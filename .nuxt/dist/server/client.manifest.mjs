@@ -1,0 +1,1 @@
+export { default } from "file:///Users/andrzej.sulkowski/Documents/Code/Rust/BlockEngraver/Frontend/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"

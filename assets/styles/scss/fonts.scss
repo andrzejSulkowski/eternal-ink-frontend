@@ -1,0 +1,206 @@
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+
+// generated with https://transfonter.org/
+// Lato
+
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-Hairline, 100, normal, woff woff2);
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-HairlineItalic, 100, italic, woff woff2);
+
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-Light, 200, normal, woff woff2);
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-LightItalic, 200, italic, woff woff2);
+
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-Regular, 400, normal, woff woff2);
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-Italic, 400, italic, woff woff2);
+
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-Bold, 700, normal, woff woff2);
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-BoldItalic, 700, italic, woff woff2);
+
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-Black, 900, normal, woff woff2);
+@include font-face(Lato, assets/styles/fonts/Lato/Lato-BlackItalic, 900, italic, woff woff2);
+
+// Montserrat
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-Thin, 100, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-ThinItalic, 100, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-ExtraLight, 200, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-ExtraLightItalic, 200, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-Light, 300, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-LightItalic, 300, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-Regular, 400, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-Italic, 400, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-Medium, 500, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-MediumItalic, 500, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-SemiBold, 600, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-SemiBoldItalic, 600, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-Bold, 700, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-BoldItalic, 700, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-ExtraBold, 800, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-ExtraBoldItalic, 800, italic, woff woff2);
+
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-Black, 900, normal, woff woff2);
+@include font-face(Montserrat, assets/styles/fonts/Montserrat/Montserrat-BlackItalic, 900, italic, woff woff2);
+
+
+// Nunito
+
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-ExtraLight, 200, normal, woff woff2);
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-ExtraLightItalic, 200, italic, woff woff2);
+
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-Light, 300, normal, woff woff2);
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-LightItalic, 300, italic, woff woff2);
+
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-Regular, 400, normal, woff woff2);
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-Italic, 400, italic, woff woff2);
+
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-SemiBold, 600, normal, woff woff2);
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-SemiBoldItalic, 600, italic, woff woff2);
+
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-Bold, 700, normal, woff woff2);
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-BoldItalic, 700, italic, woff woff2);
+
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-ExtraBold, 800, normal, woff woff2);
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-ExtraBoldItalic, 800, italic, woff woff2);
+
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-Black, 900, normal, woff woff2);
+@include font-face(Nunito, assets/styles/fonts/Nunito/Nunito-BlackItalic, 900, italic, woff woff2);
+
+// Open Sans
+
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-Light, 300, normal, woff woff2);
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-LightItalic, 300, italic, woff woff2);
+
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-Regular, 400, normal, woff woff2);
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-Italic, 400, italic, woff woff2);
+
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-SemiBold, 600, normal, woff woff2);
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-SemiBoldItalic, 600, italic, woff woff2);
+
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-Bold, 700, normal, woff woff2);
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-BoldItalic, 700, italic, woff woff2);
+
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-ExtraBold, 800, normal, woff woff2);
+@include font-face(OpenSans, assets/styles/fonts/Open_Sans/OpenSans-ExtraBoldItalic, 800, italic, woff woff2);
+
+
+// Poppins
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-Thin, 100, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-ThinItalic, 100, italic, woff woff2);
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-ExtraLight, 200, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-ExtraLightItalic, 200, italic, woff woff2);
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-Light, 300, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-LightItalic, 300, italic, woff woff2);
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-Regular, 400, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-Italic, 400, italic, woff woff2);
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-SemiBold, 600, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-SemiBoldItalic, 600, italic, woff woff2);
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-Bold, 700, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-BoldItalic, 700, italic, woff woff2);
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-ExtraBold, 800, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-ExtraBoldItalic, 800, italic, woff woff2);
+
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-Black, 900, normal, woff woff2);
+@include font-face(Poppins, assets/styles/fonts/Poppins/Poppins-BlackItalic, 900, italic, woff woff2);
+
+// Raleway
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-Thin, 100, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-ThinItalic, 100, italic, woff woff2);
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-ExtraLight, 200, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-ExtraLightItalic, 200, italic, woff woff2);
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-Light, 300, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-LightItalic, 300, italic, woff woff2);
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-Regular, 400, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-Italic, 400, italic, woff woff2);
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-SemiBold, 600, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-SemiBoldItalic, 600, italic, woff woff2);
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-Bold, 700, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-BoldItalic, 700, italic, woff woff2);
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-ExtraBold, 800, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-ExtraBoldItalic, 800, italic, woff woff2);
+
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-Black, 900, normal, woff woff2);
+@include font-face(Raleway, assets/styles/fonts/Raleway/Raleway-BlackItalic, 900, italic, woff woff2);
+
+// Roboto
+
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-Thin, 100, normal, woff woff2);
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-ThinItalic, 100, italic, woff woff2);
+
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-Light, 300, normal, woff woff2);
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-LightItalic, 300, italic, woff woff2);
+
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-Regular, 400, normal, woff woff2);
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-Italic, 400, italic, woff woff2);
+
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-Medium, 500, normal, woff woff2);
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-MediumItalic, 500, italic, woff woff2);
+
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-Bold, 700, normal, woff woff2);
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-BoldItalic, 700, italic, woff woff2);
+
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-Black, 900, normal, woff woff2);
+@include font-face(Roboto, assets/styles/fonts/Roboto/Roboto-BlackItalic, 900, italic, woff woff2);

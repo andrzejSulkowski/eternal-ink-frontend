@@ -1,0 +1,59 @@
+@import "./main.scss";
+
+// -------------------------------------------------- Global Styles -------------------------------------------------- //
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  font-weight: 300;
+  font-size: 22px;
+}
+@media screen and (max-width: $breakpoint-tablet) {
+  html {
+    font-size: calc(15px + 4 * ((100vw - 768px) / 360));
+  }
+}
+@media screen and (max-width: $breakpoint-mobile) {
+  html {
+    font-size: calc(19px + 6 * ((100vw - 320px) / 680));
+  }
+}
+body {
+  margin: 0;
+  background-color: $black;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+:root {
+  scrollbar-color: #999 #333;
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #16248b;
+  }
+  ::-webkit-scrollbar-track {
+    background: #00000000;
+  }
+}
+
