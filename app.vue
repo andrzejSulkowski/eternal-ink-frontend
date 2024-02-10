@@ -1,13 +1,16 @@
 <template>
   <div>
-    <NuxtLayout>
-      <NuxtPage/>
-    </NuxtLayout>
+    <v-app>
+      <NuxtLayout name="default">
+        <NuxtPage />
+      </NuxtLayout>
+    </v-app>
   </div>
 </template>
 
 <script setup lang="ts">
-
-
-
 </script>
+<style lang="scss">
+@import "@/assets/styles/scss/global.scss";
+
+</style>

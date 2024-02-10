@@ -46,3 +46,30 @@ $warning-color: #F59E0B; // Yellow
 
 $breakpoint-tablet: 1128px;
 $breakpoint-mobile: 768px;
+
+
+
+/// Core Background (Deep Space): A neutral, deep blue to serve as a versatile background across blockchain themes
+$core-background: #0E1117;
+
+/// Primary Text (Galactic Silver): A soft, light grey for primary text, ensuring readability on dark backgrounds
+$primary-text: #E8E8E8;
+
+/// Secondary Text (Moonlight Gray): A darker shade of grey for secondary text and less emphasized elements
+$secondary-text: #BEBEBE;
+
+/// Accent (Digital Teal): An accent color that stands out without being tied to any specific blockchain
+$accent-color: #64FFDA;
+
+/// Interactive Elements (Neon Blue): A vibrant blue for buttons and interactive elements, providing a tech-forward feel
+$interactive-color: #007BFF;
+
+/// Error and Alerts (Mars Red): A striking red for warnings and error messages, compatible across themes
+$error-color: #FF4567;
+
+/// * Blockchain Themes * ///
+
+$bitcoin-orange: #F7931A;
+$ethereum-purple: #627EEA;
+$polkadot-pink: #E6007A;
+$cosmos-blue: #2E3148;
