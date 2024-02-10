@@ -39,22 +39,31 @@
       <div class="flex items-center">
 
         <v-btn
-        v-for="icon in icons"
-        :key="icon"
         class="mx-4"
-        :icon="icon"
+        icon="mdi-theme-light-dark"
         variant="plain"
         size="default"
-      ></v-btn>
+        @click="toggleTheme"
+      />
+      <v-btn
+        class="mx-4"
+        icon="mdi-github"
+        variant="plain"
+        size="default"
+      />
       </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
+import { useTheme } from 'vuetify/lib/framework.mjs';
 
-const icons = ref([
-    'mdi-theme-light-dark',
-    'mdi-github'
-]);
+const theme = useTheme();
+function toggleTheme(){
+  console.log("toggle theme")
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+  document.querySelector('html')!.classList.toggle('dark')
+}
+
 </script>

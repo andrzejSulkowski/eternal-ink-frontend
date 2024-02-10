@@ -1,75 +1,32 @@
-$primary-font: 'Montserrat', sans-serif;
-$secondary-font: 'Raleway', sans-serif;
-
-$font-size-tiny: 0.6rem;
-$font-size-script: 0.65rem;
-$font-size-body: 0.85rem;
-
-$font-size-h5: 0.8rem;
-$font-size-h4: 0.85rem;
-$font-size-h3: 1rem;
-$font-size-h3-05: 1.75rem;
-$font-size-h2: 2.5rem;
-$font-size-h1: 3rem;
-
-
-
-$primary-color: #3A506B; // Dark Blue
-$secondary-color: #1E3D58; // Deeper Blue
-$accent-color: #D9B08C; // Warm Beige
-$background-color: #F1F1F1; // Light Gray
-$primary-text-color: #212121; // Dark Gray
-$secondary-text-color: #616161; // Gray
-
-
-$background-color-light: #FEFEFE; 
-$background-color-dark: #18181A; 
-$background-color-dark-secondary: #191A1C;
-
-
-$font-dark: #010100;
-
-$black: #0e0f0e;
-$shark: #1C1C1D;
-$octopus: #121416;
-$scorpion: #5C5B5C;
-$corduroy: #636463;
-$greyFish: #999999;
-$snow: #FFFEFE;
-
-
-// Additional colors if needed
-$success-color: #10B981; // Green
-$error-color: #EF4444; // Red
-$warning-color: #F59E0B; // Yellow
-
-
 $breakpoint-tablet: 1128px;
 $breakpoint-mobile: 768px;
 
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #ffffff; /* Adjusted for consistency */
+  --primary-text-color: #343a40; /* Adjusted for consistency */
+  --accent-grey: #f8f9fa;
+  --accent-blue: #17a2b8;
 
+  /// * Event Colors * ///
+  --success-color: #10b981; // Green
+  --error-color: #ff4567;
+  --warning-color: #f59e0b; // Yellow
 
-/// Core Background (Deep Space): A neutral, deep blue to serve as a versatile background across blockchain themes
-$core-background: #0E1117;
-
-/// Primary Text (Galactic Silver): A soft, light grey for primary text, ensuring readability on dark backgrounds
-$primary-text: #E8E8E8;
-
-/// Secondary Text (Moonlight Gray): A darker shade of grey for secondary text and less emphasized elements
-$secondary-text: #BEBEBE;
-
-/// Accent (Digital Teal): An accent color that stands out without being tied to any specific blockchain
-$accent-color: #64FFDA;
-
-/// Interactive Elements (Neon Blue): A vibrant blue for buttons and interactive elements, providing a tech-forward feel
-$interactive-color: #007BFF;
-
-/// Error and Alerts (Mars Red): A striking red for warnings and error messages, compatible across themes
-$error-color: #FF4567;
-
-/// * Blockchain Themes * ///
-
-$bitcoin-orange: #F7931A;
-$ethereum-purple: #627EEA;
-$polkadot-pink: #E6007A;
-$cosmos-blue: #2E3148;
+  /// * Blockchain Themes * ///
+  --bitcoin-orange: #f7931a;
+  --ethereum-purple: #627eea;
+  --polkadot-pink: #e6007a;
+  --cosmos-blue: #2e3148;
+}
+:root {
+  .dark {
+    --primary-color: #29b6f6;
+    --secondary-color: #455a64;
+    --background-color: #121212;
+    --primary-text-color: #cfd8dc;
+    --accent-grey: #263238;
+    --accent-blue: #00bcd4;
+  }
+}

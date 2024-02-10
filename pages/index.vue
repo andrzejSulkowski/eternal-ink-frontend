@@ -7,7 +7,12 @@
 
 <script setup lang="ts">
 onBeforeMount(async () => {
-  await health_check()
+  try{
+    await health_check()
+  }catch(e){
+    console.warn(e);
+  }
+
 });
 
 async function health_check() {

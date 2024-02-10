@@ -11,6 +11,12 @@
 <script setup lang="ts">
 </script>
 <style lang="scss">
-@import "@/assets/styles/scss/global.scss";
+//@import "@/assets/styles/scss/global.scss";
+
+.v-application {
+  background-color: transparent;
+  --v-theme-on-background: transparent;
+  --v-theme-background: transparent;
+}
 
 </style>

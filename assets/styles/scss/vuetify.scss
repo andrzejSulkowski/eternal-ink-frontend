@@ -1,4 +1,6 @@
 // Override Vuetify Scss Settings
-@forward 'vuetify/settings' with (
+@use 'vuetify' with (
   $button-color: green,
+  $v-theme-background: red,
+  $background: red,
 );

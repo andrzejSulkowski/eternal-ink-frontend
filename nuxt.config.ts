@@ -5,11 +5,13 @@ const { resolve } = createResolver(import.meta.url);
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   hooks: {
   },
   css: [
+    // "@/assets/styles/scss/vuetify.scss",
+    "vuetify/styles",
     "@mdi/font/css/materialdesignicons.min.css",
-    "vuetify/lib/styles/main.sass",
     "@/assets/styles/css/tailwind.css",
   ],
   build: {
@@ -33,18 +35,16 @@ export default defineNuxtConfig({
     },
   ],
   vite: {
+    ssr: {
+      noExternal: ["vuetify"],
+    },
     define: {
       "process.env.DEBUG": false,
-    },
-    vue: {
-      template: {
-        transformAssetUrls,
-      },
     },
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/styles/scss/main.scss";', // Here only mixins and vars should be important that dont translate into permanent css when built
+          additionalData: '@import "@/assets/styles/scss/global.scss";', // Here only mixins and vars should be important that dont translate into permanent css when built
         },
       },
     },
