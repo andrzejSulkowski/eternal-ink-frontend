@@ -38,9 +38,9 @@ const appConfig = defuFn(inlineAppConfig);
 
 const _inlineRuntimeConfig = {
   "app": {
-    "baseURL": "/",
-    "buildAssetsDir": "/_nuxt/",
-    "cdnURL": ""
+    "baseURL": "http://localhost:3001",
+    "buildAssetsDir": "dist",
+    "cdnURL": "http://localhost:3001"
   },
   "nitro": {
     "envPrefix": "NUXT_",
@@ -60,7 +60,9 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {
+    "apiBase": "/api"
+  }
 };
 const ENV_PREFIX = "NITRO_";
 const ENV_PREFIX_ALT = _inlineRuntimeConfig.nitro.envPrefix ?? process.env.NITRO_ENV_PREFIX ?? "_";

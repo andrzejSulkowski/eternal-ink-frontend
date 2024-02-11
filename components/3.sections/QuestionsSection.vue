@@ -1,6 +1,6 @@
 <template>
-      <client-only>
-    <v-container>
+    <client-only>
+    <v-container id="question-section">
       <v-row justify="center">
         <v-col cols="12" sm="8" class="text-center">
           <h2 class="text-h4 mb-4">Frequently Asked Questions</h2>

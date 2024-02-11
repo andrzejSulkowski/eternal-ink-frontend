@@ -34,10 +34,11 @@
   </v-container>
 </template>
 <script setup lang="ts">
+const router = useRouter();
 function engrave() {
-  console.log("Engrave button clicked");
+  router.push("/engrave") 
 }
 function retrieve() {
-  console.log("Retrieve button clicked");
+  router.push("/retrieve")
 }
 </script>

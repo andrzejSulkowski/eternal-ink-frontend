@@ -1,11 +1,24 @@
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 import { createResolver } from "@nuxt/kit";
+import type { RuntimeConfig } from "nuxt/schema";
 const { resolve } = createResolver(import.meta.url);
+import { defineNuxtConfig } from 'nuxt/config'
+
+
+const runtimeConfig: RuntimeConfig = {
+  app: {
+    baseURL: "http://localhost:3001",
+    buildAssetsDir: "dist",
+    cdnURL: "",
+  },
+  public: {
+    apiBase: '/api'
+  }
+}
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-
   hooks: {
   },
   css: [
@@ -27,9 +40,8 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
     "@vueuse/nuxt",
-    (_options, nuxt) => {
-      nuxt.hooks.hook("vite:extendConfig", (config) => {
-        // @ts-expect-error
+    (_options: any, nuxt: any) => {
+      nuxt.hooks.hook("vite:extendConfig", (config: any) => {
         config.plugins.push(vuetify({ autoImport: true }));
       });
     },
@@ -55,4 +67,5 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig
 });
