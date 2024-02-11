@@ -6,11 +6,6 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 
 const runtimeConfig: RuntimeConfig = {
-  app: {
-    baseURL: "http://localhost:3001",
-    buildAssetsDir: "dist",
-    cdnURL: "",
-  },
   public: {
     apiBase: '/api'
   }
