@@ -8,6 +8,8 @@
 </template>
 
 <script setup lang="ts">
+
+
 onBeforeMount(async () => {
   try{
     await health_check()

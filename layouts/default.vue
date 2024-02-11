@@ -15,7 +15,7 @@
           class="hidden w-full overflow-visible absolute fill-transparent right-20 top-[-50px] opacity-15"
         />
       </div>
-      <div class="z-20 relative">
+      <div class="z-20 relative h-full">
         <slot></slot>
       </div>
     </div>

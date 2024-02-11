@@ -2,20 +2,18 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 import { createResolver } from "@nuxt/kit";
 import type { RuntimeConfig } from "nuxt/schema";
 const { resolve } = createResolver(import.meta.url);
-import { defineNuxtConfig } from 'nuxt/config'
-
+import { defineNuxtConfig } from "nuxt/config";
 
 const runtimeConfig: RuntimeConfig = {
   public: {
-    apiBase: '/api'
-  }
-}
+    apiBase: "/api",
+  },
+};
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  hooks: {
-  },
+  hooks: {},
   css: [
     // "@/assets/styles/scss/vuetify.scss",
     "vuetify/styles",
@@ -33,7 +31,12 @@ export default defineNuxtConfig({
   },
   components: [{ path: "./components", pathPrefix: false }],
   modules: [
-    "@pinia/nuxt",
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: ["defineStore", "acceptHMRUpdate"],
+      },
+    ],
     "@vueuse/nuxt",
     (_options: any, nuxt: any) => {
       nuxt.hooks.hook("vite:extendConfig", (config: any) => {
@@ -62,5 +65,8 @@ export default defineNuxtConfig({
       },
     },
   },
-  runtimeConfig
+  imports: {
+    dirs: ['stores']
+  },
+  runtimeConfig,
 });

@@ -117,12 +117,14 @@ declare global {
   const refDefault: typeof import('../../node_modules/@vueuse/core')['refDefault']
   const refThrottled: typeof import('../../node_modules/@vueuse/core')['refThrottled']
   const refWithControl: typeof import('../../node_modules/@vueuse/core')['refWithControl']
+  const refreshCookie: typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['refreshCookie']
   const refreshNuxtData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['refreshNuxtData']
   const reloadNuxtApp: typeof import('../../node_modules/nuxt/dist/app/composables/chunk')['reloadNuxtApp']
   const requestIdleCallback: typeof import('../../node_modules/nuxt/dist/app/compat/idle-callback')['requestIdleCallback']
   const resolveComponent: typeof import('../../node_modules/vue')['resolveComponent']
   const resolveRef: typeof import('../../node_modules/@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('../../node_modules/@vueuse/core')['resolveUnref']
+  const setInterval: typeof import('../../node_modules/nuxt/dist/app/compat/interval')['setInterval']
   const setPageLayout: typeof import('../../node_modules/nuxt/dist/app/composables/router')['setPageLayout']
   const setResponseStatus: typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['setResponseStatus']
   const shallowReactive: typeof import('../../node_modules/vue')['shallowReactive']
@@ -146,6 +148,7 @@ declare global {
   const tryOnMounted: typeof import('../../node_modules/@vueuse/core')['tryOnMounted']
   const tryOnScopeDispose: typeof import('../../node_modules/@vueuse/core')['tryOnScopeDispose']
   const tryOnUnmounted: typeof import('../../node_modules/@vueuse/core')['tryOnUnmounted']
+  const tryUseNuxtApp: typeof import('../../node_modules/nuxt/dist/app/nuxt')['tryUseNuxtApp']
   const unref: typeof import('../../node_modules/vue')['unref']
   const unrefElement: typeof import('../../node_modules/@vueuse/core')['unrefElement']
   const until: typeof import('../../node_modules/@vueuse/core')['until']
@@ -224,6 +227,7 @@ declare global {
   const useHead: typeof import('../../node_modules/@unhead/vue')['useHead']
   const useHeadSafe: typeof import('../../node_modules/@unhead/vue')['useHeadSafe']
   const useHydration: typeof import('../../node_modules/nuxt/dist/app/composables/hydrate')['useHydration']
+  const useId: typeof import('../../node_modules/nuxt/dist/app/composables/id')['useId']
   const useIdle: typeof import('../../node_modules/@vueuse/core')['useIdle']
   const useInfiniteScroll: typeof import('../../node_modules/@vueuse/core')['useInfiniteScroll']
   const useIntersectionObserver: typeof import('../../node_modules/@vueuse/core')['useIntersectionObserver']
@@ -319,6 +323,7 @@ declare global {
   const useToNumber: typeof import('../../node_modules/@vueuse/core')['useToNumber']
   const useToString: typeof import('../../node_modules/@vueuse/core')['useToString']
   const useToggle: typeof import('../../node_modules/@vueuse/core')['useToggle']
+  const useTransactionStore: typeof import('../../stores/transactionStore')['useTransactionStore']
   const useTransition: typeof import('../../node_modules/@vueuse/core')['useTransition']
   const useTransitionState: typeof import('../../node_modules/vue')['useTransitionState']
   const useUrlSearchParams: typeof import('../../node_modules/@vueuse/core')['useUrlSearchParams']
@@ -484,12 +489,14 @@ declare module 'vue' {
     readonly refDefault: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['refWithControl']>
+    readonly refreshCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['refreshCookie']>
     readonly refreshNuxtData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['refreshNuxtData']>
     readonly reloadNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/chunk')['reloadNuxtApp']>
     readonly requestIdleCallback: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/idle-callback')['requestIdleCallback']>
     readonly resolveComponent: UnwrapRef<typeof import('../../node_modules/vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['resolveUnref']>
+    readonly setInterval: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/interval')['setInterval']>
     readonly setPageLayout: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/router')['setPageLayout']>
     readonly setResponseStatus: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['setResponseStatus']>
     readonly shallowReactive: UnwrapRef<typeof import('../../node_modules/vue')['shallowReactive']>
@@ -513,6 +520,7 @@ declare module 'vue' {
     readonly tryOnMounted: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['tryOnMounted']>
     readonly tryOnScopeDispose: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['tryOnScopeDispose']>
     readonly tryOnUnmounted: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['tryOnUnmounted']>
+    readonly tryUseNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['tryUseNuxtApp']>
     readonly unref: UnwrapRef<typeof import('../../node_modules/vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['until']>
@@ -591,6 +599,7 @@ declare module 'vue' {
     readonly useHead: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHead']>
     readonly useHeadSafe: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHeadSafe']>
     readonly useHydration: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/hydrate')['useHydration']>
+    readonly useId: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/id')['useId']>
     readonly useIdle: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useIdle']>
     readonly useInfiniteScroll: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useInfiniteScroll']>
     readonly useIntersectionObserver: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useIntersectionObserver']>
@@ -686,6 +695,7 @@ declare module 'vue' {
     readonly useToNumber: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useToNumber']>
     readonly useToString: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useToString']>
     readonly useToggle: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useToggle']>
+    readonly useTransactionStore: UnwrapRef<typeof import('../../stores/transactionStore')['useTransactionStore']>
     readonly useTransition: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useTransition']>
     readonly useTransitionState: UnwrapRef<typeof import('../../node_modules/vue')['useTransitionState']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useUrlSearchParams']>
@@ -844,12 +854,14 @@ declare module '@vue/runtime-core' {
     readonly refDefault: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['refWithControl']>
+    readonly refreshCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['refreshCookie']>
     readonly refreshNuxtData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['refreshNuxtData']>
     readonly reloadNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/chunk')['reloadNuxtApp']>
     readonly requestIdleCallback: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/idle-callback')['requestIdleCallback']>
     readonly resolveComponent: UnwrapRef<typeof import('../../node_modules/vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['resolveUnref']>
+    readonly setInterval: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/compat/interval')['setInterval']>
     readonly setPageLayout: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/router')['setPageLayout']>
     readonly setResponseStatus: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['setResponseStatus']>
     readonly shallowReactive: UnwrapRef<typeof import('../../node_modules/vue')['shallowReactive']>
@@ -873,6 +885,7 @@ declare module '@vue/runtime-core' {
     readonly tryOnMounted: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['tryOnMounted']>
     readonly tryOnScopeDispose: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['tryOnScopeDispose']>
     readonly tryOnUnmounted: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['tryOnUnmounted']>
+    readonly tryUseNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['tryUseNuxtApp']>
     readonly unref: UnwrapRef<typeof import('../../node_modules/vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['until']>
@@ -951,6 +964,7 @@ declare module '@vue/runtime-core' {
     readonly useHead: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHead']>
     readonly useHeadSafe: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHeadSafe']>
     readonly useHydration: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/hydrate')['useHydration']>
+    readonly useId: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/id')['useId']>
     readonly useIdle: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useIdle']>
     readonly useInfiniteScroll: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useInfiniteScroll']>
     readonly useIntersectionObserver: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useIntersectionObserver']>
@@ -1046,6 +1060,7 @@ declare module '@vue/runtime-core' {
     readonly useToNumber: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useToNumber']>
     readonly useToString: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useToString']>
     readonly useToggle: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useToggle']>
+    readonly useTransactionStore: UnwrapRef<typeof import('../../stores/transactionStore')['useTransactionStore']>
     readonly useTransition: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useTransition']>
     readonly useTransitionState: UnwrapRef<typeof import('../../node_modules/vue')['useTransitionState']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('../../node_modules/@vueuse/core')['useUrlSearchParams']>

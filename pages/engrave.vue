@@ -1,10 +1,50 @@
 <template>
-<div>
-engrave
-</div>
+  <v-container class="flex justify-center items-center h-full flex-col">
+    <v-row class="mt-14 display-2 text-3xl font-bold text-slate-700">
+      <v-col>
+        <h1>Engrave</h1>
+      </v-col>
+    </v-row>
+    <v-row class="w-full">
+      <v-col>
+        <v-form @submit.prevent="() => null">
+          <v-textarea
+            variant="outlined"
+            label="Your Message"
+            placeholder="Type your message here..."
+            rows="3"
+            auto-grow
+            class="mb-4 text-primary-text"
+            v-model="message"
+          ></v-textarea>
+          <v-btn
+            large
+            color="primary"
+            dark
+            class="mx-2 font-weight-bold"
+            @click="engrave"
+            type="submit"
+          >
+            Engrave ⛏️
+          </v-btn>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup lang="ts">
+import { requestEngraving } from "@/api/engraving";
+
+const transactionStore = useTransactionStore();
+const { message } = toRefs(transactionStore);
+watch(message, () => {
+  console.log("message: ", message.value);
+});
+
+async function engrave() {
+  const { fees, address } = await requestEngraving(message.value, "btc");
+}
 
 const text = ref<string>("");
 let evtSource: EventSource | undefined = undefined;
@@ -135,5 +175,4 @@ async function fetchTx() {
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
