@@ -1,7 +1,9 @@
 <template>
   <div>
-    <landing-page/>
-
+    <landing-section />
+    <how-it-works-section />
+    <about-us />
+    <questions-section />
   </div>
 </template>
 

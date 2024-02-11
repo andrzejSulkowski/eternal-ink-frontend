@@ -12,18 +12,18 @@
 html {
   scroll-behavior: smooth;
   font-weight: 300;
-  font-size: 22px;
+  //font-size: 22px;
 }
-@media screen and (max-width: $breakpoint-tablet) {
-  html {
-    font-size: calc(15px + 4 * ((100vw - 768px) / 360));
-  }
-}
-@media screen and (max-width: $breakpoint-mobile) {
-  html {
-    font-size: calc(19px + 6 * ((100vw - 320px) / 680));
-  }
-}
+// @media screen and (max-width: $breakpoint-tablet) {
+//   html {
+//     font-size: calc(15px + 4 * ((100vw - 768px) / 360));
+//   }
+// }
+// @media screen and (max-width: $breakpoint-mobile) {
+//   html {
+//     font-size: calc(19px + 6 * ((100vw - 320px) / 680));
+//   }
+// }
 body {
   margin: 0;
 }
