@@ -57,12 +57,12 @@ yarn preview
 ```
 
 ## Resources 
-Framework [docs](https://vuejs.org/)
-Meta-Framework [docs](https://nuxt.com/)
-Vuetify as our Component Library [docs](https://vuetifyjs.com/en/)
+- Framework [docs](https://vuejs.org/)
+- Meta-Framework [docs](https://nuxt.com/)
+- Vuetify as our Component Library [docs](https://vuetifyjs.com/en/)
 ### CSS Utils
-Tailwind [docs](https://tailwindcss.com/)
-SCSS/SASS [docs](https://sass-lang.com/documentation/)
+- Tailwind [docs](https://tailwindcss.com/)
+- SCSS/SASS [docs](https://sass-lang.com/documentation/)
 
 ## API Endpoints
 'api/healthchecker', (), -> ()
