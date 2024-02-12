@@ -55,6 +55,8 @@ Locally preview production build:
 yarn preview
 
 ```
+## Knowledge Tree 
+![knowledge_tree](https://github.com/andrzejSulkowski/engrave-me-frontend/assets/111314156/f3175362-9be4-407b-a93d-1b5fb97d03fe)
 
 ## Resources 
 - Framework [docs](https://vuejs.org/)
