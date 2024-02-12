@@ -8,22 +8,21 @@
 </template>
 
 <script setup lang="ts">
-
+const { $api } = useNuxtApp();
 
 onBeforeMount(async () => {
-  try{
-    await health_check()
-  }catch(e){
+  try {
+    await healthCheck();
+  } catch (e) {
     console.warn(e);
   }
-
 });
 
-async function health_check() {
-  const { message, status } = await $fetch<{
-    message: string;
-    status: "success";
-  }>("http://localhost:3001/api/healthchecker");
+async function healthCheck() {
+  console.log("checking health of backend...");
+
+  const { message, status } = await $api.healthCheck();
+
   if (status === "success") {
     console.log("🚀 Server is up and running!");
     return true;
@@ -32,7 +31,6 @@ async function health_check() {
     return false;
   }
 }
-
 </script>
 
 <style scoped>
@@ -44,5 +42,4 @@ input {
   display: flex;
   justify-content: space-between;
 }
-
 </style>

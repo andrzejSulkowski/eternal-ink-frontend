@@ -7,6 +7,7 @@ import { defineNuxtConfig } from "nuxt/config";
 const runtimeConfig: RuntimeConfig = {
   public: {
     apiBase: "/api",
+    backendURL: "http://localhost:3001",
   },
 };
 
@@ -67,6 +68,11 @@ export default defineNuxtConfig({
   },
   imports: {
     dirs: ['stores']
+  },
+  nitro: {
+    routeRules: {
+      '/api/**': {proxy: 'http://localhost:3001/api/**'}
+    }
   },
   runtimeConfig,
 });

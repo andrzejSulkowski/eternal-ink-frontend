@@ -1,4 +1,4 @@
-type Blockchains =
+export type Blockchains =
   | "btc"
   | "eth"
   | "dot" 

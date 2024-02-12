@@ -7,46 +7,38 @@
     </v-row>
     <v-row class="w-full">
       <v-col>
-        <v-form @submit.prevent="() => null">
-          <v-textarea
-            variant="outlined"
-            label="Your Message"
-            placeholder="Type your message here..."
-            rows="3"
-            auto-grow
-            class="mb-4 text-primary-text"
-            v-model="message"
-          ></v-textarea>
-          <v-btn
-            large
-            color="primary"
-            dark
-            class="mx-2 font-weight-bold"
-            @click="engrave"
-            type="submit"
-          >
-            Engrave ⛏️
-          </v-btn>
-        </v-form>
+        <engrave-form v-if="state === STATE.REQUEST" />
+        <!-- <div v-else-if="state === STATE.WAITING_FOR_FUNDS">
+          <span>{{ fees }}</span> BTC
+          <div>
+            Send <span>{{ fees }}</span> BTC to <span>{{ address }}</span>
+          </div>
+          <div>
+            {{ address }}
+            <v-btn
+              class="mx-4"
+              icon="mdi-content-copy"
+              variant="plain"
+              size="default"
+            />
+          </div>
+        </div> -->
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { requestEngraving } from "@/api/engraving";
-
-const transactionStore = useTransactionStore();
-const { message } = toRefs(transactionStore);
-watch(message, () => {
-  console.log("message: ", message.value);
-});
-
-async function engrave() {
-  const { fees, address } = await requestEngraving(message.value, "btc");
+enum STATE {
+  REQUEST = "request",
+  WAITING_FOR_FUNDS = "waiting for funds",
+  PROCESSING = "processing",
+  FINAL = "final",
 }
+const state = ref<STATE>(STATE.REQUEST);
+//state.value = STATE.WAITING_FOR_FUNDS;
 
-const text = ref<string>("");
+
 let evtSource: EventSource | undefined = undefined;
 const address = ref<string>();
 const fees = ref<number>();
