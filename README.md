@@ -65,7 +65,7 @@ yarn preview
 - SCSS/SASS [docs](https://sass-lang.com/documentation/)
 
 ## API Endpoints
-'api/healthchecker', (), -> ()
-'api/request-engraving', (msg: string, chain: string) -> (address: string, fees: number)
-'api/tx/:txId', (txId: string) -> (op_return: string, status: string)
-'api/tx-stream/:tx_id', (txId: string) -> (transactionStatus as Sse(Server-Side Event))
+- 'api/healthchecker', (), -> ()
+- 'api/request-engraving', (msg: string, chain: string) -> (address: string, fees: number)
+- 'api/tx/:txId', (txId: string) -> (op_return: string, status: string)
+- 'api/tx-stream/:tx_id', (txId: string) -> (transactionStatus as Sse(Server-Side Event))
