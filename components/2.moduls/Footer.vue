@@ -6,13 +6,19 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        v-for="icon in icons"
-        :key="icon"
         class="mx-4"
-        :icon="icon"
+        icon="mdi-linkedin"
         variant="plain"
         size="small"
-      ></v-btn>
+      />
+
+      <v-btn
+        class="mx-4"
+        icon="mdi-account-tie-outline"
+        variant="plain"
+        size="small"
+        @click="$router.push('/about')"
+      />
 
     </div>
 
@@ -27,6 +33,7 @@ const icons = ref([
     'mdi-linkedin',
     'mdi-account-tie-outline'
 ]);
+
 </script>
 
 <style scoped lang="scss">
