@@ -1,23 +1,29 @@
-# Nuxt 3 Minimal Starter
+# EngraveMe
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+**EngraveMe** is a pioneering project designed to make the blockchain accessible for persistently saving data. Our initial focus is on the Bitcoin blockchain, offering a user-friendly interface for engraving messages permanently. Whether you're looking to immortalize a moment or secure data for eternity, EngraveMe provides the tools you need to write directly onto the world's most robust ledger.
 
-## Setup
 
-Make sure to install the dependencies:
+## Technologies Used
+
+- **Vue.js**: A progressive JavaScript framework for building user interfaces.
+- **Nuxt.js**: An intuitive Vue framework for creating modern web applications.
+- **Vuetify**: A Vue UI library with beautifully handcrafted components.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **SCSS/SASS**: A preprocessor scripting language that is interpreted or compiled into CSS.
+- **Yarn**: Our preferred package manager for handling project dependencies.
+
+
+## Project Setup
+
+First, clone the repository to your local machine:
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
+git clone https://github.com/your-username/engraveme.git
+cd engraveme
+```
+Then Install the dependencies:
+```bash
 yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
@@ -25,17 +31,9 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
 # yarn
 yarn dev
 
-# bun
-bun run dev
 ```
 
 ## Production
@@ -43,33 +41,31 @@ bun run dev
 Build the application for production:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
 
 # yarn
 yarn build
 
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
 
 # yarn
 yarn preview
 
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Resources 
+Framework [docs](https://vuejs.org/)
+Meta-Framework [docs](https://nuxt.com/)
+Vuetify as our Component Library [docs](https://vuetifyjs.com/en/)
+### CSS Utils
+Tailwind [docs](https://tailwindcss.com/)
+SCSS/SASS [docs](https://sass-lang.com/documentation/)
+
+## API Endpoints
+'api/healthchecker', (), -> ()
+'api/request-engraving', (msg: string, chain: string) -> (address: string, fees: number)
+'api/tx/:txId', (txId: string) -> (op_return: string, status: string)
+'api/tx-stream/:tx_id', (txId: string) -> (transactionStatus as Sse(Server-Side Event))
