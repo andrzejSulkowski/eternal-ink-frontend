@@ -5,7 +5,7 @@ export interface IHealthCheckResponse {
 
 export interface IRequestEngravingResponse {
     address: BitcoinAddress; // Ensure BitcoinAddress type is defined or imported
-    fees: string;
+    fees: number;
 }
 
 export type IEngravingStatusStream = TransactionStatus; // Ensure TransactionStatus is defined or imported

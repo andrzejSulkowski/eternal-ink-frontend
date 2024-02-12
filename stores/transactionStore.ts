@@ -1,8 +1,18 @@
 import { defineStore } from 'pinia';
 
+interface ITransactionStore {
+    message: string;
+    fees: number | undefined;
+    address: string | undefined;
+    txId: string | undefined;
+} 
+
 export const useTransactionStore = defineStore('transactionStore', {
-    state: () => ({
-        message: ""
+    state: ():ITransactionStore => ({
+        message: "",
+        fees: undefined,
+        address: undefined,
+        txId: undefined
     }),
     getters: {
 

@@ -7,22 +7,74 @@
     </v-row>
     <v-row class="w-full">
       <v-col>
-        <engrave-form v-if="state === STATE.REQUEST" />
-        <!-- <div v-else-if="state === STATE.WAITING_FOR_FUNDS">
-          <span>{{ fees }}</span> BTC
-          <div>
-            Send <span>{{ fees }}</span> BTC to <span>{{ address }}</span>
-          </div>
-          <div>
-            {{ address }}
-            <v-btn
-              class="mx-4"
-              icon="mdi-content-copy"
-              variant="plain"
-              size="default"
-            />
-          </div>
-        </div> -->
+        <engrave-form
+          v-if="state === STATE.REQUEST"
+          @submit="({ address, fees }) => setFormData(address, fees)"
+        />
+        <div v-else-if="state === STATE.WAITING_FOR_FUNDS">
+          <!-- <div
+            class="max-w-md mx-auto bg-white rounded-lg border border-gray-200 shadow-md p-6 m-4"
+          >
+            <h2 class="text-lg font-semibold text-gray-900">
+              Transaction Details
+            </h2>
+            <div class="mt-4">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600">Bitcoin Address:</span>
+                <span class="font-medium text-gray-900"
+                  >1BoatSLRHtKNngkdXEeobR76b53LETtpyT</span
+                >
+              </div>
+              <div class="flex justify-between items-center mt-3">
+                <span class="text-gray-600">Fees:</span>
+                <span class="font-medium text-gray-900">0.0005 BTC</span>
+              </div>
+            </div>
+            <div class="mt-6">
+              <button
+                class="w-full text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Confirm Transaction
+              </button>
+            </div>
+          </div> -->
+
+          <v-card class="max-w-md mx-auto my-8 shadow-lg">
+            <v-card-title class="text-center text-blue-900 font-semibold">
+              Payment Instructions
+            </v-card-title>
+            <v-card-text>
+              <div class="my-4">
+                <p class="text-sm text-gray-700">
+                  To proceed with your transaction, please send the required
+                  fees to the Bitcoin address below. Make sure to transfer the
+                  exact amount specified.
+                </p>
+              </div>
+              <v-list dense>
+                <v-list-item>
+                  <div class="flex justify-between">
+                    <span class="text-gray-600">Bitcoin Address:</span>
+                    <span class="text-gray-900 font-medium"
+                      >1BoatSLRHtKNngkdXEeobR76b53LETtpyT</span
+                    >
+                  </div>
+                </v-list-item>
+                <v-list-item>
+                  <div class="flex justify-between">
+                    <span class="text-gray-600">Required Fees:</span>
+                    <span class="text-gray-900 font-medium">0.0005 BTC</span>
+                  </div>
+                </v-list-item>
+              </v-list>
+            </v-card-text>
+            <v-card-actions class="justify-center">
+              <v-btn color="primary" dark class="mt-4" :loading="true">
+                Processing...
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -36,12 +88,18 @@ enum STATE {
   FINAL = "final",
 }
 const state = ref<STATE>(STATE.REQUEST);
-//state.value = STATE.WAITING_FOR_FUNDS;
-
+state.value = STATE.WAITING_FOR_FUNDS;
 
 let evtSource: EventSource | undefined = undefined;
 const address = ref<string>();
 const fees = ref<number>();
+
+function setFormData(addr: string, fee: number) {
+  address.value = addr;
+  fees.value = fee;
+  state.value = STATE.WAITING_FOR_FUNDS;
+}
+
 async function engraveMsg(message: string) {
   const { data, error } = await useFetch<ResponseEngraveMessage>(
     "http://localhost:3001/api/request-engraving",
