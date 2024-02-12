@@ -1,4 +1,15 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "./.nuxt/tsconfig.json",
+  "includes": ["types/*.ts"],
+  "compilerOptions": {
+    /* Strict Type-Checking Options */
+    "strict": true /* Enable all strict type-checking options. */,
+
+    /* Additional Checks */
+    //"noUnusedLocals": true /* Report errors on unused locals. */,
+    //"noUnusedParameters": true /* Report errors on unused parameters. */,
+    "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
+    "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */
+  }
 }
