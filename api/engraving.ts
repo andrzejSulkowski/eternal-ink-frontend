@@ -2,7 +2,7 @@ import type {
   IHealthCheckResponse,
   IRequestEngravingResponse,
   IEngravingStatusStream,
-  IRequestStatusResponse,
+  IRequestTxResponse,
 } from "~/types/engraving";
 import type { Blockchains } from "~/types/chains";
 
@@ -25,10 +25,10 @@ export function subscribeStatus(baseURL: string, apiBase: string, address: strin
   return new EventSource(`${baseURL}${apiBase}/tx-stream/${address}`);
 }
 
-export async function fetchStatus(
+export async function fetchTx(
   baseURL: string,
   apiBase: string,
   txId: string
-): Promise<IRequestStatusResponse> {
-  return await $fetch<IRequestStatusResponse>(`${baseURL}${apiBase}/tx/${txId}`);
+): Promise<IRequestTxResponse> {
+  return await $fetch<IRequestTxResponse>(`${baseURL}${apiBase}/tx/${txId}`);
 }

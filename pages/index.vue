@@ -34,15 +34,52 @@ async function healthCheck() {
 }
 
 
-async function test(){
-  // const data = await $fetch('/api/healthchecker')
-  // console.log("test health check: ", data)
+async function testFetchTx(){
+  const data = await $api.fetchTx("dde21714eb5fb1f4785201a353c347582a84d6ee4f67a0431a417cd4e41a96d6");
+  console.log("test result: ", data)
 
-  const data = await useAPIFetch('/api/healthchecker').data.value;
-  console.log("test health check: ", data)
+  // const data = await useAPIFetch('/api/healthchecker').data.value;
+  // console.log("test health check: ", data)
+}
+async function engravingStatusStream(){
+  console.log("listening engraving status stream");
+
+  const eventSource = $api.subscribeStatus("tb1qwaznwcxhl2vhdnd0f26qwphxmr2u0qudz05xgq" as BitcoinAddress);
+
+  let counter = 0;
+  eventSource.onmessage = function(event) {
+    console.log("event: ", event)
+    counter++;
+    if(counter > 3){
+      eventSource.close();
+    }
+  }
 }
 
-//test()
+engravingStatusStream();
+
+// function testSse() {
+//   console.log("listening to sse!");
+//   try {
+//     const evtSource = new EventSource(`http://localhost:3001/api/stream-test`);
+//     evtSource.onmessage = (event) => {
+//       console.log("event: ", event);
+//       if (event.data === "close") {
+//         console.warn("closing connection to stream!");
+//         evtSource?.close();
+//       }
+//     };
+//     evtSource.onerror = (event) => {
+//       console.log("event: ", event);
+//       evtSource?.close();
+//     };
+//   } catch (e) {
+//     console.error("CATCH HIT");
+//   }
+// }
+// testSse();
+
+
 </script>
 
 <style scoped>

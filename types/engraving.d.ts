@@ -10,6 +10,7 @@ export interface IRequestEngravingResponse {
 
 export type IEngravingStatusStream = TransactionStatus; // Ensure TransactionStatus is defined or imported
 
-export interface IRequestStatusResponse {
+export interface IRequestTxResponse {
+    op_return: string;
     status: TransactionStatus;
 }

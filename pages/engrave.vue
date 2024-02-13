@@ -48,7 +48,7 @@ function subscribeToTxStatus(addr: BitcoinAddress, fee: number) {
 }
 
 
-async function setupSse(address: string) {
+async function setupSse(address: BitcoinAddress) {
   evtSource = $api.subscribeStatus(address);
 
   evtSource.onmessage = (event: MessageEvent<TransactionStatus>) => {
@@ -96,25 +96,7 @@ async function setupSse(address: string) {
 
 /// TESTING FUNCTIONS BELOW
 
-// function testSse() {
-//   console.log("listening to sse!");
-//   try {
-//     evtSource = new EventSource(`http://localhost:3001/api/stream-test`);
-//     evtSource.onmessage = (event) => {
-//       console.log("event: ", event);
-//       if (event.data === "close") {
-//         console.warn("closing connection to stream!");
-//         evtSource?.close();
-//       }
-//     };
-//     evtSource.onerror = (event) => {
-//       console.log("event: ", event);
-//       evtSource?.close();
-//     };
-//   } catch (e) {
-//     console.error("CATCH HIT");
-//   }
-// }
+
 
 const txId = ref<string>(
   "d12cc196a322b5a8f47ea60dc2d056f88eab940cdabb77e3b18a7fe40116c73b"

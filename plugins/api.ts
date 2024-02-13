@@ -1,6 +1,6 @@
-import type { IHealthCheckResponse, IRequestEngravingResponse, IEngravingStatusStream, IRequestStatusResponse } from "~/types/engraving";
+import type { IHealthCheckResponse, IRequestEngravingResponse, IEngravingStatusStream, IRequestTxResponse } from "~/types/engraving";
 import type { Blockchains } from "~/types/chains";
-import { requestEngraving, subscribeStatus, fetchStatus } from "~/api/engraving";
+import { requestEngraving, subscribeStatus, fetchTx } from "~/api/engraving";
 import { healthCheck } from "~/api/health";
 
 
@@ -15,14 +15,14 @@ export default defineNuxtPlugin(nuxtApp => {
     console.log("baseURL: ", baseURL);
     
     const requestEngravingApi = async (msg: string, chain: Blockchains): Promise<IRequestEngravingResponse> => await requestEngraving(baseURL, apiBase, msg, chain);
-    const subscribeStatusApi = (address: string): EventSource => subscribeStatus(baseURL, apiBase, address);
-    const fetchStatusApi = async (txId: string): Promise<IRequestStatusResponse> => await fetchStatus(baseURL, apiBase, txId);
+    const subscribeStatusApi = (address: BitcoinAddress): EventSource => subscribeStatus(baseURL, apiBase, address);
+    const fetchTxApi = async (txId: string): Promise<IRequestTxResponse> => await fetchTx(baseURL, apiBase, txId);
     const healthCheckApi = async () => await healthCheck(baseURL, apiBase);
 
     const api = {
         requestEngraving: requestEngravingApi,
         subscribeStatus: subscribeStatusApi,
-        fetchStatus: fetchStatusApi,
+        fetchTx: fetchTxApi,
         healthCheck: healthCheckApi
     }
     return {
