@@ -19,7 +19,7 @@ export default defineEventHandler(async (event: H3Event) => {
     let interval = setInterval(() => {
         data = nextStatus(data);
         console.log("sending data...")
-        send((id) => ({ id, data}))
+        send(() => ({data}))
     }, 5000)
 
     event.node.req.on("close", () => clearInterval(interval));

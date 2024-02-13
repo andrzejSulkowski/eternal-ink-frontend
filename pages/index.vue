@@ -56,28 +56,28 @@ async function engravingStatusStream(){
   }
 }
 
-engravingStatusStream();
+//engravingStatusStream();
 
-// function testSse() {
-//   console.log("listening to sse!");
-//   try {
-//     const evtSource = new EventSource(`http://localhost:3001/api/stream-test`);
-//     evtSource.onmessage = (event) => {
-//       console.log("event: ", event);
-//       if (event.data === "close") {
-//         console.warn("closing connection to stream!");
-//         evtSource?.close();
-//       }
-//     };
-//     evtSource.onerror = (event) => {
-//       console.log("event: ", event);
-//       evtSource?.close();
-//     };
-//   } catch (e) {
-//     console.error("CATCH HIT");
-//   }
-// }
-// testSse();
+function testSse() {
+  console.log("listening to sse!");
+  try {
+    const evtSource = new EventSource(`http://localhost:3001/api/stream-test`);
+    evtSource.onmessage = (event) => {
+      console.log("event: ", event);
+      if (event.data === "close") {
+        console.warn("closing connection to stream!");
+        evtSource?.close();
+      }
+    };
+    evtSource.onerror = (event) => {
+      console.log("event: ", event);
+      evtSource?.close();
+    };
+  } catch (e) {
+    console.error("CATCH HIT");
+  }
+}
+testSse();
 
 
 </script>

@@ -18,7 +18,6 @@ export const useSSE = (event: H3Event, hookName: string) => {
     sseHooks.hook(hookName, (data: any) => {
         event.node.res.write(`id: ${id += 1}\n`)
         event.node.res.write(`data: ${JSON.stringify(data)}\n\n`)
-        //event.node.res.write(`${JSON.stringify(data)}\n\n`)
         event.node.res.flushHeaders()
     })
     
