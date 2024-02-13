@@ -16,14 +16,14 @@
           <div class="flex justify-between">
             <span class="text-gray-600">Bitcoin Address:</span>
             <span class="text-gray-900 font-medium"
-              >1BoatSLRHtKNngkdXEeobR76b53LETtpyT</span
+              >{{ address }}</span
             >
           </div>
         </v-list-item>
         <v-list-item>
           <div class="flex justify-between">
             <span class="text-gray-600">Required Fees:</span>
-            <span class="text-gray-900 font-medium">0.0005 BTC</span>
+            <span class="text-gray-900 font-medium">{{ getSatoshiInBtc }} BTC</span>
           </div>
         </v-list-item>
       </v-list>
@@ -35,3 +35,13 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup lang="ts">
+const props = defineProps({
+  address: {type: String as any as PropType<BitcoinAddress>, required: true},
+  fees: {type: Number, required: true},
+})
+
+const getSatoshiInBtc = computed(() => satoshiToBitcoin(props.fees))
+
+</script>

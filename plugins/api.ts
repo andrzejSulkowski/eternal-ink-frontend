@@ -9,10 +9,17 @@ export default defineNuxtPlugin(nuxtApp => {
     const config = nuxtApp.$config;
 
     // API_Base is our api for our backend server
-    const { apiBase } = config.public;
+    let apiBase = '';
+    if(config.public.mock.backend){
+        apiBase = config.public.mock.apiBase;
+    }else {
+        apiBase = config.public.apiBase;
+    }
 
+    console.log("API_BASE: ", apiBase);
+    
     const requestEngravingApi = async (msg: string, chain: Blockchains): Promise<IRequestEngravingResponse> => await requestEngraving(apiBase, msg, chain);
-    const subscribeStatusApi = async (address: string): Promise<IEngravingStatusStream> => await subscribeStatus(apiBase, address);
+    const subscribeStatusApi = (address: string): EventSource => subscribeStatus(apiBase, address);
     const fetchStatusApi = async (txId: string): Promise<IRequestStatusResponse> => await fetchStatus(apiBase, txId);
     const healthCheckApi = async () => await healthCheck(apiBase);
 

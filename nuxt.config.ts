@@ -8,6 +8,10 @@ const runtimeConfig: RuntimeConfig = {
   public: {
     apiBase: "/api",
     backendURL: "http://localhost:3001",
+    mock: {
+      backend: false,
+      apiBase: "/api-mock",
+    },
   },
 };
 
@@ -72,7 +76,8 @@ export default defineNuxtConfig({
   nitro: {
     routeRules: {
       '/api/**': {proxy: 'http://localhost:3001/api/**'}
-    }
+    },
+
   },
   runtimeConfig,
 });

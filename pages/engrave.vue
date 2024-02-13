@@ -9,9 +9,12 @@
       <v-col>
         <engrave-form
           v-if="state === STATE.REQUEST"
-          @submit="({ address, fees }) => setFormData(address, fees)"
+          @submit="({ address, fees }) => subscribeToTxStatus(address, fees)"
         />
-        <request-funds v-else-if="state === STATE.WAITING_FOR_FUNDS"/>
+        <request-funds v-else-if="state === STATE.WAITING_FOR_FUNDS && address && fees"
+          :address="address" 
+          :fees="fees" 
+        />
         <transaction-progress v-else-if="state === STATE.PROCESSING || state === STATE.FINAL"
           :status="txStatus" 
         />
@@ -22,6 +25,7 @@
 
 <script setup lang="ts">
 import { TransactionStatus } from '~/types/transactionStatus';
+const { $api } = useNuxtApp();
 
 enum STATE {
   REQUEST = "request",
@@ -30,90 +34,56 @@ enum STATE {
   FINAL = "final",
 }
 const state = ref<STATE>(STATE.REQUEST);
-state.value = STATE.PROCESSING;
-
-const txStatus: TransactionStatus = TransactionStatus.Finalized;
+let txStatus: TransactionStatus = TransactionStatus.WaitingForFunds;
 
 let evtSource: EventSource | undefined = undefined;
-const address = ref<string>();
+const address = ref<BitcoinAddress>();
 const fees = ref<number>();
 
-function setFormData(addr: string, fee: number) {
+function subscribeToTxStatus(addr: BitcoinAddress, fee: number) {
   address.value = addr;
   fees.value = fee;
   state.value = STATE.WAITING_FOR_FUNDS;
+  setupSse(address.value);
 }
 
-async function engraveMsg(message: string) {
-  const { data, error } = await useFetch<ResponseEngraveMessage>(
-    "http://localhost:3001/api/request-engraving",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        chain: "btc",
-        message: message,
-      }),
-      onResponseError: (error) => {
-        console.error(error);
-      },
-    }
-  );
-  if (data.value) {
-    address.value = data.value.address;
-    fees.value = data.value.fees;
 
-    setupSse(address.value);
-  } else {
-    console.error("could not get address and fees!");
-  }
-}
+async function setupSse(address: string) {
+  evtSource = $api.subscribeStatus(address);
 
-// TODO: Here we need to maintain the keys from server to client which. This can make problems as the server can change the keys and the client will not know about it. (TransactionStatus Into<String> method in server)
-enum SSE_EVENTS {
-  ERROR = "Error occurred",
-
-  WaitingForFunds = "waiting for funds",
-  ConfirmingFunds = "confirming funds",
-  ConfirmedFunds = "confirmed funds",
-  Engraving = "engraving",
-  Engraved = "engraved",
-  Finalized = "finalized",
-
-  ExternalUnconfirmed = "external unconfirmed",
-  ExternalConfirmed = "external confirmed",
-}
-function setupSse(address: string) {
-  evtSource = new EventSource(`http://localhost:3001/api/tx-stream/${address}`);
-  evtSource.onmessage = (event: MessageEvent<SSE_EVENTS>) => {
+  evtSource.onmessage = (event: MessageEvent<TransactionStatus>) => {
     console.log("event: ", event);
+    txStatus = event.data;
     switch (event.data) {
-      case SSE_EVENTS.ERROR:
-        console.error("Error occurred");
-        break;
-      case SSE_EVENTS.WaitingForFunds:
+      case TransactionStatus.WaitingForFunds:
         console.log("waiting for funds");
         break;
-      case SSE_EVENTS.ConfirmingFunds:
+      case TransactionStatus.ConfirmingFunds:
         console.log("confirming funds");
+        state.value = STATE.PROCESSING;
         break;
-      case SSE_EVENTS.ConfirmedFunds:
+      case TransactionStatus.ConfirmedFunds:
         console.log("confirmed funds");
+        state.value = STATE.PROCESSING;
         break;
-      case SSE_EVENTS.Engraving:
+      case TransactionStatus.Engraving:
         console.log("engraving");
+        state.value = STATE.PROCESSING;
         break;
-      case SSE_EVENTS.Engraved:
+      case TransactionStatus.Engraved:
         console.log("engraved");
+        state.value = STATE.FINAL;
         break;
-      case SSE_EVENTS.Finalized:
+      case TransactionStatus.Finalized:
         console.log("finalized");
+        state.value = STATE.FINAL;
         evtSource?.close();
         break;
 
-      case SSE_EVENTS.ExternalUnconfirmed:
+      case TransactionStatus.ExternalUnconfirmed:
         console.log("external unconfirmed");
         break;
-      case SSE_EVENTS.ExternalConfirmed:
+      case TransactionStatus.ExternalConfirmed:
         console.log("external confirmed");
         break;
 
@@ -124,25 +94,27 @@ function setupSse(address: string) {
   };
 }
 
-function testSse() {
-  console.log("listening to sse!");
-  try {
-    evtSource = new EventSource(`http://localhost:3001/api/stream-test`);
-    evtSource.onmessage = (event) => {
-      console.log("event: ", event);
-      if (event.data === "close") {
-        console.warn("closing connection to stream!");
-        evtSource?.close();
-      }
-    };
-    evtSource.onerror = (event) => {
-      console.log("event: ", event);
-      evtSource?.close();
-    };
-  } catch (e) {
-    console.error("CATCH HIT");
-  }
-}
+/// TESTING FUNCTIONS BELOW
+
+// function testSse() {
+//   console.log("listening to sse!");
+//   try {
+//     evtSource = new EventSource(`http://localhost:3001/api/stream-test`);
+//     evtSource.onmessage = (event) => {
+//       console.log("event: ", event);
+//       if (event.data === "close") {
+//         console.warn("closing connection to stream!");
+//         evtSource?.close();
+//       }
+//     };
+//     evtSource.onerror = (event) => {
+//       console.log("event: ", event);
+//       evtSource?.close();
+//     };
+//   } catch (e) {
+//     console.error("CATCH HIT");
+//   }
+// }
 
 const txId = ref<string>(
   "d12cc196a322b5a8f47ea60dc2d056f88eab940cdabb77e3b18a7fe40116c73b"
@@ -167,6 +139,31 @@ async function fetchTx() {
   console.log("data: ", data.value);
   console.log("error: ", error.value);
 }
+
+
+// async function engraveMsg(message: string) {
+//   const { data, error } = await useFetch<ResponseEngraveMessage>(
+//     "http://localhost:3001/api/request-engraving",
+//     {
+//       method: "POST",
+//       body: JSON.stringify({
+//         chain: "btc",
+//         message: message,
+//       }),
+//       onResponseError: (error) => {
+//         console.error(error);
+//       },
+//     }
+//   );
+//   if (data.value) {
+//     address.value = data.value.address;
+//     fees.value = data.value.fees;
+
+//     setupSse(address.value);
+//   } else {
+//     console.error("could not get address and fees!");
+//   }
+// }
 </script>
 
 <style scoped lang="scss"></style>

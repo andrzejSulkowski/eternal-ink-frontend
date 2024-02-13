@@ -26,7 +26,7 @@ const { $api } = useNuxtApp();
 const { message } = toRefs(useTransactionStore());
 
 const emit = defineEmits<{
-  (event: "submit", data:{address: string, fees: number}): void
+  (event: "submit", data:{address: BitcoinAddress, fees: number}): void
 }>();
 
 const isLoading = ref(false);
