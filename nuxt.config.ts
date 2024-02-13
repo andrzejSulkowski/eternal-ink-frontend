@@ -7,11 +7,9 @@ import { defineNuxtConfig } from "nuxt/config";
 const runtimeConfig: RuntimeConfig = {
   public: {
     apiBase: "/api",
-    backendURL: "http://localhost:3001",
-    mock: {
-      backend: false,
-      apiBase: "/api-mock",
-    },
+    baseURL: "http://localhost:3001",
+    baseURLMock: "http://localhost:3000",
+    mockedBackend: true,
   },
 };
 
@@ -74,10 +72,12 @@ export default defineNuxtConfig({
     dirs: ['stores']
   },
   nitro: {
-    routeRules: {
-      '/api/**': {proxy: 'http://localhost:3001/api/**'}
+    // routeRules: {
+    //   '/api/**': {proxy: 'http://localhost:3001/api/**'}
+    // },
+    prerender: {
+      routes: ['/api-mock/**']
     },
-
   },
   runtimeConfig,
 });

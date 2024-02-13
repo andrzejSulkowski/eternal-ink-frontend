@@ -9,19 +9,15 @@ export default defineNuxtPlugin(nuxtApp => {
     const config = nuxtApp.$config;
 
     // API_Base is our api for our backend server
-    let apiBase = '';
-    if(config.public.mock.backend){
-        apiBase = config.public.mock.apiBase;
-    }else {
-        apiBase = config.public.apiBase;
-    }
+    const apiBase = config.public.apiBase;
+    const baseURL = config.public.mockedBackend ? config.public.baseURLMock : config.public.baseURL;
 
-    console.log("API_BASE: ", apiBase);
+    console.log("baseURL: ", baseURL);
     
-    const requestEngravingApi = async (msg: string, chain: Blockchains): Promise<IRequestEngravingResponse> => await requestEngraving(apiBase, msg, chain);
-    const subscribeStatusApi = (address: string): EventSource => subscribeStatus(apiBase, address);
-    const fetchStatusApi = async (txId: string): Promise<IRequestStatusResponse> => await fetchStatus(apiBase, txId);
-    const healthCheckApi = async () => await healthCheck(apiBase);
+    const requestEngravingApi = async (msg: string, chain: Blockchains): Promise<IRequestEngravingResponse> => await requestEngraving(baseURL, apiBase, msg, chain);
+    const subscribeStatusApi = (address: string): EventSource => subscribeStatus(baseURL, apiBase, address);
+    const fetchStatusApi = async (txId: string): Promise<IRequestStatusResponse> => await fetchStatus(baseURL, apiBase, txId);
+    const healthCheckApi = async () => await healthCheck(baseURL, apiBase);
 
     const api = {
         requestEngraving: requestEngravingApi,

@@ -44,4 +44,5 @@ const props = defineProps({
 
 const getSatoshiInBtc = computed(() => satoshiToBitcoin(props.fees))
 
+
 </script>

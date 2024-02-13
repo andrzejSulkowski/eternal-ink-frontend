@@ -25,12 +25,24 @@ async function healthCheck() {
 
   if (status === "success") {
     console.log("🚀 Server is up and running!");
+    console.log(message)
     return true;
   } else {
     console.log("☠️ Server is down!");
     return false;
   }
 }
+
+
+async function test(){
+  // const data = await $fetch('/api/healthchecker')
+  // console.log("test health check: ", data)
+
+  const data = await useAPIFetch('/api/healthchecker').data.value;
+  console.log("test health check: ", data)
+}
+
+//test()
 </script>
 
 <style scoped>
