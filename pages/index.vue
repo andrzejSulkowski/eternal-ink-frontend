@@ -49,14 +49,16 @@ async function engravingStatusStream(){
   let counter = 0;
   eventSource.onmessage = function(event) {
     console.log("event: ", event)
-    counter++;
-    if(counter > 3){
+    const status = JSON.parse(event.data);
+    if(status === "finalized"){
+      console.warn("closing connection to stream!");
       eventSource.close();
     }
   }
+  
 }
 
-//engravingStatusStream();
+engravingStatusStream();
 
 function testSse() {
   console.log("listening to sse!");
@@ -77,7 +79,7 @@ function testSse() {
     console.error("CATCH HIT");
   }
 }
-testSse();
+//testSse();
 
 
 </script>

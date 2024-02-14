@@ -16,13 +16,25 @@ export default defineEventHandler(async (event: H3Event) => {
 
     let data: IEngravingStatusStream = TransactionStatus.WaitingForFunds;
 
-    let interval = setInterval(() => {
+    const updateDataAndSend = () => {
         data = nextStatus(data);
-        console.log("sending data...")
-        send(() => ({data}))
-    }, 5000)
+        send(() => ({data}));
+        console.log("Sent update: ", data);
 
-    event.node.req.on("close", () => clearInterval(interval));
+        // Check if the new status is Finalized, and if so, stop the interval.
+        if (data === TransactionStatus.Finalized) {
+            clearInterval(interval);
+            console.log("Transaction finalized, stopping updates.");
+            close();
+        }
+    };
+
+    let interval = setInterval(updateDataAndSend, 5000);
+
+    event.node.req.on("close", () => {
+        clearInterval(interval);
+        console.log("Client disconnected, stopping updates.");
+    });
 });
 
 

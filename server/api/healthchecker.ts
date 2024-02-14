@@ -3,10 +3,7 @@ import { useRuntimeConfig } from '#imports'
 import type { IHealthCheckResponse } from '~/types/engraving';
  
 export default defineEventHandler(async (event: H3Event) => {
-    console.warn("Health Check Event: ", event.node.req.method, event.node.req.url);
-
     if (event.node.req.method === 'GET') {
-
         setResponseStatus(event, 200);
         const body: IHealthCheckResponse = {
             message: `

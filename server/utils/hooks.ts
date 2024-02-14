@@ -27,7 +27,9 @@ export const useSSE = (event: H3Event, hookName: string) => {
     }
     
     const close = () => {
-        event.node.res.end()
+        event.node.res.once("drain", () => {
+            event.node.res.end()
+        })
     }
     
     event._handled = true
