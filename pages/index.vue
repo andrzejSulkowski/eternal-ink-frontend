@@ -45,20 +45,30 @@ async function engravingStatusStream(){
   console.log("listening engraving status stream");
 
   const eventSource = $api.subscribeStatus("tb1qwaznwcxhl2vhdnd0f26qwphxmr2u0qudz05xgq" as BitcoinAddress);
-
-  let counter = 0;
+  console.log("eventSource: ", eventSource);
   eventSource.onmessage = function(event) {
-    console.log("event: ", event)
+    console.warn("event: ", event)
     const status = JSON.parse(event.data);
     if(status === "finalized"){
       console.warn("closing connection to stream!");
       eventSource.close();
     }
   }
+  let counter = 0;
+  // eventSource.onmessage = function(event) {
+  //   console.log("event: ", event)
+  //   const status = JSON.parse(event.data);
+  //   if(status === "finalized"){
+  //     console.warn("closing connection to stream!");
+  //     eventSource.close();
+  //   }
+  // }
   
 }
+onMounted(() => {
+  //engravingStatusStream();
+})
 
-engravingStatusStream();
 
 function testSse() {
   console.log("listening to sse!");

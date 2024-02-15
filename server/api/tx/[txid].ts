@@ -22,6 +22,8 @@ export default defineEventHandler(async (event: H3Event) => {
 
     console.log("WRONG METHOD: ", event.node.req.method, event.node.req.url)
     setResponseStatus(event, 405)
-    return;
+    return {
+        op_return: "",
+    } as IRequestTxResponse;
 });
 
