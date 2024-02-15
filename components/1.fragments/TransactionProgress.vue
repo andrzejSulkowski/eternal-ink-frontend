@@ -5,6 +5,7 @@
     </v-card-title>
     <v-card-text class="text-center">
       <p :class="statusClass" class="font-medium">{{ statusMessage }}</p>
+      <p v-if="txId">Transaction ID: {{ txId }}</p>
       <v-progress-circular
         v-if="isProcessing"
         class="mt-8"
@@ -21,6 +22,7 @@ import { TransactionStatus } from '~/types/transactionStatus';
 
 const props = defineProps({
   status: { type: String as PropType<TransactionStatus>, required: true },
+  txId: { type: String , required: false, default: () => undefined },
 });
 
 const { status } = toRefs(props);

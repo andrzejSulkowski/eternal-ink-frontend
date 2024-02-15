@@ -3,26 +3,44 @@ import { useRuntimeConfig } from "#imports";
 import type { IRequestTxResponse, IEngravingStatusStream } from "~/types/engraving";
 import { TransactionStatus } from "~/types/transactionStatus";
 import { useSSE } from "@/server/utils/hooks";
+import { fromStr } from "~/utils/types/bitcoinAddress";
 
 export default defineEventHandler(async (event: H3Event) => {
-    const txId = event.context.params?.txid;
-    if (!txId) {
-        console.error("No txId provided");
+    const address_string: string | undefined = event.context.params?.address;
+    if (!address_string) {
+        console.error("No address provided");
+        setResponseStatus(event, 400);
+        return;
+    }
+    const address = fromStr(address_string);
+
+    if (!address) {
+        console.error("Invalid address provided");
         setResponseStatus(event, 400);
         return;
     }
 
     const { send, close } = useSSE(event, 'sse:event');
 
-    let data: IEngravingStatusStream = TransactionStatus.WaitingForFunds;
-
+    let status: TransactionStatus | undefined = TransactionStatus.WaitingForFunds;
+    let txId: string | undefined = undefined;
     const updateDataAndSend = () => {
-        data = nextStatus(data);
+        status = nextStatus(status);
+
+        if(status === TransactionStatus.Engraving){
+            txId = "dde21714eb5fb1f4785201a353c347582a84d6ee4f67a0431a417cd4e41a96d6"
+        }
+        const data: IEngravingStatusStream = {
+            status: status,
+            address,
+            txId
+        };
+
         send(() => ({data}));
         console.log("Sent update: ", data);
 
         // Check if the new status is Finalized, and if so, stop the interval.
-        if (data === TransactionStatus.Finalized) {
+        if (data.status === TransactionStatus.Finalized) {
             clearInterval(interval);
             console.log("Transaction finalized, stopping updates.");
             close();
@@ -39,7 +57,7 @@ export default defineEventHandler(async (event: H3Event) => {
 
 
 // *Note: External TransactionStatus is not being tested in this example
-function nextStatus(status: TransactionStatus): TransactionStatus {
+function nextStatus(status?: TransactionStatus): TransactionStatus {
     switch (status){
         case TransactionStatus.WaitingForFunds:
             return TransactionStatus.ConfirmingFunds;

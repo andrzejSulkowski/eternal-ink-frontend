@@ -11,12 +11,15 @@
           v-if="state === STATE.REQUEST"
           @submit="({ address, fees }) => subscribeToTxStatus(address, fees)"
         />
-        <request-funds v-else-if="state === STATE.WAITING_FOR_FUNDS && address && fees"
-          :address="address" 
-          :fees="fees" 
+        <request-funds
+          v-else-if="state === STATE.WAITING_FOR_FUNDS && address && fees"
+          :address="address"
+          :fees="fees"
         />
-        <transaction-progress v-else-if="state === STATE.PROCESSING || state === STATE.FINAL"
-          :status="txStatus" 
+        <transaction-progress
+          v-else-if="state === STATE.PROCESSING || state === STATE.FINAL"
+          :status="txStatus"
+          :tx-id="txId"
         />
       </v-col>
     </v-row>
@@ -24,7 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { TransactionStatus } from '~/types/transactionStatus';
+import type { IEngravingStatusStream } from "~/types/engraving";
+import { TransactionStatus } from "~/types/transactionStatus";
 const { $api } = useNuxtApp();
 
 enum STATE {
@@ -39,6 +43,7 @@ let txStatus: TransactionStatus = TransactionStatus.WaitingForFunds;
 let evtSource: EventSource | undefined = undefined;
 const address = ref<BitcoinAddress>();
 const fees = ref<number>();
+const txId = ref<string>();
 
 function subscribeToTxStatus(addr: BitcoinAddress, fee: number) {
   address.value = addr;
@@ -47,14 +52,18 @@ function subscribeToTxStatus(addr: BitcoinAddress, fee: number) {
   setupSse(address.value);
 }
 
-
 async function setupSse(address: BitcoinAddress) {
   evtSource = $api.subscribeStatus(address);
 
-  evtSource.onmessage = (event: MessageEvent<TransactionStatus>) => {
+  evtSource.onmessage = (event: MessageEvent<string>) => {
+    const data: { data: IEngravingStatusStream } = JSON.parse(event.data);
+    let status = data.data.status;
+    txId.value = data.data.txId;
+
     console.log("event: ", event);
-    txStatus = event.data;
-    switch (event.data) {
+    console.log("parsed data: ", data);
+    txStatus = status;
+    switch (txStatus) {
       case TransactionStatus.WaitingForFunds:
         console.log("waiting for funds");
         break;
@@ -96,11 +105,6 @@ async function setupSse(address: BitcoinAddress) {
 
 /// TESTING FUNCTIONS BELOW
 
-
-
-const txId = ref<string>(
-  "d12cc196a322b5a8f47ea60dc2d056f88eab940cdabb77e3b18a7fe40116c73b"
-);
 function validateTxId(value: string) {
   if (value.length !== 64) {
     return "Transaction ID must be 64 characters long";
@@ -121,7 +125,6 @@ async function fetchTx() {
   console.log("data: ", data.value);
   console.log("error: ", error.value);
 }
-
 
 // async function engraveMsg(message: string) {
 //   const { data, error } = await useFetch<ResponseEngraveMessage>(

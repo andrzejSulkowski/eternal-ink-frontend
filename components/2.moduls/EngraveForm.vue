@@ -8,6 +8,7 @@
       auto-grow
       class="mb-4 text-primary-text"
       v-model="message"
+      :rules="[validateLength]"
     ></v-textarea>
     <v-btn
       large
@@ -45,7 +46,7 @@ async function engrave() {
 }
 
 function validateMessage(msg: string): { isValid: boolean; error?: string } {
-  if (msg.length > 20) {
+  if (msg.length > 32) {
     // TODO: update to correct length accepted currently by the system
     return {
       isValid: false,
@@ -53,6 +54,14 @@ function validateMessage(msg: string): { isValid: boolean; error?: string } {
     };
   } else {
     return { isValid: true };
+  }
+}
+
+const validateLength = (value: string) => {
+  if (value.length <= 32) {
+    return true;
+  }else {
+    return 'Message can be at most 20 characters long';
   }
 }
 </script>
