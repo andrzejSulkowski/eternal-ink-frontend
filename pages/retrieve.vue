@@ -5,7 +5,7 @@
         <v-card class="pa-4" outlined>
           <v-form @submit.prevent="fetchTransactionData">
             <v-text-field
-              v-model="txId"
+              v-model="txAddress"
               label="Transaction ID"
               outlined
               dense
@@ -33,7 +33,7 @@
 import type { IRequestTxResponse } from "~/types/engraving";
 
 const { $api } = useNuxtApp();
-const txId = ref("");
+const txAddress = ref("");
 const transactionData = ref<IRequestTxResponse>();
 
 const rules = {
@@ -41,13 +41,13 @@ const rules = {
 };
 
 const fetchTransactionData = async () => {
-    if(rules.required(txId.value) !== true){
+    if(rules.required(txAddress.value) !== true){
       return;
     }
   // Example: Fetch transaction data from your backend
   // Replace with your actual API call
   const response = await $api.fetchTx(
-   txId.value 
+   txAddress.value 
   );
 
   transactionData.value = response;
