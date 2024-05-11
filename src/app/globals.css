@@ -2,15 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-  --background-color: #404462; 
-  --primary-faded: #A6AEC2;
+  --background-color: #404462;
+  --primary-faded: #a6aec2;
   --border-color: #242438;
+
+  /* Generated CSS */
+  /* Color styles */
+  --opacity_-white: rgba(255, 255, 255, 0.6000000238418579);
+  --l--grey: rgba(166, 174, 194, 1);
+  --violet: rgba(140, 114, 245, 1);
+  --white: rgba(255, 255, 255, 1);
+  --black: rgba(9, 9, 10, 1);
+  --stroke: rgba(36, 36, 56, 1);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
 }
 
 @media (prefers-color-scheme: dark) {
