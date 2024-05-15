@@ -17,7 +17,8 @@ const config: Config = {
         'purple': 'rgba(140, 114, 245, 1)',
         'dirty-purple': 'rgba(148, 120, 151, 1)',
         'dark-purple': '#242438',
-        'ei-grey': 'rgba(166, 174, 194, 1)'//TODO: rename colors ei-{name}
+        'ei-grey': 'rgba(166, 174, 194, 1)',//TODO: rename colors ei-{name}
+        'ei-danger': '#EF4870'
       },
       darkMode: ['class', '[data-mode="dark"]'],
       fontFamily: {

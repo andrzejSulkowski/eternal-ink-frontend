@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import InfoBanner from "@/components/InfoBanner/InfoBanner";
+import FileBanner from "@/components/FileInput/parts/FileBanner/FileBanner";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Ethernal Ink/Info Banner",
-  component: InfoBanner,
+  title: "Ethernal Ink/File Input/Parts/File Banner",
+  component: FileBanner,
   decorators: [],
   parameters: {
     layout: "centered",
@@ -12,13 +12,11 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
   },
-} satisfies Meta<typeof InfoBanner>;
+} satisfies Meta<typeof FileBanner>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    allowedMimeTypes: ['application/pdf', 'image/jpeg', 'image/jpg']
-  },
+  args: {},
 };

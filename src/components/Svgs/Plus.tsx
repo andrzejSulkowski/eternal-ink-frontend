@@ -13,9 +13,9 @@ function Plus({ color, className }: Props) {
         shape-rendering="geometricPrecision"
         text-rendering="geometricPrecision"
         image-rendering="optimizeQuality"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         fill={color ? color : 'black'}
-        clip-rule="evenodd"
+        clipRule="evenodd"
         viewBox="0 0 512 512"
         className={["w-full h-full", className].join(" ")}
       >

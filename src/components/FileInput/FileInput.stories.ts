@@ -2,13 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react";
 import FileInput from "@/components/FileInput/FileInput";
 import { fn } from "@storybook/test";
 
-const meta = {
-  title: "Ethernal Ink/File Input",
+let file: File | null = null;
+const meta: Meta<typeof FileInput> = {
+  title: "Ethernal Ink/File Input/Input",
   component: FileInput,
   decorators: [],
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: "centered",
+    layout: "padded",
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
@@ -24,13 +25,27 @@ const meta = {
       "image/jpeg",
       "application/pdf",
     ],
-    file: undefined,
-    onInput: (file: File | null) => console.log("file: ", file),
+    file: file ?? undefined,
+    onInput: (f: File | null) => file = f,
   },
 } satisfies Meta<typeof FileInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+
+export const Default: Story = {
+  args: {
+    allowedMimeTypes: [
+      "image/jpg",
+      "image/png",
+      "image/jpeg",
+      "application/pdf",
+    ],
+    file: file ?? undefined,
+    onInput: (f: File | null) => file = f,
+  },
+};
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const WithoutFile: Story = {
@@ -42,7 +57,7 @@ export const WithoutFile: Story = {
       "application/pdf",
     ],
     file: undefined,
-    onInput: (file: File | null) => console.log("file: ", file),
+    onInput: (file: File | null) => console.log("file (WithoutFile Story): ", file),
   },
 };
 
@@ -54,9 +69,8 @@ export const WithFile: Story = {
       "image/jpeg",
       "application/pdf",
     ],
-    file: new File([new ArrayBuffer(0)], "Magic Axe"),
-    onInput(file: File | null) {
-      console.log("file: ", file);
-    },
+    file: new File([""], "magic_axe.png"),
+    onInput: (f: File | null) => console.log("file (WithFile): ", f)
+    
   },
 };
