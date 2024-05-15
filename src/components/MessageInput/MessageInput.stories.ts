@@ -3,7 +3,7 @@ import MessageInput from "@/components/MessageInput/MessageInput";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Ethernal Ink/MessageInput",
+  title: "Ethernal Ink/Message Input",
   component: MessageInput,
   decorators: [],
   parameters: {

@@ -21,20 +21,10 @@ const LoadingSpinner: React.FC<Props> = ({ innerText, label }: Props) => {
           </span>
         </div>
       </div>
-      <div className="uppercase w-32 truncate">{label}</div>
+      <div className="uppercase truncate">{label}</div>
     </div>
   );
 };
 
-// .loader {
-//     width: 48px;
-//     height: 48px;
-//     border-radius: 50%;
-//     display: inline-block;
-//     border-top: 3px solid #FFF;
-//     border-right: 3px solid transparent;
-//     box-sizing: border-box;
-//     animation: rotation 1s linear infinite;
-//   }
 
 export default LoadingSpinner;
