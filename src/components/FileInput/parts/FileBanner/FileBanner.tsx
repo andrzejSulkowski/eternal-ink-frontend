@@ -15,7 +15,7 @@ function FileBanner({src, name, size, onRemove}: Props) {
         <Image src={src} alt="File Info" width={40} height={40} draggable={false}/>
         <div className="flex flex-col h-full justify-between">
           <span className="font-bold text-white">{name}</span>
-          <span className="text-primary-faded">
+          <span className="text-ei-primary-faded">
             {size.value + ' ' + size.unit.toUpperCase()}
           </span>
         </div>

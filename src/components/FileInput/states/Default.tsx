@@ -9,7 +9,7 @@ function Default({className, children}: React.PropsWithChildren<Props>) {
     <div className={['text-nowrap', className].join(" ")}>
       <span>
         Drag Your File In Here or{" "}
-        <span className="text-purple">Select from Device</span>
+        <span className="text-ei-purple">Select from Device</span>
         {children}
       </span>
     </div>

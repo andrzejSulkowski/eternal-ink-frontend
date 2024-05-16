@@ -97,7 +97,7 @@ function FileInput(props: Props) {
         onDragEnter={dragEnter}
         onClick={() => fileInputRef.current?.click()}
         className={[
-          "py-14 px-44 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-light-purple mb-4 relative",
+          "py-14 px-44 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-ei-light-purple mb-4 relative",
           "w-full",
           getCursor,
         ].join(" ")}

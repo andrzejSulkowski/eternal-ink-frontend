@@ -10,11 +10,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        "primary-faded": "#A6AEC2",
-        primary: "#8C72F5",
-        "light-purple": "rgba(64, 68, 98, 0.1)",
-        "purple-transparent": "rgba(140, 114, 245, 0.2)",
-        purple: "rgba(140, 114, 245, 1)",
+        "ei-primary-faded": "#A6AEC2",
+        "ei-primary": "#8C72F5",
+        "ei-light-purple": "rgba(64, 68, 98, 0.1)",
+        "ei-purple": "rgb(140, 114, 245)",
         "dirty-purple": "rgba(148, 120, 151, 1)",
         "dark-purple": "#242438",
         "ei-grey": "rgb(166, 174, 194)", //TODO: rename colors ei-{name}

@@ -8,7 +8,7 @@ interface Props {
 function Loading({progress}: Props) {
   return (
     <div className="flex flex-col justify-center items-center">
-      <span className="text-primary-faded font-normal">Loading...</span>
+      <span className="text-ei-primary-faded font-normal">Loading...</span>
       <ProgressBar percent={progress} />
     </div>
   );

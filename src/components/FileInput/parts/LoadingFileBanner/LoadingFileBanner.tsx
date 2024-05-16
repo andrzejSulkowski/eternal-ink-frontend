@@ -14,7 +14,7 @@ function LoadingFileBanner({ src, namePlaceholder, sizePlaceholder }: Props) {
         <Image src={src} alt="File Info" width={40} height={40} draggable={false}/>
         <div className="flex flex-col h-full justify-between">
           <span className="font-bold text-white">{namePlaceholder}</span>
-          <span className="text-primary-faded">
+          <span className="text-ei-primary-faded">
             {sizePlaceholder}
           </span>
         </div>

@@ -16,9 +16,9 @@ const Input: React.FC<Props> = ({
 }: Props) => {
   return (
     <textarea
-      className="font-manrope border w-full bg-light-purple border-1 border-dark-purple rounded-2xl px-6 py-4 box-border outline-none text-white 
-      focus:border-primary focus:placeholder-white 
-      placeholder:font-normal placeholder:placeholder-primary-faded
+      className="font-manrope border w-full bg-ei-light-purple border-1 border-dark-purple rounded-2xl px-6 py-4 box-border outline-none text-white 
+      focus:border-ei-primary focus:placeholder-white 
+      placeholder:font-normal placeholder:placeholder-ei-primary-faded
       font-bold 
       resize-none"
       placeholder={placeholder}

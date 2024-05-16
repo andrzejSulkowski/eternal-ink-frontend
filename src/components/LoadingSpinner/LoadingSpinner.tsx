@@ -8,7 +8,7 @@ interface Props {
 }
 
 const style =
-  "w-12 h-12 rounded-full inline-block border-t-2 border-solid border-t-purple border-r-transparent box-border animate-spin";
+  "w-12 h-12 rounded-full inline-block border-t-2 border-solid border-t-ei-purple border-r-transparent box-border animate-spin";
 
 const LoadingSpinner: React.FC<Props> = ({ innerText, label }: Props) => {
   return (
