@@ -1,13 +1,9 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useMemo, useRef } from "react";
 import { MimeType } from "@/libs/mime-types/types";
-import InfoBanner from "@/components/FileInput/parts/InfoBanner/InfoBanner";
-import { useDropzone } from "react-dropzone";
+
+// Custom Hooks
+import { useFileInputState, STATE } from "./hooks/useFileInputState";
+import { useDropzone } from "./hooks/useDropzone";
 
 // States
 import Default from "./states/Default";
@@ -15,52 +11,61 @@ import Enter from "./states/Enter";
 import Loading from "./states/Loading";
 import Full from "./states/Full";
 
-interface Props {
+// Banner
+import InfoBanner from "./parts/InfoBanner/InfoBanner";
+import FileBanner from "./parts/FileBanner/FileBanner";
+import LoadingFileBanner from "./parts/LoadingFileBanner/LoadingFileBanner";
+
+export interface Props {
   file?: File;
   allowedMimeTypes: MimeType[];
   onInput: (f: File | null) => void;
 }
-enum STATE {
-  DEFAULT = "default",
-  ENTER = "enter",
-  LOADING = "loading",
-  FULL = "full",
-}
 
 ///TODO: The first div has a fixed padding. I'd like to make it to try to have py-14 and px-44 but it is more important that the text does not break into another line.
-function FileInput({ file, allowedMimeTypes, onInput }: Props) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  let uploadTimeStamp: number | null = null;
+function FileInput(props: Props) {
+  let fileInputRef = useRef<HTMLInputElement | null>(null);
+  let uploadTimeStamp: React.MutableRefObject<number | null> = useRef(null);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const file = acceptedFiles.at(0);
-    uploadTimeStamp = new Date().getTime();
-    onInput(file || null);
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { isDragActive, dragEnter, dragLeave, drop } = useDropzone(
+    props,
+    uploadTimeStamp
+  );
 
-  const state: STATE = useMemo(() => {
-    if (file) {
-      if (uploadTimeStamp && new Date().getTime() - uploadTimeStamp < 5000) {
-        return STATE.LOADING;
-      } else {
-        return STATE.FULL;
-      }
-    } else if (isDragActive) {
-      return STATE.ENTER;
-    } else {
-      return STATE.DEFAULT;
-    }
-  }, [file, isDragActive, uploadTimeStamp]);
-  const progress = useMemo(() => (file ? 100 : 0), [file]);
-
+  const { state } = useFileInputState(props, uploadTimeStamp, isDragActive);
+  const progress = useMemo(() => (props.file ? 100 : 0), [props.file]);
   const componentMap = {
     default: Default,
-    enter: Enter,
+    enter: () => (
+      <Default>
+        <Enter onDragLeave={dragLeave} onDrop={drop} />
+      </Default>
+    ),
     loading: () => <Loading progress={progress} />,
     full: Full,
   };
+  const bannerMap = {
+    default: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
+    enter: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
+    loading: () => (
+      <LoadingFileBanner
+        src="/storybook_resources/dwarf.png"
+        namePlaceholder="Loading your file"
+        sizePlaceholder=">100 MB"
+      />
+    ),
+    full: () => (
+      <FileBanner
+        src="/storybook_resources/axe.png"
+        name="filename.png"
+        size={{ value: 21, unit: "MB" }}
+        onRemove={() => props.onInput(null)}
+      />
+    ),
+  };
+
   const StateComponent = componentMap[state] || Default;
+  const BannerComponent = bannerMap[state] || InfoBanner;
   const getCursor = useMemo(() => {
     switch (state) {
       case STATE.DEFAULT:
@@ -70,23 +75,36 @@ function FileInput({ file, allowedMimeTypes, onInput }: Props) {
       default:
         return "cursor-not-allowed";
     }
-  }, [state])
+  }, [state]);
 
   return (
     <>
-      <input type="file" hidden ref={inputRef} {...getInputProps()} />
+      <input
+        type="file"
+        hidden
+        ref={fileInputRef}
+        onChange={(e) => {
+          const files = e.target.files;
+          if (files && files.length > 0) {
+            props.onInput(files[0]);
+          }
+        }}
+      />
+      <span className="text-white font-manrope font-bold text-sm mb-4 block">
+        Add your File
+      </span>
       <div
-        {...getRootProps()}
+        onDragEnter={dragEnter}
+        onClick={() => fileInputRef.current?.click()}
         className={[
           "py-14 px-44 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-light-purple mb-4 relative",
           "w-full",
-          getCursor
+          getCursor,
         ].join(" ")}
       >
         <StateComponent />
       </div>
-
-      <InfoBanner allowedMimeTypes={allowedMimeTypes} />
+      <BannerComponent />
     </>
   );
 }

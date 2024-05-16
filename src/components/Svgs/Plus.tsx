@@ -1,20 +1,24 @@
 import React from "react";
 
-interface Props {
-    color?: string;
-    className?: string;
+interface Props extends React.DOMAttributes<HTMLDivElement> {
+  color?: string;
+  className?: string;
 }
 
-function Plus({ color, className }: Props) {
+function Plus({ color, className, ...rest }: Props) {
   return (
-    <div className="w-full h-full aspect-square">
+    <div className="w-full h-full aspect-square" {...rest}>
       <svg
+        onDragLeave={(e) => e.stopPropagation()}
+        onDragEnd={(e) => e.stopPropagation()}
+        onDragExit={(e) => e.stopPropagation()}
+
         xmlns="http://www.w3.org/2000/svg"
-        shape-rendering="geometricPrecision"
-        text-rendering="geometricPrecision"
-        image-rendering="optimizeQuality"
+        shapeRendering="geometricPrecision"
+        textRendering="geometricPrecision"
+        imageRendering="optimizeQuality"
         fillRule="evenodd"
-        fill={color ? color : 'black'}
+        fill={color ? color : "black"}
         clipRule="evenodd"
         viewBox="0 0 512 512"
         className={["w-full h-full", className].join(" ")}

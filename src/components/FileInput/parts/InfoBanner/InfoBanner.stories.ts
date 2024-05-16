@@ -7,7 +7,7 @@ const meta = {
   component: InfoBanner,
   decorators: [],
   parameters: {
-    layout: "centered",
+    layout: "padded",
   },
   tags: ["autodocs"],
   argTypes: {

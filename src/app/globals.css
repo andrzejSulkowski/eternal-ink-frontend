@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
   font-smooth: never;
 }
+img {
+  /* pointer-events: none; */
+}
 
 @media (prefers-color-scheme: dark) {
   :root {

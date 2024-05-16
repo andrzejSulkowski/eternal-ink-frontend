@@ -26,26 +26,16 @@ const meta: Meta<typeof FileInput> = {
       "application/pdf",
     ],
     file: file ?? undefined,
-    onInput: (f: File | null) => file = f,
+    onInput: (f: File | null) => {
+      file = f
+      console.log("set file: ", file)
+    },
   },
 } satisfies Meta<typeof FileInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-
-export const Default: Story = {
-  args: {
-    allowedMimeTypes: [
-      "image/jpg",
-      "image/png",
-      "image/jpeg",
-      "application/pdf",
-    ],
-    file: file ?? undefined,
-    onInput: (f: File | null) => file = f,
-  },
-};
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const WithoutFile: Story = {
@@ -57,7 +47,11 @@ export const WithoutFile: Story = {
       "application/pdf",
     ],
     file: undefined,
-    onInput: (file: File | null) => console.log("file (WithoutFile Story): ", file),
+    onInput: (f: File | null) => {
+      console.log("file (WithoutFile Story): ", f);
+      file = f;
+      console.log("new file: ", file)
+    },
   },
 };
 

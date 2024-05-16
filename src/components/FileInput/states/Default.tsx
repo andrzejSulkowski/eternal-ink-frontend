@@ -1,11 +1,16 @@
 import React from "react";
 
-function Default() {
+interface Props {
+  className?: string;
+}
+
+function Default({className, children}: React.PropsWithChildren<Props>) {
   return (
-    <div className="text-nowrap">
+    <div className={['text-nowrap', className].join(" ")}>
       <span>
         Drag Your File In Here or{" "}
         <span className="text-purple">Select from Device</span>
+        {children}
       </span>
     </div>
   );

@@ -7,7 +7,7 @@ const meta = {
   component: FileBanner,
   decorators: [],
   parameters: {
-    layout: "centered",
+    layout: "padded",
   },
   tags: ["autodocs"],
   argTypes: {
@@ -18,5 +18,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    src: './storybook_resources/axe.png',
+    name: 'file.jpg',
+    size: { value: 2.4, unit: 'MB' },
+    onRemove: fn
+  },
 };
