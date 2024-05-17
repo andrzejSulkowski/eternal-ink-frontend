@@ -26,7 +26,7 @@ export interface Props {
 
 ///TODO: The first div has a fixed padding. I'd like to make it to try to have py-14 and px-44 but it is more important that the text does not break into another line.
 function FileInput(props: Props) {
-  const {openHiddenFileInput, HiddenFileInput} = useHiddenFileInput(props.onInput);
+  const {openHiddenFileInput, HiddenFileInput, userFile, setUserFile} = useHiddenFileInput(props.onInput);
   let uploadTimeStamp: React.MutableRefObject<number | null> = useRef(null);
 
   const { isDragActive, dragEnter, dragLeave, drop } = useDropzone(
