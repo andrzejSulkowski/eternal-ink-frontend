@@ -17,7 +17,7 @@ const Message: React.FC<Props> = ({
     address.slice(0, 4) + "..." + address.slice(address.length - 4);
 
   const variantStyles = {
-    solid: "bg-ei-purple/20",
+    solid: "bg-ei-primary/20",
     outline: "bg-transparent",
   };
   const getVariantStyles = () =>
@@ -26,7 +26,7 @@ const Message: React.FC<Props> = ({
   return (
     <div
       className={[
-        "flex justify-between rounded-xl bg-ei-purple/20 py-3 px-4 w-[362px] h-[67.5px] text-sm border-solid border border-ei-purple/20 font-manrope",
+        "flex justify-between rounded-xl bg-ei-primary/20 py-3 px-4 w-[362px] h-[67.5px] text-sm border-solid border border-ei-primary/20 font-manrope",
         getVariantStyles(),
       ].join(" ")}
     >
@@ -37,7 +37,7 @@ const Message: React.FC<Props> = ({
         </span>
       </div>
       <div className="flex flex-col w-2/5 justify-center text-right">
-        <span className="text-dirty-purple">engraved message:</span>
+        <span className="text-ei-primary-dirty">engraved message:</span>
         <span className="text-white truncate font-bold">{message}</span>
       </div>
     </div>

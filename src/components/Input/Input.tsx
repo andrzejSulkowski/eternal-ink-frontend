@@ -12,7 +12,7 @@ const Input: React.FC<Props> = ({ placeholder, value, onInput, onChange }: Props
 
   return (
     <input
-      className="font-manrope border w-full bg-ei-light-purple border-1 border-dark-purple rounded-2xl px-4 py-4 box-border outline-none text-white 
+      className="font-manrope border w-full bg-ei-primary-light/10 border-1 border-ei-primary-dark rounded-2xl px-4 py-4 box-border outline-none text-white 
       focus:border-ei-primary focus:placeholder-white
       placeholder:font-normal placeholder:placeholder-ei-primary-faded
       font-bold "

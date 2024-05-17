@@ -28,7 +28,7 @@ function Enter({ onDragLeave, onDrop }: Props) {
       className="absolute bg-white bg-opacity-80 rounded-2xl top-0 bottom-0 right-0 left-0"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-clip h-1/3">
-        <Plus color="white" className="fill-ei-purple" />
+        <Plus color="white" className="fill-ei-primary" />
       </div>
     </div>
   );

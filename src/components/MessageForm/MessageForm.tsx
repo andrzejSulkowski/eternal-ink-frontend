@@ -7,7 +7,7 @@ interface Props {
 
 function MessageForm() {
   return (
-    <div className="w-[30rem] h-[45rem] bg-ei-black rounded-[20px] text-white px-8 pt-6 pb-10">
+    <div className="w-[30rem] h-[45rem] bg-ei-void rounded-[20px] text-white px-8 pt-6 pb-10">
       {/* Header Controls */}
       <div className="border-b-2 border-solid border-ei-primary-faded border-opacity-20 flex justify-between items-center text-ei-primary-faded pb-4">
         <span>Send Your Own Message</span>
