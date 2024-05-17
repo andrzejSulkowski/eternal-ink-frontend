@@ -7,19 +7,13 @@ interface Props {
   address: string;
 }
 
-// const avatarStyle = {
-//     ''
-// }
-
 const Avatar: React.FC<Props> = ({ address }: Props) => {
   const [url, setUrl] = useState<string>("");
 
   useEffect(() => {
-    // This function will be called whenever `address` changes.
-    console.log("Generating avatar for address:", address);
     const newUrl = generateAvatarURL(address);
     setUrl(newUrl);
-  }, [address]); // Dependency array, useEffect will re-run when `address` changes.
+  }, [address]);
 
   return (
     <>

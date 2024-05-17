@@ -45,3 +45,4 @@ const Message: React.FC<Props> = ({
 };
 
 export default Message;
+export type { Props as MessageProps }

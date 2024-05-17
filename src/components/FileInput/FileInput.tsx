@@ -4,6 +4,8 @@ import { MimeType } from "@/libs/mime-types/types";
 // Custom Hooks
 import { useFileInputState, STATE } from "./hooks/useFileInputState";
 import { useDropzone } from "./hooks/useDropzone";
+//Common Hooks
+import { useHiddenFileInput } from "@/hooks/useHiddenFileInput";
 
 // States
 import Default from "./states/Default";
@@ -24,7 +26,7 @@ export interface Props {
 
 ///TODO: The first div has a fixed padding. I'd like to make it to try to have py-14 and px-44 but it is more important that the text does not break into another line.
 function FileInput(props: Props) {
-  let fileInputRef = useRef<HTMLInputElement | null>(null);
+  const {openHiddenFileInput, HiddenFileInput} = useHiddenFileInput(props.onInput);
   let uploadTimeStamp: React.MutableRefObject<number | null> = useRef(null);
 
   const { isDragActive, dragEnter, dragLeave, drop } = useDropzone(
@@ -79,23 +81,13 @@ function FileInput(props: Props) {
 
   return (
     <>
-      <input
-        type="file"
-        hidden
-        ref={fileInputRef}
-        onChange={(e) => {
-          const files = e.target.files;
-          if (files && files.length > 0) {
-            props.onInput(files[0]);
-          }
-        }}
-      />
+      <HiddenFileInput />
       <span className="text-white font-manrope font-bold text-sm mb-4 block">
         Add your File
       </span>
       <div
         onDragEnter={dragEnter}
-        onClick={() => fileInputRef.current?.click()}
+        onClick={openHiddenFileInput}
         className={[
           "py-14 px-44 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-ei-primary-light bg-opacity-10 mb-4 relative",
           "w-full",
