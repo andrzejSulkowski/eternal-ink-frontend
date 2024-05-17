@@ -20,7 +20,7 @@ interface Props {
 
 function MessageForm({onClose, onSend, messages = []}: Props) {
 
-  const MessageList = () => messages.map((props, index) => <Message message={props.message} address={props.address} variant={props.variant} key={index}/>)
+  const MessageList = () => messages.map((props, index) => <Message key={index} {...props}/>)
 
   const [userMessage, setUserMessage] = useState("");
   const { userFile, setUserFile, HiddenFileInput, openHiddenFileInput} = useHiddenFileInput()

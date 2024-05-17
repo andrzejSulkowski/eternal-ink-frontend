@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import Avatar from "@/components/Avatar/Avatar";
 
-interface Props {
+export interface Props {
   address: string;
   txHash: string;
   onClick: (id: string) => void;
@@ -24,7 +24,7 @@ function Tick({ address, txHash, onClick }: Props) {
       >
         {formattedAddress}
       </span>
-      <span className="text-white/60">engraved message into</span>
+      <span className="text-white/60 text-nowrap">engraved message into</span>
       <span
         onClick={() => onClick(txHash)}
         className="font-bold hover:underline cursor-pointer"
