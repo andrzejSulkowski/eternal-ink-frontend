@@ -5,9 +5,10 @@ import WaveSvg from "@/components/Svgs/Wave";
 
 interface Props {
   address: string;
+  className?: string;
 }
 
-const Avatar: React.FC<Props> = ({ address }: Props) => {
+const Avatar: React.FC<Props> = ({ address, className= '' }: Props) => {
   const [url, setUrl] = useState<string>("");
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const Avatar: React.FC<Props> = ({ address }: Props) => {
 
   return (
     <>
-      <div className="rounded-full overflow-clip relative max-w-full max-h-full aspect-square">
+      <div className={["rounded-full overflow-clip relative max-w-full max-h-full aspect-square", className].join(" ")}>
         <WaveSvg fillSrc={url} />
       </div>
     </>

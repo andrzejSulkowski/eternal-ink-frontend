@@ -8,17 +8,17 @@ const ticks: TickProps[] = [
     {
         address: "0x1234567890",
         txHash: "0x1234567890",
-        onClick: fn()
+        onClick: (id: string) => console.log(id)
     },
     {
         address: "0x8884567890",
         txHash: "0x1234567890",
-        onClick: fn()
+        onClick: (id: string) => console.log(id)
     },
     {
         address: "0x9994567890",
         txHash: "0x1234567890",
-        onClick: fn()
+        onClick: (id: string) => console.log(id)
     }
 ]
 

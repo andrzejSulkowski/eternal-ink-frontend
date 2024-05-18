@@ -1,3 +1,4 @@
+import { transform } from "next/dist/build/swc";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -26,7 +27,14 @@ const config: Config = {
       animation: {
         "ping-slow": "ping 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "ping-fast": "ping 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "infinite-scroll": "infinite-scroll linear infinite",
       },
+      keyframes: {
+        "infinite-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" }
+        }
+      }
     },
   },
   plugins: [
