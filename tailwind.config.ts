@@ -18,6 +18,7 @@ const config: Config = {
         "ei-primary-dark": "rgb(36, 36, 56)",
         "ei-void": "rgb(9, 9, 10)",
         "ei-danger": "rgb(239, 72, 112)",
+        "ei-black": "rbg(11, 9, 13)"
       },
       darkMode: ["class", '[data-mode="dark"]'],
       fontFamily: {

@@ -41,7 +41,7 @@ function TickHor({ ticks, tpm = 2 }: Props) {
 
   return (
     <div
-      className="max-w-full overflow-hidden"
+      className="max-w-full overflow-hidden font-manrope"
       onMouseEnter={() => _decelerate()}
       onMouseLeave={() => _reset()}
     >
