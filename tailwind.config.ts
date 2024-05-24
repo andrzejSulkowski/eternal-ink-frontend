@@ -9,6 +9,8 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-to-r": "linear-gradient(to right, var(--tw-gradient-stops))",
+        'gradient-to-br': 'linear-gradient(to bottom right, var(--tw-gradient-stops))',
       },
       colors: {
         "ei-primary": "rgb(140, 114, 245)",
@@ -16,9 +18,11 @@ const config: Config = {
         "ei-primary-light": "rgb(64, 68, 98)",
         "ei-primary-dirty": "rgb(148, 120, 151)",
         "ei-primary-dark": "rgb(36, 36, 56)",
+        "ei-primary-royal": "rgb(128, 69, 254)",
+        "ei-twilight-blue": "rgb(38, 45, 115)",
         "ei-void": "rgb(9, 9, 10)",
         "ei-danger": "rgb(239, 72, 112)",
-        "ei-black": "rbg(11, 9, 13)"
+        "ei-black": "rbg(11, 9, 13)",
       },
       darkMode: ["class", '[data-mode="dark"]'],
       fontFamily: {
@@ -33,13 +37,11 @@ const config: Config = {
       keyframes: {
         "infinite-scroll": {
           from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-100%)" }
-        }
-      }
+          to: { transform: "translateX(-100%)" },
+        },
+      },
     },
   },
-  plugins: [
-    require("tailwindcss-animation-delay"),
-  ],
+  plugins: [require("tailwindcss-animation-delay")],
 } satisfies Config;
 export default config;
