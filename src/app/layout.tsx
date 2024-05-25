@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={[kanit.variable, manrope.variable, "font-manrope"].join(" ")}>{children}</body>
+      <body className={[kanit.variable, manrope.variable, "font-manrope, text-white"].join(" ")}>{children}</body>
     </html>
   );
 }

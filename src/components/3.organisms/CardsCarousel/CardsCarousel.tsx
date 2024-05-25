@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card, { Props as CardProps } from "@/components/2.molecules/Card/Card";
-import ChevronLeft from "./parts/ChevronLeft";
-import ChevronRight from "./parts/ChevronRight";
+import ChevronLeft from "@/components/1.atoms/ChevronLeft/ChevronLeft";
+import ChevronRight from "@/components/1.atoms/ChevronRight/ChevronRight";
 
 interface Props {
   cards: CardProps[];
