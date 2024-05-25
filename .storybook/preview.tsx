@@ -2,9 +2,19 @@ import type { Preview, ReactRenderer } from "@storybook/react";
 import "../src/app/globals.css";
 import { manrope } from "../src/libs/fonts";
 import * as React from "react";
+import {
+  INITIAL_VIEWPORTS,
+  MINIMAL_VIEWPORTS,
+} from "@storybook/addon-viewport";
 
 const preview: Preview = {
   parameters: {
+    viewport: {
+      viewports: {
+        ...INITIAL_VIEWPORTS,
+        ...MINIMAL_VIEWPORTS,
+      },
+    },
     backgrounds: {
       default: "dark",
       values: [

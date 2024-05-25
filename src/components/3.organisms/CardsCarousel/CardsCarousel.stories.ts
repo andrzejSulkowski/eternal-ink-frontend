@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardsGroup from "./CardsGroup";
+import CardsCarousel from "./CardsCarousel";
 import { Props as CardProps } from "@/components/2.molecules/Card/Card";
 
 const mockCards:  CardProps[] = [
@@ -11,28 +11,27 @@ const mockCards:  CardProps[] = [
     },
     {
         title: "Your message will last forever",
-        highlightedTitle: "on the blockchain",
+        highlightedTitle: "On the Blockchain",
         description: "We'll show you how to do it",
     },
     {
-        title: "You can also send your message",
-        highlightedTitle: "to a friend",
+        title: "Send your message",
+        highlightedTitle: "To a friend",
         description: "Just type in your message and send him the link",
     }
 ]
 
 const meta = {
-  title: "Ethernal Ink/Cards Group",
-  component: CardsGroup,
+  title: "Ethernal Ink/Cards Carousel",
+  component: CardsCarousel,
   decorators: [],
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {},
   args: {
   },
-} satisfies Meta<typeof CardsGroup>;
+} satisfies Meta<typeof CardsCarousel>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

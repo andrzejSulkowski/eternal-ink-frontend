@@ -9,11 +9,11 @@ export interface Props {
 
 function Card({ title, highlightedTitle, description, children }: Props) {
   return (
-    <div className="w-full h-80 bg-gradient-to-br from-black/20 to-ei-twilight-blue text-white rounded-3xl grid grid-cols-12">
-      <div className="col-span-5">
+    <div className="w-full bg-gradient-to-br from-black/20 to-ei-twilight-blue text-white rounded-3xl grid grid-cols-12">
+      <div className="col-span-5 w-full h-full relative max-w-full max-h-full">
         {children}
       </div>
-      <div className="col-span-7 pr-10 py-20">
+      <div className="col-span-7 pr-10 py-20 flex flex-col">
         <div className="uppercase text-ei-primary font-semibold text-xs mb-5">
           Random facts
         </div>
