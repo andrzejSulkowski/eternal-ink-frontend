@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from "react";
 import IconStyles from "./parts/IconStyles";
-import { FaGripLinesVertical } from "react-icons/fa";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface Props {
+interface Props extends EIProps {
   icon: React.JSX.Element;
   title: string;
   description: string;
@@ -12,7 +13,7 @@ interface Props {
   }>;
 }
 
-function SelectionCard({ icon, title, description, options }: Props) {
+function SelectionCard({ icon, title, description, options, className }: Props) {
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(0);
 
   const CardOptionsTitles = () => {
@@ -45,7 +46,7 @@ function SelectionCard({ icon, title, description, options }: Props) {
   return (
     <div className="font-manrope">
       <IconStyles icon={icon} />
-      <div className="text-sm text-ei-primary-faded mt-8">
+      <div className={classNames("text-sm text-ei-primary-faded mt-8", className)}>
         <span className="block font-extrabold text-white text-xl mb-3">
           {" "}
           {title}{" "}

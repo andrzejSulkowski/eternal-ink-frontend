@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Card, { Props as CardProps } from "@/components/2.molecules/Card/Card";
 import ChevronLeft from "@/components/1.atoms/ChevronLeft/ChevronLeft";
 import ChevronRight from "@/components/1.atoms/ChevronRight/ChevronRight";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface Props {
+interface Props extends EIProps {
   cards: CardProps[];
 }
 
-function CardsGroup({ cards }: Props) {
+function CardsGroup({ cards, className }: Props) {
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   const handlePrev = () => {
@@ -40,7 +42,7 @@ function CardsGroup({ cards }: Props) {
   return (
     <>
       <div>
-        <div className="relative flex items-center justify-center w-full">
+        <div className={classNames("relative flex items-center justify-center w-full", className)}>
             <ChevronLeft onClick={handlePrev} className="absolute -left-4 p-2 rounded-full z-20 w-10 h-10"/>
           <div className="w-full flex justify-center">
             <Card {...cards[selectedIdx]}>

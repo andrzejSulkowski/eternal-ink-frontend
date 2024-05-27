@@ -11,6 +11,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-to-r": "linear-gradient(to right, var(--tw-gradient-stops))",
         'gradient-to-br': 'linear-gradient(to bottom right, var(--tw-gradient-stops))',
+        'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
       },
       colors: {
         "ei-primary": "rgb(140, 114, 245)",

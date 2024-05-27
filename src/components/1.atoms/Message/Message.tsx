@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import Avatar from "@/components/1.atoms/Avatar/Avatar";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface Props {
+interface Props extends EIProps {
   message: string;
   address: string;
   variant?: "solid" | "outline";
@@ -12,6 +13,7 @@ const Message: React.FC<Props> = ({
   address,
   message,
   variant = "solid",
+  className,
 }: Props) => {
   const getFormattedAddress = (address: string) =>
     address.slice(0, 4) + "..." + address.slice(address.length - 4);
@@ -25,10 +27,11 @@ const Message: React.FC<Props> = ({
 
   return (
     <div
-      className={[
+      className={classNames(
         "flex justify-between rounded-xl bg-ei-primary/20 py-3 px-4 w-[362px] h-[67.5px] text-sm border-solid border border-ei-primary/20 font-manrope",
         getVariantStyles(),
-      ].join(" ")}
+        className
+      )}
     >
       <div className="flex items-center gap-2 w-2/5">
         <Avatar address={address} />
@@ -45,4 +48,4 @@ const Message: React.FC<Props> = ({
 };
 
 export default Message;
-export type { Props as MessageProps }
+export type { Props as MessageProps };

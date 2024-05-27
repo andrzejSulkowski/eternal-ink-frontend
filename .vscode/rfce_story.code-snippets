@@ -1,0 +1,28 @@
+{
+	"Create React Components Story": {
+	  "prefix": "rfce_story",
+	  "body": [
+		"import type { Meta, StoryObj } from '@storybook/react';",
+		"import ${1:ComponentName} from './${1:ComponentName}';",
+		"import { fn } from '@storybook/test';",
+		"",
+		"const meta = {",
+		"  title: 'Eternal Ink/${1:ComponentName}',",
+		"  component: ${1:ComponentName},",
+		"  decorators: [],",
+		"  parameters: {",
+		"    layout: 'centered',",
+		"  },",
+		"  argTypes: {},",
+		"  args: {},",
+		"} satisfies Meta<typeof ${1:ComponentName}>;",
+		"export default meta;",
+		"type Story = StoryObj<typeof meta>;",
+		"",
+		"export const Default: Story = {",
+		"  args: {},",
+		"};"
+	  ],
+	  "description": "Create a Storybook Story with the filename as the stories name"
+	}
+  }

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 import PropTypes from "prop-types";
 import WaveSvg from "@/components/Svgs/Wave";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface Props {
+interface Props extends EIProps {
   address: string;
-  className?: string;
 }
 
 const Avatar: React.FC<Props> = ({ address, className= '' }: Props) => {
@@ -18,7 +19,7 @@ const Avatar: React.FC<Props> = ({ address, className= '' }: Props) => {
 
   return (
     <>
-      <div className={["rounded-full overflow-clip relative max-w-full max-h-full aspect-square", className].join(" ")}>
+      <div className={classNames("rounded-full overflow-clip relative max-w-full max-h-full aspect-square", className)}>
         <WaveSvg fillSrc={url} />
       </div>
     </>

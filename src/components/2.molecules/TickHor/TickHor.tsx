@@ -2,8 +2,10 @@ import React, { useMemo, useState } from "react";
 import Tick, { Props as TickProps } from "@/components/1.atoms/Tick/Tick";
 import { FaGripLinesVertical } from "react-icons/fa";
 import GradientFadeEffect from "@/components/2.molecules/TickHor/parts/GradientFadeEffect/GradientFadeEffect";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface Props {
+interface Props extends EIProps{
   ticks: TickProps[];
   tpm?: number; //ticks per minute - how many ticks to show scroll through in a minute
 }
@@ -13,7 +15,7 @@ interface TicksProps {
   keyGenerator: (index: number) => string;
 }
 
-function TickHor({ ticks, tpm = 2 }: Props) {
+function TickHor({ ticks, tpm = 2, className }: Props) {
   const scrollDuration = useMemo(() => `${60 / tpm}s`, [tpm]);
 
   function _decelerate() {
@@ -41,7 +43,7 @@ function TickHor({ ticks, tpm = 2 }: Props) {
 
   return (
     <div
-      className="max-w-full overflow-hidden font-manrope"
+      className={classNames("max-w-full overflow-hidden font-manrope", className)}
       onMouseEnter={() => _decelerate()}
       onMouseLeave={() => _reset()}
     >

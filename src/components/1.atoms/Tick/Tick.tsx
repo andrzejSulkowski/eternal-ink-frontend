@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 import Avatar from "@/components/1.atoms/Avatar/Avatar";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-export interface Props {
+export interface Props extends EIProps<string> {
   address: string;
   txHash: string;
   onClick: (id: string) => void;
-  className?: string;
 }
 
 function Tick({ address, txHash, onClick, className }: Props) {
@@ -17,7 +18,7 @@ function Tick({ address, txHash, onClick, className }: Props) {
   }, [txHash]);
 
   return (
-    <div className={["flex text-white items-center h-8 gap-3 text-xs", className].join(" ")}>
+    <div className={classNames("flex text-white items-center h-8 gap-3 text-xs", className)}>
       <div className="flex h-full gap-2">
         <Avatar address={address} />
         <span

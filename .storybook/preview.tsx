@@ -1,6 +1,6 @@
 import type { Preview, ReactRenderer } from "@storybook/react";
 import "../src/app/globals.css";
-import { manrope } from "../src/libs/fonts";
+import { manrope, kanit } from "../src/libs/fonts";
 import * as React from "react";
 import {
   INITIAL_VIEWPORTS,
@@ -33,7 +33,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <div className={`${manrope.variable}`}>
+      <div className={`${manrope.variable}, ${kanit.variable}`}>
         <Story />
       </div>
     ),

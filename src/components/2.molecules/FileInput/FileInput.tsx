@@ -1,5 +1,7 @@
 import React, { useMemo, useRef } from "react";
 import { MimeType } from "@/libs/mime-types/types";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
 // Custom Hooks
 import { useFileInputState, STATE } from "./hooks/useFileInputState";
@@ -18,7 +20,7 @@ import InfoBanner from "./parts/InfoBanner/InfoBanner";
 import FileBanner from "./parts/FileBanner/FileBanner";
 import LoadingFileBanner from "./parts/LoadingFileBanner/LoadingFileBanner";
 
-export interface Props {
+export interface Props extends EIProps {
   file?: File;
   allowedMimeTypes: MimeType[];
   onInput: (f: File | null) => void;
@@ -26,7 +28,8 @@ export interface Props {
 
 ///TODO: The first div has a fixed padding. I'd like to make it to try to have py-14 and px-44 but it is more important that the text does not break into another line.
 function FileInput(props: Props) {
-  const {openHiddenFileInput, HiddenFileInput, userFile, setUserFile} = useHiddenFileInput(props.onInput);
+  const { openHiddenFileInput, HiddenFileInput, userFile, setUserFile } =
+    useHiddenFileInput(props.onInput);
   let uploadTimeStamp: React.MutableRefObject<number | null> = useRef(null);
 
   const { isDragActive, dragEnter, dragLeave, drop } = useDropzone(
@@ -88,11 +91,12 @@ function FileInput(props: Props) {
       <div
         onDragEnter={dragEnter}
         onClick={openHiddenFileInput}
-        className={[
+        className={classNames(
           "py-14 px-44 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-ei-primary-light bg-opacity-10 mb-4 relative",
           "w-full",
           getCursor,
-        ].join(" ")}
+          props.className
+        )}
       >
         <StateComponent />
       </div>

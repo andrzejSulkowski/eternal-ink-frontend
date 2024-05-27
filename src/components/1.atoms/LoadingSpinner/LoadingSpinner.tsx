@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Avatar from "@/components/1.atoms/Avatar/Avatar";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface Props {
+interface Props extends EIProps{
   innerText: string;
   label: string;
 }
@@ -10,9 +10,9 @@ interface Props {
 const style =
   "w-12 h-12 rounded-full inline-block border-t-2 border-solid border-t-ei-primary border-r-transparent box-border animate-spin";
 
-const LoadingSpinner: React.FC<Props> = ({ innerText, label }: Props) => {
+const LoadingSpinner: React.FC<Props> = ({ innerText, label, className }: Props) => {
   return (
-    <div className="flex flex-col items-center justify-center text-xs text-white font-manrope font-semibold">
+    <div className={classNames("flex flex-col items-center justify-center text-xs text-white font-manrope font-semibold", className)}>
       <div className="p-4 bg-black rounded-full aspect-square w-min h-min">
         <div className="text-white font-manrope font-semibold relative aspect-square flex justify-center items-center">
           <div className={style}></div>

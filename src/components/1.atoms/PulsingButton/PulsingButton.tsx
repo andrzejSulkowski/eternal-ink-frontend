@@ -1,14 +1,14 @@
 import React from "react";
 import { FiSend } from "react-icons/fi";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface PullsButtonProps {
-  onClick: () => void;
-}
+interface PullsButtonProps extends EIProps{}
 
-const PullsButton: React.FC<PullsButtonProps> = ({ onClick }) => {
+const PullsButton: React.FC<PullsButtonProps> = ({ onClick, className }) => {
 
   return (
-    <div className="relative flex items-center justify-center aspect-square h-[4rem] rounded-full">
+    <div className={classNames("relative flex items-center justify-center aspect-square h-[4rem] rounded-full", className)}>
       <button
         onClick={onClick}
         className="absolute w-full h-full z-10 hover:scale-105 transition-transform duration-200 ease-in-out bg-ei-primary rounded-full flex items-center justify-center"
