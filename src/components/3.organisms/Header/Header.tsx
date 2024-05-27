@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import type { EIProps } from "@/types";
+import React, { useMemo } from "react";
+import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Button from "@/components/1.atoms/Button/Button";
 import Routes from "./parts/Routes/Routes";
@@ -7,7 +7,7 @@ import Routes from "./parts/Routes/Routes";
 interface Props extends EIProps {
   onCTAClick: () => void;
   onHrefClick: (route: string) => void;
-  routes: string[];
+  routes: EIRoute[];
   currentRouteIdx: number;
 }
 

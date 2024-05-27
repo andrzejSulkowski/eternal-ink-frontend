@@ -1,10 +1,11 @@
 import React from "react";
-import type { EIProps } from "@/types";
+import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
+import Link from "next/link";
 
 interface Props extends EIProps {
   selectedIdx: number;
-  routes: string[];
+  routes: EIRoute[];
   onHrefClick: (route: string) => void;
 }
 
@@ -20,13 +21,14 @@ function Routes({ className, selectedIdx, routes, onHrefClick }: Props) {
   return (
     <div className={classNames("flex gap-12 font-manrope text-sm", className)}>
       {routes.map((route, idx) => (
-        <span
+        <Link
           key={idx}
           className={routeStyles(idx)}
-          onClick={() => onHrefClick(route)}
+          href={route.href}
+          onClick={() => onHrefClick(route.href)}
         >
-          {route}
-        </span>
+          {route.name}
+        </Link>
       ))}
     </div>
   );
