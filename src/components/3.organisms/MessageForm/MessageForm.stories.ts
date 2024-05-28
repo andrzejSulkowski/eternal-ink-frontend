@@ -54,7 +54,7 @@ const mockMessages: MessageProps[] = [
 
 
 const meta = {
-  title: "Eternal Ink/Message Form",
+  title: "Eternal Ink/organisms/Message Form",
   component: MessageForm,
   decorators: [],
   parameters: {

@@ -4,7 +4,7 @@ import { fn } from "@storybook/test";
 
 let file: File | null = null;
 const meta: Meta<typeof FileInput> = {
-  title: "Eternal Ink/File Input/Input",
+  title: "Eternal Ink/molecules/File Input/Input",
   component: FileInput,
   decorators: [],
   parameters: {

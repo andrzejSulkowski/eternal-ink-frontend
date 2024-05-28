@@ -3,7 +3,7 @@ import ToggleButton from './ToggleButton';
 import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Eternal Ink/ToggleButton',
+  title: 'Eternal Ink/atoms/ToggleButton',
   component: ToggleButton,
   decorators: [],
   parameters: {

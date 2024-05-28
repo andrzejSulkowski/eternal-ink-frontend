@@ -5,7 +5,7 @@ import { WiStars } from "react-icons/wi";
 import ThreeStars from "@/components/Svgs/ThreeStars";
 
 const meta = {
-  title: "Eternal Ink/Button",
+  title: "Eternal Ink/atoms/Button",
   component: Button,
   decorators: [],
   parameters: {

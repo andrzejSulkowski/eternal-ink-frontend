@@ -3,7 +3,7 @@ import Textarea from "./Textarea";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Eternal Ink/Textarea",
+  title: "Eternal Ink/atoms/Textarea",
   component: Textarea,
   decorators: [],
   parameters: {

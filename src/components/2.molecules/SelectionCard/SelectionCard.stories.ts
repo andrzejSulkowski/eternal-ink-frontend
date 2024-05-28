@@ -3,7 +3,7 @@ import SelectionCard from "./SelectionCard";
 import Cube from "@/components/Svgs/Cube";
 
 const meta = {
-  title: "Eternal Ink/SelectionCard",
+  title: "Eternal Ink/molecules/SelectionCard",
   component: SelectionCard,
   decorators: [],
   parameters: {

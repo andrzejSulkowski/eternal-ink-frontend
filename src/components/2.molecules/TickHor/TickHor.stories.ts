@@ -23,7 +23,7 @@ const ticks: TickProps[] = [
 ]
 
 const meta = {
-  title: "Eternal Ink/Tick Hor",
+  title: "Eternal Ink/molecules/Tick Hor",
   component: TickHor,
   decorators: [],
   parameters: {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import ProgressBar from "@/components/1.atoms/ProgressBar/ProgressBar";
 
 const meta = {
-  title: "Eternal Ink/Progress Bar",
+  title: "Eternal Ink/atoms/Progress Bar",
   component: ProgressBar,
   decorators: [],
   parameters: {

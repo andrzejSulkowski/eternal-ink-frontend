@@ -18,7 +18,7 @@ const routes: EIRoute[] = [
 ]
 
 const meta = {
-  title: 'Eternal Ink/Footer',
+  title: 'Eternal Ink/organisms/Footer',
   component: Footer,
   decorators: [],
   parameters: {

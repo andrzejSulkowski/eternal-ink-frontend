@@ -3,7 +3,7 @@ import ToggleGroup from './ToggleGroup';
 import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Eternal Ink/ToggleGroup',
+  title: 'Eternal Ink/molecules/ToggleGroup',
   component: ToggleGroup,
   decorators: [],
   parameters: {

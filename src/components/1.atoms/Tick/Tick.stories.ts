@@ -3,7 +3,7 @@ import Tick from "./Tick";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Eternal Ink/Tick",
+  title: "Eternal Ink/atoms/Tick",
   component: Tick,
   decorators: [],
   parameters: {

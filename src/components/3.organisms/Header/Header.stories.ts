@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Header from './Header';
-import { fn } from '@storybook/test';
+import type { Meta, StoryObj } from "@storybook/react";
+import Header from "./Header";
+import { fn } from "@storybook/test";
 
 const meta = {
-  title: 'Eternal Ink/Header',
+  title: "Eternal Ink/organisms/Header",
   component: Header,
   decorators: [],
   parameters: {
-    layout: '',
+    layout: "",
   },
   argTypes: {},
   args: {},
@@ -19,7 +19,11 @@ export const Default: Story = {
   args: {
     onCTAClick: fn(),
     onHrefClick: fn(),
-    routes: ["About", "Engrave", "Retrieve"],
+    routes: [
+      { href: "/home", name: "Home" },
+      { href: "/about", name: "About" },
+      { href: "/contact", name: "Contact" },
+    ],
     currentRouteIdx: 0,
   },
 };

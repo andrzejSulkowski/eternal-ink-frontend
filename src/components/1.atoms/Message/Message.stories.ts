@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Message from "@/components/1.atoms/Message/Message";
 
 const meta = {
-  title: "Eternal Ink/Message",
+  title: "Eternal Ink/atoms/Message",
   component: Message,
   decorators: [],
   parameters: {
