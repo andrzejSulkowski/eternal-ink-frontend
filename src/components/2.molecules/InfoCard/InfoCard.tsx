@@ -3,6 +3,7 @@ import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import EIIcon from "@/components/1.atoms/EIIcon/EIIcon";
 import Copy from "@/components/Svgs/Copy";
+import { trim } from '@/libs/transaction'
 
 interface Props extends EIProps {
   icon: React.ReactNode;
@@ -20,8 +21,6 @@ function InfoCard({
   isCopyable = true,
   trimValue = false,
 }: Props) {
-  const trim = (address: string) =>
-    `${address.slice(0, 9)}...${address.slice(-11)}`;
   const getValue = useMemo(() => trimValue ? trim(value) : value, [value, trimValue]);
 
   return (
