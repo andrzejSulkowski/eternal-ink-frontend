@@ -20,10 +20,13 @@ type Story = StoryObj<typeof meta>;
 // message: string,
 // txId: TxId
 
-export const Default: Story = {
+export const Filled: Story = {
   args: {
     status: 'engraved',
     message: "Hello, World!",
     txId: "1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX72",
   },
+};
+export const Empty: Story = {
+  args: {},
 };
