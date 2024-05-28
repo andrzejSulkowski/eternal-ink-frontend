@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "./Button";
 import { fn } from "@storybook/test";
+import { WiStars } from "react-icons/wi";
+import ThreeStars from "@/components/Svgs/ThreeStars";
 
 const meta = {
   title: "Eternal Ink/Button",
@@ -24,9 +26,17 @@ export const Default: Story = {
   },
 };
 
+
+const IconWrapper = () => (
+  <div className="h-full w-5 ml-1">
+    <WiStars size={"120%"}/>
+  </div>
+)
+
 export const Filled: Story = {
   args: {
     textContent: "Begin Your Legacy",
+    children: ThreeStars({className: "max-w-5 ml-2"})
   },
 };
 

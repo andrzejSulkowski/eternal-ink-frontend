@@ -33,7 +33,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <div className={`${manrope.variable}, ${kanit.variable}`}>
+      <div className={`${manrope.variable} ${kanit.variable}`}>
         <Story />
       </div>
     ),
