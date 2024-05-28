@@ -8,7 +8,7 @@ function ThreeRoad() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_45_211)">
+        <g clipPath="url(#clip0_45_211)">
           <path
             d="M13.2463 13.9655C15.4874 14.8818 17.4463 16.5132 18.7538 18.5535V7.43713H21.0977L16 0L10.9023 7.43713H13.2463V13.9655Z"
             fill="white"
