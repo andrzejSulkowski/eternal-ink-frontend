@@ -16,6 +16,7 @@ const meta = {
   argTypes: {
     placeholder: { control: "text" },
     value: { control: "text" },
+    type: { control: "text" },
   },
   args: { onInput: fn() },
 } satisfies Meta<typeof Input>;

@@ -9,6 +9,7 @@ interface Props extends EIProps {
   onInput?: (e: React.FormEvent<HTMLInputElement>) => void;
   onChange?: (value: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;
+  type?: HTMLInputElement["type"];
 }
 
 const Input: React.FC<Props> = ({
@@ -17,7 +18,8 @@ const Input: React.FC<Props> = ({
   onInput,
   onChange,
   isDisabled = false,
-  className
+  className,
+  type,
 }: Props) => {
   return (
     <input
@@ -32,6 +34,7 @@ const Input: React.FC<Props> = ({
       value={value}
       onInput={(e) => onInput && onInput(e)}
       onChange={(e) => onChange && onChange(e)}
+      type={type}
     />
   );
 };

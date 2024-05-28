@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { Status, TxId } from '@/libs/transaction';
 
 const meta = {
-  title: 'Eternal Ink/RetrievedMessage',
+  title: 'Eternal Ink/molecules/RetrievedMessage',
   component: RetrievedMessage,
   decorators: [],
   parameters: {
