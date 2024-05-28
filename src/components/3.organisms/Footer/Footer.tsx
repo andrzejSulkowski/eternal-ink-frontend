@@ -7,14 +7,19 @@ import Hrefs from "./parts/Href/Hrefs";
 interface Props extends EIProps {
   onHrefClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   routes: EIRoute[];
-  socials: React.FC<EIProps>[];
+  socials: ISocial[];
+}
+
+interface ISocial {
+  href: string;
+  cmp: React.FC<EIProps>;
 }
 
 function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
   const Socials = () => (
     <div className="flex gap-8 justify-end">
       {socials.map((Social, idx) => (
-        <Social key={idx} className="cursor-pointer" />
+        <Social.cmp key={idx} className="cursor-pointer" />
       ))}
     </div>
   );
@@ -44,4 +49,5 @@ function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
   );
 }
 
+export type { ISocial };
 export default Footer;

@@ -12,7 +12,7 @@ function Hrefs({ className, routes, onHrefClick }: Props) {
   return (
     <ul className={classNames("flex text-ei-primary-faded gap-4", className)}>
         {routes?.map((route, index) => (
-          <li>
+          <li key={index}>
             <Link key={index} href={route.href} onClick={onHrefClick}>{route.name}</Link>
             {index !== routes.length - 1 && (
               <span className="text-ei-primary-faded/20 ml-4">|</span>

@@ -1,28 +1,28 @@
+'use client';
 import React, { useMemo } from "react";
 import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Button from "@/components/1.atoms/Button/Button";
 import Routes from "./parts/Routes/Routes";
+import { on } from "events";
 
 interface Props extends EIProps {
-  onCTAClick: () => void;
-  onHrefClick: (route: string) => void;
   routes: EIRoute[];
-  currentRouteIdx: number;
 }
 
 function Header({
   className,
-  onCTAClick,
-  onHrefClick,
   children,
   routes,
-  currentRouteIdx,
 }: Props) {
-  useMemo(() => {
-    if (currentRouteIdx >= routes.length) console.error("");
-  }, []);
 
+
+  function onCTAClick() {
+    console.log("CTA Clicked");
+  }
+  function onHrefClick() {
+    console.log("Href Clicked");
+  }
   return (
     <header
       className={classNames(
@@ -36,9 +36,7 @@ function Header({
         <span className="font-bold font-kanit text-2xl">Engrave</span>
         {/* Left's Bock Routes */}
         <Routes
-          selectedIdx={currentRouteIdx}
           routes={routes}
-          onHrefClick={onHrefClick}
         />
       </div>
 

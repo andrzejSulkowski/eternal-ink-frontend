@@ -1,15 +1,22 @@
-import React from "react";
+'use client';
+
+import React, { useMemo } from "react";
 import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Props extends EIProps {
-  selectedIdx: number;
   routes: EIRoute[];
-  onHrefClick: (route: string) => void;
 }
 
-function Routes({ className, selectedIdx, routes, onHrefClick }: Props) {
+function Routes({ className, routes }: Props) {
+  const pathname = usePathname();
+  const selectedIdx = useMemo(() => {
+    const idx = routes.findIndex((route) => route.href === pathname);
+    return idx;
+  }, [pathname]);
+
   const routeStyles = (idx: number) => {
     let styles = "cursor-pointer ";
     if (idx === selectedIdx) styles += "text-white font-bold";
@@ -25,7 +32,6 @@ function Routes({ className, selectedIdx, routes, onHrefClick }: Props) {
           key={idx}
           className={routeStyles(idx)}
           href={route.href}
-          onClick={() => onHrefClick(route.href)}
         >
           {route.name}
         </Link>

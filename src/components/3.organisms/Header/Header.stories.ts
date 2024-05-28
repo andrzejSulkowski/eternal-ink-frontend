@@ -24,6 +24,5 @@ export const Default: Story = {
       { href: "/about", name: "About" },
       { href: "/contact", name: "Contact" },
     ],
-    currentRouteIdx: 0,
   },
 };
