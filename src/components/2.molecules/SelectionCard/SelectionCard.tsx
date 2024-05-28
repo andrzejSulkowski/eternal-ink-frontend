@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import IconStyles from "./parts/IconStyles";
+import EIIcon from "@/components/1.atoms/EIIcon/EIIcon";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 
@@ -45,7 +45,7 @@ function SelectionCard({ icon, title, description, options, className }: Props) 
 
   return (
     <div className="font-manrope">
-      <IconStyles icon={icon} />
+      <EIIcon>{icon}</EIIcon>
       <div className={classNames("text-sm text-ei-primary-faded mt-8", className)}>
         <span className="block font-extrabold text-white text-xl mb-3">
           {" "}
