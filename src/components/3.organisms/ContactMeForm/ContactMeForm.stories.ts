@@ -4,7 +4,7 @@ import { fn } from "@storybook/test";
 import { useState } from "react";
 
 const meta = {
-  title: "Ethernal Ink/ContactMeForm",
+  title: "Eternal Ink/ContactMeForm",
   component: ContactMeForm,
   decorators: [],
   parameters: {

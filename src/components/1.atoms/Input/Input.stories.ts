@@ -3,7 +3,7 @@ import Input from "@/components/1.atoms/Input/Input";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Ethernal Ink/Input",
+  title: "Eternal Ink/Input",
   component: Input,
   decorators: [],
   parameters: {

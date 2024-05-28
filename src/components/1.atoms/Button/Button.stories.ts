@@ -3,7 +3,7 @@ import Button from "./Button";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Ethernal Ink/Button",
+  title: "Eternal Ink/Button",
   component: Button,
   decorators: [],
   parameters: {

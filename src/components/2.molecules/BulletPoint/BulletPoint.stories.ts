@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import BulletPoint from "./BulletPoint";
 
 const meta = {
-  title: "Ethernal Ink/BulletPoint",
+  title: "Eternal Ink/BulletPoint",
   component: BulletPoint,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout

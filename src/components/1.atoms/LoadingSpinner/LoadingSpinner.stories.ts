@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import LoadingSpinner from "@/components/1.atoms/LoadingSpinner/LoadingSpinner";
 
 const meta = {
-  title: "Ethernal Ink/Loading Spinner",
+  title: "Eternal Ink/Loading Spinner",
   component: LoadingSpinner,
   decorators: [],
   parameters: {

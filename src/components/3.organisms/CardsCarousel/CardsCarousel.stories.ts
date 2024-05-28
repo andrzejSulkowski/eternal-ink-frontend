@@ -22,7 +22,7 @@ const mockCards:  CardProps[] = [
 ]
 
 const meta = {
-  title: "Ethernal Ink/Cards Carousel",
+  title: "Eternal Ink/Cards Carousel",
   component: CardsCarousel,
   decorators: [],
   parameters: {

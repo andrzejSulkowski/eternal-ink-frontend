@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Card from "./Card";
 
 const meta = {
-  title: "Ethernal Ink/Card",
+  title: "Eternal Ink/Card",
   component: Card,
   decorators: [],
   parameters: {

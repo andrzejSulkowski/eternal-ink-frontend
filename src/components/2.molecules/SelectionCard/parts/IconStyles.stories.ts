@@ -7,7 +7,7 @@ import DollarBanner from "@/components/Svgs/DollarBanner";
 
 
 const meta = {
-  title: "Ethernal Ink/SelectionCard/IconStyles",
+  title: "Eternal Ink/SelectionCard/IconStyles",
   component: IconStyles,
   decorators: [],
   parameters: {

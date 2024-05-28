@@ -4,7 +4,7 @@ import { manrope, kanit } from "@/libs/fonts";
 
 
 export const metadata: Metadata = {
-  title: "Ethernal Ink",
+  title: "Eternal Ink",
   description: "Persistently store your thoughts and ideas on the Blockchain",
 };
 

@@ -3,7 +3,7 @@ import FileBanner from "@/components/2.molecules/FileInput/parts/FileBanner/File
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Ethernal Ink/File Input/Parts/File Banner",
+  title: "Eternal Ink/File Input/Parts/File Banner",
   component: FileBanner,
   decorators: [],
   parameters: {
