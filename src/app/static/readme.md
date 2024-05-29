@@ -1,0 +1,1 @@
+static routes go in here. Pages with no effect, hooks, (state?)

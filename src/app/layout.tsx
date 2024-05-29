@@ -50,9 +50,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="flex min-h-screen flex-col items-center justify-between p-24"
+      className="flex min-h-screen flex-col items-center justify-between"
     >
-      <Header routes={headerRoutes} className="" />
+      <Header routes={headerRoutes} className="fixed" />
       <body
         className={[
           kanit.variable,

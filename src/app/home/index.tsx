@@ -9,7 +9,6 @@ interface Props extends EIProps {}
 function HomePage({ className }: Props) {
   return (
     <div className={classNames("", className)}>
-      <span>home page</span>
       <Hero />
     </div>
   );

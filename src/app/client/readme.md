@@ -1,0 +1,1 @@
+pages which use 'use client';
