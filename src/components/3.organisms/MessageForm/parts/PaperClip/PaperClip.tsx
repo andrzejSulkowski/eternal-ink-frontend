@@ -31,7 +31,7 @@ function PaperClip({
 
   const contextMenuRef = useRef<HTMLDivElement>(null);
   // Setup and Cleanup
-  useEffect(onMounted, []);
+  useEffect(onMounted);
 
   const handleClickOutside = (e: MouseEvent) => {
     if (

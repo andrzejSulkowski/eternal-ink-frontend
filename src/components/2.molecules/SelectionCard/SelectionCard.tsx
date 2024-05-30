@@ -40,7 +40,7 @@ function SelectionCard({ icon, title, description, options, className }: Props) 
 
   const getSelectedOptionDescription = useMemo(
     () => options[selectedOptionIdx].description,
-    [selectedOptionIdx]
+    [selectedOptionIdx, options]
   );
 
   return (

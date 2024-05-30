@@ -15,7 +15,7 @@ function Routes({ className, routes }: Props) {
   const selectedIdx = useMemo(() => {
     const idx = routes.findIndex((route) => route.href === pathname);
     return idx;
-  }, [pathname]);
+  }, [pathname, routes]);
 
   const routeStyles = (idx: number) => {
     let styles = "cursor-pointer ";

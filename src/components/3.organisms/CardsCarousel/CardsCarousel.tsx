@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import Card, { Props as CardProps } from "@/components/2.molecules/Card/Card";
 import ChevronLeft from "@/components/1.atoms/ChevronLeft/ChevronLeft";
 import ChevronRight from "@/components/1.atoms/ChevronRight/ChevronRight";
@@ -47,11 +48,12 @@ function CardsGroup({ cards, className }: Props) {
           <div className="w-full flex justify-center">
             <Card {...cards[selectedIdx]}>
               <div className="absolute bottom-0 z-10">
-                <img
+                <Image
                   src="/storybook_resources/ball.png"
                   className="absolute -right-24 -top-20 -z-10"
+                  alt="ball"
                 />
-                <img className="w-full" src="./storybook_resources/dwarf2.png" />
+                <Image className="w-full" src="./storybook_resources/dwarf2.png" alt="dwarf" />
               </div>
             </Card>
           </div>

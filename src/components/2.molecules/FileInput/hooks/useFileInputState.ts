@@ -32,6 +32,6 @@ export const useFileInputState = (
     } else {
       return STATE.DEFAULT;
     }
-  }, [file, isDragActive, uploadTimeStamp.current]);
+  }, [file, isDragActive, uploadTimeStamp]);
   return { state };
 };

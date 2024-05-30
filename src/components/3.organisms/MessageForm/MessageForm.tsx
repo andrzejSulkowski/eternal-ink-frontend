@@ -51,7 +51,7 @@ function MessageForm({onClose, onSend, messages = []}: Props) {
       {/* Body Header */}
       <div className="flex flex-col items-center gap-3 mb-6 mt-2">
         <span className="text-white text-4xl font-extrabold">Join the digital legacy</span>
-        <span className="text-ei-primary-faded">Enter your message or document hash below and press 'Send' to engrave your mark on the blockchain instantly</span>
+        <span className="text-ei-primary-faded">Enter your message or document hash below and press &apos;Send&apos; to engrave your mark on the blockchain instantly</span>
       </div>
       {/* Body */}
       <div className="overflow-y-auto max-h-full flex flex-col items-center gap-2 mb-2">

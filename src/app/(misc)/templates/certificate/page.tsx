@@ -4,6 +4,7 @@ import { classNames } from "@/utils/className";
 import QrCode from "@/app/(misc)/templates/certificate/parts/QrCode";
 import Signature from "@/app/(misc)/templates/certificate/parts/Signature";
 import FooterData from "@/app/(misc)/templates/certificate/parts/FooterData";
+import Image from "next/image";
 
 interface Props extends EIProps {}
 
@@ -20,7 +21,7 @@ function index({ className }: Props) {
         <div className="flex items-center justify-center bg-[#F7931A]/20 px-3 py-1 gap-1 w-fit rounded-3xl font-semibold text-xs">
           Bitcoin Blockchain
           {/* W: 132 H: 132 */}
-          <img
+          <Image
             className="aspect-square h-[2ch]"
             src="/certificate/assets/btc.png"
             alt="bitcoin blockchain"
@@ -51,24 +52,28 @@ function index({ className }: Props) {
 
       {/* Background */}
       <div>
-        <img
+        <Image
           className="absolute top-0 left-0"
           src="/certificate/assets/planet.png"
+          alt="planet"
         />
         {/* Ball Right */}
-        <img
+        <Image
           className="absolute top-[-80px] right-[-340px]"
           src="/certificate/assets/ball_1.png"
+          alt="ball"
         />
 
         {/* Ball Left Top */}
-        <img
+        <Image
           className="absolute top-0 left-[-50%] blur-3xl w-2/3"
           src="/certificate/assets/ball.png"
+          alt="ball"
         />
 
         {/* Ball Left Bottom */}
-        <img
+        <Image
+          alt="ball"
           className="absolute bottom-[8%] left-[-10.5%] w-[100px] blur-[2px]"
           src="/certificate/assets/ball.png"
         />

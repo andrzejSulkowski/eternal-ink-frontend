@@ -4,10 +4,10 @@ import { classNames } from '@/utils/className'
 
 interface Props extends EIProps {}
 
-function page({className}: Props) {
+function EngravePage({className}: Props) {
   return (
     <div className={classNames('', className)}>Engrave Page</div>
   )
 }
 
-export default page
+export default EngravePage

@@ -1,6 +1,7 @@
 import React from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
+import Image from "next/image";
 
 interface Props extends EIProps {}
 
@@ -8,9 +9,10 @@ function Signature({ className }: Props) {
   return (
     <div className={classNames("w-[107px] h-[89px] flex flex-col", className)}>
       <div className="h-[50px] w-full relative">
-        <img
+        <Image
           className="absolute left-3 -top-5 w-full"
           src="/certificate/assets/signature.png"
+          alt="signature"
         />
       </div>
       <div data-vertical-line className="w-full h-[1px] bg-[#242438]" />

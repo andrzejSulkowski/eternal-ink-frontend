@@ -14,8 +14,7 @@ const Message: React.FC<Props> = ({percent, className}: Props) => {
     useEffect(() => {
         const totalWidth = baseBar.current?.clientWidth;
         if(totalWidth) setFillBarWidth(`${percent * totalWidth / 100}px`)
-        console.log("fillBarWidth: ", getFillBarWidth)
-    }, [percent]);
+    }, [percent, baseBar, getFillBarWidth]);
 
   return (
     <div className={classNames("w-96 h-1 rounded-3xl bg-[rgba(255,255,255,0.1)", className)} ref={baseBar}>
