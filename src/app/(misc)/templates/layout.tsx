@@ -1,6 +1,3 @@
-import "@/app/globals.css";
-import type { Metadata } from "next";
-import { manrope, kanit } from "@/libs/fonts";
 
 export default function RootLayout({
   children,
@@ -8,8 +5,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main data-templates-layout className="flex-grow">
+    <div data-templates-layout className="w-[573px] h-[842px] overflow-hidden">
       {children}
-    </main>
+    </div>
   );
 }
