@@ -43,9 +43,9 @@ function TypeTwo({ className }: Props) {
             width="3105.24"
             height="2229.26"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -65,8 +65,8 @@ function TypeTwo({ className }: Props) {
             y2="1394.88"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#364AFA" />
-            <stop offset="1" stop-color="#202C94" stop-opacity="0" />
+            <stop stopColor="#364AFA" />
+            <stop offset="1" stopColor="#202C94" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_20_1751"
@@ -76,8 +76,8 @@ function TypeTwo({ className }: Props) {
             y2="48.2283"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F019CE" />
-            <stop offset="1" stop-color="#8A0E76" stop-opacity="0" />
+            <stop stopColor="#F019CE" />
+            <stop offset="1" stopColor="#8A0E76" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint2_linear_20_1751"
@@ -87,8 +87,8 @@ function TypeTwo({ className }: Props) {
             y2="1191.46"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#5B2A8B" />
-            <stop offset="1" stop-color="#180B25" stop-opacity="0" />
+            <stop stopColor="#5B2A8B" />
+            <stop offset="1" stopColor="#180B25" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

@@ -73,9 +73,9 @@ function TypeOne({ className }: Props) {
             width="2785.45"
             height="1786"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -94,9 +94,9 @@ function TypeOne({ className }: Props) {
             width="3585.45"
             height="2586"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -116,8 +116,8 @@ function TypeOne({ className }: Props) {
             y2="134.015"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#7738FF" />
-            <stop offset="1" stop-color="#1E0661" stop-opacity="0" />
+            <stop stopColor="#7738FF" />
+            <stop offset="1" stopColor="#1E0661" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_20_1379"
@@ -127,9 +127,9 @@ function TypeOne({ className }: Props) {
             y2="1148.32"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#B80DC7" />
-            <stop offset="1" stop-color="#61064B" />
-            <stop offset="1" stop-color="#61064B" stop-opacity="0" />
+            <stop stopColor="#B80DC7" />
+            <stop offset="1" stopColor="#61064B" />
+            <stop offset="1" stopColor="#61064B" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint2_linear_20_1379"
@@ -139,8 +139,8 @@ function TypeOne({ className }: Props) {
             y2="526.436"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#4E55D9" />
-            <stop offset="1" stop-color="#2A2D73" stop-opacity="0" />
+            <stop stopColor="#4E55D9" />
+            <stop offset="1" stopColor="#2A2D73" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint3_linear_20_1379"
@@ -150,8 +150,8 @@ function TypeOne({ className }: Props) {
             y2="-412.399"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#520C8F" />
-            <stop offset="1" stop-color="#180329" stop-opacity="0" />
+            <stop stopColor="#520C8F" />
+            <stop offset="1" stopColor="#180329" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint4_linear_20_1379"
@@ -161,8 +161,8 @@ function TypeOne({ className }: Props) {
             y2="134.015"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#7738FF" />
-            <stop offset="1" stop-color="#1E0661" stop-opacity="0" />
+            <stop stopColor="#7738FF" />
+            <stop offset="1" stopColor="#1E0661" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint5_linear_20_1379"
@@ -172,9 +172,9 @@ function TypeOne({ className }: Props) {
             y2="1148.32"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#B80DC7" />
-            <stop offset="1" stop-color="#61064B" />
-            <stop offset="1" stop-color="#61064B" stop-opacity="0" />
+            <stop stopColor="#B80DC7" />
+            <stop offset="1" stopColor="#61064B" />
+            <stop offset="1" stopColor="#61064B" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint6_linear_20_1379"
@@ -184,8 +184,8 @@ function TypeOne({ className }: Props) {
             y2="526.436"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#4E55D9" />
-            <stop offset="1" stop-color="#2A2D73" stop-opacity="0" />
+            <stop stopColor="#4E55D9" />
+            <stop offset="1" stopColor="#2A2D73" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint7_linear_20_1379"
@@ -195,8 +195,8 @@ function TypeOne({ className }: Props) {
             y2="-412.399"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#520C8F" />
-            <stop offset="1" stop-color="#180329" stop-opacity="0" />
+            <stop stopColor="#520C8F" />
+            <stop offset="1" stopColor="#180329" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

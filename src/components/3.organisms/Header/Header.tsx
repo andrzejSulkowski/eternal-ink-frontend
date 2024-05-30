@@ -4,7 +4,6 @@ import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Button from "@/components/1.atoms/Button/Button";
 import Routes from "./parts/Routes/Routes";
-import { on } from "events";
 
 interface Props extends EIProps {
   routes: EIRoute[];
@@ -24,7 +23,7 @@ function Header({
     console.log("Href Clicked");
   }
   return (
-    <header
+    <div
       className={classNames(
         "flex w-full px-72 py-6 bg-gradient-to-t from-[rgba(7,5,20,0.1)] to-[#070514] to-100% font-manrope text-white gap-10 justify-between",
         "border-b-[1px] border-solid border-[#242438]",
@@ -45,7 +44,7 @@ function Header({
         {children}
         <Button onClick={onCTAClick}>Begin Your Legacy</Button>
       </div>
-    </header>
+    </div>
   );
 }
 

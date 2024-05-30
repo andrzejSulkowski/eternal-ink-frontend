@@ -50,9 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="flex min-h-screen flex-col items-center justify-between"
     >
-      <Header routes={headerRoutes} className="fixed" />
       <body
         className={[
           kanit.variable,
@@ -61,9 +59,10 @@ export default function RootLayout({
           "bg-black",
         ].join(" ")}
       >
+        <Header routes={headerRoutes} className="fixed" />
         <main className="flex-grow">{children}</main>
+        <Footer routes={footerRoutes} socials={footerSocials} />
       </body>
-      <Footer routes={footerRoutes} socials={footerSocials} />
     </html>
   );
 }
