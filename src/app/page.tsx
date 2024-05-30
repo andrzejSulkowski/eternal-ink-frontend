@@ -1,4 +1,4 @@
-import Hero from "@/app/home/(sections)/Hero";
+import Hero from "@/app/(app-pages)/home/(sections)/Hero";
 import RootLayout from "@/app/layout";
 import { classNames } from "@/utils/className";
 import { Metadata } from "next";
