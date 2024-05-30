@@ -33,10 +33,10 @@ function index({ className }: Props) {
 
       {/* Content */}
       <div className="flex w-full flex-col items-center z-10 mt-[120px]">
-        <span className="text-ei-primary-faded text-xs">
+        <span data-engraved-type className="text-ei-primary-faded text-xs">
           Engraved Message/FileHash
         </span>
-        <h2 className="font-extrabold text-[44px]">Hello, World!</h2>
+        <h2 data-engraved-data className="font-extrabold text-[44px]">Hello, World!</h2>
 
         <div className="flex mt-8 gap-8 items-center">
           {/* QR-Code */}
