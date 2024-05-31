@@ -6,14 +6,13 @@ import Signature from "@/app/(misc)/templates/certificate/parts/Signature";
 import FooterData from "@/app/(misc)/templates/certificate/parts/FooterData";
 import Image from "next/image";
 
-interface Props extends EIProps {}
+interface Props {}
 
-function index({ className }: Props) {
+function index({}: Props) {
   return (
     <div
       className={classNames(
-        "font-manrope flex flex-col px-[41px] pb-10 relative w-full h-full bg-[#09090A]",
-        className
+        "font-manrope flex flex-col px-[41px] pb-10 relative w-full h-full bg-[#09090A]"
       )}
     >
       {/* Header */}
@@ -37,7 +36,9 @@ function index({ className }: Props) {
         <span data-engraved-type className="text-ei-primary-faded text-xs">
           Engraved Message/FileHash
         </span>
-        <h2 data-engraved-data className="font-extrabold text-[44px]">Hello, World!</h2>
+        <h2 data-engraved-data className="font-extrabold text-[44px]">
+          Hello, World!
+        </h2>
 
         <div className="flex mt-8 gap-8 items-center">
           {/* QR-Code */}

@@ -17,8 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    onCTAClick: fn(),
-    onHrefClick: fn(),
     routes: [
       { href: "/home", name: "Home" },
       { href: "/about", name: "About" },

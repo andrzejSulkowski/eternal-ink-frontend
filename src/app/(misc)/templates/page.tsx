@@ -1,13 +1,11 @@
-import React from 'react'
-import type { EIProps } from '@/types'
-import { classNames } from '@/utils/className'
+import React from "react";
+import type { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-interface Props extends EIProps {}
+interface Props {}
 
-function page({className}: Props) {
-  return (
-    <div className={classNames('', className)}>templates page</div>
-  )
+function page({}: Props) {
+  return <div className={classNames("")}>templates page</div>;
 }
 
-export default page
+export default page;

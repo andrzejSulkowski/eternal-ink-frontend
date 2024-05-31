@@ -3,12 +3,12 @@ import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import Hero from "./(sections)/Hero";
 
-interface Props extends EIProps {}
+interface Props {}
 
 
-function HomePage({ className }: Props) {
+function HomePage({ }: Props) {
   return (
-    <div className={classNames("", className)}>
+    <div className={classNames("")}>
       <Hero />
     </div>
   );

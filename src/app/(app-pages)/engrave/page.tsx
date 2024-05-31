@@ -1,12 +1,11 @@
 import React from 'react'
-import type { EIProps } from '@/types'
 import { classNames } from '@/utils/className'
 
-interface Props extends EIProps {}
+interface Props {}
 
-function EngravePage({className}: Props) {
+function EngravePage({}: Props) {
   return (
-    <div className={classNames('', className)}>Engrave Page</div>
+    <div className={classNames('')}>Engrave Page</div>
   )
 }
 
