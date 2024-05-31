@@ -10,6 +10,8 @@ function Signature({ className }: Props) {
     <div className={classNames("w-[107px] h-[89px] flex flex-col", className)}>
       <div className="h-[50px] w-full relative">
         <Image
+        width={100}
+        height={100}
           className="absolute left-3 -top-5 w-full"
           src="/certificate/assets/signature.png"
           alt="signature"

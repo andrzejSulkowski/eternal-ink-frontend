@@ -21,6 +21,8 @@ function index({}: Props) {
           Bitcoin Blockchain
           {/* W: 132 H: 132 */}
           <Image
+            width={132}
+            height={132}
             className="aspect-square h-[2ch]"
             src="/certificate/assets/btc.png"
             alt="bitcoin blockchain"
@@ -54,12 +56,16 @@ function index({}: Props) {
       {/* Background */}
       <div>
         <Image
+          width={100}
+          height={100}
           className="absolute top-0 left-0"
           src="/certificate/assets/planet.png"
           alt="planet"
         />
         {/* Ball Right */}
         <Image
+          width={100}
+          height={100}
           className="absolute top-[-80px] right-[-340px]"
           src="/certificate/assets/ball_1.png"
           alt="ball"
@@ -67,6 +73,8 @@ function index({}: Props) {
 
         {/* Ball Left Top */}
         <Image
+          width={100}
+          height={100}
           className="absolute top-0 left-[-50%] blur-3xl w-2/3"
           src="/certificate/assets/ball.png"
           alt="ball"
@@ -74,6 +82,8 @@ function index({}: Props) {
 
         {/* Ball Left Bottom */}
         <Image
+          width={100}
+          height={100}
           alt="ball"
           className="absolute bottom-[8%] left-[-10.5%] w-[100px] blur-[2px]"
           src="/certificate/assets/ball.png"
