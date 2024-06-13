@@ -6,7 +6,7 @@ interface Props extends EIProps {}
 
 function Info({ className }: Props) {
   return (
-    <div className={classNames(className, "h-full max-w-full max-h-full")}>
+    <div className={classNames("h-full max-w-full max-h-full", className)}>
       <svg
         viewBox="0 0 20 20"
         fill="none"

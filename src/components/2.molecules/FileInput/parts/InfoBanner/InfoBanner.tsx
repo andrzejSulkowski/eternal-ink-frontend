@@ -14,7 +14,7 @@ function InfoBanner({allowedMimeTypes}: Props) {
 
   return (
     <div className='w-full h-14 bg-ei-primary/10 text-ei-primary-faded text-sm flex items-center gap-3 px-3 py-3 rounded-xl'>
-        <Info className='h-5'/>
+        <Info className='!h-6'/>
         <aside>Accepted file types: {getFormattedMimeTypes()}.</aside>
     </div>
   )

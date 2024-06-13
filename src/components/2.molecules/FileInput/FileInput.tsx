@@ -21,7 +21,7 @@ import FileBanner from "./parts/FileBanner/FileBanner";
 import LoadingFileBanner from "./parts/LoadingFileBanner/LoadingFileBanner";
 
 export interface Props extends EIProps {
-  file?: File;
+  file: File | null;
   allowedMimeTypes: MimeType[];
   onInput: (f: File | null) => void;
 }
@@ -37,13 +37,18 @@ function FileInput(props: Props) {
     uploadTimeStamp
   );
 
+  const maybeDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    if (props.file === null) {
+      drop(e);
+    }
+  };
   const { state } = useFileInputState(props, uploadTimeStamp, isDragActive);
   const progress = useMemo(() => (props.file ? 100 : 0), [props.file]);
   const componentMap = {
-    default: Default,
+    default: () => Default({className: "h-11 leading-10"}), //h-11 <=> 44px which is exactly what the content of full is with 20px each line plus 4px of gap
     enter: () => (
       <Default>
-        <Enter onDragLeave={dragLeave} onDrop={drop} />
+        <Enter onDragLeave={dragLeave} onDrop={maybeDrop} />
       </Default>
     ),
     loading: () => <Loading progress={progress} />,
@@ -82,24 +87,33 @@ function FileInput(props: Props) {
     }
   }, [state]);
 
+  const maybeOpenFileInput = () => {
+    if (props.file === null) {
+      openHiddenFileInput();
+    }
+  };
+
   return (
-    <div className={props.className}>
+    <div className={classNames(props.className, "relative")}>
       <HiddenFileInput />
       <span className="text-white font-manrope font-bold text-sm mb-4 block">
         Add your File
       </span>
       <div
         onDragEnter={dragEnter}
-        onClick={openHiddenFileInput}
+        onClick={maybeOpenFileInput}
         className={classNames(
           "py-14 px-20 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-ei-primary-light bg-opacity-10 mb-4 relative",
           "w-full",
-          getCursor,
+          getCursor
         )}
       >
         <StateComponent />
       </div>
-      <BannerComponent />
+
+      <div className="absolute -bottom-8 left-0 w-full translate-y-full">
+        <BannerComponent />
+      </div>
     </div>
   );
 }

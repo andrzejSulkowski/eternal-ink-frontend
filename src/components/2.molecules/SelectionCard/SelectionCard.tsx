@@ -7,19 +7,25 @@ interface Props extends EIProps {
   icon: React.JSX.Element;
   title: string;
   description: string;
-  options: Array<{
+  options?: Array<{
     title: string;
     description: string;
   }>;
 }
 
-function SelectionCard({ icon, title, description, options, className }: Props) {
+function SelectionCard({
+  icon,
+  title,
+  description,
+  options,
+  className,
+}: Props) {
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(0);
 
   const CardOptionsTitles = () => {
     return (
       <div className="flex gap-7 justify-start items-center mb-3">
-        {options.map((option, index) => (
+        {options?.map((option, index) => (
           <React.Fragment key={index}>
             <div
               onClick={() => setSelectedOptionIdx(index)}
@@ -39,23 +45,24 @@ function SelectionCard({ icon, title, description, options, className }: Props) 
   };
 
   const getSelectedOptionDescription = useMemo(
-    () => options[selectedOptionIdx].description,
+    () => options?.at(selectedOptionIdx)?.description,
     [selectedOptionIdx, options]
   );
 
   return (
-    <div className="font-manrope">
-      <EIIcon>{icon}</EIIcon>
-      <div className={classNames("text-sm text-ei-primary-faded mt-8", className)}>
-        <span className="block font-extrabold text-white text-xl mb-3">
+    <div className="font-manrope flex flex-col">
+      <EIIcon className="w-10">{icon}</EIIcon>
+      <div
+        className={classNames("text-sm text-ei-primary-faded mt-8", className)}
+      >
+        <span className="block font-extrabold text-white text-sm mb-3">
           {" "}
           {title}{" "}
         </span>
         <span className="block"> {description} </span>
-        <div className="mt-6">
-          <CardOptionsTitles />
-          <span>{getSelectedOptionDescription}</span>
-        </div>
+        {options && options.length > 0 && <div className="mt-6" />}
+        <CardOptionsTitles />
+        <span>{getSelectedOptionDescription}</span>
       </div>
     </div>
   );

@@ -48,12 +48,14 @@ function CardsGroup({ cards, className }: Props) {
           <div className="w-full flex justify-center">
             <Card {...cards[selectedIdx]}>
               <div className="absolute bottom-0 z-10">
-                <Image
+                {/* Change to Image */}
+                <img
                   src="/storybook_resources/ball.png"
                   className="absolute -right-24 -top-20 -z-10"
                   alt="ball"
                 />
-                <Image className="w-full" src="./storybook_resources/dwarf2.png" alt="dwarf" />
+                {/* Change to Image */}
+                <img className="w-full" src="./storybook_resources/dwarf2.png" alt="dwarf" />
               </div>
             </Card>
           </div>
