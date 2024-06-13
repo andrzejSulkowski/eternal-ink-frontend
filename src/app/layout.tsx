@@ -1,12 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { manrope, kanit } from "@/libs/fonts";
-import type { EIRoute } from "@/types";
-import Header from "@/components/3.organisms/Header/Header";
-import Footer, { ISocial } from "@/components/3.organisms/Footer/Footer";
-import LinkedIn from "@/components/Svgs/LinkedIn";
-import Github from "@/components/Svgs/Github";
-import Web from "@/components/Svgs/Web";
+import Banner from "@/components/1.atoms/Banner/Banner";
 
 export const metadata: Metadata = {
   title: "Eternal Ink",
@@ -30,6 +25,7 @@ export default function RootLayout({
           "bg-black",
         ].join(" ")}
       >
+        <Banner message="Some Message"/>
         <main className="flex-grow flex flex-col">{children}</main>
       </body>
     </html>

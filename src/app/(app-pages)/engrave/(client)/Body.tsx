@@ -31,6 +31,22 @@ function Body() {
 
   let toggleKey = "public";
 
+
+  const startEngraving = () => {
+    if (message.length === 0 && file === null) {
+      alert("Please enter a message or upload a file");
+      return;
+    }
+
+    if (toggleKey === "public") {
+      // Public
+    } else if (toggleKey === "encrypt") {
+      // Encrypt
+    } else {
+      // Neither
+    }
+  }
+
   return (
     <>
       <div className="grid grid-cols-[1fr_auto_1fr] gap-8 font-manrope">
@@ -68,7 +84,7 @@ function Body() {
         onChange={(key) => (toggleKey = key)}
       />
 
-      <Button className="!w-fit mt-10">
+      <Button className="!w-fit mt-10" onClick={startEngraving}>
         Start Engraving Magic
         <ThreeStars className="max-w-5 ml-2" />
       </Button>

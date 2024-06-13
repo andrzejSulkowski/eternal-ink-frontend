@@ -47,7 +47,7 @@ function FileInput(props: Props) {
   const componentMap = {
     default: () => Default({className: "h-11 leading-10"}), //h-11 <=> 44px which is exactly what the content of full is with 20px each line plus 4px of gap
     enter: () => (
-      <Default>
+      <Default className="h-11 leading-10">
         <Enter onDragLeave={dragLeave} onDrop={maybeDrop} />
       </Default>
     ),
