@@ -14,23 +14,212 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# API-Endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<details>
+  <summary><h3>Health Check</h3></summary>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`[get] api/healthcheck`
 
-## Learn More
+**Response**
 
-To learn more about Next.js, take a look at the following resources:
+```ts
+{
+    message: string,
+    status: string
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+</details>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<details>
+  <summary><h3>Request Engraving</h3></summary>
 
-## Deploy on Vercel
+`[post] api/request-engraving`
+**Request Body**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```ts
+{
+    chain: "btc",
+    message: string,
+    is_file: boolean,
+    is_encrypted: boolean,
+    is_public: boolean
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Response**
+
+```ts
+{
+    address: string,
+    fees: number
+}
+```
+
+</details>
+
+<details>
+  <summary><h3>Request Tx Stream</h3></summary>
+
+`[get] api/tx-stream/:id`
+**Path**
+
+```ts
+{
+  id: string;
+}
+```
+
+**Response**
+
+```ts
+const stream = new EventSource(`${baseUrl}/api/tx-stream/${id}`);
+```
+
+</details>
+
+<details>
+  <summary><h3>Estimate Fees</h3></summary>
+
+`[get] api/estimate-fees`
+**Body**
+
+```ts
+{
+  msg_length: number;
+}
+```
+
+**Response**
+
+```ts
+{
+  fee: number;
+}
+```
+
+</details>
+
+<details>
+  <summary><h3>Tx Status</h3></summary>
+
+`[get] api/tx-status/:id`
+**Path**
+
+```ts
+{
+  id: string;
+}
+```
+
+### Response
+
+```ts
+type ITxStatus =
+  | "WaitingForFunds"
+  | "ConfirmingFunds"
+  | "ConfirmedFunds"
+  | "Engraving"
+  | "Engraved"
+  | "Finalized"
+  | "ExternalUnconfirmed"
+  | "ExternalConfirmed";
+
+type Response = {
+  status: ITxStatus;
+};
+```
+
+</details>
+
+<details>
+  <summary><h3>Messages</h3></summary>
+
+`[get] api/get-messages?after_uuid=&items=`
+**Query**
+
+```ts
+{
+    after_uuid: string,
+    items: number
+}
+```
+
+**Response**
+
+```ts
+interface IMessage {
+  content: string;
+  id: string;
+  time: string;
+}
+interface Response {
+  messages: IMessage[];
+}
+```
+
+</details>
+
+<details>
+  <summary><h3>Request PDF</h3></summary>
+
+`[get] api/request-engraving-cert/:id`
+**Path**
+
+```ts
+{
+  id: string;
+}
+```
+
+**Response**
+
+```binary
+    Binary PDF
+```
+
+</details>
+
+<details>
+  <summary><h3>Remaining Time</h3></summary>
+
+`[get] api/remaining-time/:id`
+**Path**
+
+```ts
+id: string;
+```
+
+**Response**
+
+```ts
+{
+    // Negative number means the tx has been dropped and is invalid but is still being kept in the DB
+    "remaining-time": number
+}
+```
+
+</details>
+
+<details>
+  <summary><h2>Error Types</h2></summary>
+
+```ts
+//This is a global error. It will always follow this pattern in case of error events
+type IErrorType =
+  | "LOGIN_FAIL"
+  | "NO_AUTH"
+  | "ENTITY_NOT_FOUND"
+  | "API_REQUEST_INVALID"
+  | "API_REQUEST_METHOD_UNKNOWN"
+  | "API_PARAMS_INVALID"
+  | "SERVICE_ERROR";
+
+interface Response {
+  type: IErrorType;
+  detail?: string;
+}
+```
+
+</details>
