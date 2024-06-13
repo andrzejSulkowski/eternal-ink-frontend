@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useState } from "react";
 import { FiX, FiPaperclip } from "react-icons/fi";
 

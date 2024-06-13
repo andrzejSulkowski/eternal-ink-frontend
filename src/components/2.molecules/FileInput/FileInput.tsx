@@ -83,7 +83,7 @@ function FileInput(props: Props) {
   }, [state]);
 
   return (
-    <>
+    <div className={props.className}>
       <HiddenFileInput />
       <span className="text-white font-manrope font-bold text-sm mb-4 block">
         Add your File
@@ -92,16 +92,15 @@ function FileInput(props: Props) {
         onDragEnter={dragEnter}
         onClick={openHiddenFileInput}
         className={classNames(
-          "py-14 px-44 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-ei-primary-light bg-opacity-10 mb-4 relative",
+          "py-14 px-20 border border-dashed rounded-2xl flex justify-center items-center text-white font-manrope text-sm font-bold bg-ei-primary-light bg-opacity-10 mb-4 relative",
           "w-full",
           getCursor,
-          props.className
         )}
       >
         <StateComponent />
       </div>
       <BannerComponent />
-    </>
+    </div>
   );
 }
 

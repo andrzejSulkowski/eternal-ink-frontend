@@ -1,13 +1,18 @@
+import { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 import React from "react";
 
-function Info() {
+interface Props extends EIProps {}
+
+function Info({ className }: Props) {
   return (
-    <div className="w-full h-full">
+    <div className={classNames(className, "h-full max-w-full max-h-full")}>
       <svg
         viewBox="0 0 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid meet" 
+        className="h-full w-full max-h-full max-w-full aspect-square"
       >
         <path
           fillRule="evenodd"
