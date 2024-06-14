@@ -9,7 +9,7 @@ interface Props {}
 function EngravePage({}: Props) {
   let textValue = "";
   return (
-    <div className={classNames("px-80 py-28 font-manrope")}>
+    <div className={classNames("xl:px-80 lg:px-56 px-10 pt-28 font-manrope")}>
       <div>
         <div className="inline-block font-extrabold text-6xl mb-6 relative">
           <h3 className="z-10">Eternalize Your Words</h3>

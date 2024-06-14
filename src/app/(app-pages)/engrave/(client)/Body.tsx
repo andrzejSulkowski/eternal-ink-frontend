@@ -2,18 +2,19 @@
 import Button from "@/components/1.atoms/Button/Button";
 import Textarea from "@/components/1.atoms/Textarea/Textarea";
 import FileInput from "@/components/2.molecules/FileInput/FileInput";
-import SelectionCard from "@/components/2.molecules/SelectionCard/SelectionCard";
 import ToggleGroup from "@/components/2.molecules/ToggleGroup/ToggleGroup";
 import ThreeStars from "@/components/Svgs/ThreeStars";
-import ThreeRoad from "@/components/Svgs/ThreeRoad";
-import Fi from "@/components/Svgs/Fi";
-import Cube from "@/components/Svgs/Cube";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
-import api from '@/libs/api/transaction/index'
+import api from "@/libs/api/transaction/index";
+import Input from "@/components/1.atoms/Input/Input";
+import PasswordInput from "./PasswordInput";
+import SelectionCards from "./SelectionCards";
 
-
-const toggleButtons = [
+const toggleButtons: {
+  value: "encrypt" | "public" | "neither";
+  label: string;
+}[] = [
   {
     value: "public",
     label: "Make public",
@@ -32,13 +33,17 @@ function Body() {
   let [message, setMessage] = useState("");
   let [file, setFile] = useState<File | null>(null);
 
-  let toggleKey = "public";
-
+  const [toggleKey, setToggleKey] = useState<"encrypt" | "public" | "neither">(
+    "encrypt"
+  );
+  useEffect(() => {
+    console.log("toggleKey: ", toggleKey);
+  }, [toggleKey]);
 
   const { showBanner } = useBanner();
   const startEngraving = async () => {
     if (message.length === 0 && file === null) {
-      showBanner("Please enter a message or upload a file")
+      showBanner("Please enter a message or upload a file");
       return;
     }
 
@@ -46,24 +51,27 @@ function Body() {
       chain: "btc",
       message: message,
       is_file: file !== null,
-      is_encrypted: toggleKey === "encrypt",
-      is_public: toggleKey === "public"
+      is_encrypted: toggleKey === "encrypt", //TODO: If its encrypted, we need to send a password to the server as well!
+      is_public: toggleKey === "public",
     });
-    if(response.ok){
+    if (response.ok) {
       const data = response.data!;
       showBanner("Success");
-      console.log("Success: ", data)
-    }else{
+      console.log("Success: ", data);
+    } else {
       const error = response.error!;
-      showBanner(`Error: ${error.type} - type: ${error.detail}`)
+      showBanner(`Error: ${error.type} - type: ${error.detail}`);
       console.warn("Error: ", error);
     }
-  }
+  };
 
+  const getPasswordInputClass = () =>
+    toggleKey !== "encrypt" ? 'hidden' : null
   return (
-    <>
-      <div className="grid grid-cols-[1fr_auto_1fr] gap-8 font-manrope">
-        <div className="w-full">
+    <div className="flex  flex-col justify-between min-h-full">
+      <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-8 font-manrope">
+        {/* Cols1 */}
+        <div data-col1 className="w-full">
           <span className="font-bold text-sm block mb-4">
             Enter Your Message
           </span>
@@ -73,10 +81,16 @@ function Body() {
             onChange={(v) => setMessage(v.currentTarget.value)}
             className="w-full h-40 p-4"
           />
+          {/* Toggle Group + Password Input */}
+          <div className="text-ei-primary-faded">
+            Message Publicity Options:
+          </div>
         </div>
+        {/* Col2 */}
         <div className="w-full h-full flex justify-center items-center">
           <div className="font-bold text-sm block">or</div>
         </div>
+        {/* Col3 */}
         <div className="w-full max-w-full">
           <FileInput
             allowedMimeTypes={[
@@ -89,37 +103,26 @@ function Body() {
             file={file}
           />
         </div>
-      </div>
-      <div className="text-ei-primary-faded">Message Publicity Options:</div>
-      <ToggleGroup
-        className="mt-4"
-        buttons={toggleButtons}
-        onChange={(key) => (toggleKey = key)}
-      />
+        {/* Col1Row1 */}
+        <div className="w-full">
+          <ToggleGroup
+            className=""
+            buttons={toggleButtons}
+            value={toggleKey}
+            onChange={(key) => setToggleKey(key as any)}
+          />
 
-      <Button className="!w-fit mt-10" onClick={startEngraving}>
-        Start Engraving Magic
-        <ThreeStars className="max-w-5 ml-2" />
-      </Button>
+          <PasswordInput className={`mt-8 ${getPasswordInputClass()}`} />
 
-      <div className="w-full bg-[#09090A] p-8 grid grid-cols-3 mt-28 gap-12 rounded-[20px]">
-        <SelectionCard
-          icon={Cube()}
-          title="Create Your Message"
-          description="Start by crafting the message you wish to immortalize on the Bitcoin Blockchain"
-        />
-        <SelectionCard
-          icon={Fi()}
-          title="Engrave Your Message"
-          description="Start by crafting the message you wish to immortalize on the Bitcoin Blockchain"
-        />
-        <SelectionCard
-          icon={ThreeRoad()}
-          title="Retrieve & Share"
-          description="Share your message with the world via our live ticker or opt for a secretive touch with password protected encryption"
-        />
+          <Button className={`!w-fit ${toggleKey === 'encrypt' ? 'mt-4' : 'mt-16'}`} onClick={startEngraving}>
+            Start Engraving Magic
+            <ThreeStars className="max-w-5 ml-2" />
+          </Button>
+        </div>
       </div>
-    </>
+
+            <SelectionCards/>
+    </div>
   );
 }
 export default Body;

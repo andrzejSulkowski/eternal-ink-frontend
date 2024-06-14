@@ -6,10 +6,11 @@ import ToggleButton from "@/components/1.atoms/ToggleButton/ToggleButton";
 interface Props extends EIProps {
   onChange: (value: string) => void;
   buttons: { value: string; label: string }[];
+  value?: string;
 }
 
-function ToggleGroup({ className, onChange, buttons }: Props) {
-  const [$selected, $setSelected] = React.useState(buttons[0].value);
+function ToggleGroup({ className, onChange, buttons, value }: Props) {
+  const [$selected, $setSelected] = React.useState(value ?? buttons[0].value);
   const setSelected = (value: string) => {
     $setSelected(value);
     onChange(value); 
