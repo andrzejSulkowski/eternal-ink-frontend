@@ -8,8 +8,10 @@ import ThreeStars from "@/components/Svgs/ThreeStars";
 import ThreeRoad from "@/components/Svgs/ThreeRoad";
 import Fi from "@/components/Svgs/Fi";
 import Cube from "@/components/Svgs/Cube";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
+import api from '@/libs/api/transaction/index'
+
 
 const toggleButtons = [
   {
@@ -34,18 +36,27 @@ function Body() {
 
 
   const { showBanner } = useBanner();
-  const startEngraving = () => {
+  const startEngraving = async () => {
     if (message.length === 0 && file === null) {
       showBanner("Please enter a message or upload a file")
       return;
     }
 
-    if (toggleKey === "public") {
-      // Public
-    } else if (toggleKey === "encrypt") {
-      // Encrypt
-    } else {
-      // Neither
+    const response = await api.postRequestEngraving({
+      chain: "btc",
+      message: message,
+      is_file: file !== null,
+      is_encrypted: toggleKey === "encrypt",
+      is_public: toggleKey === "public"
+    });
+    if(response.ok){
+      const data = response.data!;
+      showBanner("Success");
+      console.log("Success: ", data)
+    }else{
+      const error = response.error!;
+      showBanner(`Error: ${error.type} - type: ${error.detail}`)
+      console.warn("Error: ", error);
     }
   }
 
