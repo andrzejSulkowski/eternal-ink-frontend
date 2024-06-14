@@ -1,1 +1,1 @@
-export * from './fetch';
+export * as $fetch from './fetch';

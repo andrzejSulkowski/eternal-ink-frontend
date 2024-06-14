@@ -1,6 +1,6 @@
-import { PostRequestEngraving, PostRequestEngravingResponse, ApiError, ApiCall} from "@/models/api";
+import { PostRequestEngraving, PostRequestEngravingResponse, ApiError, ApiCall} from "./../../models";
 import CONFIG  from "@/libs/config";
-import { $fetch } from '@/libs/api';
+import $fetch from './../../fetch';
 
 const PostRequestEngravingMockData: PostRequestEngravingResponse = {
     address: "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",

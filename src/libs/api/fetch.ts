@@ -1,5 +1,5 @@
 import CONFIG from "@/libs/config";
-import { ApiResponse, ApiError } from "@/models/api";
+import { ApiResponse, ApiError } from "./models";
 
 const $fetch = async <T>(
   endpoint: string,
@@ -32,4 +32,4 @@ const $fetch = async <T>(
   }
 };
 
-export { $fetch };
+export default $fetch;
