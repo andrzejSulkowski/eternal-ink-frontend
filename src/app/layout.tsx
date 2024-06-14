@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { manrope, kanit } from "@/libs/fonts";
 import Banner from "@/components/1.atoms/Banner/Banner";
+import { BannerProvider } from "@/components/1.atoms/Banner/BannerContext";
 
 export const metadata: Metadata = {
   title: "Eternal Ink",
@@ -14,9 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-    >
+    <html lang="en">
       <body
         className={[
           kanit.variable,
@@ -25,8 +24,10 @@ export default function RootLayout({
           "bg-black",
         ].join(" ")}
       >
-        <Banner message="Some Message"/>
-        <main className="flex-grow flex flex-col">{children}</main>
+        <BannerProvider>
+          <Banner />
+          <main className="flex-grow flex flex-col">{children}</main>
+        </BannerProvider>
       </body>
     </html>
   );

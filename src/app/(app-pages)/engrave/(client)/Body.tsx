@@ -8,7 +8,8 @@ import ThreeStars from "@/components/Svgs/ThreeStars";
 import ThreeRoad from "@/components/Svgs/ThreeRoad";
 import Fi from "@/components/Svgs/Fi";
 import Cube from "@/components/Svgs/Cube";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 
 const toggleButtons = [
   {
@@ -32,9 +33,10 @@ function Body() {
   let toggleKey = "public";
 
 
+  const { showBanner } = useBanner();
   const startEngraving = () => {
     if (message.length === 0 && file === null) {
-      alert("Please enter a message or upload a file");
+      showBanner("Please enter a message or upload a file")
       return;
     }
 
