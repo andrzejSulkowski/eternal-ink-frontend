@@ -4,15 +4,15 @@ import Textarea from "@/components/1.atoms/Textarea/Textarea";
 import FileInput from "@/components/2.molecules/FileInput/FileInput";
 import ToggleGroup from "@/components/2.molecules/ToggleGroup/ToggleGroup";
 import ThreeStars from "@/components/Svgs/ThreeStars";
-import { useEffect, useState } from "react";
-import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
-import api from "@/libs/api/transaction/index";
-import Input from "@/components/1.atoms/Input/Input";
+import { useState } from "react";
 import PasswordInput from "./PasswordInput";
 import SelectionCards from "./SelectionCards";
+import { startEngraving } from './../(logic)/api';
+import { ToggleKeys } from './../(logic)/types';
+
 
 const toggleButtons: {
-  value: "encrypt" | "public" | "neither";
+  value: ToggleKeys;
   label: string;
 }[] = [
   {
@@ -34,38 +34,10 @@ function Body() {
   let [file, setFile] = useState<File | null>(null);
   let [password, setPassword] = useState("");
 
-  const [toggleKey, setToggleKey] = useState<"encrypt" | "public" | "neither">(
+  const [toggleKey, setToggleKey] = useState<ToggleKeys>(
     "encrypt"
   );
-  useEffect(() => {
-    console.log("toggleKey: ", toggleKey);
-  }, [toggleKey]);
 
-  const { showBanner } = useBanner();
-  const startEngraving = async () => {
-    if (message.length === 0 && file === null) {
-      showBanner("Please enter a message or upload a file");
-      return;
-    }
-
-    const response = await api.postRequestEngraving({
-      chain: "btc",
-      message: message,
-      is_file: file !== null,
-      password: toggleKey === "encrypt" ? password : null,
-      is_encrypted: toggleKey === "encrypt",
-      is_public: toggleKey === "public",
-    });
-    if (response.ok) {
-      const data = response.data!;
-      showBanner("Success");
-      console.log("Success: ", data);
-    } else {
-      const error = response.error!;
-      showBanner(`Error: ${error.type} - type: ${error.detail}`);
-      console.warn("Error: ", error);
-    }
-  };
 
   const getPasswordInputClass = () =>
     toggleKey !== "encrypt" ? "hidden" : null;
@@ -122,7 +94,7 @@ function Body() {
 
           <Button
             className={`!w-fit ${toggleKey === "encrypt" ? "mt-4" : "mt-16"}`}
-            onClick={startEngraving}
+            onClick={() => startEngraving(message, file, password, toggleKey)}
           >
             Start Engraving Magic
             <ThreeStars className="max-w-5 ml-2" />
@@ -135,3 +107,4 @@ function Body() {
   );
 }
 export default Body;
+export type { ToggleKeys };
