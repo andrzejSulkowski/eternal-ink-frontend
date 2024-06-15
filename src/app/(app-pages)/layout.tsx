@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <>
       <Header routes={headerRoutes} className="" />
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow relative">{children}</main>
       <Footer routes={footerRoutes} socials={footerSocials} />
     </>
   );

@@ -13,7 +13,7 @@ function ToggleButton({ className, isSelected, children, onClick }: Props) {
 
   return (
     <div
-      className={classNames("px-6 py-2 rounded-2xl cursor-pointer transition-all", className, () =>
+      className={classNames("px-6 py-2 rounded-2xl cursor-pointer transition-all flex justify-center items-center", className, () =>
         isSelected ? selectedStyles : defaultStyles
       )}
       onClick={onClick}

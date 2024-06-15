@@ -1,7 +1,7 @@
 import React from 'react'
 import type { EIProps } from '@/types'
 import { classNames } from '@/utils/className'
-import PlanetLayout from '@/components/Svgs/bg/PlanetLayout'
+import PlanetLayout from '@/components/Svgs/bg/planet/PlanetLayout'
 
 interface Props extends EIProps {}
 
