@@ -19,7 +19,7 @@ function Banner() {
 
   return (
     <div
-      className={`fixed w-full top-0 left-0 h-12 bg-ei-danger flex justify-between items-center px-8 font-manrope transition-opacity duration-500 ${
+      className={`fixed w-full top-0 left-0 h-12 bg-ei-danger flex justify-between items-center px-8 font-manrope transition-opacity duration-500 z-30 ${
         banner.visible ? 'opacity-100' : 'opacity-0'
       } ${isVisible ? '' : 'hidden'}`}
     >
