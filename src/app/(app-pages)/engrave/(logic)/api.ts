@@ -1,15 +1,18 @@
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import { ToggleKeys } from "../(client)/Body";
 
-const { showBanner } = useBanner();
+const SALT = 10;
+
 const startEngraving = async (
   message: string,
   file: File | null,
   password: string | null,
-  toggleKey: ToggleKeys 
+  toggleKey: ToggleKeys,
+  { showBanner }: ReturnType<typeof useBanner>
 ) => {
+
   if (message.length === 0 && file === null) {
     showBanner("Please enter a message or upload a file");
     return;
@@ -33,9 +36,6 @@ const startEngraving = async (
     is_public: toggleKey === "public",
   });
   if (response.ok) {
-    const data = response.data!;
-    showBanner("Success");
-    console.log("Success: ", data);
     return response;
   } else {
     const error = response.error!;
@@ -51,7 +51,7 @@ const hashPassword = async (password: string | null, toggleKey: ToggleKeys) => {
   } else if (toggleKey === "encrypt" && password.length === 0) {
     throw new Error("Please enter a password");
   } else {
-    return await bcrypt.hash(password, 10);
+    return await bcryptjs.hash(password, SALT);
   }
 };
 
