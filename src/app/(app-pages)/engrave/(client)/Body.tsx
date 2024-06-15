@@ -7,11 +7,12 @@ import ThreeStars from "@/components/Svgs/ThreeStars";
 import { useState } from "react";
 import PasswordInput from "./PasswordInput";
 import SelectionCards from "./SelectionCards";
-import { startEngraving } from './../(logic)/api';
-import { ToggleKeys } from './../(logic)/types';
+import { startEngraving } from "./../(logic)/api";
+import { ToggleKeys } from "./../(logic)/types";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useRouter } from "next/navigation";
-
+import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
+import { TxStatus } from "@/models/transaction";
 
 const toggleButtons: {
   value: ToggleKeys;
@@ -36,15 +37,28 @@ function Body() {
   let [file, setFile] = useState<File | null>(null);
   let [password, setPassword] = useState("");
 
-  const [toggleKey, setToggleKey] = useState<ToggleKeys>(
-    "encrypt"
-  );
+  const [toggleKey, setToggleKey] = useState<ToggleKeys>("public");
   const banner = useBanner();
+  const { setEngravingData } = useEngraving();
 
   const router = useRouter();
   async function engrave() {
-    const response = await startEngraving(message, file, password, toggleKey, banner);
-    if(response?.ok){
+    const response = await startEngraving(
+      message,
+      file,
+      password,
+      toggleKey,
+      banner
+    );
+    if (response?.ok) {
+      setEngravingData({
+        address: response.data!.address,
+        fees: response.data!.fees,
+        message,
+        isPublic: toggleKey === "public",
+        isEncrypted: toggleKey === "encrypt",
+        state: TxStatus.WaitingForFunds,
+      });
       router.push(`/engrave/${response.data!.address}`);
     }
   }
