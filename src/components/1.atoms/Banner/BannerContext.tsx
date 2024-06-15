@@ -10,7 +10,7 @@ import React, {
 const APPEAR_DURATION = 4500;
 
 interface BannerProps {
-  visible: boolean;
+  isVisible: boolean;
   message: string;
   danger: boolean;
 }
@@ -24,7 +24,7 @@ interface IContext {
   hideBanner: () => void;
 }
 const BannerContext = createContext<IContext>({
-  banner: { visible: false, message: "", danger: true },
+  banner: { isVisible: false, message: "", danger: true },
   showBanner: () => {},
   hideBanner: () => {},
 });
@@ -36,7 +36,7 @@ export const useBanner = () => {
 
 export const BannerProvider = ({ children }: PropsWithChildren) => {
   const [banner, setBanner] = useState<BannerProps>({
-    visible: false,
+    isVisible: false,
     message: "",
     danger: true,
   });
@@ -49,13 +49,13 @@ export const BannerProvider = ({ children }: PropsWithChildren) => {
     }
   ) => {
     console.log("set banner message: ", message);
-    setBanner({ visible: true, message: message, danger: opt.danger ?? true });
+    setBanner({ isVisible: true, message: message, danger: opt.danger ?? true });
     let timeout = opt.ms ?? APPEAR_DURATION;
     setTimeout(hideBanner, timeout);
   };
 
   const hideBanner = () => {
-    setBanner({ visible: false, message: "", danger: banner.danger });
+    setBanner({ isVisible: false, message: "", danger: banner.danger });
   };
 
   const props: IContext = {
