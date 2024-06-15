@@ -10,6 +10,7 @@ import SelectionCards from "./SelectionCards";
 import { startEngraving } from './../(logic)/api';
 import { ToggleKeys } from './../(logic)/types';
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
+import { useRouter } from "next/navigation";
 
 
 const toggleButtons: {
@@ -38,8 +39,16 @@ function Body() {
   const [toggleKey, setToggleKey] = useState<ToggleKeys>(
     "encrypt"
   );
-
   const banner = useBanner();
+
+  const router = useRouter();
+  async function engrave() {
+    const response = await startEngraving(message, file, password, toggleKey, banner);
+    if(response?.ok){
+      router.push(`/engrave/${response.data!.address}`);
+    }
+  }
+
   const getPasswordInputClass = () =>
     toggleKey !== "encrypt" ? "hidden" : null;
   return (
@@ -95,7 +104,7 @@ function Body() {
 
           <Button
             className={`!w-fit ${toggleKey === "encrypt" ? "mt-4" : "mt-16"}`}
-            onClick={() => startEngraving(message, file, password, toggleKey, banner)}
+            onClick={engrave}
           >
             Start Engraving Magic
             <ThreeStars className="max-w-5 ml-2" />

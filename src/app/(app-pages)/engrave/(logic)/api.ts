@@ -22,8 +22,8 @@ const startEngraving = async (
   try {
     passwordHashed = await hashPassword(password, toggleKey);
   } catch (e) {
-    const errorMsg = e as any as string;
-    showBanner(errorMsg);
+    const error = e as any as Error;
+    showBanner(error.message);
     return;
   }
 
@@ -40,7 +40,6 @@ const startEngraving = async (
   } else {
     const error = response.error!;
     showBanner(`Error: ${error.type} - type: ${error.detail}`);
-    console.warn("Error: ", error);
     return response;
   }
 };
@@ -48,7 +47,7 @@ const startEngraving = async (
 const hashPassword = async (password: string | null, toggleKey: ToggleKeys) => {
   if (password === null) {
     return null;
-  } else if (toggleKey === "encrypt" && password.length === 0) {
+  } else if (toggleKey === "encrypt" && (password === null || password.length === 0)) {
     throw new Error("Please enter a password");
   } else {
     return await bcryptjs.hash(password, SALT);
