@@ -4,6 +4,7 @@ import { classNames } from "@/utils/className";
 import EIIcon from "@/components/1.atoms/EIIcon/EIIcon";
 import Copy from "@/components/Svgs/Copy";
 import { trim } from '@/libs/transaction'
+import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 
 interface Props extends EIProps {
   icon: React.ReactNode;
@@ -22,7 +23,14 @@ function InfoCard({
   trimValue = false,
 }: Props) {
   const getValue = useMemo(() => trimValue ? trim(value) : value, [value, trimValue]);
+  const { showBanner } = useBanner();
 
+
+  function copy(){
+    console.log("copying", value)
+    navigator.clipboard.writeText(value);
+    showBanner("Copied to clipboard", { danger: false, ms: 4500 });
+  }
   return (
     <div
       className={classNames(
@@ -40,11 +48,11 @@ function InfoCard({
       </div>
 
       <div className="flex items-center text-ei-primary-faded text-sm">
-        <span>{getValue}</span>
+        <span className="text-nowrap">{getValue}</span>
         {isCopyable && (
           <Copy
             className="min-w-5 min-h-5 ml-2"
-            onClick={() => navigator.clipboard.writeText(value)}
+            onClick={copy}
           />
         )}
       </div>
