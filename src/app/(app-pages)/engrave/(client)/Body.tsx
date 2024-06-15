@@ -32,6 +32,7 @@ const toggleButtons: {
 function Body() {
   let [message, setMessage] = useState("");
   let [file, setFile] = useState<File | null>(null);
+  let [password, setPassword] = useState("");
 
   const [toggleKey, setToggleKey] = useState<"encrypt" | "public" | "neither">(
     "encrypt"
@@ -51,7 +52,8 @@ function Body() {
       chain: "btc",
       message: message,
       is_file: file !== null,
-      is_encrypted: toggleKey === "encrypt", //TODO: If its encrypted, we need to send a password to the server as well!
+      password: toggleKey === "encrypt" ? password : null,
+      is_encrypted: toggleKey === "encrypt",
       is_public: toggleKey === "public",
     });
     if (response.ok) {
@@ -66,7 +68,7 @@ function Body() {
   };
 
   const getPasswordInputClass = () =>
-    toggleKey !== "encrypt" ? 'hidden' : null
+    toggleKey !== "encrypt" ? "hidden" : null;
   return (
     <div className="flex  flex-col justify-between min-h-full">
       <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-8 font-manrope">
@@ -112,16 +114,23 @@ function Body() {
             onChange={(key) => setToggleKey(key as any)}
           />
 
-          <PasswordInput className={`mt-8 ${getPasswordInputClass()}`} />
+          <PasswordInput
+            onChange={(e) => setPassword(e.currentTarget.value)}
+            password={password}
+            className={`mt-8 ${getPasswordInputClass()}`}
+          />
 
-          <Button className={`!w-fit ${toggleKey === 'encrypt' ? 'mt-4' : 'mt-16'}`} onClick={startEngraving}>
+          <Button
+            className={`!w-fit ${toggleKey === "encrypt" ? "mt-4" : "mt-16"}`}
+            onClick={startEngraving}
+          >
             Start Engraving Magic
             <ThreeStars className="max-w-5 ml-2" />
           </Button>
         </div>
       </div>
 
-            <SelectionCards/>
+      <SelectionCards />
     </div>
   );
 }

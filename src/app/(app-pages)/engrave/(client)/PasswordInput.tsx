@@ -3,10 +3,12 @@ import { EIProps } from "@/types"
 import { classNames } from "@/utils/className"
 import { useState } from "react"
 
-interface Props extends EIProps {}
+interface Props extends EIProps {
+  password: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-function PasswordInput({className}: Props) {
-    const [password, setPassword] = useState<string>('')
+function PasswordInput({className, password, onChange}: Props) {
 
   return (
     <div className={classNames("flex gap-4 pr-3 pl-4 py-3 bg-[#09090A] font-manrope rounded-xl", className)}>
@@ -17,7 +19,7 @@ function PasswordInput({className}: Props) {
         <Input
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onChange}
             type="password"
         />
     </div>
