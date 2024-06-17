@@ -1,5 +1,5 @@
 import { TxStatus } from "@/models/transaction";
-import { GetTxStatusStream } from "@/libs/api/models";
+import { GetTxStatusStream, GetTxStatusStreamResponse } from "@/libs/api/models";
 import { NextRequest, NextResponse } from "next/server";
 
 const stateFlow = [
@@ -28,7 +28,11 @@ export async function GET(request: NextRequest, { params }: {params: { txid: str
   const customReadable = new ReadableStream({
     async start(controller) {
       for (const status of stateFlow) {
-        const message = JSON.stringify({ id: txid, status });
+        const response: GetTxStatusStreamResponse = {
+          data: status,
+          status: "keep-alive",
+        };
+        const message = JSON.stringify(response);
         controller.enqueue(encoder.encode(`data: ${message}\n\n`));
         // Simulate a delay between status updates
         await new Promise((resolve) => setTimeout(resolve, 5000));

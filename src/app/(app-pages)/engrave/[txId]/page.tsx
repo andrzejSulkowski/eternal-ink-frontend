@@ -9,7 +9,8 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
 import { useLoadingScreen } from "@/context/loadingScreenCtx";
 import { useSseStream } from "./(logic)/useSseStream";
-
+import { useWindow } from "@/hooks/useWindow";
+import CONFIG from "@/libs/config";
 
 interface Props {}
 
@@ -18,6 +19,7 @@ function EngravePage({}: Props) {
   const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
   const { engravingData, setEngravingData } = useEngraving();
   const path = usePathname();
+  const { window , runFn } = useWindow();
 
   const maybeAddress = path.split("/").at(2);
   if (!maybeAddress) {
@@ -25,6 +27,8 @@ function EngravePage({}: Props) {
     return new Error("Address not found");
   }
   const address = maybeAddress!;
+
+  const { eventSource, startListening } = useSseStream(address);
 
   const displayFees = useMemo(() => {
     if (engravingData?.fees) {
@@ -41,8 +45,17 @@ function EngravePage({}: Props) {
     throw new Error("API Not implemented!");
   }
 
-  const { eventSource } = useSseStream(address);
-
+  if (CONFIG.MOCK_API) {
+    console.warn(
+      "✭ To simulate a transaction, run window.mock.engrave() in the console"
+    );
+    runFn((window) => {
+      window.mock = window.mock || {};
+      window.mock.engrave = () => {
+        startListening();
+      };
+    });
+  }
 
   return (
     <>

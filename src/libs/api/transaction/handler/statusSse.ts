@@ -1,15 +1,7 @@
-'use client';
+"use client";
 
-import {
-  ApiError,
-  ApiCall,
-  GetTxStatusStream,
-  GetTxStatusStreamResponse,
-} from "./../../models";
-import { TxStatus } from "@/models/transaction";
+import { GetTxStatusStream } from "./../../models";
 import CONFIG from "@/libs/config";
-import $fetch from "./../../fetch";
-import { useEffect } from "react";
 
 const getTxStatusStream = {
   call: (data: GetTxStatusStream) => {
@@ -20,7 +12,9 @@ const getTxStatusStream = {
     }
   },
   mockCall: (data: GetTxStatusStream) => {
-    return new EventSource(CONFIG.MOCK_BACKEND_URL + "engrave/tx-stream/" + data.id); 
+    return new EventSource(
+      CONFIG.MOCK_BACKEND_URL + "engrave/tx-stream/" + data.id
+    );
   },
   backendCall: (data: GetTxStatusStream) => {
     return new EventSource(CONFIG.BACKEND_URL + "engrave/tx-stream/" + data.id);
