@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from "react";
 import { classNames } from "@/utils/className";
 import Background from "@/components/Svgs/bg/1/Background";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import InfoCard from "@/components/2.molecules/InfoCard/InfoCard";
 import { IoWallet } from "react-icons/io5";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
@@ -19,7 +19,8 @@ function EngravePage({}: Props) {
   const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
   const { engravingData, setEngravingData } = useEngraving();
   const path = usePathname();
-  const { window , runFn } = useWindow();
+  const router = useRouter();
+  const { window, runFn } = useWindow();
 
   const maybeAddress = path.split("/").at(2);
   if (!maybeAddress) {
@@ -28,7 +29,12 @@ function EngravePage({}: Props) {
   }
   const address = maybeAddress!;
 
-  const { eventSource, startListening } = useSseStream(address);
+  const { eventSource, startListening } = useSseStream(address, {
+    onCompleted: () => {
+      router.push("/engrave-success/");
+    },
+    onError: () => {},
+  });
 
   const displayFees = useMemo(() => {
     if (engravingData?.fees) {

@@ -28,7 +28,10 @@ const mapTxStatusToString: Record<TxStatus, string> = {
   [TxStatus.ExternalConfirmed]: "External Confirmed",
 };
 
-export const useSseStream = (id: string) => {
+export const useSseStream = (
+  id: string,
+  callbacks: { onError: () => void; onCompleted: () => void }
+) => {
   const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
   const [eventSource, setEventSource] = useState<EventSource | null>(null);
   const [isStreaming, setIsStreaming] = useState(false);
@@ -37,12 +40,13 @@ export const useSseStream = (id: string) => {
     eventSource?.close();
     hideLoadingScreen();
   };
+
   const startListening = () => {
     if (window && !isStreaming) {
       const source = api.requestStatusStream({ id });
       source.onerror = close;
       source.onmessage = onmessage;
-      
+
       setEventSource(source);
       setIsStreaming(true);
     }
@@ -57,12 +61,15 @@ export const useSseStream = (id: string) => {
         mapTxStatusToProgress[txStatus],
         5
       );
-      if (data === TxStatus.Finalized) setTimeout(close, 500);
+      if (data === TxStatus.Finalized) {
+        callbacks.onCompleted();
+        setTimeout(close, 500);
+      }
     } else {
+      callbacks.onError();
       close();
     }
   };
-
 
   return {
     eventSource,

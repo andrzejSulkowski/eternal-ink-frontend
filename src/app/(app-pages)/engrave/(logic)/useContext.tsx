@@ -13,6 +13,7 @@ const defaultEngravingState: EngravingState = {
   isPublic: false,
   isEncrypted: false,
   state: TxStatus.WaitingForFunds,
+  txId: undefined
 };
 
 const EngravingContext = createContext<EngravingContextType>({

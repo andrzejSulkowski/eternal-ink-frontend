@@ -7,6 +7,7 @@ interface EngravingState {
   isPublic: boolean;
   isEncrypted: boolean;
   state: TxStatus;
+  txId: string | undefined;
 }
 
 interface EngravingContextType {

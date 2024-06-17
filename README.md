@@ -149,6 +149,29 @@ type Response = {
 </details>
 
 <details>
+  <summary><h3>Map Address to Transaction Id</h3></summary>
+
+`[get] api/addr-to-txId/:address`
+**Path**
+
+```ts
+{
+  address: string;
+}
+```
+
+### Response
+
+```ts
+
+type Response = {
+  tx_id: string;
+};
+```
+
+</details>
+
+<details>
   <summary><h3>Messages</h3></summary>
 
 `[get] api/get-messages?after_uuid=&items=`
