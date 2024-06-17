@@ -14,6 +14,25 @@ pnpm dev
 bun dev
 ```
 
+## Models
+```ts
+type ITxStatus =
+  | "WaitingForFunds"
+  | "ConfirmingFunds"
+  | "ConfirmedFunds"
+  | "Engraving"
+  | "Engraved"
+  | "Finalized"
+  | "ExternalUnconfirmed"
+  | "ExternalConfirmed";
+
+interface IMessage {
+  content: string;
+  id: string;
+  time: string;
+}
+```
+
 # API-Endpoints
 
 <details>
@@ -75,6 +94,10 @@ bun dev
 **Response**
 
 ```ts
+interface Response {
+  data: ITxStatus | string, // string in case its a error - ITxStatus if status = 'keep-alive'
+  status: 'keep-alive' | 'error'
+}
 const stream = new EventSource(`${baseUrl}/api/tx-stream/${id}`);
 ```
 
@@ -117,15 +140,6 @@ const stream = new EventSource(`${baseUrl}/api/tx-stream/${id}`);
 ### Response
 
 ```ts
-type ITxStatus =
-  | "WaitingForFunds"
-  | "ConfirmingFunds"
-  | "ConfirmedFunds"
-  | "Engraving"
-  | "Engraved"
-  | "Finalized"
-  | "ExternalUnconfirmed"
-  | "ExternalConfirmed";
 
 type Response = {
   status: ITxStatus;
@@ -150,11 +164,7 @@ type Response = {
 **Response**
 
 ```ts
-interface IMessage {
-  content: string;
-  id: string;
-  time: string;
-}
+
 interface Response {
   messages: IMessage[];
 }

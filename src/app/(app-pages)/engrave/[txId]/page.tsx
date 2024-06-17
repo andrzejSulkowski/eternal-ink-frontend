@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { classNames } from "@/utils/className";
 import Background from "@/components/Svgs/bg/1/Background";
 import { usePathname } from "next/navigation";
@@ -8,36 +8,41 @@ import { IoWallet } from "react-icons/io5";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
 import { useLoadingScreen } from "@/context/loadingScreenCtx";
+import { useSseStream } from "./(logic)/useSseStream";
+
 
 interface Props {}
 
 function EngravePage({}: Props) {
-  const path = usePathname();
-  const address = path.split("/").at(2);
-  const { engravingData, setEngravingData } = useEngraving();
-  const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
-
   const { showBanner } = useBanner();
-  if (!address) {
+  const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
+  const { engravingData, setEngravingData } = useEngraving();
+  const path = usePathname();
+
+  const maybeAddress = path.split("/").at(2);
+  if (!maybeAddress) {
     showBanner("Address not found");
     return new Error("Address not found");
   }
+  const address = maybeAddress!;
 
   const displayFees = useMemo(() => {
     if (engravingData?.fees) {
       return engravingData?.fees.toString() + " BTC";
     }
     return "- BTC";
-  }, [engravingData?.fees])
+  }, [engravingData?.fees]);
 
-
-  function cancel(){
-      showLoadingScreen("Cancelling Engraving...", 1, 2);
-      setTimeout(() => {
-        hideLoadingScreen();
-      }, 4000);
-    throw new Error("API Not implemented!")
+  function cancel() {
+    showLoadingScreen("Cancelling Engraving...", 1, 2);
+    setTimeout(() => {
+      hideLoadingScreen();
+    }, 4000);
+    throw new Error("API Not implemented!");
   }
+
+  const { eventSource } = useSseStream(address);
+
 
   return (
     <>
@@ -58,9 +63,11 @@ function EngravePage({}: Props) {
             <InfoCard
               icon={IoWallet({ color: "white" })}
               label="Bitcoin Address"
-              value={engravingData?.address ?? '-'}
+              value={engravingData?.address ?? "-"}
             />
-            <div className="h-full flex items-center font-bold text-sm">and</div>
+            <div className="h-full flex items-center font-bold text-sm">
+              and
+            </div>
             <InfoCard
               icon={IoWallet({ color: "white" })}
               label="Required Fees:"
@@ -68,7 +75,10 @@ function EngravePage({}: Props) {
             />
           </div>
 
-          <div className="text-ei-primary-faded text-sm mt-12 hover:underline cursor-pointer" onClick={cancel}>
+          <div
+            className="text-ei-primary-faded text-sm mt-12 hover:underline cursor-pointer"
+            onClick={cancel}
+          >
             Cancel Engraving
           </div>
         </div>

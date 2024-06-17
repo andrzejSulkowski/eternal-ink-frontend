@@ -1,3 +1,4 @@
+import { TxStatus } from "@/models/transaction";
 import { ApiError } from "./errors";
 
 // type ApiResponse<T> = T | ApiError;
@@ -15,6 +16,7 @@ interface ApiCall<Request, Response> {
   private async backendCall: (p: Request) => Promise<ApiResponse<Response>>; 
 }
 
+/// Post Request Engraving
 interface PostRequestEngraving {
   chain: "btc";
   message: string;
@@ -28,4 +30,14 @@ interface PostRequestEngravingResponse {
   fees: number;
 }
 
-export type { PostRequestEngraving, PostRequestEngravingResponse, ApiCall, ApiResponse };
+/// Tx Status Stream
+interface GetTxStatusStream {
+  id: string
+}
+interface GetTxStatusStreamResponse {
+  data: TxStatus | string,
+  status: 'keep-alive' | 'error'
+}
+
+
+export type { PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, ApiCall, ApiResponse };

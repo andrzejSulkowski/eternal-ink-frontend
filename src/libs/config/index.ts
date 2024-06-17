@@ -5,6 +5,7 @@ const CONFIG: IConfiguration = {
     MOCK_API: true,
     // BANNER_APPEAR_DURATION: 4500 //TODO: Not being used yet
     BACKEND_URL: 'http://localhost:3001/api/v1/',
+    MOCK_BACKEND_URL: 'http://localhost:3000/api/',
     PASSWORD_SALT: 10
 }
 
