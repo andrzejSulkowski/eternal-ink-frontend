@@ -11,6 +11,7 @@ import { useLoadingScreen } from "@/context/loadingScreenCtx";
 import { useSseStream } from "./(logic)/useSseStream";
 import { useWindow } from "@/hooks/useWindow";
 import CONFIG from "@/libs/config";
+import { trim } from "@/libs/transaction";
 
 interface Props {}
 
@@ -31,7 +32,7 @@ function EngravePage({}: Props) {
 
   const { eventSource, startListening } = useSseStream(address, {
     onCompleted: () => {
-      router.push("/engrave-success/");
+      router.push("/engrave/success/");
     },
     onError: () => {},
   });
@@ -52,9 +53,7 @@ function EngravePage({}: Props) {
   }
 
   if (CONFIG.MOCK_API) {
-    console.warn(
-      "✭ To simulate a transaction, run window.mock.engrave() in the console"
-    );
+    // console.warn("✭ To simulate a transaction, run window.mock.engrave() in the console");
     runFn((window) => {
       window.mock = window.mock || {};
       window.mock.engrave = () => {
@@ -81,8 +80,8 @@ function EngravePage({}: Props) {
           <div className="grid grid-cols-[1fr_auto_1fr] gap-8">
             <InfoCard
               icon={IoWallet({ color: "white" })}
-              label="Bitcoin Address"
-              value={engravingData?.address ?? "-"}
+              label="Bitcoin Address:"
+              value={engravingData?.address ? trim(engravingData.address) : "-"}
             />
             <div className="h-full flex items-center font-bold text-sm">
               and

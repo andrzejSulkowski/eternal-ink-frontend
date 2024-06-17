@@ -5,6 +5,7 @@ import CONFIG from "@/libs/config";
 
 const getTxStatusStream = {
   call: (data: GetTxStatusStream) => {
+    console.log("calling getTxStatusStream")
     if (CONFIG.MOCK_API) {
       return getTxStatusStream.mockCall(data);
     } else {

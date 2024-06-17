@@ -36,8 +36,19 @@ interface GetTxStatusStream {
 }
 interface GetTxStatusStreamResponse {
   data: TxStatus | string,
-  status: 'keep-alive' | 'error'
+  status: 'keep-alive' | 'error' | 'close'
 }
 
+/// Addr to Id
+interface GetTxIdFromAddr {
+  address: string
+}
+interface GetTxIdFromAddrResponse {
+  tx_id: string
+}
 
-export type { PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, ApiCall, ApiResponse };
+export type { 
+  PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, 
+  GetTxIdFromAddr, GetTxIdFromAddrResponse,
+  ApiCall, ApiResponse 
+};

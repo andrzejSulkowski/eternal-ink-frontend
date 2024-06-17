@@ -96,7 +96,7 @@ interface IMessage {
 ```ts
 interface Response {
   data: ITxStatus | string, // string in case its a error - ITxStatus if status = 'keep-alive'
-  status: 'keep-alive' | 'error'
+  status: 'keep-alive' | 'error' | 'close' // TODO: I am not sure if error really exists - needs to be checked
 }
 const stream = new EventSource(`${baseUrl}/api/tx-stream/${id}`);
 ```

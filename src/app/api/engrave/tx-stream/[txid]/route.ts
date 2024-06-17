@@ -27,15 +27,16 @@ export async function GET(request: NextRequest, { params }: {params: { txid: str
   // Create a streaming response
   const customReadable = new ReadableStream({
     async start(controller) {
+      console.log("running start")
       for (const status of stateFlow) {
         const response: GetTxStatusStreamResponse = {
           data: status,
-          status: "keep-alive",
+          status: status !== TxStatus.Finalized ? "keep-alive" : "close",
         };
         const message = JSON.stringify(response);
         controller.enqueue(encoder.encode(`data: ${message}\n\n`));
         // Simulate a delay between status updates
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+        await new Promise((resolve) => setTimeout(resolve, 2500));
       }
       // Close the stream after sending all updates
       controller.close();

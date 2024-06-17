@@ -1,7 +1,8 @@
+"use client";
 import api from "@/libs/api/transaction";
 import { GetTxStatusStreamResponse } from "@/libs/api/models";
 import { TxStatus } from "@/models/transaction";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoadingScreen } from "@/context/loadingScreenCtx";
 
 const mapTxStatusToProgress: Record<TxStatus, number> = {
@@ -33,26 +34,34 @@ export const useSseStream = (
   callbacks: { onError: () => void; onCompleted: () => void }
 ) => {
   const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
-  const [eventSource, setEventSource] = useState<EventSource | null>(null);
-  const [isStreaming, setIsStreaming] = useState(false);
+  const eventSource = useRef<EventSource | null>(null);
+  const isStreaming = useRef(false);
+  const isCompletedRef = useRef(false);
 
   const close = () => {
-    eventSource?.close();
+    eventSource.current?.close();
+    eventSource.current = null;
     hideLoadingScreen();
+    isCompletedRef.current = true;
+    isStreaming.current = false;
   };
 
   const startListening = () => {
-    if (window && !isStreaming) {
+    isCompletedRef.current = false;
+
+    if (window && !isStreaming.current) {
       const source = api.requestStatusStream({ id });
+      isStreaming.current = true;
       source.onerror = close;
       source.onmessage = onmessage;
 
-      setEventSource(source);
-      setIsStreaming(true);
+      eventSource.current = source;
     }
   };
 
   const onmessage = (event: MessageEvent) => {
+    if (isCompletedRef.current) return;
+
     const { data, status }: GetTxStatusStreamResponse = JSON.parse(event.data);
     if (status === "keep-alive") {
       const txStatus = data as TxStatus;
@@ -61,18 +70,30 @@ export const useSseStream = (
         mapTxStatusToProgress[txStatus],
         5
       );
-      if (data === TxStatus.Finalized) {
-        callbacks.onCompleted();
-        setTimeout(close, 500);
-      }
+    } else if (status === "close") {
+      const txStatus = data as TxStatus;
+      showLoadingScreen(
+        mapTxStatusToString[txStatus],
+        mapTxStatusToProgress[txStatus],
+        5
+      );
+      callbacks.onCompleted();
+      setTimeout(close, 200);
     } else {
       callbacks.onError();
       close();
     }
   };
 
+  useEffect(() => {
+    return () => {
+      close();
+    };
+  }, []);
+
   return {
     eventSource,
     startListening,
+    close,
   };
 };

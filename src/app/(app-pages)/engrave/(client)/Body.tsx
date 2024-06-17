@@ -58,6 +58,7 @@ function Body() {
         isPublic: toggleKey === "public",
         isEncrypted: toggleKey === "encrypt",
         state: TxStatus.WaitingForFunds,
+        txId: undefined,
       });
       router.push(`/engrave/${response.data!.address}`);
     }
