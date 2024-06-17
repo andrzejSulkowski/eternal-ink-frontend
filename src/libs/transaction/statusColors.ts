@@ -1,9 +1,12 @@
-import { Status } from "./index";
+import { TxStatus } from "@/models"
 
-export const statusColors: Record<Status, string> = {
-  "waiting-for-funds": "text-ei-primary-faded",
-  "confirming-funds": "text-ei-warning",
-  engraving: "text-ei-warning",
-  engraved: "text-ei-success",
-  timeout: "text-ei-danger",
+export const statusColors: Record<TxStatus, string> = {
+  [TxStatus.WaitingForFunds]: "text-ei-primary-faded",
+  [TxStatus.ConfirmedFunds]: "text-ei-warning",
+  [TxStatus.ConfirmingFunds]: "text-ei-warning",
+  [TxStatus.Engraving]: "text-ei-warning",
+  [TxStatus.Engraved]: "test-ei-warning",
+  [TxStatus.Finalized]: "text-ei-success",
+  [TxStatus.ExternalUnconfirmed]: "text-ei-primary-faded",
+  [TxStatus.ExternalConfirmed]: "text-ei-success"
 };

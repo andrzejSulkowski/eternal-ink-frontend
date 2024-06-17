@@ -24,6 +24,7 @@ const config: Config = {
         "ei-twilight-blue": "rgb(38, 45, 115)",
         "ei-void": "rgb(9, 9, 10)",
         "ei-danger": "rgb(239, 72, 112)",
+        "ei-warning": "rgb(255, 159, 67)",
         "ei-success": "rgb(41, 189, 80)",
         "ei-black": "rbg(11, 9, 13)",
       },

@@ -1,16 +1,16 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import {
-  Status,
   TxId,
   getStatusColor,
   trim,
   displayStatus,
 } from "@/libs/transaction";
+import { TxStatus } from "@/models";
 
 interface Props extends EIProps {
-  status?: Status;
+  status?: TxStatus;
   message?: string;
   txId?: TxId;
 }
@@ -20,7 +20,23 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
     return status !== undefined && txId !== undefined;
   }, [status, txId]);
 
-  console.log("isCmpRdy", isCmpRdy)
+  const dStatus = useMemo<ReturnType<typeof displayStatus>>(() => {
+    if (status !== undefined) {
+      return displayStatus(status);
+    }else {
+      return "Unknown"
+    }
+  }, [status])
+
+  const bodyMessage = useMemo(() => {
+      if (dStatus === "Finalized"){
+        return "Engraved Message: "
+      }else{
+        return "Engraving Message: "
+      }
+  }, [dStatus])
+  
+
   return (
     <div
       className={classNames(
@@ -35,7 +51,7 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
             <div>
               <span className="text-ei-primary-faded mr-4">Status:</span>
               <span className={classNames(getStatusColor(status!), "font-bold")}>
-                {displayStatus(status!)}
+                {dStatus}
               </span>
             </div>
             <div>
@@ -45,7 +61,7 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
           </div>
           {/* Body */}
           <div className="flex flex-col pt-8 border-t-ei-primary-dark border border-transparent gap-3">
-            <span className="text-ei-primary-faded">Engraved Message:</span>
+            <span className="text-ei-primary-faded">{bodyMessage}</span>
             <span className="text-white font-extrabold text-xl">{message}</span>
           </div>
         </>

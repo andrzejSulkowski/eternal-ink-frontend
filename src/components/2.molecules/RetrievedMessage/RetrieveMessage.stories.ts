@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import RetrievedMessage from './RetrievedMessage';
 import { fn } from '@storybook/test';
-import { Status, TxId } from '@/libs/transaction';
+import { TxId } from '@/libs/transaction';
+import { TxStatus } from '@/models';
 
 const meta = {
   title: 'Eternal Ink/molecules/RetrievedMessage',
@@ -22,7 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Filled: Story = {
   args: {
-    status: 'engraved',
+    status: TxStatus.Finalized,
     message: "Hello, World!",
     txId: "1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX72",
   },
