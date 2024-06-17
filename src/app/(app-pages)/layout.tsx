@@ -1,12 +1,11 @@
 import "@/app/globals.css";
-import type { Metadata } from "next";
-import { manrope, kanit } from "@/libs/fonts";
 import type { EIRoute } from "@/types";
 import Header from "@/components/3.organisms/Header/Header";
 import Footer, { ISocial } from "@/components/3.organisms/Footer/Footer";
 import LinkedIn from "@/components/Svgs/LinkedIn";
 import Github from "@/components/Svgs/Github";
 import Web from "@/components/Svgs/Web";
+import LoadingScreenProvider from "@/context/loadingScreenCtx";
 
 const headerRoutes: EIRoute[] = [
   {
@@ -48,10 +47,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <LoadingScreenProvider>
       <Header routes={headerRoutes} className="" />
       <main className="flex-grow relative">{children}</main>
       <Footer routes={footerRoutes} socials={footerSocials} />
-    </>
+    </LoadingScreenProvider>
   );
 }

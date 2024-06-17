@@ -7,6 +7,7 @@ import InfoCard from "@/components/2.molecules/InfoCard/InfoCard";
 import { IoWallet } from "react-icons/io5";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
+import { useLoadingScreen } from "@/context/loadingScreenCtx";
 
 interface Props {}
 
@@ -14,6 +15,7 @@ function EngravePage({}: Props) {
   const path = usePathname();
   const address = path.split("/").at(2);
   const { engravingData, setEngravingData } = useEngraving();
+  const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
 
   const { showBanner } = useBanner();
   if (!address) {
@@ -30,7 +32,11 @@ function EngravePage({}: Props) {
 
 
   function cancel(){
-    throw new Error("Not implemented!")
+      showLoadingScreen("Cancelling Engraving...", 1, 2);
+      setTimeout(() => {
+        hideLoadingScreen();
+      }, 4000);
+    throw new Error("API Not implemented!")
   }
 
   return (
@@ -50,13 +56,13 @@ function EngravePage({}: Props) {
           </div>
           <div className="grid grid-cols-[1fr_auto_1fr] gap-8">
             <InfoCard
-              icon={IoWallet({ size: "auto", color: "white" })}
+              icon={IoWallet({ color: "white" })}
               label="Bitcoin Address"
               value={engravingData?.address ?? '-'}
             />
             <div className="h-full flex items-center font-bold text-sm">and</div>
             <InfoCard
-              icon={IoWallet({ size: "auto", color: "white" })}
+              icon={IoWallet({ color: "white" })}
               label="Required Fees:"
               value={displayFees}
             />

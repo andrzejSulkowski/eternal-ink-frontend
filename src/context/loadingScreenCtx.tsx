@@ -1,6 +1,6 @@
 "use client";
-
-import { createContext, useContext, useState } from "react";
+import { PropsWithChildren, createContext, useContext, useState } from "react";
+import LoadingSpinner from "@/components/1.atoms/LoadingSpinner/LoadingSpinner";
 
 interface IContext {
   isVisible: boolean;
@@ -29,7 +29,7 @@ const LoadingScreenContext = createContext<{
 });
 const useLoadingScreen = () => useContext(LoadingScreenContext);
 
-function LoadingScreenProvider() {
+function LoadingScreenProvider({ children }: PropsWithChildren<{}>) {
   const [state, setState] = useState<IContext>({
     isVisible: false,
     loadingMessage: "",
@@ -62,7 +62,20 @@ function LoadingScreenProvider() {
   return (
     <LoadingScreenContext.Provider
       value={{ showLoadingScreen, hideLoadingScreen, state }}
-    ></LoadingScreenContext.Provider>
+    >
+      {state.isVisible && (
+        <div className="absolute top-0 left-0 bottom-0 right-0 bg-black/40 z-50">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <LoadingSpinner
+              innerText={state.currentStage + "/" + state.totalStages}
+              label={state.loadingMessage}
+            />
+          </div>
+        </div>
+      )}
+
+      {children}
+    </LoadingScreenContext.Provider>
   );
 }
 export default LoadingScreenProvider;
