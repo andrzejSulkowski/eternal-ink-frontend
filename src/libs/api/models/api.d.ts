@@ -58,9 +58,25 @@ interface GetTxInfoResponse {
   is_encrypted: boolean
 }
 
+/// Retrieve Messages
+interface IMessage {
+  content: string,
+  id: string,
+  time: string,
+  tx_id: string,
+}
+interface GetMessages {
+  after_uuid: string | null,
+  items: number,
+}
+interface GetMessagesResponse {
+  messages: IMessage[],
+}
+
 export type { 
   PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, 
   GetTxIdFromAddr, GetTxIdFromAddrResponse,
   GetTxInfo, GetTxInfoResponse,
+  IMessage, GetMessages, GetMessagesResponse,
   ApiCall, ApiResponse 
 };

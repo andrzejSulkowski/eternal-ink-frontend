@@ -8,7 +8,7 @@ interface Props extends EIProps {}
 function HeroSection({className}: Props) {
   return (
     <div className={classNames('', className)}>
-        <PlanetLayout className="w-svw h-svh relative top-0 overflow-hidden" />
+        <PlanetLayout className="w-svw h-svh !absolute top-0 overflow-hidden !-z-10" />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import Hero from "@/app/(app-pages)/home/(sections)/Hero";
 import RootLayout from "@/app/layout";
 import { classNames } from "@/utils/className";
 import { Metadata } from "next";
+import LoadedTicks from './(client)/LoadedTicks';
 
 interface Props {}
 
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function Page({ }: Props) {
   return  (
     <div className={classNames("")}>
+      <LoadedTicks />
       <Hero />
     </div>
   );

@@ -24,11 +24,11 @@ function Header({
   }
   return (
     <div
-      className={classNames(
-        "flex w-full px-72 py-6 bg-gradient-to-t from-[rgba(7,5,20,0.1)] to-[#070514] to-100% font-manrope text-white gap-10 justify-between",
-        "border-b-[1px] border-solid border-[#242438]",
-        className
-      )}
+    className={classNames(
+      "flex w-full px-72 py-6 bg-gradient-to-b from-[#070514] to-transparent font-manrope text-white gap-10 justify-between",
+      "border-b-[1px] border-solid border-b-[#242438] font-manrope z-10",
+      className
+    )}
     >
       {/* Left Block */}
       <div className="flex gap-16 justify-between items-center">

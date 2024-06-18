@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Tick, { Props as TickProps } from "@/components/1.atoms/Tick/Tick";
+export type { TickProps };
 import { FaGripLinesVertical } from "react-icons/fa";
 import GradientFadeEffect from "@/components/2.molecules/TickHor/parts/GradientFadeEffect/GradientFadeEffect";
 import type { EIProps } from "@/types";
