@@ -1,10 +1,8 @@
 import React from "react";
-import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import QrCode from "@/app/(misc)/templates/certificate/parts/QrCode";
 import Signature from "@/app/(misc)/templates/certificate/parts/Signature";
 import FooterData from "@/app/(misc)/templates/certificate/parts/FooterData";
-import Image from "next/image";
 
 interface Props {}
 
@@ -26,7 +24,7 @@ function index({}: Props) {
             alt="bitcoin blockchain"
           />
         </div>
-        <h1 className="font-extrabold text-[32px] text-center leading-9">
+        <h1 className="font-extrabold text-[32px] text-center leading-[3.5rem]">
           Blockchain Engraving Certificate
         </h1>
       </div>
