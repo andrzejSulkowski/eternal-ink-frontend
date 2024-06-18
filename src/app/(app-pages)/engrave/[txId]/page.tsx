@@ -23,26 +23,23 @@ function EngravePage({}: Props) {
   const router = useRouter();
   const { window, runFn } = useWindow();
 
-  const maybeAddress = path.split("/").at(2);
-  if (!maybeAddress) {
-    showBanner("Address not found");
-    return new Error("Address not found");
-  }
-  const address = maybeAddress!;
-
-  const { eventSource, startListening } = useSseStream(address, {
-    onCompleted: () => {
-      router.push("/engrave/success/");
-    },
-    onError: () => {},
-  });
-
   const displayFees = useMemo(() => {
     if (engravingData?.fees) {
       return engravingData?.fees.toString() + " BTC";
     }
     return "- BTC";
   }, [engravingData?.fees]);
+
+  const address = path.split("/").at(2);
+  const { startListening } = useSseStream(address ?? "", {
+    onCompleted: () => router.push("/engrave/success/"),
+    onError: () => {},
+  });
+
+  if (!address) {
+    showBanner("Address not found");
+    return new Error("Address not found");
+  }
 
   function cancel() {
     showLoadingScreen("Cancelling Engraving...", 1, 2);

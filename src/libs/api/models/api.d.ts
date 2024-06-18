@@ -11,9 +11,9 @@ type ApiResponse<T> = {
 
 interface ApiCall<Request, Response> {
   // EIApiCall can be of type T or ApiError
-  public async call: (p: Request) => Promise<ApiResponse<Response>>;
-  private async mockCall: (p: Request) => Promise<ApiResponse<Response>>;
-  private async backendCall: (p: Request) => Promise<ApiResponse<Response>>; 
+  call: (p: Request) => Promise<ApiResponse<Response>>;
+  mockCall: (p: Request) => Promise<ApiResponse<Response>>;
+  backendCall: (p: Request) => Promise<ApiResponse<Response>>; 
 }
 
 /// Post Request Engraving

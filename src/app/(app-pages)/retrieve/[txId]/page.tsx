@@ -11,6 +11,8 @@ import Input from "@/components/1.atoms/Input/Input";
 import { usePathname } from "next/navigation";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
+import PasswordInput from "./(client)/PasswordInput";
+import { decrypt as $decrypt } from "@/utils/crypto";
 
 function RetrievePage() {
   const path = usePathname();
@@ -18,6 +20,7 @@ function RetrievePage() {
   const [status, setStatus] = useState<TxStatus | undefined>();
   const [message, setMessage] = useState<string | undefined>();
   const [isProtected, setIsProtected] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
 
   const { showBanner } = useBanner();
   if (!txId) {
@@ -27,17 +30,33 @@ function RetrievePage() {
 
   const retrieve = async () => {
     const response = await api.retrieveTx({ tx_id: txId });
-    console.log("response: ", response.data);
     if (response.ok) {
       setStatus(response.data?.status);
       setMessage(response.data?.message);
       if (response.data?.is_encrypted) setIsProtected(true);
     } else {
-      console.log("error: ", response.error);
       if (response.status_code === 404) {
         showBanner("Transaction not found");
       } else {
         showBanner("Error retrieving message");
+      }
+    }
+  };
+
+  const decrypt = () => {
+    if (message) {
+      try {
+        const decrypted = $decrypt(message, password);
+        if (decrypted) {
+          setMessage(decrypted);
+          showBanner("Decrypted Successfully", { danger: false });
+          setIsProtected(false);
+          setPassword("");
+        } else {
+          showBanner("Incorrect password");
+        }
+      } catch (e) {
+        showBanner("Incorrect Password");
       }
     }
   };
@@ -70,9 +89,19 @@ function RetrievePage() {
               value={txId}
               onChange={(e) => setTxId(e.target.value)}
             />
+            {isProtected && (
+              <div>
+                <PasswordInput
+                  onChange={(e) => setPassword(e.currentTarget.value)}
+                  password={password}
+                  className={`mt-8`}
+                />
+              </div>
+            )}
+
             <Button
               className={`!w-1/3 mt-8 !justify-center`}
-              onClick={retrieve}
+              onClick={isProtected ? decrypt : retrieve}
             >
               {isProtected ? "Decrypt" : "Retrieve"}
               <ThreeStars className="max-w-5 ml-2" />
@@ -84,7 +113,9 @@ function RetrievePage() {
           </div>
           {/* Col3 */}
           <div className="w-full max-w-full flex flex-col min-w-0">
-            <span className="font-bold text-sm block mb-4 w-fit">Your Result</span>
+            <span className="font-bold text-sm block mb-4 w-fit">
+              Your Result
+            </span>
 
             {/* <div className="flex">
               <span className="break-words max-w-full">

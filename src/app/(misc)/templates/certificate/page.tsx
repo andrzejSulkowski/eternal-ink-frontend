@@ -20,9 +20,7 @@ function index({}: Props) {
         <div className="flex items-center justify-center bg-[#F7931A]/20 px-3 py-1 gap-1 w-fit rounded-3xl font-semibold text-xs">
           Bitcoin Blockchain
           {/* W: 132 H: 132 */}
-          <Image
-            width={132}
-            height={132}
+          <img
             className="aspect-square h-[2ch]"
             src="/certificate/assets/btc.png"
             alt="bitcoin blockchain"
@@ -55,35 +53,27 @@ function index({}: Props) {
 
       {/* Background */}
       <div>
-        <Image
-          width={100}
-          height={100}
+        <img
           className="absolute top-0 left-0"
           src="/certificate/assets/planet.png"
           alt="planet"
         />
         {/* Ball Right */}
-        <Image
-          width={100}
-          height={100}
+        <img
           className="absolute top-[-80px] right-[-340px]"
           src="/certificate/assets/ball_1.png"
           alt="ball"
         />
 
         {/* Ball Left Top */}
-        <Image
-          width={100}
-          height={100}
+        <img
           className="absolute top-0 left-[-50%] blur-3xl w-2/3"
           src="/certificate/assets/ball.png"
           alt="ball"
         />
 
         {/* Ball Left Bottom */}
-        <Image
-          width={100}
-          height={100}
+        <img
           alt="ball"
           className="absolute bottom-[8%] left-[-10.5%] w-[100px] blur-[2px]"
           src="/certificate/assets/ball.png"
