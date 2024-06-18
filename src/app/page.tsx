@@ -1,8 +1,8 @@
-import Hero from "@/app/(app-pages)/home/(sections)/Hero";
-import RootLayout from "@/app/layout";
+import Hero from "@/app/(app-pages)/(sections)/Hero";
 import { classNames } from "@/utils/className";
 import { Metadata } from "next";
-import LoadedTicks from './(client)/LoadedTicks';
+import LoadedTicks from './(app-pages)/(client)/LoadedTicks';
+import HowItWorks from './(app-pages)/(sections)/HowItWorks';
 
 interface Props {}
 
@@ -16,6 +16,7 @@ export default function Page({ }: Props) {
     <div className={classNames("")}>
       <LoadedTicks />
       <Hero />
+      <HowItWorks/>
     </div>
   );
 }

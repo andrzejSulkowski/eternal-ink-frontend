@@ -1,9 +1,10 @@
+'use client';
 import React, { useMemo, useState } from "react";
 import EIIcon from "@/components/1.atoms/EIIcon/EIIcon";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 
-interface Props extends EIProps {
+export interface Props extends EIProps {
   icon: React.JSX.Element;
   title: string;
   description: string;
@@ -55,11 +56,11 @@ function SelectionCard({
       <div
         className={classNames("text-sm text-ei-primary-faded mt-8", className)}
       >
-        <span className="block font-extrabold text-white text-sm mb-3">
+        <span className="block font-extrabold text-white text-xl mb-3">
           {" "}
           {title}{" "}
         </span>
-        <span className="block"> {description} </span>
+        <span className="block text-sm"> {description} </span>
         {options && options.length > 0 && <div className="mt-6" />}
         <CardOptionsTitles />
         <span>{getSelectedOptionDescription}</span>

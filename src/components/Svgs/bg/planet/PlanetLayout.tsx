@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import Noise from "../parts/Noise";
@@ -8,7 +8,7 @@ import Planet from "../parts/Planet";
 
 interface Props extends EIProps {}
 
-function PlanetLayout({ className }: Props) {
+function PlanetLayout({ className, children }: PropsWithChildren<Props>) {
   return (
     <div className={classNames("w-svw h-svh relative top-0 overflow-hidden", className)}>
       <div className="w-full h-full">
@@ -17,6 +17,7 @@ function PlanetLayout({ className }: Props) {
         <TypeTwo className="absolute top-0 left-0" />
         <Planet className="absolute top-[75%] z-10 rounded-full left-1/2 -translate-x-1/2" />
       </div>
+      { children }
     </div>
   );
 }
