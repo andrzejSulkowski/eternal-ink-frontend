@@ -253,7 +253,8 @@ id: string;
     "status": ITxStatus,
     "message": string,
     "tx_id": string | null,
-    "cert_id": string | null
+    "cert_id": string | null,
+    "is_encrypted": boolean
 }
 ```
 
