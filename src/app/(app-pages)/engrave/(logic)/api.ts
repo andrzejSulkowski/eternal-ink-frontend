@@ -1,9 +1,7 @@
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
-import bcryptjs from "bcryptjs";
 import { ToggleKeys } from "../(client)/Body";
-
-const SALT = 10;
+import { encrypt } from "@/utils/crypto";
 
 const startEngraving = async (
   message: string,
@@ -12,7 +10,6 @@ const startEngraving = async (
   toggleKey: ToggleKeys,
   { showBanner }: ReturnType<typeof useBanner>
 ) => {
-
   if (message.length === 0 && file === null) {
     showBanner("Please enter a message or upload a file");
     return;
@@ -20,7 +17,13 @@ const startEngraving = async (
 
   let passwordHashed: string | null = null;
   try {
-    passwordHashed = await hashPassword(password, toggleKey);
+    if (
+      toggleKey === "encrypt" &&
+      (password === null || password.length === 0)
+    ) {
+    } else if (toggleKey === "encrypt" && password && password.length > 0) {
+      passwordHashed = encrypt(message, password);
+    }
   } catch (e) {
     const error = e as any as Error;
     showBanner(error.message);
@@ -41,16 +44,6 @@ const startEngraving = async (
     const error = response.error!;
     showBanner(`Error: ${error.type} - type: ${error.detail}`);
     return response;
-  }
-};
-
-const hashPassword = async (password: string | null, toggleKey: ToggleKeys) => {
-  if (password === null) {
-    return null;
-  } else if (toggleKey === "encrypt" && (password === null || password.length === 0)) {
-    throw new Error("Please enter a password");
-  } else {
-    return await bcryptjs.hash(password, SALT);
   }
 };
 

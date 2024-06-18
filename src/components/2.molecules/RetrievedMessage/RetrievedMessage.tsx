@@ -40,7 +40,7 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
   return (
     <div
       className={classNames(
-        "bg-ei-primary-light/10 px-4 pt-5 pb-10 rounded-2xl border-solid border border-ei-primary-dark font-manrope flex flex-col gap-4 text-sm min-h-40",
+        "bg-ei-primary-light/10 px-4 pt-5 pb-10 rounded-2xl border-solid border border-ei-primary-dark font-manrope flex flex-col gap-4 text-sm min-h-40 max-w-full",
         className
       )}
     >
@@ -62,7 +62,7 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
           {/* Body */}
           <div className="flex flex-col pt-8 border-t-ei-primary-dark border border-transparent gap-3">
             <span className="text-ei-primary-faded">{bodyMessage}</span>
-            <span className="text-white font-extrabold text-xl">{message}</span>
+            <span className="text-white font-extrabold text-xl break-words whitespace-pre-wrap">{message}</span>
           </div>
         </>
       ): null}

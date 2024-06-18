@@ -8,13 +8,39 @@ import RetrievedMessage from "@/components/2.molecules/RetrievedMessage/Retrieve
 import { useState } from "react";
 import { TxStatus } from "@/models";
 import Input from "@/components/1.atoms/Input/Input";
+import { usePathname } from "next/navigation";
+import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
+import api from "@/libs/api/transaction";
 
 function RetrievePage() {
+  const path = usePathname();
+  const [txId, setTxId] = useState<string | undefined>(path.split("/").at(2));
   const [status, setStatus] = useState<TxStatus | undefined>();
   const [message, setMessage] = useState<string | undefined>();
-  const [txId, setTxId] = useState<string | undefined>();
+  const [isProtected, setIsProtected] = useState<boolean>(false);
 
-  function retrieve() {}
+  const { showBanner } = useBanner();
+  if (!txId) {
+    showBanner("TxId not found");
+    return new Error("TxId not found");
+  }
+
+  const retrieve = async () => {
+    const response = await api.retrieveTx({ tx_id: txId });
+    console.log("response: ", response.data);
+    if (response.ok) {
+      setStatus(response.data?.status);
+      setMessage(response.data?.message);
+      if (response.data?.is_encrypted) setIsProtected(true);
+    } else {
+      console.log("error: ", response.error);
+      if (response.status_code === 404) {
+        showBanner("Transaction not found");
+      } else {
+        showBanner("Error retrieving message");
+      }
+    }
+  };
 
   return (
     <>
@@ -32,9 +58,9 @@ function RetrievePage() {
             tincidunt volutpat sem amet. Penatibus tempus sed.
           </span>
         </div>
-        <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-8 font-manrope">
+        <div className="grid grid-cols-[1fr_auto_1fr] gap-8 font-manrope">
           {/* Cols1 */}
-          <div data-col1 className="w-full">
+          <div data-col1 className="w-full min-w-full">
             <span className="font-bold text-sm block mb-4">
               Enter Transaction ID
             </span>
@@ -44,8 +70,11 @@ function RetrievePage() {
               value={txId}
               onChange={(e) => setTxId(e.target.value)}
             />
-            <Button className={`!w-1/3 mt-8 !justify-center`} onClick={retrieve}>
-              Retrieve
+            <Button
+              className={`!w-1/3 mt-8 !justify-center`}
+              onClick={retrieve}
+            >
+              {isProtected ? "Decrypt" : "Retrieve"}
               <ThreeStars className="max-w-5 ml-2" />
             </Button>
           </div>
@@ -54,8 +83,15 @@ function RetrievePage() {
             <div className="font-bold text-sm block"> = </div>
           </div>
           {/* Col3 */}
-          <div className="w-full max-w-full">
-            <span className="font-bold text-sm block mb-4">Your Result</span>
+          <div className="w-full max-w-full flex flex-col min-w-0">
+            <span className="font-bold text-sm block mb-4 w-fit">Your Result</span>
+
+            {/* <div className="flex">
+              <span className="break-words max-w-full">
+                sdfasdfasdflasdfjslfdjlsdfjsljdflsdjflsjdfslfdsdkfjsldkfjsldkjfskdljfslkdjfskldjfslkdfjsldkfjsldkjfslkdfjsldkfjslkdjsldfjskdjflsdjkflskdjflskdskdlfjskdfjl
+              </span>
+            </div> */}
+
             <RetrievedMessage status={status} message={message} txId={txId} />
           </div>
         </div>

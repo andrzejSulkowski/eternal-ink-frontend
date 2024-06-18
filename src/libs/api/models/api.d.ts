@@ -46,9 +46,21 @@ interface GetTxIdFromAddr {
 interface GetTxIdFromAddrResponse {
   tx_id: string
 }
+/// Retrieve Tx
+interface GetTxInfo {
+  tx_id: string
+}
+interface GetTxInfoResponse {
+  status: TxStatus,
+  message: string,
+  tx_id: string | null,
+  cert_id: string | null,
+  is_encrypted: boolean
+}
 
 export type { 
   PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, 
   GetTxIdFromAddr, GetTxIdFromAddrResponse,
+  GetTxInfo, GetTxInfoResponse,
   ApiCall, ApiResponse 
 };

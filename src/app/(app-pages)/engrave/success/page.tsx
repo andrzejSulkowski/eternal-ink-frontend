@@ -10,6 +10,7 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import Button from "@/components/1.atoms/Button/Button";
 import ThreeStars from "@/components/Svgs/ThreeStars";
 import { trim } from "@/libs/transaction";
+import { useRouter } from "next/navigation";
 
 interface Props {}
 
@@ -35,7 +36,9 @@ function EngravePage({}: Props) {
     }
   }
 
-  function retrieve() {}
+  const router = useRouter();
+  const retrieve = () => router.push("/retrieve/" + engravingData?.txId);
+  
 
   useEffect(() => {
     initPage();
