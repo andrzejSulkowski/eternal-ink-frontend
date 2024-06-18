@@ -237,6 +237,30 @@ id: string;
 </details>
 
 <details>
+  <summary><h3>Tx Info</h3></summary>
+
+`[get] api/get-tx/:id`
+**Path**
+
+```ts
+id: string;
+```
+
+**Response**
+
+```ts
+{
+    "status": ITxStatus,
+    "message": string,
+    "tx_id": string | null,
+    "cert_id": string | null
+}
+```
+
+</details>
+
+
+<details>
   <summary><h2>Error Types</h2></summary>
 
 ```ts
