@@ -9,9 +9,20 @@ export interface Props extends EIProps {
   children?: React.ReactNode;
 }
 
-function Card({ title, highlightedTitle, description, children, className }: Props) {
+function Card({
+  title,
+  highlightedTitle,
+  description,
+  children,
+  className,
+}: Props) {
   return (
-    <div className={classNames("w-full bg-gradient-to-br from-black/20 to-ei-twilight-blue text-white rounded-3xl grid grid-cols-12", className)}>
+    <div
+      className={classNames(
+        "w-full bg-gradient-to-br from-black/20 to-ei-twilight-blue text-white rounded-3xl grid grid-cols-12",
+        className
+      )}
+    >
       <div className="col-span-5 w-full h-full relative max-w-full max-h-full">
         {children}
       </div>
@@ -23,6 +34,7 @@ function Card({ title, highlightedTitle, description, children, className }: Pro
         <div className="font-extrabold text-5xl text-ei-primary">
           {highlightedTitle}
         </div>
+
         <span className="text-sm mt-5 text-ei-primary-faded">
           {description}
         </span>
