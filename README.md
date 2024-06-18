@@ -179,7 +179,7 @@ type Response = {
 
 ```ts
 {
-    after_uuid: string,
+    after_uuid: string | undefined,
     items: number
 }
 ```
