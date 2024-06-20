@@ -127,7 +127,7 @@ function HowItWorks() {
         }
     }
   return (
-    <div className="font-manrope">
+    <div className="font-manrope py-24">
       <Header onNext={goToNextCard} onPrev={goToPrevCard}/>
       <SelectionCardList setRef={(r) => setRef(r)} />
     </div>

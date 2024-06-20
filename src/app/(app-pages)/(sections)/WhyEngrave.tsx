@@ -64,7 +64,7 @@ function Ellipse2({ className }: EIProps) {
       className={classNames("w-full h-full max-w-full max-h-full", className)}
     >
       <svg viewBox="0 0 865 789" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g opacity="0.6" filter="url(#filter0_f_56_626)">
+        <g opacity="1" filter="url(#filter0_f_56_626)">
           <path
             d="M266.924 543.485C141.786 398.703 66.235 209.752 150.816 136.647C235.398 63.5414 556.788 179.209 681.925 323.991C807.063 468.773 737.536 559.918 652.955 633.023C568.373 706.128 392.062 688.267 266.924 543.485Z"
             fill="url(#paint0_linear_56_626)"
@@ -158,12 +158,10 @@ function BgViolet1({ className }: { className?: string }) {
 
 function BgViolet2({ className }: { className?: string }) {
   return (
-    <div className={classNames("w-full h-auto max-w-full max-h-full", className)}>
-      <svg
-        viewBox="0 0 886 460"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <div
+      className={classNames("w-full h-auto max-w-full max-h-full", className)}
+    >
+      <svg viewBox="0 0 886 460" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M412.787 445.618C139.187 377.618 23.7866 160.952 0.28656 61.1182C0.28656 -71.8818 291.287 36.1182 412.787 157.618C534.287 279.118 619.287 61.1182 816.787 134.618C1014.29 208.118 754.787 530.618 412.787 445.618Z"
           fill="url(#paint0_linear_45_313)"
@@ -186,9 +184,39 @@ function BgViolet2({ className }: { className?: string }) {
   );
 }
 
+function BgBlue1({ className }: { className?: string }) {
+  return (
+    <div className={classNames("max-w-full max-h-full", className)}>
+      <svg
+        viewBox="0 0 599 1271"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M172.796 606.567C299.196 382.967 153.796 257.067 65.2956 222.067C155.796 -263.933 876.296 185.067 833.796 281.567C791.296 378.067 769.296 708.067 811.296 829.567C853.296 951.067 655.796 1417.07 251.796 1225.07C-152.204 1033.07 14.7956 886.067 172.796 606.567Z"
+          fill="url(#paint0_linear_45_312)"
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear_45_312"
+            x1="417.944"
+            y1="-0.000244141"
+            x2="417.944"
+            y2="1270.88"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="#364AFA" />
+            <stop offset="1" stop-color="#202C94" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
 function WhyEngrave() {
   return (
-    <div className="px-60 font-manrope py-48">
+    <div className="px-60 font-manrope">
       <h1 className="font-extrabold text-6xl w-full text-center mt-54">
         Why Engrave?
       </h1>
@@ -230,7 +258,7 @@ function WhyEngrave() {
             />
             <E className="absolute top-0 left-0 h-full  -z-10" />
             <Ellipse1 className="absolute top-0 right-[-15%] -z-10" />
-            <Ellipse2 className="absolute bottom-[-20%] left-[-20%] -z-10" />
+            <Ellipse2 className="absolute top-[-10%] left-[-20%] -z-10 blur-md" />
           </div>
         </div>
       </div>
@@ -247,7 +275,7 @@ function WhyEngrave() {
             <Ellipse1 className="absolute top-0 right-[-15%] -z-10" />
             <Ellipse2 className="absolute bottom-[-20%] left-[-20%] -z-10" />
             <BgBlack1 className="absolute bottom-[-40%] left-[-10%] -z-10 blur-3xl" />
-            <BgViolet1 className="absolute top-[30%] left-[-50%] -z-20 !w-2/3 blur-3xl" />
+            <BgViolet1 className="absolute top-[30%] left-[-50%] -z-20 !w-2/3 blur-3xl opacity-60" />
           </div>
         </div>
 
@@ -283,8 +311,10 @@ function WhyEngrave() {
             security—wrapped in the promise of eternity.
           </p>
           {/* BG */}
-          <BgViolet2 className="absolute bottom-[-30%] blur-[126px] -z-10 "/>
+          <BgViolet2 className="absolute bottom-[-5%] blur-[146px] -z-10" />
+          <BgBlue1 className="absolute top-[40%] right-[-40%] -z-20 !w-2/3 blur-3xl opacity-40" />
         </div>
+
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ function ContactMeForm({
   return (
     <div
       className={classNames(
-        "font-manrope bg-[#09090A] rounded-[1.25rem] flex flex-col justify-center items-center gap-8 py-10 px-5",
+        "font-manrope bg-[#09090A] rounded-[1.25rem] flex flex-col justify-center items-center gap-8 py-10 px-5 border border-solid border-[#242438]",
         className
       )}
     >
