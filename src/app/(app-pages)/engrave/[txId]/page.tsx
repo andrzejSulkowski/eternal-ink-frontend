@@ -30,8 +30,8 @@ function EngravePage({}: Props) {
     return "- BTC";
   }, [engravingData?.fees]);
 
-  const address = path.split("/").at(2);
-  const { startListening } = useSseStream(address ?? "", {
+  const address = path.split("/")[2];
+  const { startListening } = useSseStream(address, {
     onCompleted: () => router.push("/engrave/success/"),
     onError: () => {},
   });

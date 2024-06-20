@@ -89,7 +89,7 @@ export const useSseStream = (
     return () => {
       close();
     };
-  });
+  }, []);
 
   return {
     eventSource,

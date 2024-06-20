@@ -9,39 +9,33 @@ interface Props extends EIProps {
   title: string;
   subtitle: string;
 
-  name: string;
   namePlaceholder: string;
-  onNameChange?: (name: ChangeEvent<HTMLInputElement>) => void;
-
-  email: string;
   emailPlaceholder: string;
-  onEmailChange?: (email: ChangeEvent<HTMLInputElement>) => void;
-
-  message: string;
   messagePlaceholder: string;
-  onMessageChange?: (message: ChangeEvent<HTMLTextAreaElement>) => void;
 
-  onSubmit: () => void;
+  onSubmit: ({
+    name,
+    email,
+    message,
+  }: {
+    name: string;
+    email: string;
+    message: string;
+  }) => void;
 }
 
 function ContactMeForm({
   title,
   subtitle,
-  name,
   namePlaceholder,
-  onNameChange,
-  email,
   emailPlaceholder,
-  onEmailChange,
-  message,
   messagePlaceholder,
-  onMessageChange,
   className,
-  onSubmit
+  onSubmit,
 }: Props) {
-  const [$name, setName] = React.useState("");
-  const [$email, setEmail] = React.useState("");
-  const [$message, setMessage] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   return (
     <div
@@ -63,22 +57,33 @@ function ContactMeForm({
           <Input
             value={name}
             placeholder={namePlaceholder}
-            onChange={onNameChange}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
           />
           <Input
             value={email}
             placeholder={emailPlaceholder}
-            onChange={onNameChange}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
           />
           <Textarea
             value={message}
             placeholder={messagePlaceholder}
-            onChange={onMessageChange}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+              setMessage(e.target.value)
+            }
             className="h-36"
           />
         </div>
 
-        <Button onClick={onSubmit} className="w-min text-nowrap">Send My Message</Button>
+        <Button
+          onClick={() => onSubmit({ name, email, message })}
+          className="w-min text-nowrap"
+        >
+          Send My Message
+        </Button>
       </form>
     </div>
   );

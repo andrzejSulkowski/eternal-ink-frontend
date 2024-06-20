@@ -6,9 +6,10 @@ import { useState } from "react";
 interface Props extends EIProps {
   password: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autofocus?: boolean;
 }
 
-function PasswordInput({ className, password, onChange }: Props) {
+function PasswordInput({ className, password, onChange, autofocus = false }: Props) {
   return (
     <div className={classNames(className)}>
       <div className="font-manrope">
@@ -22,6 +23,7 @@ function PasswordInput({ className, password, onChange }: Props) {
           <span className="font-bold text-sm text-white">Password:</span>
         </div>
         <Input
+        autofocus={autofocus}
           placeholder="Password"
           value={password}
           onChange={onChange}

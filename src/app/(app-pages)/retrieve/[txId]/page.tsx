@@ -5,7 +5,7 @@ import ThreeStars from "@/components/Svgs/ThreeStars";
 import Background from "@/components/Svgs/bg/1/Background";
 import { classNames } from "@/utils/className";
 import RetrievedMessage from "@/components/2.molecules/RetrievedMessage/RetrievedMessage";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { TxStatus } from "@/models";
 import Input from "@/components/1.atoms/Input/Input";
 import { usePathname } from "next/navigation";
@@ -13,14 +13,15 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
 import PasswordInput from "./(client)/PasswordInput";
 import { decrypt as $decrypt } from "@/utils/crypto";
+import useState from "react-usestateref";
 
 function RetrievePage() {
   const path = usePathname();
   const [txId, setTxId] = useState<string | undefined>(path.split("/").at(2));
   const [status, setStatus] = useState<TxStatus | undefined>();
-  const [message, setMessage] = useState<string | undefined>();
-  const [isProtected, setIsProtected] = useState<boolean>(false);
-  const [password, setPassword] = useState<string>("");
+  const [message, setMessage, messageRef] = useState<string | undefined>();
+  const [isProtected, setIsProtected, isProtectedRef] = useState<boolean>(false);
+  const [password, setPassword, passwordRef] = useState<string>("");
 
   const { showBanner } = useBanner();
   if (!txId) {
@@ -44,9 +45,9 @@ function RetrievePage() {
   };
 
   const decrypt = () => {
-    if (message) {
+    if (messageRef.current) {
       try {
-        const decrypted = $decrypt(message, password);
+        const decrypted = $decrypt(messageRef.current, passwordRef.current);
         if (decrypted) {
           setMessage(decrypted);
           showBanner("Decrypted Successfully", { danger: false });
@@ -60,6 +61,22 @@ function RetrievePage() {
       }
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        if (isProtectedRef.current) {
+          decrypt();
+        } else {
+          retrieve();
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <>
@@ -92,6 +109,7 @@ function RetrievePage() {
             {isProtected && (
               <div>
                 <PasswordInput
+                  autofocus={true}
                   onChange={(e) => setPassword(e.currentTarget.value)}
                   password={password}
                   className={`mt-8`}
@@ -116,12 +134,6 @@ function RetrievePage() {
             <span className="font-bold text-sm block mb-4 w-fit">
               Your Result
             </span>
-
-            {/* <div className="flex">
-              <span className="break-words max-w-full">
-                sdfasdfasdflasdfjslfdjlsdfjsljdflsdjflsjdfslfdsdkfjsldkfjsldkjfskdljfslkdjfskldjfslkdfjsldkfjsldkjfslkdfjsldkfjslkdjsldfjskdjflsdjkflskdjflskdskdlfjskdfjl
-              </span>
-            </div> */}
 
             <RetrievedMessage status={status} message={message} txId={txId} />
           </div>

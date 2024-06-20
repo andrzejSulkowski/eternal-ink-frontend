@@ -38,11 +38,23 @@ function EngravePage({}: Props) {
 
   const router = useRouter();
   const retrieve = () => router.push("/retrieve/" + engravingData?.txId);
-  
 
   useEffect(() => {
     initPage();
-  }, []);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      console.log("handling keydown - key: ", event);
+      if (event.key === "Enter") {
+        retrieve();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [engravingData]);
 
   return (
     <>

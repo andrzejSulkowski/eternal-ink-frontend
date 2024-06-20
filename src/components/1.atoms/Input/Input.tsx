@@ -10,6 +10,7 @@ interface Props extends EIProps {
   onChange?: (value: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;
   type?: HTMLInputElement["type"];
+  autofocus?: boolean;
 }
 
 const Input: React.FC<Props> = ({
@@ -20,9 +21,11 @@ const Input: React.FC<Props> = ({
   isDisabled = false,
   className,
   type,
+  autofocus = false,
 }: Props) => {
   return (
     <input
+      autoFocus={autofocus}
       className={classNames(
         "font-manrope border w-full bg-ei-primary-light/10 border-1 border-ei-primary-dark rounded-2xl px-4 py-4",
         "box-border outline-none text-white focus:border-ei-primary focus:placeholder-white placeholder:font-normal",

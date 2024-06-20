@@ -22,7 +22,7 @@ function CardSection() {
     ]
 
   return (
-    <div className="my-48 px-80">
+    <div className="my-48 px-60">
         <CardsCarousel
         cards={cards}
         />
