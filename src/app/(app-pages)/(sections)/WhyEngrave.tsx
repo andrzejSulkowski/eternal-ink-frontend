@@ -108,11 +108,88 @@ function Ellipse2({ className }: EIProps) {
     </div>
   );
 }
+function BgBlack1({ className }: { className?: string }) {
+  return (
+    <div
+      className={classNames("w-full h-auto max-w-full max-h-full", className)}
+    >
+      <svg viewBox="0 0 664 377" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M16.7866 207.272C-72.0134 389.672 219.12 388.606 375.787 365.272C401.12 375.939 486.287 355.172 624.287 186.772C796.787 -23.7276 349.787 -49.7276 305.787 75.7724C261.787 201.272 127.787 -20.7276 16.7866 207.272Z"
+          fill="black"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function BgViolet1({ className }: { className?: string }) {
+  return (
+    <div
+      className={classNames("w-full h-auto max-w-full max-h-full", className)}
+    >
+      <svg
+        className="max-w-full max-h-full"
+        viewBox="0 0 586 847"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M538.287 764.5C637.487 606.5 558.953 340.667 507.287 227.5C168.287 -309.5 -176.213 264.5 -97.2134 346C-18.2134 427.5 162.787 448 123.287 603.5C83.7865 759 414.287 962 538.287 764.5Z"
+          fill="url(#paint0_linear_45_314)"
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear_45_314"
+            x1="491.645"
+            y1="348.689"
+            x2="361.307"
+            y2="1186.46"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#5B2A8B" />
+            <stop offset="0.5" stopColor="#180B25" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function BgViolet2({ className }: { className?: string }) {
+  return (
+    <div className={classNames("w-full h-auto max-w-full max-h-full", className)}>
+      <svg
+        viewBox="0 0 886 460"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M412.787 445.618C139.187 377.618 23.7866 160.952 0.28656 61.1182C0.28656 -71.8818 291.287 36.1182 412.787 157.618C534.287 279.118 619.287 61.1182 816.787 134.618C1014.29 208.118 754.787 530.618 412.787 445.618Z"
+          fill="url(#paint0_linear_45_313)"
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear_45_313"
+            x1="456.502"
+            y1="448.493"
+            x2="464.927"
+            y2="-46.7719"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="#F019CE" />
+            <stop offset="1" stop-color="#8A0E76" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
 
 function WhyEngrave() {
   return (
-    <div className="px-60 font-manrope">
-      <h1 className="font-extrabold text-6xl w-full text-center mt-24">
+    <div className="px-60 font-manrope py-48">
+      <h1 className="font-extrabold text-6xl w-full text-center mt-54">
         Why Engrave?
       </h1>
       {/* First Section */}
@@ -165,13 +242,16 @@ function WhyEngrave() {
               className="w-4/5 aspect-square z-10"
               src="/storybook_resources/dwarf4.png"
             />
+            {/* BG */}
             <E className="absolute top-0 left-0 h-full  -z-10" />
             <Ellipse1 className="absolute top-0 right-[-15%] -z-10" />
             <Ellipse2 className="absolute bottom-[-20%] left-[-20%] -z-10" />
+            <BgBlack1 className="absolute bottom-[-40%] left-[-10%] -z-10 blur-3xl" />
+            <BgViolet1 className="absolute top-[30%] left-[-50%] -z-20 !w-2/3 blur-3xl" />
           </div>
         </div>
 
-        <div>
+        <div className="relative">
           <h2 className="font-extrabold text-4xl">
             Proof of Existence:
             <span className="block">The Practical Magic of File Hashing</span>
@@ -202,6 +282,8 @@ function WhyEngrave() {
             flow of blockchain. It's about joy, celebration, and
             security—wrapped in the promise of eternity.
           </p>
+          {/* BG */}
+          <BgViolet2 className="absolute bottom-[-30%] blur-[126px] -z-10 "/>
         </div>
       </div>
     </div>
