@@ -2,6 +2,7 @@ import React from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 
+
 interface Props extends EIProps {}
 
 function TypeTwo({ className }: Props) {

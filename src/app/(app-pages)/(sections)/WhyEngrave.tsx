@@ -1,3 +1,4 @@
+import Ball from "@/components/1.atoms/Ball/Ball";
 import BulletPoint from "@/components/2.molecules/BulletPoint/BulletPoint";
 import E from "@/components/Svgs/E";
 import { EIProps } from "@/types";
@@ -250,7 +251,10 @@ function WhyEngrave() {
             offering a peek into what mattered to us for generations to come.
           </p>
         </div>
-        <div className="w-full h-full flex justify-center items-center">
+        <div className="w-full h-full flex justify-center items-center relative">
+
+          <Ball className="absolute h-[150%] !max-w-max !max-h-max top-[-42%] right-[-95%] blur-3xl -z-10"/>
+
           <div className="w-4/5 aspect-square relative">
             <img
               className="w-4/5 aspect-square z-10"
@@ -278,7 +282,6 @@ function WhyEngrave() {
             <BgViolet1 className="absolute top-[30%] left-[-50%] -z-20 !w-2/3 blur-3xl opacity-60" />
           </div>
         </div>
-
         <div className="relative">
           <h2 className="font-extrabold text-4xl">
             Proof of Existence:

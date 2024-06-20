@@ -11,9 +11,6 @@ const meta = {
     layout: "centered",
   },
   argTypes: {
-    name: { control: 'text'},
-    email: { control: 'text'},
-    message: { control: 'text'},
   },
   args: {},
 } satisfies Meta<typeof ContactMeForm>;
@@ -43,15 +40,9 @@ export const Default: Story = {
   args: {
     title: "Eager to hear from you!",
     subtitle: "Fill out the form with any inquiries or thoughts",
-    name: "",
     namePlaceholder: "Name",
-    onNameChange: fn(),
-    email: "",
     emailPlaceholder: "Email",
-    onEmailChange: fn(),
-    message: "",
     messagePlaceholder: "Message",
-    onMessageChange: fn(),
     onSubmit: () => console.log("Submit btn clicked!"),
     className: "w-[580px]",
   },

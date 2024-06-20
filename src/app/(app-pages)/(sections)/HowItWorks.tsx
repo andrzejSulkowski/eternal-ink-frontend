@@ -11,6 +11,7 @@ import ChevronLeft from "@/components/1.atoms/ChevronLeft/ChevronLeft";
 import ChevronRight from "@/components/1.atoms/ChevronRight/ChevronRight";
 import StarCheck from "@/components/Svgs/StarCheck";
 import { MutableRefObject, RefObject, useEffect, useRef } from "react";
+import Ball from "@/components/1.atoms/Ball/Ball";
 
 const selectionCards: SelectionCardProps[] = [
   {
@@ -127,9 +128,10 @@ function HowItWorks() {
         }
     }
   return (
-    <div className="font-manrope py-24">
+    <div className="font-manrope py-24 relative">
       <Header onNext={goToNextCard} onPrev={goToPrevCard}/>
       <SelectionCardList setRef={(r) => setRef(r)} />
+      <Ball className="absolute h-1/3 top-[-5%] right-[-5%] blur-sm -z-10"/>
     </div>
   );
 }

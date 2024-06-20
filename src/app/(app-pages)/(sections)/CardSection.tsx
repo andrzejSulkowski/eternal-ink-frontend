@@ -1,3 +1,4 @@
+import Ball from "@/components/1.atoms/Ball/Ball"
 import CardsCarousel, {CardProps} from "@/components/3.organisms/CardsCarousel/CardsCarousel"
 
 function CardSection() {
@@ -22,10 +23,12 @@ function CardSection() {
     ]
 
   return (
-    <div className="my-48 px-60">
+    <div className="my-48 px-60 relative">
         <CardsCarousel
         cards={cards}
         />
+        <Ball className="absolute left-[7%] top-[35%] z-20 blur-sm"/>
+        <Ball className="absolute right-[10%] top-[-50%] -z-20 blur-lg opacity-60"/>
     </div>
   )
 }
