@@ -1,8 +1,8 @@
 import Hero from "./(sections)/Hero";
 import { classNames } from "@/utils/className";
 import { Metadata } from "next";
-import LoadedTicks from "./(client)/LoadedTicks";
-import HowItWorks from "./(sections)/HowItWorks";
+import LoadedTicks from "./(cmp)/LoadedTicks";
+import HowItWorks from "./(sections)/(HowItWorks)/HowItWorks";
 import CardSection from "./(sections)/CardSection";
 import WhyEngrave from "./(sections)/WhyEngrave";
 import ContactSection from "@/app/(app-pages)/home/(sections)/ContactSection";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function Page({}: Props) {
   return (
     <div className={classNames("")}>
-      <LoadedTicks />
+      <LoadedTicks className=""/>
       <Hero />
       <HowItWorks />
       <CardSection />

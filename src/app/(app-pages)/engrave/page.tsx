@@ -1,7 +1,7 @@
 import React from "react";
 import { classNames } from "@/utils/className";
 import Label from "@/components/1.atoms/Tag/Tag";
-import Body from "./(client)/Body";
+import Body from "./(cmp)/Body";
 import Background from "@/components/Svgs/bg/1/Background";
 
 interface Props {}

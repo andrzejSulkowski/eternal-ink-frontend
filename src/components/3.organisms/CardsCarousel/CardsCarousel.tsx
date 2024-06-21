@@ -46,7 +46,7 @@ function CardsCarousel({ cards, className }: Props) {
     <>
       <div>
         <div className={classNames("relative flex items-center justify-center w-full", className)}>
-            <ChevronLeft onClick={handlePrev} className="absolute -left-4 p-2 rounded-full z-20 w-10 h-10"/>
+            <ChevronLeft onClick={handlePrev} className="absolute -left-4 z-20"/>
           <div className="w-full flex justify-center">
             <Card {...cards[selectedIdx]}>
               <div className="absolute bottom-0 z-10">

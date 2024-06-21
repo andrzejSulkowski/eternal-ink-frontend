@@ -39,7 +39,6 @@ const footerRoutes: EIRoute[] = [
     name: "Privacy Policy",
   },
 ];
-
 const footerSocials: ISocial[] = [
   { href: "https://github.com/andrzejSulkowski", cmp: Github },
   {

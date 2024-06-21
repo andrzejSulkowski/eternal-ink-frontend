@@ -4,6 +4,7 @@ import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Button from "@/components/1.atoms/Button/Button";
 import Routes from "./parts/Routes/Routes";
+import Link from "next/link";
 
 interface Props extends EIProps {
   routes: EIRoute[];
@@ -32,7 +33,7 @@ function Header({
     >
       {/* Left Block */}
       <div className="flex gap-16 justify-between items-center">
-        <span className="font-bold font-kanit text-2xl">Engrave</span>
+        <Link className="font-bold font-kanit text-2xl" href="/">Engrave</Link>
         {/* Left's Bock Routes */}
         <Routes
           routes={routes}

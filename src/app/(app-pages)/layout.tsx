@@ -3,5 +3,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <main className="flex-grow relative">{children}</main>;
+  return <main className="flex-grow">{children}</main>;
 }

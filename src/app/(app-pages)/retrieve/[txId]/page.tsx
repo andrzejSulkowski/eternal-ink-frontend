@@ -11,7 +11,7 @@ import Input from "@/components/1.atoms/Input/Input";
 import { usePathname } from "next/navigation";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
-import PasswordInput from "./(client)/PasswordInput";
+import PasswordInput from "./(cmp)/PasswordInput";
 import { decrypt as $decrypt } from "@/utils/crypto";
 import useState from "react-usestateref";
 
