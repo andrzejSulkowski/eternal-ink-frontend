@@ -79,9 +79,9 @@ function Ellipse2({ className }: EIProps) {
             width="863.237"
             height="788.911"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -101,8 +101,8 @@ function Ellipse2({ className }: EIProps) {
             y2="715.772"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#0A0A20" stop-opacity="0" />
-            <stop offset="1" stop-color="#262E73" />
+            <stop stopColor="#0A0A20" stopOpacity="0" />
+            <stop offset="1" stopColor="#262E73" />
           </linearGradient>
         </defs>
       </svg>
@@ -176,8 +176,8 @@ function BgViolet2({ className }: { className?: string }) {
             y2="-46.7719"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#F019CE" />
-            <stop offset="1" stop-color="#8A0E76" stop-opacity="0" />
+            <stop stopColor="#F019CE" />
+            <stop offset="1" stopColor="#8A0E76" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>
@@ -206,8 +206,8 @@ function BgBlue1({ className }: { className?: string }) {
             y2="1270.88"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#364AFA" />
-            <stop offset="1" stop-color="#202C94" stop-opacity="0" />
+            <stop stopColor="#364AFA" />
+            <stop offset="1" stopColor="#202C94" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

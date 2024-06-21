@@ -26,8 +26,8 @@ function BgBlue1({ className }: EIProps) {
           y2="1112.88"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#364AFA" />
-          <stop offset="1" stop-color="#202C94" stop-opacity="0" />
+          <stop stopColor="#364AFA" />
+          <stop offset="1" stopColor="#202C94" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
