@@ -24,12 +24,9 @@ function RetrievePage() {
   const [password, setPassword, passwordRef] = useState<string>("");
 
   const { showBanner } = useBanner();
-  if (!txId) {
-    showBanner("TxId not found");
-    return new Error("TxId not found");
-  }
-
   const retrieve = async () => {
+    if(!txId) return showBanner("TxId not found");
+
     const response = await api.retrieveTx({ tx_id: txId });
     if (response.ok) {
       setStatus(response.data?.status);

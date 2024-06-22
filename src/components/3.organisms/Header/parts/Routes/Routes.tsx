@@ -10,14 +10,26 @@ interface Props extends EIProps {
   routes: EIRoute[];
 }
 
-const isRouteSelected = (routeHref: string, currentPathname: string) => {
+const isRouteSelected = (routeHref: string, currentPathname: string): boolean => {
   // Ensure both are strings and start with the same base route
-  return currentPathname.startsWith(routeHref);
-}
+  if (typeof routeHref !== 'string' || typeof currentPathname !== 'string') {
+    return false;
+  }
+
+  // Normalize paths to avoid discrepancies due to trailing slashes
+  const normalizedRouteHref = routeHref.replace(/\/$/, '');
+  const normalizedCurrentPathname = currentPathname.replace(/\/$/, '');
+
+  // Check if the current path starts with the routeHref
+  return normalizedCurrentPathname.startsWith(normalizedRouteHref);
+};
+
 function Routes({ className, routes }: Props) {
+  console.log("Routes: ", routes)
   const pathname = usePathname();
   const selectedIdx = useMemo(() => {
     const idx = routes.findIndex((route) => isRouteSelected(route.href, pathname));
+    console.warn("Selected Index: ", idx);
     return idx;
   }, [pathname, routes]);
 

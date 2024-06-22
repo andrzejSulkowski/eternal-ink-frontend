@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 const headerRoutes: EIRoute[] = [
   {
-    href: "/",
+    href: "/home",
     name: "Home",
   },
   {
