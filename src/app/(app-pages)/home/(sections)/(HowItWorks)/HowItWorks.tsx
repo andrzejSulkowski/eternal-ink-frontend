@@ -9,7 +9,7 @@ import { RefObject, useEffect, useRef } from "react";
 import Ball from "@/components/1.atoms/Ball/Ball";
 import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(HowItWorks)/(cmp)/SelectionCardsList";
 import Header from "./(cmp)/Header";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring, animated, config } from "@react-spring/web";
 
 const selectionCards: SelectionCardProps[] = [
   {
@@ -70,50 +70,46 @@ const selectionCards: SelectionCardProps[] = [
 function HowItWorks() {
   let scrollRef = useRef<HTMLDivElement | null>(null);
   const setRef = (r: RefObject<HTMLDivElement>) => (scrollRef = r);
-  const scrollAmount = 300;
 
-  const [springProps, springApi] = useSpring(() => {
-    scroll: 0;
-  });
+  const [springProps, springApi] = useSpring(() => ({
+    immediate: false,
+    scrollLeft: 0,
+    onChange: (props: any) => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollLeft = props.scrollLeft;
+      }
+    },
+    config: config.slow,
+  }));
 
   function goToNextCard() {
-    const currentScroll = scrollRef.current?.scrollLeft;
-    const child = scrollRef.current?.firstChild;
-    if (!child) return;
+    const currentScroll = springProps.scrollLeft.get();
+    const containerWidth = scrollRef.current?.clientWidth || 0;
+    const contentWidth = scrollRef.current?.scrollWidth || 0;
+    const cardWidth =
+      (scrollRef.current?.firstChild as undefined | HTMLDivElement)
+        ?.clientWidth || 0;
 
-    const cardWidth = (child as HTMLDivElement).clientWidth;
-    springApi.start({
-      scroll: currentScroll! + cardWidth,
-      onChange: (props: any) => {
-        if (scrollRef.current) {
-          scrollRef.current.scrollLeft = props.value.scroll;
-        }
-      },
-    });
+    const container = scrollRef.current;
+    const containerPadding =
+      parseFloat(getComputedStyle(container!).paddingLeft) +
+      parseFloat(getComputedStyle(container!).paddingRight);
+
+    const maxScroll = contentWidth - containerWidth + containerPadding;
+    const nextScroll = Math.min(currentScroll + cardWidth, maxScroll);
+
+    springApi.start({ scrollLeft: nextScroll });
   }
 
   function goToPrevCard() {
-    const currentScroll = scrollRef.current?.scrollLeft;
-    const child = scrollRef.current?.firstChild;
-    if (!child) return;
+    const currentScroll = springProps.scrollLeft.get();
+    const cardWidth =
+      (scrollRef.current?.firstChild as undefined | HTMLDivElement)
+        ?.clientWidth || 0;
 
-    const cardWidth = (child as HTMLDivElement).clientWidth;
-    springApi.start({
-      scroll: currentScroll! - cardWidth,
-      onChange: (props: any) => {
-        if (scrollRef.current) {
-          scrollRef.current.scrollLeft = props.value.scroll;
-        }
-      },
-    });
+    const prevScroll = Math.max(currentScroll - cardWidth, 0);
+    springApi.start({ scrollLeft: prevScroll });
   }
-
-  useEffect(() => {
-    if(scrollRef.current && springApi !== undefined) {
-      console.log("springApi: ", springApi);
-      springApi.set({ scroll: scrollRef.current.scrollLeft });
-    }
-  }, [springApi, scrollRef.current])
 
   return (
     <div className="font-manrope py-24 relative">
@@ -121,6 +117,7 @@ function HowItWorks() {
       <SelectionCardsList
         setRef={(r) => setRef(r)}
         selectionCards={selectionCards}
+        scrollLeft={springProps.scrollLeft}
       />
 
       <Ball className="absolute h-1/3 top-[-5%] right-[-5%] blur-sm -z-10" />
