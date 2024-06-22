@@ -5,9 +5,9 @@ import Fi from "@/components/Svgs/Fi";
 import ThreeRoad from "@/components/Svgs/ThreeRoad";
 import DollarBanner from "@/components/Svgs/DollarBanner";
 import StarCheck from "@/components/Svgs/StarCheck";
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useRef } from "react";
 import Ball from "@/components/1.atoms/Ball/Ball";
-import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(HowItWorks)/(cmp)/SelectionCardsList";
+import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/SelectionCardsList";
 import Header from "./(cmp)/Header";
 import { useSpring, animated, config } from "@react-spring/web";
 

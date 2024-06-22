@@ -4,9 +4,7 @@ import { classNames } from "@/utils/className";
 import PlanetLayout from "@/components/Svgs/bg/planet/PlanetLayout";
 import Button from "@/components/1.atoms/Button/Button";
 import Ball from "@/components/1.atoms/Ball/Ball";
-import BgBlue1 from './../(bg)/BgBlue1';
-
-
+import BgBlue1 from './(bg)/BgBlue1';
 
 interface Props extends EIProps {}
 
