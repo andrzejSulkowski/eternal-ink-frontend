@@ -59,7 +59,7 @@ function ContactSection() {
       </div>
       {/* BG */}
       <div>
-        <BgBlue1 className="absolute top-[-10%] left-[5%] -z-10 blur-[126px] opacity-60" />
+        <BgBlue1 className="absolute top-[-2%] left-[5%] -z-10 blur-[126px] opacity-60 !w-[60%] !h-auto -rotate-6" />
       </div>
     </div>
   );
