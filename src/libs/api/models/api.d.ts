@@ -73,11 +73,18 @@ interface GetMessagesResponse {
   messages: IMessage[],
 }
 
+/// Post Contact Message
 interface PostContactMessage{
   name: string,
   email: string,
   message: string,
 }
+/// 
+interface GetRequestCertificate {
+  id: string;
+}
+type GetRequestCertificateResponse = any
+
 
 export type { 
   PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, 
@@ -85,5 +92,6 @@ export type {
   GetTxInfo, GetTxInfoResponse,
   IMessage, GetMessages, GetMessagesResponse,
   PostContactMessage,
+  GetRequestCertificate, GetRequestCertificateResponse,
   ApiCall, ApiResponse 
 };

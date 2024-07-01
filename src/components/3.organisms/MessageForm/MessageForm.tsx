@@ -13,6 +13,7 @@ import { useHiddenFileInput } from "@/hooks/useHiddenFileInput";
 
 //# Parts
 import PaperClip from "./parts/PaperClip/PaperClip";
+import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 
 interface Props {
   onSend: (message: string | File) => void;
@@ -26,6 +27,7 @@ function MessageForm({onClose, onSend, messages = []}: Props) {
 
   const [userMessage, setUserMessage] = useState("");
   const { userFile, setUserFile, HiddenFileInput, openHiddenFileInput} = useHiddenFileInput()
+  const { showBanner } = useBanner();
 
   function trySend() {
     if (userMessage.length > 0 || userFile) {
@@ -33,7 +35,7 @@ function MessageForm({onClose, onSend, messages = []}: Props) {
       onSend(data);
       clean()
     }else{
-      console.warn("TODO: Display error message to user when he tries to send a empty message")
+      showBanner("Message is empty", { danger: true })
     }
   }
 

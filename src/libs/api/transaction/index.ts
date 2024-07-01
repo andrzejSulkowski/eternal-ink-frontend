@@ -3,6 +3,7 @@ import requestStatusStream from './handler/statusSse';
 import addrToTxId from './handler/addrToId';
 import retrieveTx from './handler/retrieveTx';
 import getMessages from './handler/getMessages';
+import getCertificate from './handler/getCertificate';
 
 
 const api = {
@@ -10,7 +11,8 @@ const api = {
     requestStatusStream,
     addrToTxId,
     retrieveTx,
-    getMessages
+    getMessages,
+    getCertificate
 };
 
 export default api;

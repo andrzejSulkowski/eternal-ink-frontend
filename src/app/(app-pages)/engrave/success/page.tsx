@@ -34,6 +34,11 @@ function EngravePage({}: Props) {
         { danger: true, ms: 10000 }
       );
     }
+
+    if(engravingData?.txId){
+      const response = await api.getCertificate({ id: engravingData?.txId})
+      console.log("response: ", response);
+    }
   }
 
   const router = useRouter();

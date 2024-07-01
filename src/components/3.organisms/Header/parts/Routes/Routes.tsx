@@ -28,7 +28,6 @@ function Routes({ className, routes }: Props) {
   const pathname = usePathname();
   const selectedIdx = useMemo(() => {
     const idx = routes.findIndex((route) => isRouteSelected(route.href, pathname));
-    console.warn("Selected Index: ", idx);
     return idx;
   }, [pathname, routes]);
 
