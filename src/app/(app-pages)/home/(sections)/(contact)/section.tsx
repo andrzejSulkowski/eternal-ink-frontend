@@ -1,14 +1,15 @@
 "use client";
+import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import ContactMeForm from "@/components/3.organisms/ContactMeForm/ContactMeForm";
+import api from "@/libs/api/general";
 import { classNames } from "@/utils/className";
+import { useState } from "react";
+import { validateEmail } from "@/utils/validateEmail";
 
 function BgBlue1({ className }: { className?: string }) {
   return (
     <div
-      className={classNames(
-        "w-full h-full max-w-full max-h-full",
-        className
-      )}
+      className={classNames("w-full h-full max-w-full max-h-full", className)}
     >
       <svg
         viewBox="0 0 820 619"
@@ -25,8 +26,33 @@ function BgBlue1({ className }: { className?: string }) {
   );
 }
 
-
 function ContactSection() {
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const { showBanner } = useBanner();
+  async function sendContactForm(data: {
+    name: string;
+    email: string;
+    message: string;
+  }) {
+    if (data.message.length < 10)
+      return showBanner("Message is too short", { danger: true });
+    else if (data.message.length > 500)
+      return showBanner("Message is too long", { danger: true });
+
+    if (validateEmail(data.email) === false)
+      return showBanner("Invalid Email", { danger: true });
+
+    if (data.name.length < 3)
+      return showBanner("Name is too short", { danger: true });
+
+    const response = await api.postContactMessage(data);
+    if (response.ok) {
+      showBanner("Message Sent Successfully", { danger: false });
+      setIsDisabled(true);
+    }
+  }
+
   return (
     <div className="px-60 font-manrope w-full relative py-36">
       <div className="w-full grid grid-cols-2 gap-16 my-24">
@@ -53,7 +79,8 @@ function ContactSection() {
             namePlaceholder="Name"
             emailPlaceholder="Email"
             messagePlaceholder="Message"
-            onSubmit={(v) => console.log("Submitted: ", v)}
+            isDisabled={isDisabled}
+            onSubmit={sendContactForm}
           />
         </div>
       </div>

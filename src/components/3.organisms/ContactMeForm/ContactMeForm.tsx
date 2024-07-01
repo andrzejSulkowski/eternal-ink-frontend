@@ -13,6 +13,8 @@ interface Props extends EIProps {
   emailPlaceholder: string;
   messagePlaceholder: string;
 
+  isDisabled?: boolean;
+
   onSubmit: ({
     name,
     email,
@@ -31,6 +33,7 @@ function ContactMeForm({
   emailPlaceholder,
   messagePlaceholder,
   className,
+  isDisabled,
   onSubmit,
 }: Props) {
   const [name, setName] = React.useState("");
@@ -60,6 +63,7 @@ function ContactMeForm({
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setName(e.target.value)
             }
+            isDisabled={isDisabled}
           />
           <Input
             value={email}
@@ -67,6 +71,7 @@ function ContactMeForm({
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
+            isDisabled={isDisabled}
           />
           <Textarea
             value={message}
@@ -75,12 +80,14 @@ function ContactMeForm({
               setMessage(e.target.value)
             }
             className="h-36"
+            isDisabled={isDisabled}
           />
         </div>
 
         <Button
           onClick={() => onSubmit({ name, email, message })}
           className="w-min text-nowrap"
+          isDisabled={isDisabled}
         >
           Send My Message
         </Button>

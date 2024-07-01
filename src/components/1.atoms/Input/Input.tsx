@@ -29,7 +29,7 @@ const Input: React.FC<Props> = ({
       className={classNames(
         "font-manrope border w-full bg-ei-primary-light/10 border-1 border-ei-primary-dark rounded-2xl px-4 py-4",
         "box-border outline-none text-white focus:border-ei-primary focus:placeholder-white placeholder:font-normal",
-        "placeholder:placeholder-ei-primary-faded font-bold disabled:opacity-50",
+        "placeholder:placeholder-ei-primary-faded font-bold disabled:opacity-50 disabled:cursor-not-allowed",
         className
       )}
       disabled={isDisabled}

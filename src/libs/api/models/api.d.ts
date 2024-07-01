@@ -9,7 +9,7 @@ type ApiResponse<T> = {
   error?: ApiError;
 };
 
-interface ApiCall<Request, Response> {
+interface ApiCall<Request, Response = {}> {
   // EIApiCall can be of type T or ApiError
   call: (p: Request) => Promise<ApiResponse<Response>>;
   mockCall: (p: Request) => Promise<ApiResponse<Response>>;
@@ -73,10 +73,17 @@ interface GetMessagesResponse {
   messages: IMessage[],
 }
 
+interface PostContactMessage{
+  name: string,
+  email: string,
+  message: string,
+}
+
 export type { 
   PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, 
   GetTxIdFromAddr, GetTxIdFromAddrResponse,
   GetTxInfo, GetTxInfoResponse,
   IMessage, GetMessages, GetMessagesResponse,
+  PostContactMessage,
   ApiCall, ApiResponse 
 };
