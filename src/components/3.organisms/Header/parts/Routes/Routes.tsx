@@ -25,7 +25,6 @@ const isRouteSelected = (routeHref: string, currentPathname: string): boolean =>
 };
 
 function Routes({ className, routes }: Props) {
-  console.log("Routes: ", routes)
   const pathname = usePathname();
   const selectedIdx = useMemo(() => {
     const idx = routes.findIndex((route) => isRouteSelected(route.href, pathname));

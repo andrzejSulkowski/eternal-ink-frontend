@@ -27,7 +27,6 @@ function InfoCard({
 
 
   function copy(){
-    console.log("copying", value)
     navigator.clipboard.writeText(value);
     showBanner("Copied to clipboard", { danger: false, ms: 4500 });
   }

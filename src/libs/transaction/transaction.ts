@@ -7,7 +7,6 @@ const trim = (address: string) =>
     `${address.slice(0, 9)}...${address.slice(-11)}`;
 
 const displayStatus = (status: TxStatus): 'Waiting for Funds' | 'Processing' | 'Finalized' | 'Unknown' => {
-    console.log("status: ", status);
     switch (status) {
         case TxStatus.WaitingForFunds:
             return "Waiting for Funds";

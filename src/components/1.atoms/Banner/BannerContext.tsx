@@ -48,7 +48,6 @@ export const BannerProvider = ({ children }: PropsWithChildren) => {
       danger: true,
     }
   ) => {
-    console.log("set banner message: ", message);
     setBanner({ isVisible: true, message: message, danger: opt.danger ?? true });
     let timeout = opt.ms ?? APPEAR_DURATION;
     setTimeout(hideBanner, timeout);

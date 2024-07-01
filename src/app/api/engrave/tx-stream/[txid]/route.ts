@@ -27,7 +27,6 @@ export async function GET(request: NextRequest, { params }: {params: { txid: str
   // Create a streaming response
   const customReadable = new ReadableStream({
     async start(controller) {
-      console.log("running start")
       for (const status of stateFlow) {
         const response: GetTxStatusStreamResponse = {
           data: status,

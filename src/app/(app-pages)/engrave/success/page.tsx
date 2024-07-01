@@ -43,7 +43,6 @@ function EngravePage({}: Props) {
     initPage();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      console.log("handling keydown - key: ", event);
       if (event.key === "Enter") {
         retrieve();
       }
