@@ -6,6 +6,7 @@ type ApiResponse<T> = {
   ok: boolean;
   status_code: number;
   data?: T;
+  type?: string;
   error?: ApiError;
 };
 
@@ -13,7 +14,7 @@ interface ApiCall<Request, Response = {}> {
   // EIApiCall can be of type T or ApiError
   call: (p: Request) => Promise<ApiResponse<Response>>;
   mockCall: (p: Request) => Promise<ApiResponse<Response>>;
-  backendCall: (p: Request) => Promise<ApiResponse<Response>>; 
+  backendCall: (p: Request) => Promise<ApiResponse<Response>>;
 }
 
 /// Post Request Engraving
@@ -32,66 +33,74 @@ interface PostRequestEngravingResponse {
 
 /// Tx Status Stream
 interface GetTxStatusStream {
-  id: string
+  id: string;
 }
 interface GetTxStatusStreamResponse {
-  data: TxStatus | string,
-  status: 'keep-alive' | 'error' | 'close'
+  data: TxStatus | string;
+  status: "keep-alive" | "error" | "close";
 }
 
 /// Addr to Id
 interface GetTxIdFromAddr {
-  address: string
+  address: string;
 }
 interface GetTxIdFromAddrResponse {
-  tx_id: string
+  tx_id: string;
 }
 /// Retrieve Tx
 interface GetTxInfo {
-  tx_id: string
+  tx_id: string;
 }
 interface GetTxInfoResponse {
-  status: TxStatus,
-  message: string,
-  tx_id: string | null,
-  cert_id: string | null,
-  is_encrypted: boolean
+  status: TxStatus;
+  message: string;
+  tx_id: string | null;
+  cert_id: string | null;
+  is_encrypted: boolean;
 }
 
 /// Retrieve Messages
 interface IMessage {
-  content: string,
-  id: string,
-  time: string,
-  tx_id: string,
+  content: string;
+  id: string;
+  time: string;
+  tx_id: string;
 }
 interface GetMessages {
-  after_uuid: string | null,
-  items: number,
+  after_uuid: string | null;
+  items: number;
 }
 interface GetMessagesResponse {
-  messages: IMessage[],
+  messages: IMessage[];
 }
 
 /// Post Contact Message
-interface PostContactMessage{
-  name: string,
-  email: string,
-  message: string,
+interface PostContactMessage {
+  name: string;
+  email: string;
+  message: string;
 }
-/// 
+///
 interface GetRequestCertificate {
   id: string;
 }
-type GetRequestCertificateResponse = any
+type GetRequestCertificateResponse = Uint8Array;
 
-
-export type { 
-  PostRequestEngraving, PostRequestEngravingResponse, GetTxStatusStream, GetTxStatusStreamResponse, 
-  GetTxIdFromAddr, GetTxIdFromAddrResponse,
-  GetTxInfo, GetTxInfoResponse,
-  IMessage, GetMessages, GetMessagesResponse,
+export type {
+  PostRequestEngraving,
+  PostRequestEngravingResponse,
+  GetTxStatusStream,
+  GetTxStatusStreamResponse,
+  GetTxIdFromAddr,
+  GetTxIdFromAddrResponse,
+  GetTxInfo,
+  GetTxInfoResponse,
+  IMessage,
+  GetMessages,
+  GetMessagesResponse,
   PostContactMessage,
-  GetRequestCertificate, GetRequestCertificateResponse,
-  ApiCall, ApiResponse 
+  GetRequestCertificate,
+  GetRequestCertificateResponse,
+  ApiCall,
+  ApiResponse,
 };

@@ -15,11 +15,28 @@ const $fetch = async <T>(
         error: error,
       };
     }
-    return {
-      ok: true,
-      status_code: response.status,
-      data: await response.json(),
-    };
+
+    console.log("response: ", response);
+
+    try {
+      const { body, type } = await getResponseBody<T>(response);
+      return {
+        ok: true,
+        status_code: response.status,
+        data: body,
+        type,
+      };
+    } catch (jsonError) {
+      // Handle cases where response is not JSON
+      return {
+        ok: false,
+        status_code: response.status,
+        error: {
+          type: "InternalError",
+          detail: "Unexpected end of JSON input",
+        } satisfies ApiError,
+      };
+    }
   } catch (e: any) {
     return {
       ok: false,
@@ -31,5 +48,24 @@ const $fetch = async <T>(
     };
   }
 };
+
+async function getResponseBody<T>(
+  response: Response
+): Promise<{ body: T; type: string }> {
+  const contentType = response.headers.get("Content-Type") || "";
+
+  let body: T | undefined = undefined;
+  if (contentType.includes("application/json")) {
+    body = (await response.json()) as T;
+  } else if (contentType.includes("text/plain")) {
+    body = (await response.text()) as T;
+  } else {
+    body = (await response.blob()) as T;
+  }
+  return {
+    body,
+    type: contentType,
+  };
+}
 
 export default $fetch;

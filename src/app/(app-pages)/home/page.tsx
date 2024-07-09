@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function Page({}: Props) {
   return (
     <div className={classNames("")}>
-      <LoadedTicks className=""/>
+      <LoadedTicks className="" />
       <Hero />
       <HowItWorks />
       <CardSection />

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useMemo } from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
@@ -18,9 +18,8 @@ function Button({
   isDisabled,
   onClick,
 }: Props) {
-
-  function onClickHandler(){
-    if(!isDisabled && onClick) onClick();
+  function onClickHandler() {
+    if (!isDisabled && onClick) onClick();
   }
   return (
     <div

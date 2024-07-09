@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { classNames } from "@/utils/className";
 import Background from "@/components/Svgs/bg/1/Background";
 import InfoCard from "@/components/2.molecules/InfoCard/InfoCard";
@@ -9,14 +9,20 @@ import api from "@/libs/api/transaction";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import Button from "@/components/1.atoms/Button/Button";
 import ThreeStars from "@/components/Svgs/ThreeStars";
+import FileWarning from "@/components/Svgs/FileWarning";
 import { trim } from "@/libs/transaction";
 import { useRouter } from "next/navigation";
+import { ApiResponse } from "@/libs/api/models";
+import { useLoadingScreen } from "@/context/loadingScreenCtx";
 
 interface Props {}
 
 function EngravePage({}: Props) {
   const { engravingData, setEngravingData } = useEngraving();
   const { showBanner } = useBanner();
+  const [hasDownloaded, setHasDownloaded] = useState(false);
+  const { showLoadingScreen, hideLoadingScreen } = useLoadingScreen();
+
   async function initPage() {
     if (engravingData?.address) {
       const resp = await api.addrToTxId({ address: engravingData.address });
@@ -34,15 +40,43 @@ function EngravePage({}: Props) {
         { danger: true, ms: 10000 }
       );
     }
+  }
 
-    if(engravingData?.txId){
-      const response = await api.getCertificate({ id: engravingData?.txId})
-      console.log("response: ", response);
+  function extractPdf(response: ApiResponse<BlobPart>): File | undefined {
+    if (response.ok && response.data) {
+      const blob = new Blob([response.data], { type: response.type });
+      const file = new File([blob], "certificate-eternal-ink.pdf", {
+        type: "application/pdf",
+      });
+      return file;
     }
   }
 
   const router = useRouter();
   const retrieve = () => router.push("/retrieve/" + engravingData?.txId);
+  const downloadCertificate = async () => {
+    if (engravingData?.txId) {
+      showLoadingScreen("Generating Certificate", 0, 1);
+      const response = await api.getCertificate({ id: engravingData.txId });
+      if (response.ok) {
+        showLoadingScreen("Downloading Certificate", 1, 1);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+      const pdf = extractPdf(response);
+      if (pdf) {
+        const url = URL.createObjectURL(pdf);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = pdf.name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        setHasDownloaded(true);
+      }
+      hideLoadingScreen();
+    }
+  };
 
   useEffect(() => {
     initPage();
@@ -59,6 +93,23 @@ function EngravePage({}: Props) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [engravingData]);
+
+  const RetrieveButton = () => (
+    <Button className={`!w-fit mt-8`} onClick={retrieve}>
+      Retrieve Tx
+      <ThreeStars className="max-w-5 ml-2" />
+    </Button>
+  );
+
+  const DownloadButton = () => (
+    <Button
+      className={`!w-fit justify-center mt-8 text-nowrap`}
+      onClick={downloadCertificate}
+    >
+      Download Certificate
+      <FileWarning className="max-w-5 ml-2" />
+    </Button>
+  );
 
   return (
     <>
@@ -82,10 +133,18 @@ function EngravePage({}: Props) {
             value={engravingData?.txId ? trim(engravingData.txId) : "-"}
           />
         </div>
-        <Button className={`!w-fit mt-8`} onClick={retrieve}>
-          Go Retrieve
-          <ThreeStars className="max-w-5 ml-2" />
-        </Button>
+        <div className="flex gap-8">
+          {hasDownloaded ? (
+            <>
+              <DownloadButton />
+              <RetrieveButton />
+            </>
+          ) : (
+            <>
+              <DownloadButton />
+            </>
+          )}
+        </div>
       </div>
     </>
   );
