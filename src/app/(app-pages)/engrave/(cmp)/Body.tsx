@@ -13,7 +13,7 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useRouter } from "next/navigation";
 import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
 import { TxStatus } from "@/models/transaction";
-import {encrypt, decrypt } from "@/utils/crypto";
+import { encrypt, decrypt } from "@/utils/crypto";
 
 const toggleButtons: {
   value: ToggleKeys;
@@ -33,17 +33,36 @@ const toggleButtons: {
   },
 ];
 
+const MAX_BYTES = 80;
+
 function Body() {
-  let [message, setMessage] = useState("");
-  let [file, setFile] = useState<File | null>(null);
-  let [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [password, setPassword] = useState("");
+  const [bytes, setBytes] = useState(0);
+
+  const updateMessage = (v: string) => {
+    const uInt = textEncoder.encode(v);
+    if (uInt.length > MAX_BYTES) {
+      banner.showBanner("Message is too long", { danger: true });
+    } else {
+      setBytes(uInt.length);
+      setMessage(v);
+    }
+  };
 
   const [toggleKey, setToggleKey] = useState<ToggleKeys>("public");
   const banner = useBanner();
   const { setEngravingData } = useEngraving();
 
   const router = useRouter();
+  const textEncoder = new TextEncoder();
   async function engrave() {
+    const t = textEncoder.encode(message);
+    if (t.length > 80) {
+      banner.showBanner("Message is too long", { danger: true });
+      return;
+    }
     const response = await startEngraving(
       message,
       file,
@@ -69,7 +88,7 @@ function Body() {
     toggleKey !== "encrypt" ? "hidden" : null;
   return (
     <div className="flex  flex-col justify-between min-h-full">
-      <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-8 font-manrope">
+      <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-6 font-manrope">
         {/* Cols1 */}
         <div data-col1 className="w-full">
           <span className="font-bold text-sm block mb-4">
@@ -78,13 +97,13 @@ function Body() {
           <Textarea
             placeholder="Your Message"
             value={message}
-            onChange={(v) => setMessage(v.currentTarget.value)}
+            onChange={(v) => updateMessage(v.currentTarget.value)}
             className="w-full h-40 p-4"
           />
+          <span className="text-ei-primary-faded">
+            Available Bytes: {MAX_BYTES - bytes}
+          </span>
           {/* Toggle Group + Password Input */}
-          <div className="text-ei-primary-faded">
-            Message Publicity Options:
-          </div>
         </div>
         {/* Col2 */}
         <div className="w-full h-full flex justify-center items-center">
@@ -105,6 +124,9 @@ function Body() {
         </div>
         {/* Col1Row1 */}
         <div className="w-full">
+          <div className="text-ei-primary-faded mb-2">
+            Message Publicity Options:
+          </div>
           <ToggleGroup
             className=""
             buttons={toggleButtons}
