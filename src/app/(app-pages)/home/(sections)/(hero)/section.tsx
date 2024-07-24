@@ -4,14 +4,15 @@ import { classNames } from "@/utils/className";
 import PlanetLayout from "@/components/Svgs/bg/planet/PlanetLayout";
 import Button from "@/components/1.atoms/Button/Button";
 import Ball from "@/components/1.atoms/Ball/Ball";
-import BgBlue1 from './(bg)/BgBlue1';
+import BgBlue1 from "./(bg)/BgBlue1";
+import Link from "next/link";
 
 interface Props extends EIProps {}
 
 function HeroSection({ className }: Props) {
   return (
     <div className={classNames("", className)}>
-      <PlanetLayout className="w-svw h-svh !absolute top-0 overflow-hidden !-z-10 font-manrope text-center !left-0" > 
+      <PlanetLayout className="w-svw h-svh !absolute top-0 overflow-hidden !-z-10 font-manrope text-center !left-0">
         <Ball className="absolute w-60 right-8 top-8 blur-md" />
         <BgBlue1 className="h-full absolute top-[-10%] right-[-10%] -z-10 blur-[96px]" />
         <Ball className="absolute w-[50%] left-[-30%] top-[0%] blur-xl" />
@@ -26,7 +27,9 @@ function HeroSection({ className }: Props) {
             Join the digital legacy. Enter your message or document hash below
             and press 'Send' to engrave your mark on the blockchain instantly
           </span>
-          <Button className="!w-fit mt-12">Begin Your Legacy</Button>
+          <Button className="!w-fit mt-12">
+            <Link href="engrave">Begin Your Legacy</Link>
+          </Button>
         </div>
       </div>
     </div>

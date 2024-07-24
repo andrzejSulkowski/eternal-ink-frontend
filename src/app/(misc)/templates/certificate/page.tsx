@@ -10,7 +10,7 @@ function index({}: Props) {
   return (
     <div
       className={classNames(
-        "font-manrope flex flex-col px-[41px] pb-10 relative w-full h-full bg-[#09090A]"
+        "w-[2480px] h-[3508px] font-manrope flex flex-col px-[41px] pb-10 relative bg-[#09090A]"
       )}
     >
       {/* Header */}

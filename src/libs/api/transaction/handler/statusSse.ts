@@ -12,12 +12,10 @@ const getTxStatusStream = {
     }
   },
   mockCall: (data: GetTxStatusStream) => {
-    return new EventSource(
-      CONFIG.MOCK_BACKEND_URL + "engrave/tx-stream/" + data.id
-    );
+    return new EventSource(CONFIG.MOCK_BACKEND_URL + "tx-stream/" + data.id);
   },
   backendCall: (data: GetTxStatusStream) => {
-    return new EventSource(CONFIG.BACKEND_URL + "engrave/tx-stream/" + data.id);
+    return new EventSource(CONFIG.BACKEND_URL + "tx-stream/" + data.id);
   },
 };
 

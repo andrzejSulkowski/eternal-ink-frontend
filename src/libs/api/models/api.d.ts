@@ -49,14 +49,17 @@ interface GetTxIdFromAddrResponse {
 }
 /// Retrieve Tx
 interface GetTxInfo {
-  tx_id: string;
+  id: string;
 }
 interface GetTxInfoResponse {
+  address: string;
+  fees: number;
   status: TxStatus;
   message: string;
   tx_id: string | null;
   cert_id: string | null;
   is_encrypted: boolean;
+  is_public: boolean;
 }
 
 /// Retrieve Messages
@@ -86,6 +89,14 @@ interface GetRequestCertificate {
 }
 type GetRequestCertificateResponse = Uint8Array;
 
+/// Status
+interface GetTxStatus {
+  id: string;
+}
+interface GetTxStatusResponse {
+  status: TxStatus;
+}
+
 export type {
   PostRequestEngraving,
   PostRequestEngravingResponse,
@@ -103,4 +114,6 @@ export type {
   GetRequestCertificateResponse,
   ApiCall,
   ApiResponse,
+  GetTxStatus,
+  GetTxStatusResponse,
 };

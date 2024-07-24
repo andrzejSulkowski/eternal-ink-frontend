@@ -60,29 +60,29 @@ export const useSseStream = (
   };
 
   const onmessage = (event: MessageEvent) => {
+    console.log("received message", event.data);
     if (isCompletedRef.current) return;
 
     const { data, status }: GetTxStatusStreamResponse = JSON.parse(event.data);
-    if (status === "keep-alive") {
+    if (status === "keep-alive" || status === "close") {
       const txStatus = data as TxStatus;
-      showLoadingScreen(
-        mapTxStatusToString[txStatus],
-        mapTxStatusToProgress[txStatus],
-        5
-      );
-    } else if (status === "close") {
-      const txStatus = data as TxStatus;
-      showLoadingScreen(
-        mapTxStatusToString[txStatus],
-        mapTxStatusToProgress[txStatus],
-        5
-      );
-      callbacks.onCompleted();
-      setTimeout(close, 200);
+      updateLoadingScreen(txStatus);
+      if (status === "close") {
+        callbacks.onCompleted();
+        setTimeout(close, 200);
+      }
     } else {
       callbacks.onError();
       close();
     }
+  };
+
+  const updateLoadingScreen = (status: TxStatus) => {
+    showLoadingScreen(
+      mapTxStatusToString[status],
+      mapTxStatusToProgress[status],
+      5
+    );
   };
 
   useEffect(() => {
@@ -95,5 +95,6 @@ export const useSseStream = (
     eventSource,
     startListening,
     close,
+    updateLoadingScreen,
   };
 };

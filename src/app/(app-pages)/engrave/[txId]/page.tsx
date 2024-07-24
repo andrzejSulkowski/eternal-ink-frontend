@@ -12,6 +12,8 @@ import { useSseStream } from "./(logic)/useSseStream";
 import { useWindow } from "@/hooks/useWindow";
 import CONFIG from "@/libs/config";
 import { trim } from "@/libs/transaction";
+import api from "@/libs/api/transaction";
+import { TxStatus } from "@/models";
 
 interface Props {}
 
@@ -19,19 +21,43 @@ function EngravePage({}: Props) {
   const { showBanner } = useBanner();
   const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
   const { engravingData, setEngravingData } = useEngraving();
+
+  useEffect(() => {
+    if (!engravingData) {
+      api.retrieveTx({ id: address }).then((resp) => {
+        if (resp.data) {
+          setEngravingData({
+            address: resp.data.address,
+            fees: resp.data.fees,
+            message: resp.data.message,
+            isPublic: resp.data.is_public,
+            isEncrypted: resp.data.is_encrypted,
+            state: resp.data.status,
+            txId: resp.data.tx_id ? resp.data.tx_id : undefined,
+          });
+        }
+      });
+    }
+  }, []);
+
+  const fees = useMemo(() => {
+    if (engravingData?.fees) {
+      return engravingData?.fees;
+    }
+  }, [engravingData?.fees]);
   const path = usePathname();
   const router = useRouter();
   const { window, runFn } = useWindow();
 
   const displayFees = useMemo(() => {
     if (engravingData?.fees) {
-      return engravingData?.fees.toString() + " BTC";
+      return engravingData?.fees.toString() + " SAT";
     }
-    return "- BTC";
+    return "- SAT";
   }, [engravingData?.fees]);
 
   const address = path.split("/")[2];
-  const { startListening } = useSseStream(address, {
+  const { startListening, updateLoadingScreen } = useSseStream(address, {
     onCompleted: () => router.push("/engrave/success/"),
     onError: () => {},
   });
@@ -49,15 +75,32 @@ function EngravePage({}: Props) {
     throw new Error("API Not implemented!");
   }
 
-  if (CONFIG.MOCK_API) {
-    // console.warn("✭ To simulate a transaction, run window.mock.engrave() in the console");
-    runFn((window) => {
-      window.mock = window.mock || {};
-      window.mock.engrave = () => {
+  useEffect(() => {
+    if (CONFIG.MOCK_API) {
+      // console.warn("✭ To simulate a transaction, run window.mock.engrave() in the console");
+      runFn((window) => {
+        window.mock = window.mock || {};
+        window.mock.engrave = () => {
+          startListening();
+        };
+      });
+    } else {
+      api.getTxStatus({ id: address }).then((resp) => {
+        if (resp.data) {
+          const { status } = resp.data;
+          if (
+            status === TxStatus.Finalized ||
+            status === TxStatus.ExternalConfirmed
+          ) {
+            router.push("/retrieve/" + address);
+          } else if (status !== TxStatus.WaitingForFunds) {
+            updateLoadingScreen(status);
+          }
+        }
         startListening();
-      };
-    });
-  }
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -78,7 +121,10 @@ function EngravePage({}: Props) {
             <InfoCard
               icon={IoWallet({ color: "white" })}
               label="Bitcoin Address:"
-              value={engravingData?.address ? trim(engravingData.address) : "-"}
+              value={engravingData?.address ? engravingData.address : "-"}
+              displayValue={
+                engravingData?.address ? trim(engravingData.address) : "-"
+              }
             />
             <div className="h-full flex items-center font-bold text-sm">
               and
@@ -86,7 +132,8 @@ function EngravePage({}: Props) {
             <InfoCard
               icon={IoWallet({ color: "white" })}
               label="Required Fees:"
-              value={displayFees}
+              value={fees ? fees.toString() : "-"}
+              displayValue={displayFees}
             />
           </div>
 

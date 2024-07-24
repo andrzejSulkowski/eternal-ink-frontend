@@ -3,15 +3,15 @@ import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import EIIcon from "@/components/1.atoms/EIIcon/EIIcon";
 import Copy from "@/components/Svgs/Copy";
-import { trim } from '@/libs/transaction'
+import { trim } from "@/libs/transaction";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 
 interface Props extends EIProps {
   icon: React.ReactNode;
   label: string;
   value: string;
+  displayValue?: string;
   isCopyable?: boolean;
-  trimValue?: boolean;
 }
 
 function InfoCard({
@@ -19,14 +19,16 @@ function InfoCard({
   icon,
   label,
   value,
+  displayValue,
   isCopyable = true,
-  trimValue = false,
 }: Props) {
-  const getValue = useMemo(() => trimValue ? trim(value) : value, [value, trimValue]);
+  const getValue = useMemo(
+    () => (displayValue ? displayValue : value),
+    [value, displayValue]
+  );
   const { showBanner } = useBanner();
 
-
-  function copy(){
+  function copy() {
     navigator.clipboard.writeText(value);
     showBanner("Copied to clipboard", { danger: false, ms: 4500 });
   }
@@ -48,12 +50,7 @@ function InfoCard({
 
       <div className="flex items-center text-ei-primary-faded text-sm">
         <span className="text-nowrap">{getValue}</span>
-        {isCopyable && (
-          <Copy
-            className="min-w-5 min-h-5 ml-2"
-            onClick={copy}
-          />
-        )}
+        {isCopyable && <Copy className="min-w-5 min-h-5 ml-2" onClick={copy} />}
       </div>
     </div>
   );
