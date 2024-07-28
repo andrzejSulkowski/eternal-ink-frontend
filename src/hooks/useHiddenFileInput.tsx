@@ -1,7 +1,11 @@
+import { MimeType } from "@/libs/mime-types/types";
 import React, { useRef, useCallback, useState } from "react";
 
+interface HiddenFileInputProps {
+  accept: MimeType[];
+}
 interface UseFileInputReturn {
-  HiddenFileInput: () => React.JSX.Element;
+  HiddenFileInput: (props: HiddenFileInputProps) => React.JSX.Element;
   openHiddenFileInput: () => void;
   userFile: File | null;
   setUserFile: (file: File | null) => void;
@@ -25,12 +29,12 @@ export const useHiddenFileInput = (
   const setUserFile = (file: File | null) => {
     setInternUserFile(file);
     onNewFile && onNewFile(file);
-  }
+  };
 
-  const HiddenFileInput = () => (
+  const HiddenFileInput = ({ accept }: HiddenFileInputProps) => (
     <input
       type="file"
-      accept="image/*"
+      accept={accept.map((t) => t as string).reduce((t) => t)}
       hidden
       ref={fileInputRef}
       onChange={handleFileChange}

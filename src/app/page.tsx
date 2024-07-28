@@ -9,9 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page({}: Props) {
-  return (
-    <div className={classNames("")}>
-      Please go to '/home'
-    </div>
-  );
+  return <div className={classNames("")}>Please go to &apos;/home&apos;</div>;
 }

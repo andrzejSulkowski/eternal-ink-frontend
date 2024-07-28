@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import Card, { Props as CardProps } from "@/components/2.molecules/Card/Card";
@@ -34,19 +34,26 @@ function CardsCarousel({ cards, className }: Props) {
           <div
             key={idx}
             className={`mx-2 rounded-full ${
-              selectedIdx === idx ? "bg-gray-100 w-2 h-2" : "bg-gray-400 w-1 h-1"
+              selectedIdx === idx
+                ? "bg-gray-100 w-2 h-2"
+                : "bg-gray-400 w-1 h-1"
             }`}
           ></div>
         ))}
       </div>
     );
-  }
+  };
 
   return (
     <>
       <div>
-        <div className={classNames("relative flex items-center justify-center w-full", className)}>
-            <ChevronLeft onClick={handlePrev} className="absolute -left-4 z-30"/>
+        <div
+          className={classNames(
+            "relative flex items-center justify-center w-full",
+            className
+          )}
+        >
+          <ChevronLeft onClick={handlePrev} className="absolute -left-4 z-30" />
           <div className="w-full flex justify-center">
             <Card {...cards[selectedIdx]}>
               <div className="absolute bottom-0 z-10">
@@ -57,11 +64,18 @@ function CardsCarousel({ cards, className }: Props) {
                   alt="ball"
                 />
                 {/* Change to Image */}
-                <img className="w-full" src="./storybook_resources/dwarf2.png" alt="dwarf" />
+                <img
+                  className="w-full"
+                  src="./storybook_resources/dwarf2.png"
+                  alt="dwarf"
+                />
               </div>
             </Card>
           </div>
-            <ChevronRight onClick={handleNext} className="absolute -right-4 z-30"/>
+          <ChevronRight
+            onClick={handleNext}
+            className="absolute -right-4 z-30"
+          />
         </div>
         <Dots />
       </div>

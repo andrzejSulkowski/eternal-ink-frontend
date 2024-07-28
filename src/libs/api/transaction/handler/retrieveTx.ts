@@ -14,6 +14,8 @@ const getTxInfoMockData: GetTxInfoResponse = {
   cert_id: "14302c68-9224-5ae1-af88-6a6a12312b5a",
   is_encrypted: true,
   is_public: true,
+  address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+  fees: 1000,
 };
 
 const apiCall: ApiCall<GetTxInfo, GetTxInfoResponse> = {

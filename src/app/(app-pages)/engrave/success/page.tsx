@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { classNames } from "@/utils/className";
 import Background from "@/components/Svgs/bg/1/Background";
 import InfoCard from "@/components/2.molecules/InfoCard/InfoCard";
@@ -23,7 +23,7 @@ function EngravePage({}: Props) {
   const [hasDownloaded, setHasDownloaded] = useState(false);
   const { showLoadingScreen, hideLoadingScreen } = useLoadingScreen();
 
-  async function initPage() {
+  const initPage = useCallback(async () => {
     if (engravingData?.address) {
       const resp = await api.addrToTxId({ address: engravingData.address });
       if (resp.ok) {
@@ -40,7 +40,7 @@ function EngravePage({}: Props) {
         { danger: true, ms: 10000 }
       );
     }
-  }
+  }, [engravingData, setEngravingData, showBanner]);
 
   function extractPdf(response: ApiResponse<BlobPart>): File | undefined {
     if (response.ok && response.data) {
@@ -53,7 +53,10 @@ function EngravePage({}: Props) {
   }
 
   const router = useRouter();
-  const retrieve = () => router.push("/retrieve/" + engravingData?.txId);
+  const retrieve = useCallback(
+    () => router.push("/retrieve/" + engravingData?.txId),
+    [engravingData?.txId, router]
+  );
   const downloadCertificate = async () => {
     if (engravingData?.txId) {
       showLoadingScreen("Generating Certificate", 0, 1);
@@ -92,7 +95,7 @@ function EngravePage({}: Props) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [engravingData]);
+  }, [engravingData, initPage, retrieve]);
 
   const RetrieveButton = () => (
     <Button className={`!w-fit mt-8`} onClick={retrieve}>

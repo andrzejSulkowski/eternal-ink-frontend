@@ -2,7 +2,7 @@
 import api from "@/libs/api/transaction";
 import { GetTxStatusStreamResponse } from "@/libs/api/models";
 import { TxStatus } from "@/models/transaction";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLoadingScreen } from "@/context/loadingScreenCtx";
 
 const mapTxStatusToProgress: Record<TxStatus, number> = {
@@ -38,13 +38,13 @@ export const useSseStream = (
   const isStreaming = useRef(false);
   const isCompletedRef = useRef(false);
 
-  const close = () => {
+  const close = useCallback(() => {
     eventSource.current?.close();
     eventSource.current = null;
     hideLoadingScreen();
     isCompletedRef.current = true;
     isStreaming.current = false;
-  };
+  }, [hideLoadingScreen]);
 
   const startListening = () => {
     isCompletedRef.current = false;
@@ -89,7 +89,7 @@ export const useSseStream = (
     return () => {
       close();
     };
-  }, []);
+  }, [close]);
 
   return {
     eventSource,

@@ -38,7 +38,7 @@ function EngravePage({}: Props) {
         }
       });
     }
-  }, []);
+  }, [engravingData, setEngravingData]);
 
   const fees = useMemo(() => {
     if (engravingData?.fees) {
@@ -62,11 +62,6 @@ function EngravePage({}: Props) {
     onError: () => {},
   });
 
-  if (!address) {
-    showBanner("Address not found");
-    return new Error("Address not found");
-  }
-
   function cancel() {
     showLoadingScreen("Cancelling Engraving...", 1, 2);
     setTimeout(() => {
@@ -76,31 +71,38 @@ function EngravePage({}: Props) {
   }
 
   useEffect(() => {
-    if (CONFIG.MOCK_API) {
-      // console.warn("✭ To simulate a transaction, run window.mock.engrave() in the console");
-      runFn((window) => {
-        window.mock = window.mock || {};
-        window.mock.engrave = () => {
-          startListening();
-        };
-      });
-    } else {
-      api.getTxStatus({ id: address }).then((resp) => {
-        if (resp.data) {
-          const { status } = resp.data;
-          if (
-            status === TxStatus.Finalized ||
-            status === TxStatus.ExternalConfirmed
-          ) {
-            router.push("/retrieve/" + address);
-          } else if (status !== TxStatus.WaitingForFunds) {
-            updateLoadingScreen(status);
+    if (address) {
+      if (CONFIG.MOCK_API) {
+        // console.warn("✭ To simulate a transaction, run window.mock.engrave() in the console");
+        runFn((window) => {
+          window.mock = window.mock || {};
+          window.mock.engrave = () => {
+            startListening();
+          };
+        });
+      } else {
+        api.getTxStatus({ id: address }).then((resp) => {
+          if (resp.data) {
+            const { status } = resp.data;
+            if (
+              status === TxStatus.Finalized ||
+              status === TxStatus.ExternalConfirmed
+            ) {
+              router.push("/retrieve/" + address);
+            } else if (status !== TxStatus.WaitingForFunds) {
+              updateLoadingScreen(status);
+            }
           }
-        }
-        startListening();
-      });
+          startListening();
+        });
+      }
     }
-  }, []);
+  }, [address, router, startListening, updateLoadingScreen, runFn]);
+
+  if (!address) {
+    showBanner("Address not found");
+    return new Error("Address not found");
+  }
 
   return (
     <>

@@ -62,14 +62,14 @@ function ContactSection() {
           <h1 className="font-extrabold text-6xl">
             Got Questions <br />
             or Need a Hand? <br />
-            I'm Here to Help!
+            I&apos;m Here to Help!
           </h1>
           <p className="text-ei-primary-faded text-sm">
             Your curiosity and engagement drive this project forward. Whether
             you have inquiries about engraving, need guidance through the
-            process, or simply want to share your thoughts, I'm here for you.
-            Use the contact form below for any questions or feedback, and I'll
-            get back to you promptly.
+            process, or simply want to share your thoughts, I&apos;m here for
+            you. Use the contact form below for any questions or feedback, and
+            I&apos;ll get back to you promptly.
           </p>
         </div>
         {/* Col2 */}

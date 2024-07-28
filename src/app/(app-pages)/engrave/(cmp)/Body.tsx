@@ -117,6 +117,9 @@ function Body() {
               "image/jpg",
               "image/png",
               "image/webp",
+              "application/pdf",
+              "application/vnd.ms-excel",
+              "application/zip",
             ]}
             onInput={setFile}
             file={file}

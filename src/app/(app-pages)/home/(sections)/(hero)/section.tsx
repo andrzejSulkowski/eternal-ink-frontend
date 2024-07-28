@@ -25,7 +25,8 @@ function HeroSection({ className }: Props) {
           </span>
           <span className="block text-ei-primary-faded text-sm mt-6 text-center">
             Join the digital legacy. Enter your message or document hash below
-            and press 'Send' to engrave your mark on the blockchain instantly
+            and press &apos;Send&apos; to engrave your mark on the blockchain
+            instantly
           </span>
           <Button className="!w-fit mt-12">
             <Link href="engrave">Begin Your Legacy</Link>

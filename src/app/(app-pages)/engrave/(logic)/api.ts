@@ -1,6 +1,6 @@
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
-import { ToggleKeys } from "../(client)/Body";
+import { ToggleKeys } from "../(cmp)/Body";
 import { encrypt } from "@/utils/crypto";
 
 const startEngraving = async (
@@ -34,7 +34,6 @@ const startEngraving = async (
     chain: "btc",
     message: message,
     is_file: file !== null,
-    password: passwordHashed,
     is_encrypted: toggleKey === "encrypt",
     is_public: toggleKey === "public",
   });

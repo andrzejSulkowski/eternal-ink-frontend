@@ -23,7 +23,6 @@ interface PostRequestEngraving {
   message: string;
   is_file: boolean;
   is_encrypted: boolean;
-  password: string | null;
   is_public: boolean;
 }
 interface PostRequestEngravingResponse {

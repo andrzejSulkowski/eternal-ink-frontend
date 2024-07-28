@@ -5,7 +5,7 @@ import ThreeStars from "@/components/Svgs/ThreeStars";
 import Background from "@/components/Svgs/bg/1/Background";
 import { classNames } from "@/utils/className";
 import RetrievedMessage from "@/components/2.molecules/RetrievedMessage/RetrievedMessage";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { TxStatus } from "@/models";
 import Input from "@/components/1.atoms/Input/Input";
 import { usePathname } from "next/navigation";
@@ -20,14 +20,15 @@ function RetrievePage() {
   const [txId, setTxId] = useState<string | undefined>(path.split("/").at(2));
   const [status, setStatus] = useState<TxStatus | undefined>();
   const [message, setMessage, messageRef] = useState<string | undefined>();
-  const [isProtected, setIsProtected, isProtectedRef] = useState<boolean>(false);
+  const [isProtected, setIsProtected, isProtectedRef] =
+    useState<boolean>(false);
   const [password, setPassword, passwordRef] = useState<string>("");
 
   const { showBanner } = useBanner();
-  const retrieve = async () => {
-    if(!txId) return showBanner("TxId not found");
+  const retrieve = useCallback(async () => {
+    if (!txId) return showBanner("TxId not found");
 
-    const response = await api.retrieveTx({ tx_id: txId });
+    const response = await api.retrieveTx({ id: txId });
     if (response.ok) {
       setStatus(response.data?.status);
       setMessage(response.data?.message);
@@ -39,9 +40,9 @@ function RetrievePage() {
         showBanner("Error retrieving message");
       }
     }
-  };
+  }, [txId, showBanner, setIsProtected, setMessage]);
 
-  const decrypt = () => {
+  const decrypt = useCallback(() => {
     if (messageRef.current) {
       try {
         const decrypted = $decrypt(messageRef.current, passwordRef.current);
@@ -57,7 +58,14 @@ function RetrievePage() {
         showBanner("Incorrect Password");
       }
     }
-  };
+  }, [
+    messageRef,
+    passwordRef,
+    showBanner,
+    setPassword,
+    setIsProtected,
+    setMessage,
+  ]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -69,11 +77,13 @@ function RetrievePage() {
         }
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [decrypt, retrieve, isProtectedRef]);
 
   return (
     <>

@@ -17,7 +17,6 @@ function PaperClip({
   userFile,
   setUserFile,
 }: ReturnType<typeof useHiddenFileInput>) {
-
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const toggleContextMenu = () => setIsContextMenuOpen(!isContextMenuOpen);
 
@@ -57,7 +56,17 @@ function PaperClip({
         ref={contextMenuRef}
         className="h-2/3 aspect-square min-w-6 rotate-180  flex justify-center items-center text-ei-primary-faded relative"
       >
-        <HiddenFileInput />
+        <HiddenFileInput
+          accept={[
+            "image/jpeg",
+            "image/jpg",
+            "image/png",
+            "image/webp",
+            "application/pdf",
+            "application/vnd.ms-excel",
+            "application/zip",
+          ]}
+        />
         <div
           onClick={toggleContextMenu}
           className="relative w-full h-full cursor-pointer"
