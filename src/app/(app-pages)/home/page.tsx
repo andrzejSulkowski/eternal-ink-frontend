@@ -4,8 +4,8 @@ import { Metadata } from "next";
 import LoadedTicks from "./(cmp)/LoadedTicks";
 import CardSection from "./(sections)/(card)/section";
 import WhyEngrave from "./(sections)/(whyEngrave)/section";
-import ContactSection from "@/app/(app-pages)/home/(sections)/(contact)/section";
-import HowItWorks from "./(sections)/(howItWorks)/section";
+import ContactSection from "./(sections)/(contact)/section";
+import HowItWorks from "./(sections)/(HowItWorks)/section";
 
 interface Props {}
 

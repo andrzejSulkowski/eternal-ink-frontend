@@ -8,8 +8,8 @@ import StarCheck from "@/components/Svgs/StarCheck";
 import { RefObject, useRef } from "react";
 import Ball from "@/components/1.atoms/Ball/Ball";
 import { useSpring, config } from "@react-spring/web";
-import Header from "./(cmp)/Header";
 import SelectionCardsList from "./(cmp)/SelectionCardsList";
+import Header from "./(cmp)/Header";
 
 const selectionCards: SelectionCardProps[] = [
   {
