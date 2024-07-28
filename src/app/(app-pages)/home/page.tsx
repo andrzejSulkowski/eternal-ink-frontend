@@ -2,10 +2,10 @@ import Hero from "./(sections)/(hero)/section";
 import { classNames } from "@/utils/className";
 import { Metadata } from "next";
 import LoadedTicks from "./(cmp)/LoadedTicks";
-import HowItWorks from "./(sections)/(howItWorks)/section";
 import CardSection from "./(sections)/(card)/section";
 import WhyEngrave from "./(sections)/(whyEngrave)/section";
 import ContactSection from "@/app/(app-pages)/home/(sections)/(contact)/section";
+import HowItWorks from "./(sections)/(HowItWorks)/section";
 
 interface Props {}
 

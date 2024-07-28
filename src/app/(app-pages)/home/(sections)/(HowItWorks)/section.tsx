@@ -7,9 +7,9 @@ import DollarBanner from "@/components/Svgs/DollarBanner";
 import StarCheck from "@/components/Svgs/StarCheck";
 import { RefObject, useRef } from "react";
 import Ball from "@/components/1.atoms/Ball/Ball";
-import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/SelectionCardsList";
-import Header from "./(cmp)/Header";
-import { useSpring, animated, config } from "@react-spring/web";
+import { useSpring, config } from "@react-spring/web";
+import Header from "@/app/(app-pages)/home/(sections)/(HowItWorks)/(cmp)/Header";
+import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(HowItWorks)/(cmp)/SelectionCardsList";
 
 const selectionCards: SelectionCardProps[] = [
   {
