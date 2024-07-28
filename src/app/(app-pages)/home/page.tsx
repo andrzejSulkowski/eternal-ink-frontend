@@ -5,7 +5,7 @@ import LoadedTicks from "./(cmp)/LoadedTicks";
 import CardSection from "./(sections)/(card)/section";
 import WhyEngrave from "./(sections)/(whyEngrave)/section";
 import ContactSection from "./(sections)/(contact)/section";
-import HowItWorks from "./(sections)/(HowItWorks)/section";
+import HowItWorks from "@/app/(app-pages)/home/(sections)/(howItWorks)/section";
 
 interface Props {}
 
