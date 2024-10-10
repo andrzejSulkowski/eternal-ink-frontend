@@ -2,6 +2,7 @@
 import React, {
   PropsWithChildren,
   createContext,
+  useCallback,
   useContext,
   useState,
 } from "react";
@@ -41,7 +42,11 @@ export const BannerProvider = ({ children }: PropsWithChildren) => {
     danger: true,
   });
 
-  const showBanner = (
+const hideBanner = useCallback(() => {
+    setBanner({ isVisible: false, message: "", danger: banner.danger });
+  }, [setBanner]);
+
+  const showBanner = useCallback((
     message: string,
     opt: { ms?: number; danger?: boolean } = {
       ms: APPEAR_DURATION,
@@ -51,11 +56,8 @@ export const BannerProvider = ({ children }: PropsWithChildren) => {
     setBanner({ isVisible: true, message: message, danger: opt.danger ?? true });
     let timeout = opt.ms ?? APPEAR_DURATION;
     setTimeout(hideBanner, timeout);
-  };
+  }, [setBanner, hideBanner]);
 
-  const hideBanner = () => {
-    setBanner({ isVisible: false, message: "", danger: banner.danger });
-  };
 
   const props: IContext = {
     banner,

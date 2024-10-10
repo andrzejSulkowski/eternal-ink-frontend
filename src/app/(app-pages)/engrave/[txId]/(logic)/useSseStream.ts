@@ -46,7 +46,48 @@ export const useSseStream = (
     isStreaming.current = false;
   }, [hideLoadingScreen]);
 
-  const startListening = () => {
+  const updateLoadingScreen = useCallback(
+    (status: TxStatus) => {
+      showLoadingScreen(
+        mapTxStatusToString[status],
+        mapTxStatusToProgress[status],
+        5
+      );
+    },
+    [showLoadingScreen]
+  );
+
+  const onmessage = useCallback(
+    (event: MessageEvent) => {
+      console.log("received message", event.data);
+      if (isCompletedRef.current) return;
+
+      const { data, status }: GetTxStatusStreamResponse = JSON.parse(
+        event.data
+      );
+      if (status === "keep-alive" || status === "close") {
+        const txStatus = data as TxStatus;
+        updateLoadingScreen(txStatus);
+        if (status === "close") {
+          console.log("txStatus: ", txStatus);
+          if (
+            txStatus === TxStatus.Finalized ||
+            txStatus === TxStatus.ExternalConfirmed
+          ) {
+            console.log("calling callbacks.onCompleted!");
+            callbacks.onCompleted();
+          }
+          setTimeout(close, 200);
+        }
+      } else {
+        callbacks.onError();
+        close();
+      }
+    },
+    [isCompletedRef, updateLoadingScreen, callbacks, close]
+  );
+
+  const startListening = useCallback(() => {
     isCompletedRef.current = false;
 
     if (window && !isStreaming.current) {
@@ -57,33 +98,7 @@ export const useSseStream = (
 
       eventSource.current = source;
     }
-  };
-
-  const onmessage = (event: MessageEvent) => {
-    console.log("received message", event.data);
-    if (isCompletedRef.current) return;
-
-    const { data, status }: GetTxStatusStreamResponse = JSON.parse(event.data);
-    if (status === "keep-alive" || status === "close") {
-      const txStatus = data as TxStatus;
-      updateLoadingScreen(txStatus);
-      if (status === "close") {
-        callbacks.onCompleted();
-        setTimeout(close, 200);
-      }
-    } else {
-      callbacks.onError();
-      close();
-    }
-  };
-
-  const updateLoadingScreen = (status: TxStatus) => {
-    showLoadingScreen(
-      mapTxStatusToString[status],
-      mapTxStatusToProgress[status],
-      5
-    );
-  };
+  }, [isCompletedRef, isStreaming, close, onmessage]);
 
   useEffect(() => {
     return () => {

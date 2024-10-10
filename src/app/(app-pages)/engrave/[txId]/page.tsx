@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { classNames } from "@/utils/className";
 import Background from "@/components/Svgs/bg/1/Background";
 import { usePathname, useRouter } from "next/navigation";
@@ -23,22 +23,20 @@ function EngravePage({}: Props) {
   const { engravingData, setEngravingData } = useEngraving();
 
   useEffect(() => {
-    if (!engravingData) {
-      api.retrieveTx({ id: address }).then((resp) => {
-        if (resp.data) {
-          setEngravingData({
-            address: resp.data.address,
-            fees: resp.data.fees,
-            message: resp.data.message,
-            isPublic: resp.data.is_public,
-            isEncrypted: resp.data.is_encrypted,
-            state: resp.data.status,
-            txId: resp.data.tx_id ? resp.data.tx_id : undefined,
-          });
-        }
-      });
-    }
-  }, [engravingData, setEngravingData]);
+    api.retrieveTx({ id: address }).then((resp) => {
+      if (resp.data) {
+        setEngravingData({
+          address: resp.data.address,
+          fees: resp.data.fees,
+          message: resp.data.data,
+          isPublic: resp.data.is_public,
+          isEncrypted: resp.data.is_encrypted,
+          state: resp.data.status,
+          txId: resp.data.tx_id ? resp.data.tx_id : undefined,
+        });
+      }
+    });
+  }, [setEngravingData]);
 
   const fees = useMemo(() => {
     if (engravingData?.fees) {
@@ -46,34 +44,46 @@ function EngravePage({}: Props) {
     }
   }, [engravingData?.fees]);
   const path = usePathname();
+  const [address, setAddress] = React.useState(path.split("/")[2]);
   const router = useRouter();
-  const { window, runFn } = useWindow();
+  const { runFn } = useWindow();
 
   const displayFees = useMemo(() => {
     if (engravingData?.fees) {
       return engravingData?.fees.toString() + " SAT";
     }
     return "- SAT";
-  }, [engravingData?.fees]);
+  }, [engravingData]);
 
-  const address = path.split("/")[2];
-  const { startListening, updateLoadingScreen } = useSseStream(address, {
-    onCompleted: () => router.push("/engrave/success/"),
-    onError: () => {},
-  });
+  const onCompleted = useCallback(() => {
+    console.log("onCompleted inside useCallback");
+    router.push("/engrave/success/");
+  }, [router]);
+  const onError = useCallback(() => {}, []);
+  const callbacks = useMemo(
+    () => ({ onError, onCompleted }),
+    [onError, onCompleted]
+  );
+  const { startListening, updateLoadingScreen } = useSseStream(
+    address,
+    callbacks
+  );
 
-  function cancel() {
-    showLoadingScreen("Cancelling Engraving...", 1, 2);
-    setTimeout(() => {
-      hideLoadingScreen();
-    }, 4000);
-    throw new Error("API Not implemented!");
-  }
+  const cancel = useCallback(async () => {
+    showLoadingScreen("Canceling Engraving...", 1, 2);
+    await api.postCancelEngraving({ id: address });
+    hideLoadingScreen();
+    setAddress("");
+    setEngravingData(null);
+    showBanner("Engraving Canceled", { danger: false });
+  }, [address]);
 
   useEffect(() => {
-    if (address) {
+    if (address && address.length > 0) {
       if (CONFIG.MOCK_API) {
-        // console.warn("✭ To simulate a transaction, run window.mock.engrave() in the console");
+        console.warn(
+          "✭ To simulate a transaction, run window.mock.engrave() in the console"
+        );
         runFn((window) => {
           window.mock = window.mock || {};
           window.mock.engrave = () => {
@@ -81,28 +91,31 @@ function EngravePage({}: Props) {
           };
         });
       } else {
-        api.getTxStatus({ id: address }).then((resp) => {
-          if (resp.data) {
-            const { status } = resp.data;
-            if (
-              status === TxStatus.Finalized ||
-              status === TxStatus.ExternalConfirmed
-            ) {
-              router.push("/retrieve/" + address);
-            } else if (status !== TxStatus.WaitingForFunds) {
-              updateLoadingScreen(status);
+        api
+          .getTxStatus({ id: address })
+          .then((resp) => {
+            if (resp.ok && resp.data) {
+              const { status } = resp.data;
+              if (
+                status === TxStatus.Finalized ||
+                status === TxStatus.ExternalConfirmed
+              ) {
+                router.push("/retrieve/" + address);
+              } else if (status !== TxStatus.WaitingForFunds) {
+                updateLoadingScreen(status);
+              }
+              startListening();
+            } else {
+              showBanner("Error getting transaction status", { danger: true });
             }
-          }
-          startListening();
-        });
+          })
+          .catch((e) => {
+            console.error(e);
+            showBanner("Error getting transaction status", { danger: true });
+          });
       }
     }
   }, [address, router, startListening, updateLoadingScreen, runFn]);
-
-  if (!address) {
-    showBanner("Address not found");
-    return new Error("Address not found");
-  }
 
   return (
     <>
@@ -139,12 +152,14 @@ function EngravePage({}: Props) {
             />
           </div>
 
-          <div
-            className="text-ei-primary-faded text-sm mt-12 hover:underline cursor-pointer"
-            onClick={cancel}
-          >
-            Cancel Engraving
-          </div>
+          {address && (
+            <div
+              className="text-ei-primary-faded text-sm mt-12 hover:underline cursor-pointer"
+              onClick={cancel}
+            >
+              Cancel Engraving
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { use, useMemo, useRef } from "react";
 import { MimeType } from "@/libs/mime-types/types";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
@@ -55,6 +55,7 @@ function FileInput(props: Props) {
     loading: () => <Loading progress={progress} />,
     full: Full,
   };
+
   const bannerMap = {
     default: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
     enter: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
@@ -65,14 +66,32 @@ function FileInput(props: Props) {
         sizePlaceholder=">100 MB"
       />
     ),
-    full: () => (
-      <FileBanner
-        src="/storybook_resources/axe.png"
-        name="filename.png"
-        size={{ value: 21, unit: "MB" }}
-        onRemove={() => props.onInput(null)}
-      />
-    ),
+    full: () => {
+      const src = useMemo(
+        () => (props.file ? URL.createObjectURL(props.file) : null),
+        [props.file]
+      );
+      const mbSize = useMemo(
+        () =>
+          props.file
+            ? Math.round((props.file.size / 1024 / 1024) * 100) / 100
+            : null,
+        [props.file]
+      );
+
+      return (
+        <>
+          {src && mbSize && (
+            <FileBanner
+              src={src}
+              name={props.file?.name ?? ""}
+              size={{ value: mbSize, unit: "MB" }}
+              onRemove={() => props.onInput(null)}
+            />
+          )}
+        </>
+      );
+    },
   };
 
   const StateComponent = componentMap[state] || Default;

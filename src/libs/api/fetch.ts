@@ -16,8 +16,6 @@ const $fetch = async <T>(
       };
     }
 
-    console.log("response: ", response);
-
     try {
       const { body, type } = await getResponseBody<T>(response);
       return {
@@ -38,6 +36,7 @@ const $fetch = async <T>(
       };
     }
   } catch (e: any) {
+    console.log("received error: ", e)
     return {
       ok: false,
       status_code: 0,

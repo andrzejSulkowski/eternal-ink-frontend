@@ -5,14 +5,16 @@ import { classNames } from "@/utils/className";
 import Button from "@/components/1.atoms/Button/Button";
 import Routes from "./parts/Routes/Routes";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Props extends EIProps {
   routes: EIRoute[];
 }
 
 function Header({ className, children, routes }: Props) {
+  const router = useRouter();
   function onCTAClick() {
-    console.log("CTA Clicked");
+    router.push("/engrave");
   }
   function onHrefClick() {
     console.log("Href Clicked");

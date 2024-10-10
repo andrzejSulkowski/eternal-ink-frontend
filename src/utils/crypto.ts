@@ -1,45 +1,69 @@
-import crypto, { BinaryLike } from "crypto";
+import crypto, { BinaryLike, CipherKey } from "crypto";
 
-const algorithm = "aes-256-cbc"; // AES encryption with 256-bit key
-const ivLength = 16; // AES block size
+const algorithm = "AES-256-CBC";
+const ivLength = 16;
 
-// Derive a key from a password
 function deriveKey(password: string, salt: BinaryLike) {
   return crypto.pbkdf2Sync(password, salt, 100000, 32, "sha256");
 }
 
-// Encrypt a message
-function encrypt(message: string, password: string) {
-  const iv = crypto.randomBytes(ivLength);
-  const salt = crypto.randomBytes(16); // 16 bytes salt
-  const key = deriveKey(password, salt);
-  const cipher = crypto.createCipheriv(algorithm, key, iv);
-  let encrypted = cipher.update(message, "utf8", "base64");
-  encrypted += cipher.final("base64");
-  // Return salt, iv, and encrypted message concatenated together
-  return `${salt.toString("base64")}:${iv.toString("base64")}:${encrypted}`;
+function encrypt(
+  message: string,
+  password: string
+): { data: Uint8Array; salt: Uint8Array; iv: Uint8Array } {
+  const iv = crypto.randomBytes(ivLength); // IV buffer
+  const salt = crypto.randomBytes(16); // Salt buffer
+  const key = deriveKey(password, new Uint8Array(salt)); // Key buffer
+  const cipher = crypto.createCipheriv(
+    algorithm,
+    new Uint8Array(key),
+    new Uint8Array(iv)
+  );
+
+  const encrypted = Buffer.concat([
+    new Uint8Array(cipher.update(message, "utf8")),
+    new Uint8Array(cipher.final()),
+  ]);
+
+  return {
+    data: new Uint8Array(encrypted),
+    salt: new Uint8Array(salt),
+    iv: new Uint8Array(iv),
+  };
 }
 
-// Decrypt a message
-function decrypt(encryptedMessage: string, password: string) {
-  const [saltBase64, ivBase64, encryptedBase64] = encryptedMessage.split(":");
-  const salt = Buffer.from(saltBase64, "base64");
-  const iv = Buffer.from(ivBase64, "base64");
-  const key = deriveKey(password, salt);
+function decrypt(args: {
+  data: Uint8Array;
+  salt: Uint8Array;
+  iv: BinaryLike;
+  password: string;
+}): string {
+  const { data, salt, iv, password } = args;
+  const key = new Uint8Array(deriveKey(password, salt));
   const decipher = crypto.createDecipheriv(algorithm, key, iv);
-  let decrypted = decipher.update(encryptedBase64, "base64", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
+
+  const decrypted = Buffer.concat([
+    new Uint8Array(decipher.update(data)),
+    new Uint8Array(decipher.final()),
+  ]);
+
+  return decrypted.toString("utf8");
 }
 
-// Usage
-// const password = "myStrongPassword";
-// const message = "This is a secret message";
+async function hash(blob: Blob): Promise<Uint8Array> {
+  const arrayBuffer = await blob.arrayBuffer();
 
-// const encryptedMessage = encrypt(message, password);
-// console.log("Encrypted message:", encryptedMessage);
+  // For browser environments
+  if (typeof crypto.subtle !== "undefined") {
+    const hashBuffer = await crypto.subtle.digest("SHA-256", arrayBuffer);
+    return new Uint8Array(hashBuffer);
+  }
 
-// const decryptedMessage = decrypt(encryptedMessage, password);
-// console.log("Decrypted message:", decryptedMessage);
+  // For Node.js environments
+  const buffer = Buffer.from(arrayBuffer);
+  const hash = crypto.createHash("sha256");
+  hash.update(new Uint8Array(buffer));
+  return new Uint8Array(hash.digest());
+}
 
-export { encrypt, decrypt }
+export { encrypt, decrypt, hash };

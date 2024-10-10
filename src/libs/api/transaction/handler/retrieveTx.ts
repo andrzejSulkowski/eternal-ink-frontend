@@ -6,14 +6,11 @@ import { encrypt } from "@/utils/crypto";
 
 const getTxInfoMockData: GetTxInfoResponse = {
   status: TxStatus.Finalized,
-  message: encrypt(
-    "Mock Message, Ald What if I keep writing a text further!",
-    "password"
-  ),
+  data: "Mock Message, Ald What if I keep writing a text further!",
   tx_id: "87387a2349e21e0019220c6c0011257654625ad9ad5a69bb98cc79b0aaa3965b",
   cert_id: "14302c68-9224-5ae1-af88-6a6a12312b5a",
-  is_encrypted: true,
-  is_public: true,
+  is_encrypted: false,
+  is_public: false,
   address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
   fees: 1000,
 };

@@ -17,14 +17,28 @@ interface ApiCall<Request, Response = {}> {
   backendCall: (p: Request) => Promise<ApiResponse<Response>>;
 }
 
-/// Post Request Engraving
-interface PostRequestEngraving {
-  chain: "btc";
+type PostRequestEngravingMessage = {
+  type: "Message";
   message: string;
-  is_file: boolean;
-  is_encrypted: boolean;
   is_public: boolean;
-}
+};
+type PostRequestEngravingFile = {
+  type: "File";
+  file_hash: Uint8Array;
+};
+type PostRequestEngravingEncrypted = {
+  type: "Encrypted";
+  encrypted_data: Uint8Array;
+  salt: Uint8Array;
+  iv: Uint8Array;
+};
+/// Post Request Engraving
+type PostRequestEngraving = { chain: "btc" } & (
+  | PostRequestEngravingMessage
+  | PostRequestEngravingFile
+  | PostRequestEngravingEncrypted
+);
+
 interface PostRequestEngravingResponse {
   address: string;
   fees: number;
@@ -54,7 +68,7 @@ interface GetTxInfoResponse {
   address: string;
   fees: number;
   status: TxStatus;
-  message: string;
+  data: string; //base64
   tx_id: string | null;
   cert_id: string | null;
   is_encrypted: boolean;
@@ -96,6 +110,12 @@ interface GetTxStatusResponse {
   status: TxStatus;
 }
 
+/// Cancel
+interface PostCancelTx {
+  id: string;
+}
+interface PostCancelTxResponse {}
+
 export type {
   PostRequestEngraving,
   PostRequestEngravingResponse,
@@ -115,4 +135,6 @@ export type {
   ApiResponse,
   GetTxStatus,
   GetTxStatusResponse,
+  PostCancelTx,
+  PostCancelTxResponse,
 };

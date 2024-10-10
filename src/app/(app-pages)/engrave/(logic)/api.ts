@@ -1,7 +1,8 @@
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
 import { ToggleKeys } from "../(cmp)/Body";
-import { encrypt } from "@/utils/crypto";
+import { encrypt, hash } from "@/utils/crypto";
+import { PostRequestEngraving } from "@/libs/api/models";
 
 const startEngraving = async (
   message: string,
@@ -15,14 +16,19 @@ const startEngraving = async (
     return;
   }
 
-  let passwordHashed: string | null = null;
+  let messageEncrypted:
+    | string
+    | { data: Uint8Array; iv: Uint8Array; salt: Uint8Array }
+    | null = null;
   try {
     if (
       toggleKey === "encrypt" &&
       (password === null || password.length === 0)
     ) {
+      showBanner("Please enter a password");
+      return;
     } else if (toggleKey === "encrypt" && password && password.length > 0) {
-      passwordHashed = encrypt(message, password);
+      messageEncrypted = encrypt(message, password);
     }
   } catch (e) {
     const error = e as any as Error;
@@ -30,13 +36,51 @@ const startEngraving = async (
     return;
   }
 
-  const response = await api.postRequestEngraving({
-    chain: "btc",
-    message: message,
-    is_file: file !== null,
-    is_encrypted: toggleKey === "encrypt",
-    is_public: toggleKey === "public",
-  });
+  const isFile = file !== null;
+  const fileHash = isFile ? await hash(file) : null;
+
+  const engravingData = isFile ? fileHash! : messageEncrypted ?? message;
+
+  let requestData: PostRequestEngraving | null = null;
+
+  if (
+    (toggleKey === "public" || toggleKey === "neither") &&
+    !isFile &&
+    messageEncrypted === null &&
+    typeof engravingData === "string"
+  ) {
+    //Message
+    requestData = {
+      chain: "btc",
+      type: "Message",
+      message: engravingData,
+      is_public: true,
+    };
+  } else if (isFile && fileHash) {
+    //File
+    requestData = {
+      chain: "btc",
+      type: "File",
+      file_hash: fileHash,
+    };
+  } else if (messageEncrypted) {
+    //Encrypted
+    requestData = {
+      chain: "btc",
+      type: "Encrypted",
+      encrypted_data: messageEncrypted.data,
+      iv: messageEncrypted.iv,
+      salt: messageEncrypted.salt,
+    };
+  } else {
+    console.error(
+      `Error before post request engraving - message: ${message}, file: ${file}, password.length: ${password?.length}, toggleKey: ${toggleKey}`
+    );
+    throw new Error("Invalid request data");
+  }
+
+  const response = await api.postRequestEngraving(requestData);
+
   if (response.ok) {
     return response;
   } else {

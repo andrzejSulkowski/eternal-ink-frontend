@@ -19,10 +19,12 @@ function RetrievePage() {
   const path = usePathname();
   const [txId, setTxId] = useState<string | undefined>(path.split("/").at(2));
   const [status, setStatus] = useState<TxStatus | undefined>();
-  const [message, setMessage, messageRef] = useState<string | undefined>();
+  const [message, setMessage, messageRef] = useState<string>("");
   const [isProtected, setIsProtected, isProtectedRef] =
     useState<boolean>(false);
   const [password, setPassword, passwordRef] = useState<string>("");
+  const [salt, setSalt, saltRef] = useState<string>("");
+  const [iv, setIv, ivRef] = useState<string>("");
 
   const { showBanner } = useBanner();
   const retrieve = useCallback(async () => {
@@ -31,7 +33,7 @@ function RetrievePage() {
     const response = await api.retrieveTx({ id: txId });
     if (response.ok) {
       setStatus(response.data?.status);
-      setMessage(response.data?.message);
+      setMessage(response.data?.data ?? "");
       if (response.data?.is_encrypted) setIsProtected(true);
     } else {
       if (response.status_code === 404) {
@@ -45,7 +47,17 @@ function RetrievePage() {
   const decrypt = useCallback(() => {
     if (messageRef.current) {
       try {
-        const decrypted = $decrypt(messageRef.current, passwordRef.current);
+        const messageBuffer = Buffer.from(messageRef.current, "base64");
+        const saltBuffer = Buffer.from(saltRef.current, "base64");
+        const ivBuffer = Buffer.from(ivRef.current, "base64");
+
+        const decrypted = $decrypt({
+          data: new Uint8Array(messageBuffer),
+          salt: new Uint8Array(saltBuffer),
+          iv: new Uint8Array(ivBuffer),
+          password: passwordRef.current,
+        });
+
         if (decrypted) {
           setMessage(decrypted);
           showBanner("Decrypted Successfully", { danger: false });
@@ -55,6 +67,7 @@ function RetrievePage() {
           showBanner("Incorrect password");
         }
       } catch (e) {
+        console.log("error", e);
         showBanner("Incorrect Password");
       }
     }
@@ -114,13 +127,31 @@ function RetrievePage() {
               onChange={(e) => setTxId(e.target.value)}
             />
             {isProtected && (
-              <div>
-                <PasswordInput
-                  autofocus={true}
-                  onChange={(e) => setPassword(e.currentTarget.value)}
-                  password={password}
-                  className={`mt-8`}
-                />
+              <div className="mt-8 flex flex-col gap-4">
+                <div>
+                  <PasswordInput
+                    autofocus={true}
+                    onChange={(e) => setPassword(e.currentTarget.value)}
+                    password={password}
+                    className={`mt-8`}
+                  />
+                </div>
+                <div>
+                  <Input
+                    autofocus={false}
+                    onChange={(e) => setSalt(e.currentTarget.value)}
+                    placeholder="Salt*"
+                    value={salt}
+                  />
+                </div>
+                <div>
+                  <Input
+                    autofocus={false}
+                    onChange={(e) => setIv(e.currentTarget.value)}
+                    placeholder="Initialization Vector (IV)*"
+                    value={iv}
+                  />
+                </div>
               </div>
             )}
 

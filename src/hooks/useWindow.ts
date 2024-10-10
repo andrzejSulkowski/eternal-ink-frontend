@@ -1,18 +1,18 @@
 import type CustomWindow from "@/models/window";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type WindowFn = (window: CustomWindow) => void;
 
 export const useWindow = () => {
   const [customWindow, setWindow] = useState<CustomWindow | null>(null);
-  const fnStack: Array<WindowFn> = useMemo(() => [], []);
+  const [fnStack, setFnStack] = useState<Array<WindowFn>>([]);
 
   useEffect(() => {
     const newWindow: CustomWindow = window as any as CustomWindow;
     if (window) {
       setWindow(newWindow);
     }
-  }, []);
+  }, [setWindow]);
 
   useEffect(() => {
     if (customWindow) {
@@ -22,13 +22,18 @@ export const useWindow = () => {
     }
   }, [customWindow, fnStack]);
 
-  const runFn = (fn: WindowFn) => {
-    if (customWindow) {
-      fn(customWindow);
-    } else {
-      fnStack.push(fn);
-    }
-  };
+  const runFn = useCallback(
+    (fn: WindowFn) => {
+      if (customWindow) {
+        fn(customWindow);
+      } else {
+        setFnStack((fnStack) => {
+          return [...fnStack, fn];
+        });
+      }
+    },
+    [customWindow, fnStack]
+  );
 
   return {
     window: customWindow,

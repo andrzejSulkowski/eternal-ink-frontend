@@ -9,12 +9,17 @@ interface Props extends EIProps {
   autofocus?: boolean;
 }
 
-function PasswordInput({ className, password, onChange, autofocus = false }: Props) {
+function PasswordInput({
+  className,
+  password,
+  onChange,
+  autofocus = false,
+}: Props) {
   return (
     <div className={classNames(className)}>
       <div className="font-manrope">
         <span className="text-ei-primary-faded">
-          This Message was Encrypted.
+          This Message was Encrypted.{" "}
         </span>
         <span className="text-white">Type Password:</span>
       </div>
@@ -23,7 +28,7 @@ function PasswordInput({ className, password, onChange, autofocus = false }: Pro
           <span className="font-bold text-sm text-white">Password:</span>
         </div>
         <Input
-        autofocus={autofocus}
+          autofocus={autofocus}
           placeholder="Password"
           value={password}
           onChange={onChange}

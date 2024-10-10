@@ -1,12 +1,9 @@
-// config.ts
-
 import { IConfiguration } from "@/models/config";
 import dotenv from "dotenv";
 
 // Load environment variables from .env file
 dotenv.config();
 
-// Function to get and parse the PASSWORD_SALT environment variable
 const getPasswordSalt = (): number | undefined => {
   const salt = process.env.PASSWORD_SALT;
   if (!salt) {
@@ -21,7 +18,7 @@ const getPasswordSalt = (): number | undefined => {
 };
 
 const getMode = (): "dev" | "prod" | undefined => {
-  const mode = process.env.MODE;
+  const mode = process.env.NEXT_PUBLIC_MODE;
   if (mode === "dev" || mode === "prod") {
     return mode;
   }
@@ -30,14 +27,15 @@ const getMode = (): "dev" | "prod" | undefined => {
   return undefined;
 };
 
-// Configuration object
 const CONFIG: IConfiguration = {
-  MODE: getMode() ?? "dev", // Replace with process.env.MODE if this should be configurable
-  MOCK_API: process.env.MOCK_API === "true", // Assuming MOCK_API is a boolean
-  BACKEND_URL: process.env.BACKEND_URL ?? "http://localhost:3001/api/",
+  MODE: getMode() ?? "dev",
+  MOCK_API: process.env.NEXT_PUBLIC_MOCK_API === "true",
+  BACKEND_URL:
+    process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3001/api/",
   MOCK_BACKEND_URL:
-    process.env.MOCK_BACKEND_URL ?? "http://localhost:3000/api/",
+    process.env.NEXT_PUBLIC_MOCK_BACKEND_URL ?? "http://localhost:3000/api/",
   PASSWORD_SALT: getPasswordSalt() ?? 10,
+  VERSION: process.env.NEXT_PUBLIC_VERSION ?? "0.0.0",
 };
 
 export default CONFIG;

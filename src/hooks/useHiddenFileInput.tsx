@@ -34,7 +34,7 @@ export const useHiddenFileInput = (
   const HiddenFileInput = ({ accept }: HiddenFileInputProps) => (
     <input
       type="file"
-      accept={accept.map((t) => t as string).reduce((t) => t)}
+      accept={accept.join(",")}
       hidden
       ref={fileInputRef}
       onChange={handleFileChange}

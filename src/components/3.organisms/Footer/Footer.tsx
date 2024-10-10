@@ -2,6 +2,7 @@ import React from "react";
 import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Hrefs from "./parts/Href/Hrefs";
+import CONFIG from "@/libs/config";
 
 interface Props extends EIProps {
   onHrefClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -33,6 +34,7 @@ function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
       {/* Legal */}
       <div className="flex flex-col justify-between gap-4">
         <span className="font-kanit font-bold text-2xl">Engrave</span>
+        <span className="text-ei-primary-faded">Version: {CONFIG.VERSION}</span>
         {/* Deactivated for now */}
         {/* <Hrefs routes={routes} onHrefClick={onHrefClick} /> */}
       </div>

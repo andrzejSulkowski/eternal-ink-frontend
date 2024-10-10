@@ -4,7 +4,7 @@ import Textarea from "@/components/1.atoms/Textarea/Textarea";
 import FileInput from "@/components/2.molecules/FileInput/FileInput";
 import ToggleGroup from "@/components/2.molecules/ToggleGroup/ToggleGroup";
 import ThreeStars from "@/components/Svgs/ThreeStars";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PasswordInput from "./PasswordInput";
 import SelectionCards from "./SelectionCards";
 import { startEngraving } from "./../(logic)/api";
@@ -15,24 +15,6 @@ import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
 import { TxStatus } from "@/models/transaction";
 import { encrypt, decrypt } from "@/utils/crypto";
 
-const toggleButtons: {
-  value: ToggleKeys;
-  label: string;
-}[] = [
-  {
-    value: "public",
-    label: "Make public",
-  },
-  {
-    value: "encrypt",
-    label: "Encrypt",
-  },
-  {
-    value: "neither",
-    label: "Neither",
-  },
-];
-
 const MAX_BYTES = 80;
 
 function Body() {
@@ -40,6 +22,28 @@ function Body() {
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState("");
   const [bytes, setBytes] = useState(0);
+
+  const toggleButtons = useMemo<
+    Array<{ value: ToggleKeys; label: string; disabled: boolean }>
+  >(() => {
+    return [
+      {
+        value: "public",
+        label: "Make public",
+        disabled: file !== null,
+      },
+      {
+        value: "encrypt",
+        label: "Encrypt",
+        disabled: file !== null,
+      },
+      {
+        value: "neither",
+        label: "Neither",
+        disabled: false,
+      },
+    ];
+  }, [file]);
 
   const updateMessage = (v: string) => {
     const uInt = textEncoder.encode(v);
@@ -84,8 +88,6 @@ function Body() {
     }
   }
 
-  const getPasswordInputClass = () =>
-    toggleKey !== "encrypt" ? "hidden" : null;
   return (
     <div className="flex  flex-col justify-between min-h-full">
       <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-6 font-manrope">
@@ -99,6 +101,7 @@ function Body() {
             value={message}
             onChange={(v) => updateMessage(v.currentTarget.value)}
             className="w-full h-40 p-4"
+            isDisabled={file !== null}
           />
           <span className="text-ei-primary-faded">
             Available Bytes: {MAX_BYTES - bytes}
@@ -140,11 +143,11 @@ function Body() {
           <PasswordInput
             onChange={(e) => setPassword(e.currentTarget.value)}
             password={password}
-            className={`mt-8 ${getPasswordInputClass()}`}
+            className={`mt-8 ${toggleKey !== "encrypt" ? "hidden" : null}`}
           />
 
           <Button
-            className={`!w-fit ${toggleKey === "encrypt" ? "mt-4" : "mt-16"}`}
+            className={`!w-fit ${toggleKey === "encrypt" ? "my-4" : "mt-16"}`}
             onClick={engrave}
           >
             Start Engraving Magic
