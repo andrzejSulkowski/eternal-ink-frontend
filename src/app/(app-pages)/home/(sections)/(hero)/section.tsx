@@ -28,8 +28,8 @@ function HeroSection({ className }: Props) {
             and press &apos;Send&apos; to engrave your mark on the blockchain
             instantly
           </span>
-          <Button className="!w-fit mt-12">
-            <Link href="engrave">Begin Your Legacy</Link>
+          <Button className="!w-fit mt-12" href="/engrave">
+            Begin Your Legacy
           </Button>
         </div>
       </div>

@@ -80,6 +80,7 @@ const startEngraving = async (
   }
 
   const response = await api.postRequestEngraving(requestData);
+  console.log("request engraving response: ", response);
 
   if (response.ok) {
     return response;

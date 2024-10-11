@@ -5,12 +5,6 @@ function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
-  return (
-    <EngravingProvider>
-      {children}
-    </EngravingProvider>
-  );
+  return <EngravingProvider>{children}</EngravingProvider>;
 }
 export default Layout;

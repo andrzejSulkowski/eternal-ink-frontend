@@ -68,15 +68,14 @@ export const useSseStream = (
       if (status === "keep-alive" || status === "close") {
         const txStatus = data as TxStatus;
         updateLoadingScreen(txStatus);
-        if (status === "close") {
+        if (
+          txStatus === TxStatus.Finalized ||
+          txStatus === TxStatus.ExternalConfirmed
+        ) {
+          callbacks.onCompleted();
+          setTimeout(close, 200);
+        } else if (status === "close") {
           console.log("txStatus: ", txStatus);
-          if (
-            txStatus === TxStatus.Finalized ||
-            txStatus === TxStatus.ExternalConfirmed
-          ) {
-            console.log("calling callbacks.onCompleted!");
-            callbacks.onCompleted();
-          }
           setTimeout(close, 200);
         }
       } else {

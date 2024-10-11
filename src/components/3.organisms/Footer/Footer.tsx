@@ -19,7 +19,9 @@ function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
   const Socials = () => (
     <div className="flex gap-8 justify-end">
       {socials.map((Social, idx) => (
-        <Social.cmp key={idx} className="cursor-pointer" />
+        <a href={Social.href}>
+          <Social.cmp key={idx} className="cursor-pointer" />
+        </a>
       ))}
     </div>
   );

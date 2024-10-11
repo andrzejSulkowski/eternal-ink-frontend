@@ -7,6 +7,7 @@ interface Props extends EIProps {
   password: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autofocus?: boolean;
+  disabled?: boolean;
 }
 
 function PasswordInput({
@@ -14,6 +15,7 @@ function PasswordInput({
   password,
   onChange,
   autofocus = false,
+  disabled = false,
 }: Props) {
   return (
     <div className={classNames(className)}>
@@ -33,6 +35,7 @@ function PasswordInput({
           value={password}
           onChange={onChange}
           type="password"
+          isDisabled={disabled}
         />
       </div>
     </div>

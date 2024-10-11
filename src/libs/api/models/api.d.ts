@@ -73,6 +73,7 @@ interface GetTxInfoResponse {
   cert_id: string | null;
   is_encrypted: boolean;
   is_public: boolean;
+  is_file: boolean;
 }
 
 /// Retrieve Messages

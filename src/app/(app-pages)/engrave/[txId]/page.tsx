@@ -19,8 +19,11 @@ interface Props {}
 
 function EngravePage({}: Props) {
   const { showBanner } = useBanner();
-  const { showLoadingScreen, hideLoadingScreen, state } = useLoadingScreen();
+  const { showLoadingScreen, hideLoadingScreen } = useLoadingScreen();
   const { engravingData, setEngravingData } = useEngraving();
+  const router = useRouter();
+  const path = usePathname();
+  const [address, setAddress] = React.useState(path.split("/")[2]);
 
   useEffect(() => {
     api.retrieveTx({ id: address }).then((resp) => {
@@ -36,16 +39,13 @@ function EngravePage({}: Props) {
         });
       }
     });
-  }, [setEngravingData]);
+  }, [setEngravingData, address]);
 
   const fees = useMemo(() => {
     if (engravingData?.fees) {
       return engravingData?.fees;
     }
   }, [engravingData?.fees]);
-  const path = usePathname();
-  const [address, setAddress] = React.useState(path.split("/")[2]);
-  const router = useRouter();
   const { runFn } = useWindow();
 
   const displayFees = useMemo(() => {

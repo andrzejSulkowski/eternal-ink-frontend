@@ -18,7 +18,7 @@ function FileBanner({ src, name, size, onRemove }: Props) {
           width={40}
           height={40}
           draggable={false}
-          objectFit="cover"
+          className="object-cover"
         />
         <div className="flex flex-col h-full justify-between">
           <span className="font-bold text-white">{name}</span>

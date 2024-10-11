@@ -4,7 +4,7 @@ import Textarea from "@/components/1.atoms/Textarea/Textarea";
 import FileInput from "@/components/2.molecules/FileInput/FileInput";
 import ToggleGroup from "@/components/2.molecules/ToggleGroup/ToggleGroup";
 import ThreeStars from "@/components/Svgs/ThreeStars";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import PasswordInput from "./PasswordInput";
 import SelectionCards from "./SelectionCards";
 import { startEngraving } from "./../(logic)/api";
@@ -13,7 +13,6 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useRouter } from "next/navigation";
 import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
 import { TxStatus } from "@/models/transaction";
-import { encrypt, decrypt } from "@/utils/crypto";
 
 const MAX_BYTES = 80;
 
@@ -61,7 +60,7 @@ function Body() {
 
   const router = useRouter();
   const textEncoder = new TextEncoder();
-  async function engrave() {
+  const engrave = useCallback(async () => {
     const t = textEncoder.encode(message);
     if (t.length > 80) {
       banner.showBanner("Message is too long", { danger: true });
@@ -74,7 +73,7 @@ function Body() {
       toggleKey,
       banner
     );
-    if (response?.ok) {
+    if (response?.ok && response.data) {
       setEngravingData({
         address: response.data!.address,
         fees: response.data!.fees,
@@ -84,9 +83,9 @@ function Body() {
         state: TxStatus.WaitingForFunds,
         txId: undefined,
       });
-      router.push(`/engrave/${response.data!.address}`);
+      router.push(`/engrave/${response.data.address}`);
     }
-  }
+  }, [message, file, password, toggleKey, banner, setEngravingData, router]);
 
   return (
     <div className="flex  flex-col justify-between min-h-full">

@@ -1,40 +1,50 @@
 "use client";
-import React, { useMemo } from "react";
-import type { EIProps } from "@/types";
+import Link from "next/link";
+import React from "react";
 import { classNames } from "@/utils/className";
 
-interface Props {
+type Props = {
   textContent?: string;
   children?: React.ReactNode;
   className?: string;
   isDisabled?: boolean;
-  onClick?: () => void;
-}
+} & ({ href: string } | { onClick: () => void });
 
-function Button({
-  textContent,
-  children,
-  className,
-  isDisabled,
-  onClick,
-}: Props) {
-  function onClickHandler() {
-    if (!isDisabled && onClick) onClick();
-  }
-  return (
-    <div
-      className={classNames(
-        `flex items-center font-semibold text-ei-black bg-white rounded-2xl px-6 py-3 text-sm font-manrope text-center 
+function Button(args: Props) {
+  const { textContent, children, className, isDisabled } = args;
+
+  if ("href" in args) {
+    const { href } = args;
+    return (
+      <div
+        className={classNames(
+          `flex items-center font-semibold text-ei-black bg-white rounded-2xl px-6 py-3 text-sm font-manrope text-center 
+          ${isDisabled ? "text-ei-primary-faded cursor-not-allowed" : "text-black cursor-pointer"}
+          `,
+          className
+        )}
+      >
+        <Link href={href}>{children}</Link>
+      </div>
+    );
+  } else {
+    const { onClick } = args;
+    const onClickHandler = () => (!isDisabled && onClick ? onClick() : null);
+    return (
+      <div
+        className={classNames(
+          `flex items-center font-semibold text-ei-black bg-white rounded-2xl px-6 py-3 text-sm font-manrope text-center 
         ${isDisabled ? "text-ei-primary-faded cursor-not-allowed" : "text-black cursor-pointer"}
         `,
-        className
-      )}
-      onClick={onClickHandler}
-    >
-      <span>{textContent}</span>
-      {children}
-    </div>
-  );
+          className
+        )}
+        onClick={onClickHandler}
+      >
+        <span>{textContent}</span>
+        {children}
+      </div>
+    );
+  }
 }
 
 export default Button;
