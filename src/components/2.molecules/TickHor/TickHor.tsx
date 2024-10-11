@@ -6,7 +6,7 @@ import GradientFadeEffect from "@/components/2.molecules/TickHor/parts/GradientF
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 
-interface Props extends EIProps{
+interface Props extends EIProps {
   ticks: TickProps[];
   tpm?: number; //ticks per minute - how many ticks to show scroll through in a minute
 }
@@ -44,7 +44,10 @@ function TickHor({ ticks, tpm = 2, className }: Props) {
 
   return (
     <div
-      className={classNames("max-w-full overflow-hidden font-manrope", className)}
+      className={classNames(
+        "max-w-full overflow-hidden font-manrope",
+        className
+      )}
       onMouseEnter={() => _decelerate()}
       onMouseLeave={() => _reset()}
     >

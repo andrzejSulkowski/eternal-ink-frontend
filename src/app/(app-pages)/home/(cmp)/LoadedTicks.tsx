@@ -39,9 +39,13 @@ function LoadedTicks({ className }: EIProps) {
   }, []);
 
   return (
-    <div className={classNames(className)}>
-      <TickHor ticks={ticks} tpm={1} />
-    </div>
+    <>
+      {ticks.length > 4 && (
+        <div className={classNames(className)}>
+          <TickHor ticks={ticks} tpm={1} />
+        </div>
+      )}
+    </>
   );
 }
 
