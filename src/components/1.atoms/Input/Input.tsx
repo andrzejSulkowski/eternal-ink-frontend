@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 
 interface Props extends EIProps {
-  placeholder: string;
-  value: string | undefined;
+  placeholder?: string;
+  value: string | boolean | undefined;
   onInput?: (e: React.FormEvent<HTMLInputElement>) => void;
   onChange?: (value: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;
-  type?: HTMLInputElement["type"];
+  type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
   label?: string;
   autofocus?: boolean;
+  name?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -21,10 +21,34 @@ const Input: React.FC<Props> = ({
   onChange,
   isDisabled = false,
   className,
-  type,
+  type = "text",
   autofocus = false,
   label,
+  name,
 }: Props) => {
+  const inputProps = {
+    autoFocus: autofocus,
+    className: classNames(
+      "font-manrope border w-full bg-ei-primary-light/10 border-1 border-ei-primary-dark rounded-2xl px-4 py-4",
+      "box-border outline-none text-white focus:border-ei-primary focus:placeholder-white placeholder:font-normal",
+      "placeholder:placeholder-ei-primary-faded font-bold disabled:opacity-50 disabled:cursor-not-allowed",
+      className
+    ),
+    disabled: isDisabled,
+    placeholder: placeholder,
+    onInput: onInput,
+    onChange: onChange,
+    type: type,
+    name: name,
+    id: name, // Add id to associate with label
+  };
+
+  // Handle checkbox input separately
+  if (type === "checkbox") {
+    return <input {...inputProps} checked={!!value} />;
+  }
+
+  // For other input types
   return (
     <>
       {label ? (
@@ -33,36 +57,14 @@ const Input: React.FC<Props> = ({
             <span className="font-bold text-sm text-white">{label}:</span>
           </div>
           <input
-            autoFocus={autofocus}
-            className={classNames(
-              "font-manrope border w-full bg-ei-primary-light/10 border-1 border-ei-primary-dark rounded-2xl px-4 py-4",
-              "box-border outline-none text-white focus:border-ei-primary focus:placeholder-white placeholder:font-normal",
-              "placeholder:placeholder-ei-primary-faded font-bold disabled:opacity-50 disabled:cursor-not-allowed",
-              className
-            )}
-            disabled={isDisabled}
-            placeholder={placeholder}
-            value={value}
-            onInput={(e) => onInput && onInput(e)}
-            onChange={(e) => onChange && onChange(e)}
-            type={type}
+            {...inputProps}
+            value={typeof value === "boolean" ? "" : value}
           />
         </div>
       ) : (
         <input
-          autoFocus={autofocus}
-          className={classNames(
-            "font-manrope border w-full bg-ei-primary-light/10 border-1 border-ei-primary-dark rounded-2xl px-4 py-4",
-            "box-border outline-none text-white focus:border-ei-primary focus:placeholder-white placeholder:font-normal",
-            "placeholder:placeholder-ei-primary-faded font-bold disabled:opacity-50 disabled:cursor-not-allowed",
-            className
-          )}
-          disabled={isDisabled}
-          placeholder={placeholder}
-          value={value}
-          onInput={(e) => onInput && onInput(e)}
-          onChange={(e) => onChange && onChange(e)}
-          type={type}
+          {...inputProps}
+          value={typeof value === "boolean" ? "" : value}
         />
       )}
     </>

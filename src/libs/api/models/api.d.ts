@@ -117,6 +117,16 @@ interface PostCancelTx {
 }
 interface PostCancelTxResponse {}
 
+/// Consent
+type PostConsent = {
+  id: string;
+  terms_and_conditions: true;
+} & (
+  | { email: string; consent_to_contact: boolean }
+  | { email: undefined; consent_to_contact: false }
+);
+type PostConsentResponse = {};
+
 export type {
   PostRequestEngraving,
   PostRequestEngravingResponse,
@@ -138,4 +148,6 @@ export type {
   GetTxStatusResponse,
   PostCancelTx,
   PostCancelTxResponse,
+  PostConsent,
+  PostConsentResponse,
 };

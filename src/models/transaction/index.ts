@@ -1,3 +1,4 @@
+import { ToggleKeys } from "@/app/(app-pages)/engrave/(logic)/types";
 import { TxStatus } from "./state";
 
 interface EngravingState {
@@ -8,6 +9,12 @@ interface EngravingState {
   isEncrypted: boolean;
   state: TxStatus;
   txId: string | undefined;
+
+  temp?: {
+    file: File | null;
+    password: string;
+    toggleKey: ToggleKeys;
+  };
 }
 
 interface EngravingContextType {

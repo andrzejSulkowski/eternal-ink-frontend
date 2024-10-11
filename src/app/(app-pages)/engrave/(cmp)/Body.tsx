@@ -7,7 +7,6 @@ import ThreeStars from "@/components/Svgs/ThreeStars";
 import { useCallback, useMemo, useState } from "react";
 import PasswordInput from "./PasswordInput";
 import SelectionCards from "./SelectionCards";
-import { startEngraving } from "./../(logic)/api";
 import { ToggleKeys } from "./../(logic)/types";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useRouter } from "next/navigation";
@@ -66,25 +65,22 @@ function Body() {
       banner.showBanner("Message is too long", { danger: true });
       return;
     }
-    const response = await startEngraving(
+    setEngravingData({
+      address: "",
+      fees: 0,
       message,
-      file,
-      password,
-      toggleKey,
-      banner
-    );
-    if (response?.ok && response.data) {
-      setEngravingData({
-        address: response.data!.address,
-        fees: response.data!.fees,
-        message,
-        isPublic: toggleKey === "public",
-        isEncrypted: toggleKey === "encrypt",
-        state: TxStatus.WaitingForFunds,
-        txId: undefined,
-      });
-      router.push(`/engrave/${response.data.address}`);
-    }
+      isPublic: toggleKey === "public",
+      isEncrypted: toggleKey === "encrypt",
+      state: TxStatus.WaitingForFunds,
+      txId: undefined,
+      temp: {
+        file,
+        password,
+        toggleKey,
+      },
+    });
+
+    router.push(`/engrave/certificate-contact`);
   }, [message, file, password, toggleKey, banner, setEngravingData, router]);
 
   return (

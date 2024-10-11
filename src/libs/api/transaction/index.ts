@@ -6,6 +6,7 @@ import getMessages from "./handler/getMessages";
 import getCertificate from "./handler/getCertificate";
 import getTxStatus from "./handler/getStatus";
 import postCancelEngraving from "./handler/cancelEngraving";
+import postConsent from "./handler/consent";
 
 const api = {
   postRequestEngraving,
@@ -15,7 +16,8 @@ const api = {
   getMessages,
   getCertificate,
   getTxStatus,
-  postCancelEngraving
+  postCancelEngraving,
+  postConsent,
 };
 
 export default api;

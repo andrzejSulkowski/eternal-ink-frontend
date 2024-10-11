@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   EngravingState,
   TxStatus,
@@ -13,7 +13,7 @@ const defaultEngravingState: EngravingState = {
   isPublic: false,
   isEncrypted: false,
   state: TxStatus.WaitingForFunds,
-  txId: undefined
+  txId: undefined,
 };
 
 const EngravingContext = createContext<EngravingContextType>({
@@ -26,7 +26,9 @@ const useEngraving = () => useContext(EngravingContext);
 export const EngravingProvider = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
-  const [engravingData, setEngravingData] = useState<EngravingState | null>(null);
+  const [engravingData, setEngravingData] = useState<EngravingState | null>(
+    null
+  );
 
   return (
     <EngravingContext.Provider value={{ engravingData, setEngravingData }}>
