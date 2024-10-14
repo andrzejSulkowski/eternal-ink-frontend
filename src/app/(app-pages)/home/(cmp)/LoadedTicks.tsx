@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const tickClick = (id: string, router: AppRouterInstance) =>
   router.push(`/retrieve/${id}`);
@@ -38,9 +39,11 @@ function LoadedTicks({ className }: EIProps) {
     init();
   }, []);
 
+  const isMobile = useIsMobile();
+
   return (
     <>
-      {ticks.length > 4 && (
+      {ticks.length > 4 && !isMobile && (
         <div className={classNames(className)}>
           <TickHor ticks={ticks} tpm={1} />
         </div>

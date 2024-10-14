@@ -1,11 +1,13 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Button from "@/components/1.atoms/Button/Button";
 import Routes from "./parts/Routes/Routes";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Props extends EIProps {
   routes: EIRoute[];
@@ -13,37 +15,127 @@ interface Props extends EIProps {
 
 function Header({ className, children, routes }: Props) {
   const router = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+
   function onCTAClick() {
     router.push("/engrave");
+    setIsMobileMenuOpen(false); // Close menu when button is clicked
   }
-  function onHrefClick() {
-    console.log("Href Clicked");
-  }
-  return (
-    <div
-      className={classNames(
-        "flex w-full px-72 py-6 bg-gradient-to-b from-[#070514] to-transparent font-manrope text-white gap-10 justify-between",
-        "border-b-[1px] border-solid border-b-[#242438] font-manrope z-10",
-        className
-      )}
-    >
-      {/* Left Block */}
-      <div className="flex gap-16 justify-between items-center">
-        <Link className="font-bold font-kanit text-2xl" href="/">
-          Engrave
-        </Link>
-        {/* Left's Bock Routes */}
-        <Routes routes={routes} />
-      </div>
 
-      {/* Right Block */}
-      <div>
-        {children}
-        <Button onClick={onCTAClick}>
-          <Link href="engrave">Begin Your Legacy</Link>
-        </Button>
-      </div>
-    </div>
+  function toggleMobileMenu() {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  }
+
+  const getMobileMenuHeight = useCallback(() => {
+    if (headerRef.current) {
+      return headerRef.current.clientHeight;
+    }
+    return 0;
+  }, [headerRef]);
+
+  const Separator = ({ className }: EIProps) => {
+    return (
+      <div
+        className={classNames("h-1 w-full bg-ei-primary-royal/30", className)}
+      />
+    );
+  };
+
+  return (
+    <AnimatePresence>
+      <motion.header
+        className={classNames(
+          "w-full px-6 py-4  font-manrope text-white",
+          "border-b border-solid  z-10 border-b-[#242438]",
+          `${isMobileMenuOpen ? "bg-black" : "bg-gradient-to-b from-[#070514] to-transparent"}`,
+          className
+        )}
+        animate={{
+          backgroundColor: isMobileMenuOpen ? "black" : "transparent",
+        }}
+        transition={{ type: "tween" }}
+        ref={headerRef}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between relative">
+          {/* Left Side */}
+          <div className="flex justify-center items-center gap-24">
+            <Link
+              className="font-bold font-kanit text-4xl md:text-2xl"
+              href="/"
+            >
+              Engrave
+            </Link>
+
+            <Routes routes={routes} />
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {children}
+            <Button onClick={onCTAClick}>
+              <Link href="/engrave">Begin Your Legacy</Link>
+            </Button>
+          </nav>
+
+          {/* Mobile Burger Icon */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              aria-label="Toggle Menu"
+              className="focus:outline-none"
+            >
+              {isMobileMenuOpen ? (
+                <HiOutlineX className="w-8 h-8" />
+              ) : (
+                <HiOutlineMenu className="w-8 h-8" />
+              )}
+            </button>
+          </div>
+        </div>
+        {/* Mobile Menu */}
+        <motion.nav
+          className={classNames(
+            `md:hidden bg-black rounded-lg shadow-lg absolute bottom-0 left-0 right-0`
+          )}
+          style={{ top: getMobileMenuHeight() }}
+          animate={{
+            transform: !isMobileMenuOpen
+              ? "translateX(-100%)"
+              : "translateX(0%)",
+            opacity: !isMobileMenuOpen ? 0 : 1,
+          }}
+          transition={{ type: "tween" }}
+        >
+          <div className="flex flex-col justify-between h-full items-center w-full">
+            {/* Header */}
+            <div className="w-full">
+              <Separator className="mb-12" />
+              <Routes
+                className="flex flex-col"
+                routes={routes}
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
+            </div>
+            {/* Body */}
+            <div>{children}</div>
+
+            {/* Footer */}
+            <div className="mb-12 w-10/12">
+              <Separator className="mb-20" />
+              <Button onClick={onCTAClick} className="w-full mt-4 text-4xl">
+                <Link
+                  className="text-2xl text-center w-full py-3"
+                  href="/engrave"
+                >
+                  Begin Your Legacy
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </motion.nav>
+      </motion.header>
+    </AnimatePresence>
   );
 }
 
