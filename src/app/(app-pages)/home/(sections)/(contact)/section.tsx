@@ -2,10 +2,10 @@
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import ContactMeForm from "@/components/3.organisms/ContactMeForm/ContactMeForm";
 import api from "@/libs/api/general";
-import tApi from "@/libs/api/transaction";
 import { classNames } from "@/utils/className";
 import { useState } from "react";
 import { validateEmail } from "@/utils/validateEmail";
+import { EIProps } from "@/types";
 
 function BgBlue1({ className }: { className?: string }) {
   return (
@@ -27,7 +27,7 @@ function BgBlue1({ className }: { className?: string }) {
   );
 }
 
-function ContactSection() {
+function ContactSection({ className }: EIProps) {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const { showBanner } = useBanner();
@@ -55,8 +55,13 @@ function ContactSection() {
   }
 
   return (
-    <div className="px-60 font-manrope w-full relative py-36">
-      <div className="w-full grid grid-cols-2 gap-16 my-24">
+    <div
+      className={classNames(
+        "px-12 md:px-60 font-manrope w-full relative py-12 md:py-36",
+        className
+      )}
+    >
+      <div className="w-full md:grid md:grid-cols-2 gap-16 my-24 flex flex-col">
         {/* Col1 */}
         <div className="w-full h-full flex flex-col justify-center gap-6">
           <h1 className="font-extrabold text-6xl">
@@ -64,7 +69,7 @@ function ContactSection() {
             or Need a Hand? <br />
             I&apos;m Here to Help!
           </h1>
-          <p className="text-ei-primary-faded text-sm">
+          <p className="text-ei-primary-faded text-xl md:text-sm">
             Your curiosity and engagement drive this project forward. Whether
             you have inquiries about engraving, need guidance through the
             process, or simply want to share your thoughts, I&apos;m here for

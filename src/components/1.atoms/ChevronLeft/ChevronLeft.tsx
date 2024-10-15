@@ -9,7 +9,7 @@ function ChevronLeft({ onClick, className }: Props) {
   return (
     <div
       className={classNames(
-        "flex justify-center items-center bg-[#242438] text-white cursor-pointer p-2 rounded-full w-10 h-10",
+        "flex justify-center items-center bg-[#242438] text-white cursor-pointer p-2 rounded-full md:w-10 md:h-10 w-16 h-16",
         className
       )}
       onClick={onClick}

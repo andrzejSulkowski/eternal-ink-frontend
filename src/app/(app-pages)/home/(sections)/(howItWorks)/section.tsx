@@ -10,6 +10,9 @@ import Ball from "@/components/1.atoms/Ball/Ball";
 import { useSpring, config } from "@react-spring/web";
 import Header from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/Header";
 import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/SelectionCardsList";
+import { motion } from "framer-motion";
+import { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
 const selectionCards: SelectionCardProps[] = [
   {
@@ -67,7 +70,7 @@ const selectionCards: SelectionCardProps[] = [
   },
 ];
 
-function HowItWorks() {
+function HowItWorks({ className }: EIProps) {
   let scrollRef = useRef<HTMLDivElement | null>(null);
   const setRef = (r: RefObject<HTMLDivElement>) => (scrollRef = r);
 
@@ -112,7 +115,11 @@ function HowItWorks() {
   }
 
   return (
-    <div className="font-manrope py-24 relative">
+    <motion.div
+      className={classNames("font-manrope py-24 relative", className)}
+      layout
+      transition={{ duration: 1, ease: "easeInOut" }}
+    >
       <Header onNext={goToNextCard} onPrev={goToPrevCard} />
       <SelectionCardsList
         setRef={(r) => setRef(r)}
@@ -121,7 +128,7 @@ function HowItWorks() {
       />
 
       <Ball className="absolute h-1/3 top-[-5%] right-[-5%] blur-sm -z-10" />
-    </div>
+    </motion.div>
   );
 }
 export default HowItWorks;

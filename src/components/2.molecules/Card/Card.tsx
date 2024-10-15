@@ -19,7 +19,7 @@ function Card({
   return (
     <div
       className={classNames(
-        "w-full bg-gradient-to-br from-black/20 to-ei-twilight-blue text-white rounded-3xl grid grid-cols-12",
+        "w-full h-[450px] md:h-auto bg-gradient-to-br from-black/20 to-ei-twilight-blue text-white rounded-3xl flex flex-col-reverse md:grid md:grid-cols-12 px-8 md:0",
         className
       )}
     >
@@ -27,7 +27,7 @@ function Card({
         {children}
       </div>
       <div className="col-span-7 pr-10 py-20 flex flex-col">
-        <div className="uppercase text-ei-primary font-semibold text-xs mb-5">
+        <div className="uppercase text-ei-primary font-semibold text-xl md:text-xs mb-5">
           Random facts
         </div>
         <div className="font-extrabold text-5xl">{title}</div>
@@ -35,7 +35,7 @@ function Card({
           {highlightedTitle}
         </div>
 
-        <span className="text-sm mt-5 text-ei-primary-faded">
+        <span className="text-2xl md:text-sm mt-5 text-ei-primary-faded">
           {description}
         </span>
       </div>

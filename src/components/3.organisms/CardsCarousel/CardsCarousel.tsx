@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import Card, { Props as CardProps } from "@/components/2.molecules/Card/Card";
 export type { CardProps };
 import ChevronLeft from "@/components/1.atoms/ChevronLeft/ChevronLeft";
 import ChevronRight from "@/components/1.atoms/ChevronRight/ChevronRight";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface Props extends EIProps {
   cards: CardProps[];
@@ -14,6 +14,7 @@ interface Props extends EIProps {
 
 function CardsCarousel({ cards, className }: Props) {
   const [selectedIdx, setSelectedIdx] = useState(0);
+  const isMobile = useIsMobile();
 
   const handlePrev = () => {
     setSelectedIdx((prevIdx) =>
@@ -49,11 +50,16 @@ function CardsCarousel({ cards, className }: Props) {
       <div>
         <div
           className={classNames(
-            "relative flex items-center justify-center w-full",
+            "relative flex flex-col md:flex-row items-center justify-center w-full",
             className
           )}
         >
-          <ChevronLeft onClick={handlePrev} className="absolute -left-4 z-30" />
+          {!isMobile && (
+            <ChevronLeft
+              onClick={handlePrev}
+              className="absolute -left-4 z-30"
+            />
+          )}
           <div className="w-full flex justify-center">
             <Card {...cards[selectedIdx]}>
               <div className="absolute bottom-0 z-10">
@@ -72,10 +78,18 @@ function CardsCarousel({ cards, className }: Props) {
               </div>
             </Card>
           </div>
-          <ChevronRight
-            onClick={handleNext}
-            className="absolute -right-4 z-30"
-          />
+          {isMobile && (
+            <div className="flex w-full justify-between mt-8">
+              <ChevronLeft onClick={handlePrev} />
+              <ChevronRight onClick={handleNext} />
+            </div>
+          )}
+          {!isMobile && (
+            <ChevronRight
+              onClick={handleNext}
+              className="absolute -right-4 z-30"
+            />
+          )}
         </div>
         <Dots />
       </div>

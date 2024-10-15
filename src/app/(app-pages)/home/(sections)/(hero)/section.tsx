@@ -23,7 +23,7 @@ function HeroSection({ className }: Props) {
           <span className="block font-extrabold text-8xl text-center font-manrope">
             Immortalize Your Essence
           </span>
-          <span className="block text-ei-primary-faded text-sm mt-6 text-center">
+          <span className="block text-ei-primary-faded text-2xl md:text-sm mt-6 text-center">
             Join the digital legacy. Enter your message or document hash below
             and press &apos;Send&apos; to engrave your mark on the blockchain
             instantly

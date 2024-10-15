@@ -8,14 +8,20 @@ import BgViolet2 from "./(bg)/BgViolet2";
 import Ellipse1 from "./(cmp)/Ellipse1";
 import Ellipse2 from "./(cmp)/Ellipse2";
 import FeatureShowcase from "@/components/2.molecules/FeatureShowcase/FeatureShowcase";
+import { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-function WhyEngrave() {
+function WhyEngrave({ className }: EIProps) {
   return (
-    <div className="px-60 font-manrope">
+    <div
+      className={classNames(
+        "px-12 md:px-60 font-manrope overflow-hidden",
+        className
+      )}
+    >
       <h1 className="font-extrabold text-6xl w-full text-center mt-54">
         Why Engrave?
       </h1>
-
 
       <FeatureShowcase
         title="A Journey Through Time"
@@ -80,7 +86,6 @@ function WhyEngrave() {
             <BgBlack1 className="absolute bottom-[-40%] left-[-10%] -z-10 blur-3xl" />
             <BgViolet1 className="absolute top-[30%] left-[-50%] -z-20 !w-2/3 blur-3xl opacity-60" />
             <Ball className="absolute h-[65%] !max-w-max !max-h-max top-[-20%] left-[-40%] blur-md -z-30" />
-
           </div>
         }
         ContentNode={

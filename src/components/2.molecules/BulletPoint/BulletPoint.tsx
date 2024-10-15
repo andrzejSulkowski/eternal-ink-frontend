@@ -10,8 +10,13 @@ export interface Props extends EIProps {
 
 function BulletPoint({ highlighted, description, className }: Props) {
   return (
-    <div className={classNames("flex items-start space-x-3 text-white", className)}>
-      <Check className="mr-2 w-10 h-10"/>
+    <div
+      className={classNames(
+        "flex text-xl md:text-sm items-start space-x-3 text-white",
+        className
+      )}
+    >
+      <Check className="mr-2 min-w-10 min-h-10" />
       <div>
         <span className="font-bold">{highlighted}</span>{" "}
         <span className="text-ei-primary-faded">{description}</span>

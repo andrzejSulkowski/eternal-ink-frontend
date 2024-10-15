@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 
 export default function Page({}: Props) {
   return (
-    <div className={classNames("")}>
-      <LoadedTicks className="" />
-      <Hero />
-      <HowItWorks />
-      <CardSection />
-      <WhyEngrave />
-      <ContactSection />
+    <div className={classNames("max-w-[100sw]")}>
+      <LoadedTicks className="overflow-x-hidden" />
+      <Hero className="overflow-x-hidden" />
+      <HowItWorks className="overflow-x-hidden" />
+      <CardSection className="overflow-x-hidden" />
+      <WhyEngrave className="overflow-x-hidden" />
+      <ContactSection className="" />
     </div>
   );
 }

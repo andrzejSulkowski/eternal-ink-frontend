@@ -21,7 +21,7 @@ interface Props {
 
 function FeatureShowcase(props: Props) {
   return (
-    <div className="w-full grid grid-cols-2 mt-32 overflow-visible">
+    <div className="w-full flex flex-col-reverse md:grid md:grid-cols-2 mt-32 overflow-visible">
       {props.first === "content" ? (
         <>
           <ContentBlock {...props}>{props.ContentNode}</ContentBlock>

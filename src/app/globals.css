@@ -85,6 +85,15 @@ img {
 html {
   font-size: 16px; /* Default font size */
 }
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 
 /* Small screens */
 @media (max-width: 640px) {

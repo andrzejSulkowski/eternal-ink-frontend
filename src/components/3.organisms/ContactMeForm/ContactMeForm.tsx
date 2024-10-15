@@ -51,7 +51,7 @@ function ContactMeForm({
         <div className="font-extrabold text-white text-3xl text-center text-nowrap">
           {title}
         </div>
-        <div className="text-ei-primary-faded text-center text-nowrap">
+        <div className="text-ei-primary-faded text-center text-nowrap text-xl md:text-base">
           {subtitle}
         </div>
       </div>
@@ -86,7 +86,7 @@ function ContactMeForm({
 
         <Button
           onClick={() => onSubmit({ name, email, message })}
-          className="w-min text-nowrap"
+          className="w-full md:w-min text-nowrap justify-center md:justify-start"
           isDisabled={isDisabled}
         >
           Send My Message

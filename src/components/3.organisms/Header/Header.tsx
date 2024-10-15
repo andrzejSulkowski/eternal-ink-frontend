@@ -1,13 +1,14 @@
 "use client";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import Button from "@/components/1.atoms/Button/Button";
 import Routes from "./parts/Routes/Routes";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface Props extends EIProps {
   routes: EIRoute[];
@@ -15,7 +16,9 @@ interface Props extends EIProps {
 
 function Header({ className, children, routes }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
   const headerRef = useRef<HTMLDivElement>(null);
 
   function onCTAClick() {
@@ -33,6 +36,10 @@ function Header({ className, children, routes }: Props) {
     }
     return 0;
   }, [headerRef]);
+
+  useEffect(() => {
+    setTimeout(() => setIsMobileMenuOpen(false), 50);
+  }, [pathname]);
 
   const Separator = ({ className }: EIProps) => {
     return (
@@ -67,7 +74,7 @@ function Header({ className, children, routes }: Props) {
               Engrave
             </Link>
 
-            <Routes routes={routes} />
+            {!isMobile && <Routes routes={routes} />}
           </div>
 
           {/* Desktop Navigation */}

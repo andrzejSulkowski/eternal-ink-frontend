@@ -29,7 +29,7 @@ function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
   return (
     <footer
       className={classNames(
-        "px-72 py-6 flex text-white justify-between font-light",
+        "px-12 md:px-72 py-6 flex text-white justify-between font-light",
         className
       )}
     >
@@ -42,7 +42,7 @@ function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
       </div>
       {/* Social Links */}
       <div className="flex flex-col justify-between gap-4">
-        <div className="h-6 w-full flex gap-8 justify-end">
+        <div className="h-8 md:h-6 w-full flex gap-8 justify-end">
           <Socials />
         </div>
         <span className="text-ei-primary-faded">

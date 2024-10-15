@@ -2,8 +2,10 @@ import Ball from "@/components/1.atoms/Ball/Ball";
 import CardsCarousel, {
   CardProps,
 } from "@/components/3.organisms/CardsCarousel/CardsCarousel";
+import { EIProps } from "@/types";
+import { classNames } from "@/utils/className";
 
-function CardSection() {
+function CardSection({ className }: EIProps) {
   const cards: CardProps[] = [
     {
       title: "Transaction Cost can range",
@@ -12,22 +14,27 @@ function CardSection() {
         "Just type in your message and we'll show you what the engraving fees are at the present time",
     },
     {
-      title: "Forever on the Blockchain",
+      title: "Forever",
       highlightedTitle: "On the Blockchain",
       description: "We'll show you how to do it",
     },
     {
-      title: "Send your message",
-      highlightedTitle: "To a friend",
+      title: "Send a message",
+      highlightedTitle: "to a friend",
       description: "Just type in your message and send him the link",
     },
   ];
 
   return (
-    <div className="my-48 px-60 relative">
+    <div
+      className={classNames(
+        "px-12 my-24 md:my-48 md:px-60 relative",
+        className
+      )}
+    >
       <CardsCarousel cards={cards} />
-      <Ball className="absolute left-[7%] top-[35%] z-20 blur-sm" />
-      <Ball className="absolute right-[10%] top-[-50%] -z-20 blur-lg opacity-60" />
+      <Ball className="absolute -left-[30%] md:left-[7%] top-[35%] z-20 blur-sm w-1/2 md:w-auto" />
+      <Ball className="absolute right-[2%] md:right-[10%] top-[-50%] -z-20 blur-lg opacity-60" />
     </div>
   );
 }

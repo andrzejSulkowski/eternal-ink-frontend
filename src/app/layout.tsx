@@ -54,12 +54,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <body
         className={[
           kanit.variable,
           manrope.variable,
-          "font-manrope, text-white overflow-x-clip overflow-y-auto flex flex-col min-h-screen",
+          "font-manrope, text-white flex flex-col min-h-screen",
           "bg-black",
         ].join(" ")}
       >
