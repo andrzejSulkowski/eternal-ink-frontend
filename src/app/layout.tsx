@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Eternal Ink",
   description: "Persistently store your thoughts and ideas on the Blockchain",
 };
+
 const headerRoutes: EIRoute[] = [
   {
     href: "/home",
