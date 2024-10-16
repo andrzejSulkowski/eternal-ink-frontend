@@ -13,7 +13,7 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {},
-  args: {  },
+  args: {},
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -22,21 +22,21 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
   args: {
-    textContent: "Begin Your Legacy"
+    onClick: () => null,
+    textContent: "Begin Your Legacy",
   },
 };
-
 
 const IconWrapper = () => (
   <div className="h-full w-5 ml-1">
-    <WiStars size={"120%"}/>
+    <WiStars size={"120%"} />
   </div>
-)
+);
 
 export const Filled: Story = {
   args: {
+    onClick: () => null,
     textContent: "Begin Your Legacy",
-    children: ThreeStars({className: "max-w-5 ml-2"})
+    children: ThreeStars({ className: "max-w-5 ml-2" }),
   },
 };
-

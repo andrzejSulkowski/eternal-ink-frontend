@@ -46,27 +46,27 @@ function FileInput(props: Props) {
   const { state } = useFileInputState(props, uploadTimeStamp, isDragActive);
   const progress = useMemo(() => (props.file ? 100 : 0), [props.file]);
   const componentMap = {
-    default: () => Default({ className: "h-11 leading-10" }), //h-11 <=> 44px which is exactly what the content of full is with 20px each line plus 4px of gap
-    enter: () => (
+    Default: () => Default({ className: "h-11 leading-10" }), //h-11 <=> 44px which is exactly what the content of full is with 20px each line plus 4px of gap
+    Enter: () => (
       <Default className="h-11 leading-10">
         <Enter onDragLeave={dragLeave} onDrop={maybeDrop} />
       </Default>
     ),
-    loading: () => <Loading progress={progress} />,
-    full: Full,
+    Loading: () => <Loading progress={progress} />,
+    Full: Full,
   };
 
   const bannerMap = {
-    default: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
-    enter: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
-    loading: () => (
+    Default: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
+    Enter: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
+    Loading: () => (
       <LoadingFileBanner
         src="/storybook_resources/dwarf.png"
         namePlaceholder="Loading your file"
         sizePlaceholder=">100 MB"
       />
     ),
-    full: () => {
+    Full: () => {
       const src = useMemo(
         () => (props.file ? URL.createObjectURL(props.file) : null),
         [props.file]

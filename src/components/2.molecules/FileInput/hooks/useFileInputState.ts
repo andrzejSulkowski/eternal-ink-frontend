@@ -3,10 +3,10 @@ import { useDropzone } from "react-dropzone";
 import { Props } from "../FileInput";
 
 export enum STATE {
-  DEFAULT = "default",
-  ENTER = "enter",
-  LOADING = "loading",
-  FULL = "full",
+  DEFAULT = "Default",
+  ENTER = "Enter",
+  LOADING = "Loading",
+  FULL = "Full",
 }
 interface UseFileInputStateReturn {
   state: STATE;
