@@ -7,6 +7,7 @@ import ChevronRight from "@/components/1.atoms/ChevronRight/ChevronRight";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import Image from "next/image";
 
 interface Props extends EIProps {
   cards: CardProps[];
@@ -58,17 +59,21 @@ function CardsCarousel({ cards, className }: Props) {
         )}
         <div className="w-full flex justify-center">
           <Card {...cards[selectedIdx]}>
-            <div className="absolute bottom-0 z-10">
+            <div className="absolute bottom-0 top-0 left-0 right-0">
               {/* Change to Image */}
-              <img
+              <Image
+                width={1260}
+                height={1425}
                 src="/storybook_resources/ball.png"
                 className="absolute -right-24 -top-20 -z-10"
                 alt="ball"
               />
               {/* Change to Image */}
-              <img
-                className="w-full"
-                src="./storybook_resources/dwarf2.png"
+              <Image
+                width={1260}
+                height={1425}
+                className="w-auto bottom-0 absolute max-h-full md:max-h-none"
+                src="/storybook_resources/dwarf2.png"
                 alt="dwarf"
               />
             </div>

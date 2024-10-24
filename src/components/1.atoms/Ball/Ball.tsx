@@ -1,17 +1,19 @@
-"use client";
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 function Ball({ className }: EIProps) {
   return (
-    <motion.img
-      className={classNames("max-w-full max-h-full", className)}
-      src="./storybook_resources/ball_solid.png"
-      alt="Ball"
-      layout
-      transition={{ duration: 1, ease: "easeInOut" }}
-    />
+    <div className={classNames("", className)}>
+      <Image
+        className="object-contain" // For responsive scaling
+        src="/storybook_resources/ball_solid.png"
+        layout="fill" // Fill the container while keeping aspect ratio
+        objectFit="contain" // Prevent distortion
+        alt="Ball"
+      />
+    </div>
   );
 }
+
 export default Ball;

@@ -30,7 +30,7 @@ const Input: React.FC<Props> = ({
     autoFocus: autofocus,
     className: classNames(
       "font-manrope border w-full bg-ei-primary-light/10 border-1 border-ei-primary-dark rounded-2xl px-4 py-4 text-2xl md:text-base",
-      "box-border outline-none text-white focus:border-ei-primary focus:placeholder-white md:placeholder:font-normal placeholder:text-2xl",
+      "box-border outline-none text-white focus:border-ei-primary focus:placeholder-white md:placeholder:font-normal placeholder:text-2xl md:placeholder:text-base",
       "placeholder:placeholder-ei-primary-faded font-bold disabled:opacity-50 disabled:cursor-not-allowed",
       className
     ),
@@ -54,7 +54,7 @@ const Input: React.FC<Props> = ({
       {label ? (
         <div className="flex gap-12 pr-3 pl-4 py-3 bg-[#09090A] font-manrope rounded-xl">
           <div className="flex flex-col text-nowrap justify-center">
-            <span className="font-bold text-2xl md:text-sm text-white">
+            <span className="font-bold text-xl md:text-sm text-white">
               {label}:
             </span>
           </div>

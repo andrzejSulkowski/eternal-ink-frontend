@@ -127,7 +127,7 @@ function HowItWorks({ className }: EIProps) {
         scrollLeft={springProps.scrollLeft}
       />
 
-      <Ball className="absolute h-1/3 top-[-5%] right-[-5%] blur-sm -z-10" />
+      <Ball className="absolute h-1/3 w-64 md:w-[20em] top-[-5%] right-[-5%] blur-sm -z-10 rounded-full" />
     </motion.div>
   );
 }

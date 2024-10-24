@@ -1,9 +1,4 @@
 import { Props as BulletPointProps } from "@/components/2.molecules/BulletPoint/BulletPoint";
-// Cmps
-import Ellipse1 from "./bg/Ellipse1";
-import Ellipse2 from "./bg/Ellipse2";
-import Ball from "@/components/1.atoms/Ball/Ball";
-import E from "@/components/Svgs/E";
 import ContentBlock from "./parts/ContentBlock";
 import ImgBlock from "./parts/ImgBlock";
 import { ReactNode } from "react";
@@ -17,6 +12,7 @@ interface Props {
   first: "img" | "content";
   ImgNode?: ReactNode;
   ContentNode?: ReactNode;
+  alt: string;
 }
 
 function FeatureShowcase(props: Props) {
@@ -25,11 +21,15 @@ function FeatureShowcase(props: Props) {
       {props.first === "content" ? (
         <>
           <ContentBlock {...props}>{props.ContentNode}</ContentBlock>
-          <ImgBlock imgSrc={props.imgSrc}>{props.ImgNode}</ImgBlock>
+          <ImgBlock imgSrc={props.imgSrc} alt={props.alt}>
+            {props.ImgNode}
+          </ImgBlock>
         </>
       ) : (
         <>
-          <ImgBlock imgSrc={props.imgSrc}>{props.ImgNode}</ImgBlock>
+          <ImgBlock imgSrc={props.imgSrc} alt={props.alt}>
+            {props.ImgNode}
+          </ImgBlock>
           <ContentBlock {...props}>{props.ContentNode}</ContentBlock>
         </>
       )}

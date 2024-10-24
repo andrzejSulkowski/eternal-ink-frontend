@@ -33,8 +33,8 @@ function CardSection({ className }: EIProps) {
       )}
     >
       <CardsCarousel cards={cards} />
-      <Ball className="absolute -left-[30%] md:left-[7%] top-[35%] z-20 blur-sm w-1/2 md:w-auto" />
-      <Ball className="absolute right-[2%] md:right-[10%] top-[-50%] -z-20 blur-lg opacity-60" />
+      <Ball className="absolute -left-[30%] md:left-[7%] top-[35%] z-20 blur-sm w-1/2 md:w-1/4 h-full" />
+      <Ball className="absolute right-[2%] md:right-[10%] top-[-50%] -z-20 blur-lg opacity-60 w-1/2 h-1/2" />
     </div>
   );
 }

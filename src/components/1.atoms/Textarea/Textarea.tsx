@@ -22,7 +22,7 @@ const Input: React.FC<Props> = ({
     <textarea
       className={classNames(
         `font-manrope border w-full bg-[#09090A] border-1 border-ei-primary-dark rounded-2xl px-6 py-4 box-border outline-none text-2xl md:text-base
-        text-white  focus:border-ei-primary focus:placeholder-white md:placeholder:font-normal placeholder:text-2xl placeholder:placeholder-ei-primary-faded font-bold resize-none
+        text-white  focus:border-ei-primary focus:placeholder-white md:placeholder:font-normal placeholder:text-2xl md:placeholder:text-base placeholder:placeholder-ei-primary-faded font-bold resize-none
         disabled:opacity-50 disabled:cursor-not-allowed cursor-text`,
         className
       )}
