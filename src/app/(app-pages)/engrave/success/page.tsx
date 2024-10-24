@@ -131,12 +131,12 @@ function EngravePage() {
           <div className="inline-block font-extrabold text-6xl mb-6 relative">
             <h3 className="z-10">Transaction Completed!</h3>
           </div>
-          <span className="text-ei-primary-faded block mb-12 w-2/3">
+          <span className="text-ei-primary-faded block mb-12 w-2/3 text-2xl md:text-base">
             Your transaction has been successfully completed. You can now
             download your certificate or retrieve your transaction details.
           </span>
         </div>
-        <div className="grid grid-cols-[1fr_auto_1fr] gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8">
           <InfoCard
             icon={<IoWallet color="white" />}
             label="Transaction Id:"

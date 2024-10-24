@@ -125,10 +125,10 @@ function EngravePage({}: Props) {
           <div className="inline-block font-extrabold text-6xl mb-6 relative">
             <h3 className="z-10">Transaction Instruction</h3>
           </div>
-          <div className="text-ei-primary-faded block mb-12 md:text-base text-xl">
+          <div className="text-ei-primary-faded block mb-12 md:text-base text-2xl">
             To proceed with your transaction, please send the required fees to
             the Bitcoin address below.
-            <div className="font-bold md:text-base text-xl">
+            <div className="font-bold md:text-base text-2xl">
               Make sure to transfer the exact amount specified
             </div>
           </div>
@@ -154,7 +154,7 @@ function EngravePage({}: Props) {
 
           {address && (
             <div
-              className="text-ei-primary-faded text-sm mt-12 hover:underline cursor-pointer"
+              className="text-ei-primary-faded text-2xl md:text-sm mt-12 hover:underline cursor-pointer"
               onClick={cancel}
             >
               Cancel Engraving

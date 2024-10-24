@@ -1,12 +1,7 @@
 import React, { useMemo, useState } from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
-import {
-  TxId,
-  getStatusColor,
-  trim,
-  displayStatus,
-} from "@/libs/transaction";
+import { TxId, getStatusColor, trim, displayStatus } from "@/libs/transaction";
 import { TxStatus } from "@/models";
 
 interface Props extends EIProps {
@@ -23,19 +18,18 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
   const dStatus = useMemo<ReturnType<typeof displayStatus>>(() => {
     if (status !== undefined) {
       return displayStatus(status);
-    }else {
-      return "Unknown"
+    } else {
+      return "Unknown";
     }
-  }, [status])
+  }, [status]);
 
   const bodyMessage = useMemo(() => {
-      if (dStatus === "Finalized"){
-        return "Engraved Message: "
-      }else{
-        return "Engraving Message: "
-      }
-  }, [dStatus])
-  
+    if (dStatus === "Finalized") {
+      return "Engraved Message: ";
+    } else {
+      return "Engraving Message: ";
+    }
+  }, [dStatus]);
 
   return (
     <div
@@ -47,25 +41,40 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
       {isCmpRdy ? (
         <>
           {/* Header */}
-          <div className="flex justify-between">
+          <div className="flex justify-between gap-4 md:gap-0 flex-col md:flex-row">
             <div>
-              <span className="text-ei-primary-faded mr-4">Status:</span>
-              <span className={classNames(getStatusColor(status!), "font-bold")}>
+              <span className="text-ei-primary-faded mr-4 text-xl md:text-sm">
+                Status:
+              </span>
+              <span
+                className={classNames(
+                  getStatusColor(status!),
+                  "font-bold text-xl md:text-sm"
+                )}
+              >
                 {dStatus}
               </span>
             </div>
             <div>
-              <span className="text-ei-primary-faded mr-4">Transaction:</span>
-              <span className="text-white font-bold">{trim(txId!)}</span>
+              <span className="text-ei-primary-faded mr-4 text-xl md:text-sm">
+                Transaction:
+              </span>
+              <span className="text-white font-bold md:text-sm text-xl">
+                {trim(txId!)}
+              </span>
             </div>
           </div>
           {/* Body */}
           <div className="flex flex-col pt-8 border-t-ei-primary-dark border border-transparent gap-3">
-            <span className="text-ei-primary-faded">{bodyMessage}</span>
-            <span className="text-white font-extrabold text-xl break-words whitespace-pre-wrap">{message}</span>
+            <span className="text-ei-primary-faded text-xl md:text-sm">
+              {bodyMessage}
+            </span>
+            <span className="text-white font-extrabold text-3xl md:text-xl break-words whitespace-pre-wrap">
+              {message}
+            </span>
           </div>
         </>
-      ): null}
+      ) : null}
     </div>
   );
 }

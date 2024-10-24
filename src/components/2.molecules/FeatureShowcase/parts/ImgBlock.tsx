@@ -1,4 +1,3 @@
-import Ball from "@/components/1.atoms/Ball/Ball";
 import E from "@/components/Svgs/E";
 import { PropsWithChildren } from "react";
 

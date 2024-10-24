@@ -5,7 +5,7 @@ import { TxStatus } from "@/models";
 
 const getTxInfoMockData: GetTxInfoResponse = {
   status: TxStatus.Finalized,
-  data: "Mock Message, Ald What if I keep writing a text further!",
+  data: "TW9jayBNZXNzYWdlLCBBbGQgV2hhdCBpZiBJIGtlZXAgd3JpdGluZyBhIHRleHQgZnVydGhlciE=",
   tx_id: "87387a2349e21e0019220c6c0011257654625ad9ad5a69bb98cc79b0aaa3965b",
   cert_id: "14302c68-9224-5ae1-af88-6a6a12312b5a",
   is_encrypted: false,

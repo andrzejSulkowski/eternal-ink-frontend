@@ -20,7 +20,7 @@ export default function Page({}: Props) {
       <LoadedTicks className="overflow-x-hidden" />
       <Hero className="overflow-x-hidden" />
       <HowItWorks className="overflow-x-hidden" />
-      <CardSection className="overflow-x-hidden" />
+      <CardSection className="overflow-visible" />
       <WhyEngrave className="overflow-visible" />
       <ContactSection className="" />
     </div>

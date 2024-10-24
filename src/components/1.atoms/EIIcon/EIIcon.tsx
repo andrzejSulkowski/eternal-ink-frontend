@@ -8,7 +8,7 @@ function EIIcon({ children, className }: Props) {
   return (
     <div
       className={classNames(
-        "bg-[#331C66] rounded-full w-14 h-14 md:w-12 md:h-12 aspect-square p-3 md:p-[10px] flex justify-center items-center",
+        "bg-[#331C66] rounded-full text-3xl md:text-base w-16 h-16 md:w-12 md:h-12 aspect-square p-3 md:p-[10px] flex justify-center items-center",
         className
       )}
     >

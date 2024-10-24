@@ -44,14 +44,14 @@ function InfoCard({
           <EIIcon>{icon}</EIIcon>
         </div>
         <div className="md:flex-grow">
-          <div className="text-white font-extrabold md:text-xl text-2xl">
+          <div className="text-white font-extrabold md:text-xl text-3xl">
             {label}
           </div>
         </div>
       </div>
 
       <div className="flex md:items-center text-ei-primary-faded text-sm">
-        <span className="text-nowrap md:text-base text-xl">{getValue}</span>
+        <span className="text-nowrap md:text-base text-2xl">{getValue}</span>
         {isCopyable && <Copy className="min-w-5 min-h-5 ml-2" onClick={copy} />}
       </div>
     </div>

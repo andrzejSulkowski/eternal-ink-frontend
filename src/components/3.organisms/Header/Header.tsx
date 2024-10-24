@@ -93,9 +93,9 @@ function Header({ className, children, routes }: Props) {
               className="focus:outline-none"
             >
               {isMobileMenuOpen ? (
-                <HiOutlineX className="w-8 h-8" />
+                <HiOutlineX className="w-14 h-14" />
               ) : (
-                <HiOutlineMenu className="w-8 h-8" />
+                <HiOutlineMenu className="w-14 h-14" />
               )}
             </button>
           </div>
