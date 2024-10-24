@@ -4,15 +4,17 @@ interface Props {
   className?: string;
 }
 
-function Default({className, children}: React.PropsWithChildren<Props>) {
+function Default({ className, children }: React.PropsWithChildren<Props>) {
   return (
-    <div className={['text-nowrap', className].join(" ")}>
-      <span className="">
-        Drag Your File In Here or{" "}
-        <span className="text-ei-primary">Select from Device</span>
+    <div className={["text-nowrap", className].join(" ")}>
+      <span>
+        <span className="hidden md:visible">Drag Your File In Here or </span>
+        <span className="text-ei-primary text-2xl md:text-base">
+          Select from Device
+        </span>
         {children}
       </span>
-        {/* <div className="block invisible">reserved space</div> */}
+      {/* <div className="block invisible">reserved space</div> */}
     </div>
   );
 }

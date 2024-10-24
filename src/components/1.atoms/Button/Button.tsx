@@ -33,7 +33,7 @@ function Button(args: Props) {
     return (
       <div
         className={classNames(
-          `flex items-center font-semibold text-ei-black bg-white rounded-2xl px-6 py-5 text-xl md:text-sm font-manrope text-center 
+          `flex items-center font-semibold text-ei-black bg-white rounded-2xl px-6 py-5 md:py-3 text-2xl md:text-sm font-manrope text-center 
         ${isDisabled ? "text-ei-primary-faded cursor-not-allowed" : "text-black cursor-pointer"}
         `,
           className

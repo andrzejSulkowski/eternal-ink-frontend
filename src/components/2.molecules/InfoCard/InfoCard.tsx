@@ -35,7 +35,7 @@ function InfoCard({
   return (
     <div
       className={classNames(
-        "flex items-end justify-between px-6 py-8 bg-black rounded-2xl space-x-4 font-manrope w-full",
+        "flex md:flex-row flex-col md:items-end md:justify-between px-6 py-8 bg-black rounded-2xl md:space-x-4 font-manrope w-full items-start justify-start gap-8 md:gap-0",
         className
       )}
     >
@@ -43,13 +43,15 @@ function InfoCard({
         <div className="flex-shrink-0 p-2 rounded-full">
           <EIIcon>{icon}</EIIcon>
         </div>
-        <div className="flex-grow">
-          <div className="text-white font-extrabold text-xl">{label}</div>
+        <div className="md:flex-grow">
+          <div className="text-white font-extrabold md:text-xl text-2xl">
+            {label}
+          </div>
         </div>
       </div>
 
-      <div className="flex items-center text-ei-primary-faded text-sm">
-        <span className="text-nowrap">{getValue}</span>
+      <div className="flex md:items-center text-ei-primary-faded text-sm">
+        <span className="text-nowrap md:text-base text-xl">{getValue}</span>
         {isCopyable && <Copy className="min-w-5 min-h-5 ml-2" onClick={copy} />}
       </div>
     </div>

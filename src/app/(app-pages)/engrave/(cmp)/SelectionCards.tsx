@@ -6,7 +6,7 @@ import ThreeRoad from "@/components/Svgs/ThreeRoad";
 function SelectionCards() {
   return (
     <div>
-      <div className="w-full bg-[#09090A] p-8 grid grid-cols-3 gap-12 rounded-[20px]">
+      <div className="w-full bg-[#09090A] p-8 flex flex-col md:grid md:grid-cols-3 gap-12 rounded-[20px]">
         <SelectionCard
           icon={Cube()}
           title="Create Your Message"

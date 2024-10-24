@@ -47,52 +47,47 @@ function CardsCarousel({ cards, className }: Props) {
 
   return (
     <>
-      <div>
-        <div
-          className={classNames(
-            "relative flex flex-col md:flex-row items-center justify-center w-full",
-            className
-          )}
-        >
-          {!isMobile && (
-            <ChevronLeft
-              onClick={handlePrev}
-              className="absolute -left-4 z-30"
-            />
-          )}
-          <div className="w-full flex justify-center">
-            <Card {...cards[selectedIdx]}>
-              <div className="absolute bottom-0 z-10">
-                {/* Change to Image */}
-                <img
-                  src="/storybook_resources/ball.png"
-                  className="absolute -right-24 -top-20 -z-10"
-                  alt="ball"
-                />
-                {/* Change to Image */}
-                <img
-                  className="w-full"
-                  src="./storybook_resources/dwarf2.png"
-                  alt="dwarf"
-                />
-              </div>
-            </Card>
-          </div>
-          {isMobile && (
-            <div className="flex w-full justify-between mt-8">
-              <ChevronLeft onClick={handlePrev} />
-              <ChevronRight onClick={handleNext} />
+      <div
+        className={classNames(
+          "relative flex flex-col md:flex-row items-center justify-center w-full",
+          className
+        )}
+      >
+        {!isMobile && (
+          <ChevronLeft onClick={handlePrev} className="absolute -left-4 z-30" />
+        )}
+        <div className="w-full flex justify-center">
+          <Card {...cards[selectedIdx]}>
+            <div className="absolute bottom-0 z-10">
+              {/* Change to Image */}
+              <img
+                src="/storybook_resources/ball.png"
+                className="absolute -right-24 -top-20 -z-10"
+                alt="ball"
+              />
+              {/* Change to Image */}
+              <img
+                className="w-full"
+                src="./storybook_resources/dwarf2.png"
+                alt="dwarf"
+              />
             </div>
-          )}
-          {!isMobile && (
-            <ChevronRight
-              onClick={handleNext}
-              className="absolute -right-4 z-30"
-            />
-          )}
+          </Card>
         </div>
-        <Dots />
+        {isMobile && (
+          <div className="flex w-full justify-between mt-8">
+            <ChevronLeft onClick={handlePrev} />
+            <ChevronRight onClick={handleNext} />
+          </div>
+        )}
+        {!isMobile && (
+          <ChevronRight
+            onClick={handleNext}
+            className="absolute -right-4 z-30"
+          />
+        )}
       </div>
+      <Dots />
     </>
   );
 }

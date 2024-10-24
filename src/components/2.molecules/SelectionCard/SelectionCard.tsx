@@ -62,10 +62,10 @@ function SelectionCard({
           className
         )}
       >
-        <span className="block font-extrabold text-white text-3xl md:text-xl mb-3">
+        <span className="block font-extrabold text-white text-2xl md:text-xl mb-3">
           {title}
         </span>
-        <span className="block text-xl md:text-sm">{description}</span>
+        <span className="block text-2xl md:text-sm">{description}</span>
         {options && options.length > 0 && <div className="mt-10 md:mt-6" />}
         {options && options.length > 0 && <CardOptionsTitles />}
         <AnimatePresence mode="wait">

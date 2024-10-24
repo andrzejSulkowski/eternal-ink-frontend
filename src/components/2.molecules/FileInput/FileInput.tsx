@@ -116,7 +116,7 @@ function FileInput(props: Props) {
   return (
     <div className={classNames(props.className, "relative")}>
       <HiddenFileInput accept={props.allowedMimeTypes} />
-      <span className="text-white font-manrope font-bold text-sm mb-4 block">
+      <span className="text-white font-manrope font-bold text-2xl md:text-sm mb-4 block">
         Add your File
       </span>
       <div

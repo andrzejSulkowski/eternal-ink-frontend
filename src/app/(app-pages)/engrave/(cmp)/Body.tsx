@@ -12,6 +12,7 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import { useRouter } from "next/navigation";
 import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
 import { TxStatus } from "@/models/transaction";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const MAX_BYTES = 80;
 
@@ -20,6 +21,7 @@ function Body() {
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState("");
   const [bytes, setBytes] = useState(0);
+  const isMobile = useIsMobile();
 
   const toggleButtons = useMemo<
     Array<{ value: ToggleKeys; label: string; disabled: boolean }>
@@ -83,77 +85,153 @@ function Body() {
     router.push(`/engrave/certificate-contact`);
   }, [message, file, password, toggleKey, banner, setEngravingData, router]);
 
-  return (
-    <div className="flex  flex-col justify-between min-h-full">
-      <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-6 font-manrope">
-        {/* Cols1 */}
-        <div data-col1 className="w-full">
-          <span className="font-bold text-sm block mb-4">
-            Enter Your Message
-          </span>
-          <Textarea
-            placeholder="Your Message"
-            value={message}
-            onChange={(v) => updateMessage(v.currentTarget.value)}
-            className="w-full h-40 p-4"
-            isDisabled={file !== null}
-          />
-          <span className="text-ei-primary-faded">
-            Available Bytes: {MAX_BYTES - bytes}
-          </span>
-          {/* Toggle Group + Password Input */}
-        </div>
-        {/* Col2 */}
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="font-bold text-sm block">or</div>
-        </div>
-        {/* Col3 */}
-        <div className="w-full max-w-full">
-          <FileInput
-            allowedMimeTypes={[
-              "image/jpeg",
-              "image/jpg",
-              "image/png",
-              "image/webp",
-              "application/pdf",
-              "application/vnd.ms-excel",
-              "application/zip",
-            ]}
-            onInput={setFile}
-            file={file}
-          />
-        </div>
-        {/* Col1Row1 */}
-        <div className="w-full">
-          <div className="text-ei-primary-faded mb-2">
-            Message Publicity Options:
+  if (isMobile) {
+    return (
+      <div className="flex flex-col justify-between min-h-full">
+        <div className="grid md:grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr] gap-6 font-manrope">
+          {/* Row1 */}
+          <div data-col1 className="w-full">
+            <span className="font-bold md:text-sm text-xl block mb-4">
+              Enter Your Message
+            </span>
+            <Textarea
+              placeholder="Your Message"
+              value={message}
+              onChange={(v) => updateMessage(v.currentTarget.value)}
+              className="w-full h-40 p-4"
+              isDisabled={file !== null}
+            />
+            <span className="text-ei-primary-faded md:text-base text-xl">
+              Available Bytes: {MAX_BYTES - bytes}
+            </span>
+            {/* Toggle Group + Password Input */}
+            <div className="w-full">
+              <div className="text-ei-primary-faded text-2xl mt-4 mb-3">
+                Message Publicity Options:
+              </div>
+              <ToggleGroup
+                className=""
+                buttons={toggleButtons}
+                value={toggleKey}
+                onChange={(key) => setToggleKey(key as any)}
+              />
+              <PasswordInput
+                onChange={(e) => setPassword(e.currentTarget.value)}
+                password={password}
+                className={`mt-8 ${toggleKey !== "encrypt" ? "hidden" : null}`}
+              />
+            </div>
           </div>
-          <ToggleGroup
-            className=""
-            buttons={toggleButtons}
-            value={toggleKey}
-            onChange={(key) => setToggleKey(key as any)}
-          />
 
-          <PasswordInput
-            onChange={(e) => setPassword(e.currentTarget.value)}
-            password={password}
-            className={`mt-8 ${toggleKey !== "encrypt" ? "hidden" : null}`}
-          />
+          {/* Row2 */}
+          <div className="w-full h-full flex md:justify-center items-center">
+            <div className="font-bold text-2xl md:text-sm block">or</div>
+          </div>
 
-          <Button
-            className={`!w-fit ${toggleKey === "encrypt" ? "my-4" : "mt-16"}`}
-            onClick={engrave}
-          >
-            Start Engraving Magic
-            <ThreeStars className="max-w-5 ml-2" />
-          </Button>
+          {/* Row3 */}
+          <div className="w-full max-w-full">
+            <FileInput
+              allowedMimeTypes={[
+                "image/jpeg",
+                "image/jpg",
+                "image/png",
+                "image/webp",
+                "application/pdf",
+                "application/vnd.ms-excel",
+                "application/zip",
+              ]}
+              onInput={setFile}
+              file={file}
+            />
+          </div>
+          {/* Col1Row1 */}
+          <div className="w-full mb-16">
+            <Button
+              className={`md:!w-fit justify-center md:justify-start ${toggleKey === "encrypt" ? "my-4" : "md:mt-16"}`}
+              onClick={engrave}
+            >
+              Start Engraving Magic
+              <ThreeStars className="max-w-5 ml-2" />
+            </Button>
+          </div>
         </div>
-      </div>
 
-      <SelectionCards />
-    </div>
-  );
+        <SelectionCards />
+      </div>
+    );
+  } else {
+    return (
+      <div className="flex flex-col justify-between min-h-full">
+        <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-6 font-manrope">
+          {/* Cols1 */}
+          <div data-col1 className="w-full">
+            <span className="font-bold text-sm block mb-4">
+              Enter Your Message
+            </span>
+            <Textarea
+              placeholder="Your Message"
+              value={message}
+              onChange={(v) => updateMessage(v.currentTarget.value)}
+              className="w-full h-40 p-4"
+              isDisabled={file !== null}
+            />
+            <span className="text-ei-primary-faded text-base ">
+              Available Bytes: {MAX_BYTES - bytes}
+            </span>
+            {/* Toggle Group + Password Input */}
+          </div>
+          {/* Col2 */}
+          <div className="w-full h-full flex justify-center items-center">
+            <div className="font-bold text-sm block">or</div>
+          </div>
+          {/* Col3 */}
+          <div className="w-full max-w-full">
+            <FileInput
+              allowedMimeTypes={[
+                "image/jpeg",
+                "image/jpg",
+                "image/png",
+                "image/webp",
+                "application/pdf",
+                "application/vnd.ms-excel",
+                "application/zip",
+              ]}
+              onInput={setFile}
+              file={file}
+            />
+          </div>
+          {/* Col1Row1 */}
+          <div className="w-full">
+            <div className="text-ei-primary-faded mb-2">
+              Message Publicity Options:
+            </div>
+            <ToggleGroup
+              className=""
+              buttons={toggleButtons}
+              value={toggleKey}
+              onChange={(key) => setToggleKey(key as any)}
+            />
+
+            <PasswordInput
+              onChange={(e) => setPassword(e.currentTarget.value)}
+              password={password}
+              className={`mt-8 ${toggleKey !== "encrypt" ? "hidden" : null}`}
+            />
+
+            <Button
+              className={`!w-fit ${toggleKey === "encrypt" ? "my-4" : "mt-16"}`}
+              onClick={engrave}
+            >
+              Start Engraving Magic
+              <ThreeStars className="max-w-5 ml-2" />
+            </Button>
+          </div>
+        </div>
+
+        <SelectionCards />
+      </div>
+    );
+  }
 }
 export default Body;
 export type { ToggleKeys };

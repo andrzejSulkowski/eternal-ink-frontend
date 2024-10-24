@@ -176,13 +176,13 @@ function CertificateContactPage() {
         <div className="grid grid-rows-2 gap-14">
           <div className="flex flex-col gap-6">
             <Input
-              className="!w-1/2"
+              className="md:!w-1/2"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <div className="flex flex-col gap-1">
-              <div className="text-nowrap flex">
+            <div className="flex flex-col gap-3 md:gap-1">
+              <div className="md:text-nowrap flex">
                 <Input
                   className="!w-auto !my-auto"
                   type="checkbox"
@@ -192,7 +192,7 @@ function CertificateContactPage() {
                 />
                 <label
                   htmlFor="termsAndConditions"
-                  className="text-ei-primary-faded ml-4 cursor-pointer"
+                  className="text-ei-primary-faded ml-4 cursor-pointer text-xl md:text-base"
                 >
                   By providing your email, you agree to the{" "}
                   <Link
@@ -205,7 +205,7 @@ function CertificateContactPage() {
                 </label>
               </div>
 
-              <div className="text-nowrap flex">
+              <div className="md:text-nowrap flex">
                 <Input
                   className="!w-auto my-auto"
                   type="checkbox"
@@ -215,7 +215,7 @@ function CertificateContactPage() {
                 />
                 <label
                   htmlFor="allowContact"
-                  className="text-ei-primary-faded ml-4 cursor-pointer"
+                  className="text-ei-primary-faded ml-4 cursor-pointer text-xl md:text-base"
                 >
                   You accept that we may contact you to ask about your
                   experience with the product.
@@ -224,13 +224,15 @@ function CertificateContactPage() {
             </div>
           </div>
           <div className="flex gap-4 items-center">
-            <Button className="w-min h-10" onClick={acceptFlow}>
+            <Button className="md:w-min h-18 md:h-10" onClick={acceptFlow}>
               Accept
               <ThreeStars className="max-w-5 ml-2" />
             </Button>
-            <span className="text-ei-primary-faded">or</span>
+            <span className="text-ei-primary-faded text-xl md:text-base">
+              or
+            </span>
             <Button
-              className="w-min h-8 bg-ei-primary-faded"
+              className="h-12 md:w-min md:h-8 bg-ei-primary-faded"
               onClick={skipFlow}
             >
               Skip

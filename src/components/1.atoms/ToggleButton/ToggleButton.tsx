@@ -21,7 +21,7 @@ function ToggleButton({
   return (
     <div
       className={classNames(
-        "px-6 py-2 rounded-2xl transition-all flex justify-center items-center",
+        "px-12 md:px-6 py-3 md:py-2 rounded-3xl transition-all flex justify-center items-center text-2xl md:text-base",
         className,
         () => (isSelected ? selectedStyles : defaultStyles),
         disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"

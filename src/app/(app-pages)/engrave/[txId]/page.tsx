@@ -125,14 +125,14 @@ function EngravePage({}: Props) {
           <div className="inline-block font-extrabold text-6xl mb-6 relative">
             <h3 className="z-10">Transaction Instruction</h3>
           </div>
-          <div className="text-ei-primary-faded block mb-12">
+          <div className="text-ei-primary-faded block mb-12 md:text-base text-xl">
             To proceed with your transaction, please send the required fees to
             the Bitcoin address below.
-            <div className="font-bold">
+            <div className="font-bold md:text-base text-xl">
               Make sure to transfer the exact amount specified
             </div>
           </div>
-          <div className="grid grid-cols-[1fr_auto_1fr] gap-8">
+          <div className="grid grid-rows-[1fr_auto_1fr] md:grid-rows-none md:grid-cols-[1fr_auto_1fr] gap-8">
             <InfoCard
               icon={IoWallet({ color: "white" })}
               label="Bitcoin Address:"
@@ -141,7 +141,7 @@ function EngravePage({}: Props) {
                 engravingData?.address ? trim(engravingData.address) : "-"
               }
             />
-            <div className="h-full flex items-center font-bold text-sm">
+            <div className="h-full flex items-center font-bold md:text-sm text-xl">
               and
             </div>
             <InfoCard

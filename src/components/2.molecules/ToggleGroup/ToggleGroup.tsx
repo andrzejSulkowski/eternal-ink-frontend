@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from "react";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import ToggleButton from "@/components/1.atoms/ToggleButton/ToggleButton";
-import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 
 interface Props extends EIProps {
   onChange: (value: string) => void;
@@ -12,7 +11,6 @@ interface Props extends EIProps {
 
 function ToggleGroup({ className, onChange, buttons, value }: Props) {
   const [$selected, $setSelected] = React.useState(value ?? buttons[0].value);
-  const { showBanner } = useBanner();
   const setSelected = useCallback(
     (value: string) => {
       $setSelected(value);

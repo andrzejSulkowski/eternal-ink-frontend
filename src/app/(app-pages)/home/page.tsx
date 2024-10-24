@@ -21,7 +21,7 @@ export default function Page({}: Props) {
       <Hero className="overflow-x-hidden" />
       <HowItWorks className="overflow-x-hidden" />
       <CardSection className="overflow-x-hidden" />
-      <WhyEngrave className="overflow-x-hidden" />
+      <WhyEngrave className="overflow-visible" />
       <ContactSection className="" />
     </div>
   );

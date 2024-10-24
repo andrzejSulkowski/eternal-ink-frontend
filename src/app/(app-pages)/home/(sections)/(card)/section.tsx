@@ -28,7 +28,7 @@ function CardSection({ className }: EIProps) {
   return (
     <div
       className={classNames(
-        "px-12 my-24 md:my-48 md:px-60 relative",
+        "px-12 my-24 md:my-48 md:px-60 relative overflow-visible",
         className
       )}
     >
