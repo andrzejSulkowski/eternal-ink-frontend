@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import EIIcon from "@/components/1.atoms/EIIcon/EIIcon";
 import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
@@ -24,7 +24,7 @@ function SelectionCard({
 }: Props) {
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(0);
 
-  const CardOptionsTitles = () => {
+  const CardOptionsTitles = useCallback(() => {
     return (
       <div className="flex gap-7 justify-start items-center mb-6 md:mb-3">
         {options?.map((option, index) => (
@@ -46,7 +46,7 @@ function SelectionCard({
         ))}
       </div>
     );
-  };
+  }, [options, selectedOptionIdx, setSelectedOptionIdx]);
 
   const getSelectedOptionDescription = useMemo(
     () => options?.[selectedOptionIdx]?.description,

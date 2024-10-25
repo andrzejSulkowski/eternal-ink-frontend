@@ -6,26 +6,27 @@ import CardsCarousel, {
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 
+const cards: CardProps[] = [
+  {
+    title: "Engraving Fees",
+    highlightedTitle: "Starting at Just $1",
+    description:
+      "Enter your message, and we'll instantly calculate the current engraving fees, ranging from affordable to premium options.",
+  },
+  {
+    title: "Permanent Imprint",
+    highlightedTitle: "Stored Forever on the Blockchain",
+    description:
+      "Experience true permanence with data stored securely and immutably on the blockchain.",
+  },
+  {
+    title: "Share Your Legacy",
+    highlightedTitle: "Send a Timeless Message",
+    description:
+      "Write your message, generate a link, and share it with someone special to create a lasting connection.",
+  },
+];
 function CardSection({ className }: EIProps) {
-  const cards: CardProps[] = [
-    {
-      title: "Transaction Cost can range",
-      highlightedTitle: "from 1$ up to 32$",
-      description:
-        "Just type in your message and we'll show you what the engraving fees are at the present time",
-    },
-    {
-      title: "Forever",
-      highlightedTitle: "On the Blockchain",
-      description: "We'll show you how to do it",
-    },
-    {
-      title: "Send a message",
-      highlightedTitle: "to a friend",
-      description: "Just type in your message and send him the link",
-    },
-  ];
-
   return (
     <div
       className={classNames(
@@ -34,8 +35,8 @@ function CardSection({ className }: EIProps) {
       )}
     >
       <CardsCarousel cards={cards} />
-      <Ball className="absolute -left-[30%] md:left-[7%] top-[10%] md:top-[35%] z-20 blur-sm w-1/2 md:w-1/4 h-full" />
-      <Ball className="absolute right-[2%] md:right-[10%] top-[-50%] -z-20 blur-lg opacity-60 w-1/2 h-1/2" />
+      <BallBlur className="absolute -left-[30%] md:left-[7%] top-[10%] md:top-[35%] z-20 blur-sm w-1/2 md:w-1/4 h-full" />
+      <BallBlur className="absolute right-[2%] md:right-[10%] top-[-50%] -z-20 blur-sm opacity-60 w-1/2 h-1/2" />
     </div>
   );
 }

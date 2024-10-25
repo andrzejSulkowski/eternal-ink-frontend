@@ -1,12 +1,4 @@
-import ChevronLeft from "@/components/1.atoms/ChevronLeft/ChevronLeft";
-import ChevronRight from "@/components/1.atoms/ChevronRight/ChevronRight";
-
-interface Props {
-  onNext: () => void;
-  onPrev: () => void;
-}
-
-function Header({ onNext, onPrev }: Props) {
+function Header() {
   return (
     <div className="w-full flex mb-24 px-12 lg::px-80">
       <div className="w-full md:w-1/2">
@@ -16,12 +8,6 @@ function Header({ onNext, onPrev }: Props) {
           blockchain, whether through a personal message or by engraving
           document
         </p>
-      </div>
-      <div className="w-1/2 md:flex justify-end items-end hidden">
-        <div className="flex gap-4">
-          <ChevronLeft onClick={onPrev} />
-          <ChevronRight onClick={onNext} />
-        </div>
       </div>
     </div>
   );

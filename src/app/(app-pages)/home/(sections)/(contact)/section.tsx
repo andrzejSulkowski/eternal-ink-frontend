@@ -3,7 +3,7 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import ContactMeForm from "@/components/3.organisms/ContactMeForm/ContactMeForm";
 import api from "@/libs/api/general";
 import { classNames } from "@/utils/className";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { validateEmail } from "@/utils/validateEmail";
 import { EIProps } from "@/types";
 
@@ -31,28 +31,27 @@ function ContactSection({ className }: EIProps) {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const { showBanner } = useBanner();
-  async function sendContactForm(data: {
-    name: string;
-    email: string;
-    message: string;
-  }) {
-    if (data.message.length < 10)
-      return showBanner("Message is too short", { danger: true });
-    else if (data.message.length > 500)
-      return showBanner("Message is too long", { danger: true });
+  const sendContactForm = useCallback(
+    async (data: { name: string; email: string; message: string }) => {
+      if (data.message.length < 10)
+        return showBanner("Message is too short", { danger: true });
+      else if (data.message.length > 500)
+        return showBanner("Message is too long", { danger: true });
 
-    if (validateEmail(data.email) === false)
-      return showBanner("Invalid Email", { danger: true });
+      if (validateEmail(data.email) === false)
+        return showBanner("Invalid Email", { danger: true });
 
-    if (data.name.length < 3)
-      return showBanner("Name is too short", { danger: true });
+      if (data.name.length < 3)
+        return showBanner("Name is too short", { danger: true });
 
-    const response = await api.postContactMessage(data);
-    if (response.ok) {
-      showBanner("Message Sent Successfully", { danger: false });
-      setIsDisabled(true);
-    }
-  }
+      const response = await api.postContactMessage(data);
+      if (response.ok) {
+        showBanner("Message Sent Successfully", { danger: false });
+        setIsDisabled(true);
+      }
+    },
+    [showBanner, setIsDisabled]
+  );
 
   return (
     <div

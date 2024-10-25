@@ -4,8 +4,6 @@ import { classNames } from "@/utils/className";
 import CONFIG from "@/libs/config";
 
 interface Props extends EIProps {
-  onHrefClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-  routes: EIRoute[];
   socials: ISocial[];
 }
 
@@ -14,7 +12,7 @@ interface ISocial {
   cmp: React.FC<EIProps>;
 }
 
-function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
+function Footer({ className, socials = [] }: Props) {
   const Socials = () => (
     <div className="flex gap-8 justify-end items-center h-full">
       {socials.map((Social, idx) => (

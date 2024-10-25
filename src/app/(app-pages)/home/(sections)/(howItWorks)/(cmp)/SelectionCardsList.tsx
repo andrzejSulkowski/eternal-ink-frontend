@@ -1,32 +1,28 @@
+"use client";
 import SelectionCard, {
   Props as SelectionCardProps,
 } from "@/components/2.molecules/SelectionCard/SelectionCard";
 import { EIProps } from "@/types";
-import { RefObject, useRef } from "react";
-import { animated, SpringValue } from "@react-spring/web";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 interface Props extends EIProps {
   selectionCards: SelectionCardProps[];
-  setRef: (ref: RefObject<HTMLDivElement>) => void;
-  scrollLeft: SpringValue<number>;
 }
 
-function SelectionCardsList({ selectionCards, scrollLeft, setRef }: Props) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  setRef(scrollContainerRef);
+function SelectionCardsList({ selectionCards }: Props) {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+  const x = useTransform(scrollYProgress, [0, 1], ["35%", "-95%"]);
 
   return (
-    <motion.div className="relative" layout>
+    <div className="relative">
       <div className="h-full w-[2px] md:w-[200%] absolute md:h-[1px] left-[4.75rem] md:left-[-50%] top-6 -z-20 bg-gradient-to-t md:bg-gradient-to-r from-[#34104B] to-[#4154DC]"></div>
-      <animated.div
-        className="overflow flex flex-col md:flex-row gap-12 px-12 lg:px-80 items-center md:items-start"
-        ref={scrollContainerRef}
-        style={{
-          transform: scrollLeft.to(
-            (scrollLeft) => `translateX(-${scrollLeft}px)`
-          ),
-        }}
+      <motion.div
+        className="overflow-hidden flex flex-col md:flex-row gap-12 px-12 lg:px-80 items-center md:items-start"
+        style={{ x }}
       >
         {selectionCards.map((card, index) => (
           <motion.div
@@ -35,11 +31,11 @@ function SelectionCardsList({ selectionCards, scrollLeft, setRef }: Props) {
             layout
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <SelectionCard key={index} {...card} className="md:!w-96" />
+            <SelectionCard {...card} className="md:!w-96" />
           </motion.div>
         ))}
-      </animated.div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 

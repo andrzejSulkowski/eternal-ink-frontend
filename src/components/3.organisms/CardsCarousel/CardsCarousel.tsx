@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Card, { Props as CardProps } from "@/components/2.molecules/Card/Card";
 export type { CardProps };
 import ChevronLeft from "@/components/1.atoms/ChevronLeft/ChevronLeft";
@@ -8,7 +8,6 @@ import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import Image from "next/image";
-import Ball from "@/components/1.atoms/Ball/Ball";
 import BallBlur from "@/components/1.atoms/Ball/BallBlur";
 
 interface Props extends EIProps {
@@ -19,19 +18,19 @@ function CardsCarousel({ cards, className }: Props) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const isMobile = useIsMobile();
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setSelectedIdx((prevIdx) =>
       prevIdx === 0 ? cards.length - 1 : prevIdx - 1
     );
-  };
+  }, [setSelectedIdx]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setSelectedIdx((prevIdx) =>
       prevIdx === cards.length - 1 ? 0 : prevIdx + 1
     );
-  };
+  }, [setSelectedIdx]);
 
-  const Dots = () => {
+  const Dots = useCallback(() => {
     return (
       <div className="flex justify-center items-center mt-5">
         {cards.map((_, idx) => (
@@ -46,7 +45,7 @@ function CardsCarousel({ cards, className }: Props) {
         ))}
       </div>
     );
-  };
+  }, [selectedIdx, cards]);
 
   return (
     <>

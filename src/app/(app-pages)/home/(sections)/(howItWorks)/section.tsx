@@ -1,13 +1,10 @@
-"use client";
 import { Props as SelectionCardProps } from "@/components/2.molecules/SelectionCard/SelectionCard";
 import Cube from "@/components/Svgs/Cube";
 import Fi from "@/components/Svgs/Fi";
 import ThreeRoad from "@/components/Svgs/ThreeRoad";
 import DollarBanner from "@/components/Svgs/DollarBanner";
 import StarCheck from "@/components/Svgs/StarCheck";
-import { RefObject, useRef } from "react";
 import Ball from "@/components/1.atoms/Ball/Ball";
-import { useSpring, config } from "@react-spring/web";
 import Header from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/Header";
 import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/SelectionCardsList";
 import { motion } from "framer-motion";
@@ -71,64 +68,13 @@ const selectionCards: SelectionCardProps[] = [
 ];
 
 function HowItWorks({ className }: EIProps) {
-  let scrollRef = useRef<HTMLDivElement | null>(null);
-  const setRef = (r: RefObject<HTMLDivElement>) => (scrollRef = r);
-
-  const [springProps, springApi] = useSpring(() => ({
-    immediate: false,
-    scrollLeft: 0,
-    onChange: (props: any) => {
-      if (scrollRef.current) {
-        scrollRef.current.scrollLeft = props.scrollLeft;
-      }
-    },
-    config: config.slow,
-  }));
-
-  function goToNextCard() {
-    const currentScroll = springProps.scrollLeft.get();
-    const containerWidth = scrollRef.current?.clientWidth || 0;
-    const contentWidth = scrollRef.current?.scrollWidth || 0;
-    const cardWidth =
-      (scrollRef.current?.firstChild as undefined | HTMLDivElement)
-        ?.clientWidth || 0;
-
-    const container = scrollRef.current;
-    const containerPadding =
-      parseFloat(getComputedStyle(container!).paddingLeft) +
-      parseFloat(getComputedStyle(container!).paddingRight);
-
-    const maxScroll = contentWidth - containerWidth + containerPadding;
-    const nextScroll = Math.min(currentScroll + cardWidth, maxScroll);
-
-    springApi.start({ scrollLeft: nextScroll });
-  }
-
-  function goToPrevCard() {
-    const currentScroll = springProps.scrollLeft.get();
-    const cardWidth =
-      (scrollRef.current?.firstChild as undefined | HTMLDivElement)
-        ?.clientWidth || 0;
-
-    const prevScroll = Math.max(currentScroll - cardWidth, 0);
-    springApi.start({ scrollLeft: prevScroll });
-  }
-
   return (
-    <motion.div
-      className={classNames("font-manrope py-24 relative", className)}
-      layout
-      transition={{ duration: 1, ease: "easeInOut" }}
-    >
-      <Header onNext={goToNextCard} onPrev={goToPrevCard} />
-      <SelectionCardsList
-        setRef={(r) => setRef(r)}
-        selectionCards={selectionCards}
-        scrollLeft={springProps.scrollLeft}
-      />
+    <div className={classNames("font-manrope py-24 relative", className)}>
+      <Header />
+      <SelectionCardsList selectionCards={selectionCards} />
 
       <Ball className="absolute h-1/3 w-64 md:w-[20em] top-[-5%] right-[-5%] blur-sm -z-10 rounded-full" />
-    </motion.div>
+    </div>
   );
 }
 export default HowItWorks;

@@ -1,12 +1,13 @@
 import Ball from "@/components/1.atoms/Ball/Ball";
+import dynamic from "next/dynamic";
 // Bg
-import BgBlack1 from "./(bg)/BgBlack1";
-import BgBlue1 from "./(bg)/BgBlue1";
-import BgViolet1 from "./(bg)/BgViolet1";
-import BgViolet2 from "./(bg)/BgViolet2";
+const BgBlack1 = dynamic(() => import("./(bg)/BgBlack1"), { ssr: false });
+const BgBlue1 = dynamic(() => import("./(bg)/BgBlue1"), { ssr: false });
+const BgViolet1 = dynamic(() => import("./(bg)/BgViolet1"), { ssr: false });
+const BgViolet2 = dynamic(() => import("./(bg)/BgViolet2"), { ssr: false });
+const Ellipse1 = dynamic(() => import("./(cmp)/Ellipse1"), { ssr: false });
+const Ellipse2 = dynamic(() => import("./(cmp)/Ellipse2"), { ssr: false });
 // Cmps
-import Ellipse1 from "./(cmp)/Ellipse1";
-import Ellipse2 from "./(cmp)/Ellipse2";
 import FeatureShowcase from "@/components/2.molecules/FeatureShowcase/FeatureShowcase";
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";

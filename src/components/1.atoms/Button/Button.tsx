@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useCallback } from "react";
 import { classNames } from "@/utils/className";
 
 type Props = {
@@ -29,7 +29,10 @@ function Button(args: Props) {
     );
   } else {
     const { onClick } = args;
-    const onClickHandler = () => (!isDisabled && onClick ? onClick() : null);
+    const onClickHandler = useCallback(
+      () => (!isDisabled && onClick ? onClick() : null),
+      [isDisabled, onClick]
+    );
     return (
       <div
         className={classNames(

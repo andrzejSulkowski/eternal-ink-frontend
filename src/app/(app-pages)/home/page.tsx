@@ -5,11 +5,9 @@ import LoadedTicks from "./(cmp)/LoadedTicks";
 import CardSection from "./(sections)/(card)/section";
 import HowItWorks from "@/app/(app-pages)/home/(sections)/(howItWorks)/section";
 import Head from "next/head";
+import WhyEngrave from "@/app/(app-pages)/home/(sections)/(whyEngrave)/section";
 import dynamic from "next/dynamic";
 const ContactSection = dynamic(() => import("./(sections)/(contact)/section"), {
-  loading: () => <p>Loading...</p>,
-});
-const WhyEngrave = dynamic(() => import("./(sections)/(whyEngrave)/section"), {
   loading: () => <p>Loading...</p>,
 });
 
