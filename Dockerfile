@@ -1,6 +1,6 @@
 # docker build -t ei-frontend .
 # docker run -p 3000:3000 ei-frontend
-FROM oven/bun AS base
+FROM oven/bun:debian AS base
 
 # Install dependencies only when needed
 FROM base AS deps
