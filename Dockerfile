@@ -5,6 +5,9 @@ FROM oven/bun AS base
 # Install dependencies only when needed
 FROM base AS deps
 
+# Install wget to perform a health check done by coolify
+RUN apt-get update && apt-get install -y wget
+
 WORKDIR /app
 
 # Install dependencies
@@ -55,7 +58,6 @@ ENV PORT=3000
 # Set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-# Install wget to perform a health check done by coolify
-RUN apt-get update && apt-get install -y wget
+
 
 CMD ["bun", "server.js"]
