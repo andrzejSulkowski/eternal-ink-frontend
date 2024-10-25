@@ -5,8 +5,7 @@ FROM oven/bun:debian AS base
 # Install dependencies only when needed
 FROM base AS deps
 
-# Install wget to perform a health check done by coolify
-RUN apt-get update && apt-get install -y wget && apt-get install -y curl
+
 
 WORKDIR /app
 
@@ -38,7 +37,7 @@ ENV NODE_ENV=production
 # Disable telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN adduser --system --uid 1001 nextjs
+#RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 
@@ -51,7 +50,8 @@ RUN chown nextjs:bun .next
 COPY --from=builder --chown=nextjs:bun /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:bun /app/.next/static ./.next/static
 
-USER nextjs
+# Disabled switching to nextjs user for now
+# USER nextjs
 
 EXPOSE 3000
 
@@ -60,6 +60,7 @@ ENV PORT=3000
 # Set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-
+# Install wget to perform a health check done by coolify
+RUN apt-get update && apt-get install -y wget && apt-get install -y curl
 
 CMD ["bun", "server.js"]
