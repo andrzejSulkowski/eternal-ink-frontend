@@ -6,7 +6,7 @@ FROM oven/bun AS base
 FROM base AS deps
 
 # Install wget to perform a health check done by coolify
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y wget && apt-get install -y curl
 
 WORKDIR /app
 
