@@ -17,6 +17,8 @@ RUN bun install --frozen-lockfile
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y wget && apt-get install -y curl
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
