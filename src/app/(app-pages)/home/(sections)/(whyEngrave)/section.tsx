@@ -10,6 +10,9 @@ import Ellipse2 from "./(cmp)/Ellipse2";
 import FeatureShowcase from "@/components/2.molecules/FeatureShowcase/FeatureShowcase";
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
+//Imgs
+import Dwarf3 from "public/storybook_resources/dwarf3/dwarf3.png";
+import Dwarf4 from "public/storybook_resources/dwarf4/dwarf4.png";
 
 function WhyEngrave({ className }: EIProps) {
   return (
@@ -44,7 +47,7 @@ function WhyEngrave({ className }: EIProps) {
           },
         ]}
         highlighted="Engraving offers a unique joy, knowing your words will outlast time, offering a peek into what mattered to us for generations to come."
-        imgSrc="/storybook_resources/dwarf3.png"
+        img={Dwarf3}
         first="content"
         ImgNode={
           <div className="absolute top-0 w-full h-full">
@@ -53,7 +56,7 @@ function WhyEngrave({ className }: EIProps) {
             <Ball className="absolute h-[150%] w-full top-[-42%] right-[-135%] blur-3xl -z-10" />
           </div>
         }
-        alt="Ball"
+        alt="Dwarf"
       />
 
       <FeatureShowcase
@@ -78,7 +81,7 @@ function WhyEngrave({ className }: EIProps) {
           },
         ]}
         highlighted="In both whimsical and weighty ways, engraving and hashing let you anchor your presence and protect your creations in the immutable flow of blockchain. It's about joy, celebration, and security—wrapped in the promise of eternity."
-        imgSrc="/storybook_resources/dwarf4.png"
+        img={Dwarf4}
         first="img"
         ImgNode={
           <div className="absolute w-full h-full top-0 left-0">
@@ -89,7 +92,7 @@ function WhyEngrave({ className }: EIProps) {
             <Ball className="absolute h-[65%] w-full top-[-30%] left-[-40%] blur-md -z-30" />
           </div>
         }
-        alt="Ball"
+        alt="Dwarf"
         ContentNode={
           <div>
             <BgViolet2 className="absolute bottom-[-5%] blur-[146px] -z-10" />

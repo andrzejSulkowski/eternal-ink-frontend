@@ -21,14 +21,14 @@ function Header({ className, children, routes }: Props) {
   const isMobile = useIsMobile();
   const headerRef = useRef<HTMLDivElement>(null);
 
-  function onCTAClick() {
+  const onCTAClick = useCallback(() => {
     router.push("/engrave");
-    setIsMobileMenuOpen(false); // Close menu when button is clicked
-  }
+    setIsMobileMenuOpen(false);
+  }, [router, setIsMobileMenuOpen]);
 
-  function toggleMobileMenu() {
+  const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-  }
+  }, [setIsMobileMenuOpen, isMobileMenuOpen]);
 
   const getMobileMenuHeight = useCallback(() => {
     if (headerRef.current) {
@@ -38,6 +38,7 @@ function Header({ className, children, routes }: Props) {
   }, [headerRef]);
 
   useEffect(() => {
+    //Every time we route to another page we close the mobile menu
     setTimeout(() => setIsMobileMenuOpen(false), 50);
   }, [pathname]);
 
@@ -74,7 +75,7 @@ function Header({ className, children, routes }: Props) {
               Engrave
             </Link>
 
-            {!isMobile && <Routes routes={routes} />}
+            {isMobile === false && <Routes routes={routes} />}
           </div>
 
           {/* Desktop Navigation */}
@@ -86,61 +87,69 @@ function Header({ className, children, routes }: Props) {
           </nav>
 
           {/* Mobile Burger Icon */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              aria-label="Toggle Menu"
-              className="focus:outline-none"
-            >
-              {isMobileMenuOpen ? (
-                <HiOutlineX className="w-14 h-14" />
-              ) : (
-                <HiOutlineMenu className="w-14 h-14" />
-              )}
-            </button>
-          </div>
+          {isMobile && (
+            <div>
+              <button
+                onClick={toggleMobileMenu}
+                aria-label="Toggle Menu"
+                className="focus:outline-none"
+              >
+                {isMobileMenuOpen ? (
+                  <HiOutlineX className="w-14 h-14" />
+                ) : (
+                  <HiOutlineMenu className="w-14 h-14" />
+                )}
+              </button>
+            </div>
+          )}
         </div>
         {/* Mobile Menu */}
-        <motion.nav
-          className={classNames(
-            `md:hidden bg-black rounded-lg shadow-lg absolute bottom-0 left-0 right-0`
-          )}
-          style={{ top: getMobileMenuHeight() }}
-          animate={{
-            transform: !isMobileMenuOpen
-              ? "translateX(-100%)"
-              : "translateX(0%)",
-            opacity: !isMobileMenuOpen ? 0 : 1,
-          }}
-          transition={{ type: "tween" }}
-        >
-          <div className="flex flex-col justify-between h-full items-center w-full">
-            {/* Header */}
-            <div className="w-full">
-              <Separator className="mb-12" />
-              <Routes
-                className="flex flex-col"
-                routes={routes}
-                onClick={() => setIsMobileMenuOpen(false)}
-              />
-            </div>
-            {/* Body */}
-            <div>{children}</div>
+        {isMobile && (
+          <motion.nav
+            className={classNames(
+              `bg-black rounded-lg shadow-lg absolute bottom-0 left-0 right-0`
+            )}
+            style={{ top: getMobileMenuHeight() }}
+            initial={{
+              transform: "translateX(-100%)",
+              opacity: 0,
+            }}
+            animate={{
+              transform: isMobileMenuOpen
+                ? "translateX(0%)"
+                : "translateX(-100%)",
+              opacity: isMobileMenuOpen ? 1 : 0,
+            }}
+            transition={{ type: "tween" }}
+          >
+            <div className="flex flex-col justify-between h-full items-center w-full">
+              {/* Header */}
+              <div className="w-full">
+                <Separator className="mb-12" />
+                <Routes
+                  className="flex flex-col"
+                  routes={routes}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                />
+              </div>
+              {/* Body */}
+              <div>{children}</div>
 
-            {/* Footer */}
-            <div className="mb-12 w-10/12">
-              <Separator className="mb-20" />
-              <Button onClick={onCTAClick} className="w-full mt-4 text-4xl">
-                <Link
-                  className="text-2xl text-center w-full py-3"
-                  href="/engrave"
-                >
-                  Begin Your Legacy
-                </Link>
-              </Button>
+              {/* Footer */}
+              <div className="mb-12 w-10/12">
+                <Separator className="mb-20" />
+                <Button onClick={onCTAClick} className="w-full mt-4 text-4xl">
+                  <Link
+                    className="text-2xl text-center w-full py-3"
+                    href="/engrave"
+                  >
+                    Begin Your Legacy
+                  </Link>
+                </Button>
+              </div>
             </div>
-          </div>
-        </motion.nav>
+          </motion.nav>
+        )}
       </motion.header>
     </AnimatePresence>
   );

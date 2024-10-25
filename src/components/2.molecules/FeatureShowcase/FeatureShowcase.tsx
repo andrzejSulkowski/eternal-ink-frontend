@@ -2,13 +2,15 @@ import { Props as BulletPointProps } from "@/components/2.molecules/BulletPoint/
 import ContentBlock from "./parts/ContentBlock";
 import ImgBlock from "./parts/ImgBlock";
 import { ReactNode } from "react";
+import { StaticImageData } from "next/image";
 
 interface Props {
   title: string;
   description: string;
   bulletPoints: BulletPointProps[];
   highlighted: string;
-  imgSrc: string;
+  img: StaticImageData;
+  imgSrcPlaceholder?: string;
   first: "img" | "content";
   ImgNode?: ReactNode;
   ContentNode?: ReactNode;
@@ -21,13 +23,13 @@ function FeatureShowcase(props: Props) {
       {props.first === "content" ? (
         <>
           <ContentBlock {...props}>{props.ContentNode}</ContentBlock>
-          <ImgBlock imgSrc={props.imgSrc} alt={props.alt}>
+          <ImgBlock img={props.img} alt={props.alt}>
             {props.ImgNode}
           </ImgBlock>
         </>
       ) : (
         <>
-          <ImgBlock imgSrc={props.imgSrc} alt={props.alt}>
+          <ImgBlock img={props.img} alt={props.alt}>
             {props.ImgNode}
           </ImgBlock>
           <ContentBlock {...props}>{props.ContentNode}</ContentBlock>

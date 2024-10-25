@@ -1,3 +1,4 @@
+import NextBundleAnalyzer from '@next/bundle-analyzer';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     // output: 'export',
@@ -11,7 +12,15 @@ const nextConfig = {
                 permanent: true
             }
         ]
-    }
+    },
+    experimental: {
+        optimizePackageImports: ["crypto-browserify"]
+    },
+    output: "standalone"
 };
 
-export default nextConfig;
+const withBundleAnalyzer = NextBundleAnalyzer({
+    enabled: process.env.ANALYZE === 'true',
+});
+
+export default withBundleAnalyzer(nextConfig);

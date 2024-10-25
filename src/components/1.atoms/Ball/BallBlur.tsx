@@ -1,7 +1,7 @@
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import Image from "next/image";
-import BallAsset from "public/storybook_resources/ball_solid.png";
+import BallAsset from "public/storybook_resources/ball.png";
 
 interface IBall extends EIProps {
   priority?: boolean;

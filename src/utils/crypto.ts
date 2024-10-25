@@ -1,20 +1,27 @@
-import crypto, { BinaryLike, CipherKey } from "crypto";
+import {
+  BinaryLike,
+  pbkdf2Sync,
+  randomBytes,
+  createCipheriv,
+  createHash,
+  createDecipheriv,
+} from "crypto";
 
 const algorithm = "AES-256-CBC";
 const ivLength = 16;
 
 function deriveKey(password: string, salt: BinaryLike) {
-  return crypto.pbkdf2Sync(password, salt, 100000, 32, "sha256");
+  return pbkdf2Sync(password, salt, 100000, 32, "sha256");
 }
 
 function encrypt(
   message: string,
   password: string
 ): { data: Uint8Array; salt: Uint8Array; iv: Uint8Array } {
-  const iv = crypto.randomBytes(ivLength); // IV buffer
-  const salt = crypto.randomBytes(16); // Salt buffer
+  const iv = randomBytes(ivLength); // IV buffer
+  const salt = randomBytes(16); // Salt buffer
   const key = deriveKey(password, new Uint8Array(salt)); // Key buffer
-  const cipher = crypto.createCipheriv(
+  const cipher = createCipheriv(
     algorithm,
     new Uint8Array(key),
     new Uint8Array(iv)
@@ -40,7 +47,7 @@ function decrypt(args: {
 }): string {
   const { data, salt, iv, password } = args;
   const key = new Uint8Array(deriveKey(password, salt));
-  const decipher = crypto.createDecipheriv(algorithm, key, iv);
+  const decipher = createDecipheriv(algorithm, key, iv);
 
   const decrypted = Buffer.concat([
     new Uint8Array(decipher.update(data)),
@@ -61,7 +68,7 @@ async function hash(blob: Blob): Promise<Uint8Array> {
 
   // For Node.js environments
   const buffer = Buffer.from(arrayBuffer);
-  const hash = crypto.createHash("sha256");
+  const hash = createHash("sha256");
   hash.update(new Uint8Array(buffer));
   return new Uint8Array(hash.digest());
 }

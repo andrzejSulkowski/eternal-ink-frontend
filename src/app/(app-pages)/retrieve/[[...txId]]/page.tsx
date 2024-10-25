@@ -5,15 +5,16 @@ import ThreeStars from "@/components/Svgs/ThreeStars";
 import Background from "@/components/Svgs/bg/1/Background";
 import { classNames } from "@/utils/className";
 import RetrievedMessage from "@/components/2.molecules/RetrievedMessage/RetrievedMessage";
-import ProtectedTx from "./(cmp)/ProtectedTx";
-import FileTx from "./(cmp)/FileTx";
 import { useCallback, useEffect, useState } from "react";
 import { TxStatus } from "@/models";
 import Input from "@/components/1.atoms/Input/Input";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import api from "@/libs/api/transaction";
 import { GetTxInfoResponse } from "@/libs/api/models";
+import dynamic from "next/dynamic";
+const ProtectedTx = dynamic(() => import("./(cmp)/ProtectedTx"));
+const FileTx = dynamic(() => import("./(cmp)/FileTx"));
 
 function RetrievePage() {
   const path = usePathname();

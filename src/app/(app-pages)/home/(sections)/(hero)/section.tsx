@@ -4,6 +4,7 @@ import { classNames } from "@/utils/className";
 import PlanetLayout from "@/components/Svgs/bg/planet/PlanetLayout";
 import Button from "@/components/1.atoms/Button/Button";
 import Ball from "@/components/1.atoms/Ball/Ball";
+import BallBlur from "@/components/1.atoms/Ball/BallBlur";
 import BgBlue1 from "./(bg)/BgBlue1";
 
 interface Props extends EIProps {}
@@ -14,7 +15,10 @@ function HeroSection({ className }: Props) {
       <PlanetLayout className="w-svw h-svh !absolute top-0 overflow-hidden !-z-10 font-manrope text-center !left-0">
         <Ball className="absolute w-60 h-60 right-8 top-8 blur-md" />
         <BgBlue1 className="h-full absolute top-[-10%] right-[-10%] -z-10 blur-[96px]" />
-        <Ball className="absolute w-1/2 h-1/2 left-[-30%] top-[0%] blur-xl" />
+        <BallBlur
+          className="absolute w-1/2 h-1/2 left-[-30%] top-[0%] blur-xl"
+          priority
+        />
       </PlanetLayout>
 
       <div className="w-full h-svh flex flex-col items-center">
