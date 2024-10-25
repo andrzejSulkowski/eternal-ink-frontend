@@ -55,4 +55,7 @@ ENV PORT=3000
 # Set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
+# Install wget to perform a health check done by coolify
+RUN apt-get update && apt-get install -y wget
+
 CMD ["bun", "server.js"]
