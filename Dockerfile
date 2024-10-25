@@ -32,12 +32,16 @@ RUN bun run build
 FROM base AS runner
 WORKDIR /app
 
+# Set environment variables
 ENV NODE_ENV=production
-
-# Disable telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-#RUN adduser --system --uid 1001 nextjs
+# Install wget and curl before creating the nextjs user
+RUN apt-get update && apt-get install -y wget curl && rm -rf /var/lib/apt/lists/*
+
+RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 
@@ -50,17 +54,13 @@ RUN chown nextjs:bun .next
 COPY --from=builder --chown=nextjs:bun /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:bun /app/.next/static ./.next/static
 
+# Set the correct permissions for the nextjs user
+RUN chown -R nextjs:bun /app
+
 # Disabled switching to nextjs user for now
-# USER nextjs
+USER nextjs
 
 EXPOSE 3000
 
-ENV PORT=3000
-
-# Set hostname to localhost
-ENV HOSTNAME="0.0.0.0"
-
-# Install wget to perform a health check done by coolify
-RUN apt-get update && apt-get install -y wget && apt-get install -y curl
 
 CMD ["bun", "server.js"]
