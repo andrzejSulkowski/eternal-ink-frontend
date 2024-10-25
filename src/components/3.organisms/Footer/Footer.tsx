@@ -2,9 +2,11 @@ import React from "react";
 import type { EIProps, EIRoute } from "@/types";
 import { classNames } from "@/utils/className";
 import CONFIG from "@/libs/config";
+import Hrefs from "@/components/3.organisms/Footer/parts/Href/Hrefs";
 
 interface Props extends EIProps {
   socials: ISocial[];
+  routes: EIRoute[];
 }
 
 interface ISocial {
@@ -12,7 +14,7 @@ interface ISocial {
   cmp: React.FC<EIProps>;
 }
 
-function Footer({ className, socials = [] }: Props) {
+function Footer({ className, socials = [], routes }: Props) {
   const Socials = () => (
     <div className="flex gap-8 justify-end items-center h-full">
       {socials.map((Social, idx) => (
@@ -40,8 +42,7 @@ function Footer({ className, socials = [] }: Props) {
         <span className="text-ei-primary-faded text-xl md:text-base">
           Version: {CONFIG.VERSION}
         </span>
-        {/* Deactivated for now */}
-        {/* <Hrefs routes={routes} onHrefClick={onHrefClick} /> */}
+        <Hrefs routes={routes} />
       </div>
       {/* Social Links */}
       <div className="flex flex-col justify-between gap-4">

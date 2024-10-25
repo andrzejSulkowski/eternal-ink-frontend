@@ -12,6 +12,11 @@ type Props = {
 
 function Button(args: Props) {
   const { textContent, children, className, isDisabled } = args;
+  const onClickHandler = useCallback(() => {
+    if ("onClick" in args) {
+      return !isDisabled && args.onClick ? args.onClick() : null;
+    }
+  }, [isDisabled, args]);
 
   if ("href" in args) {
     const { href } = args;
@@ -28,11 +33,6 @@ function Button(args: Props) {
       </div>
     );
   } else {
-    const { onClick } = args;
-    const onClickHandler = useCallback(
-      () => (!isDisabled && onClick ? onClick() : null),
-      [isDisabled, onClick]
-    );
     return (
       <div
         className={classNames(

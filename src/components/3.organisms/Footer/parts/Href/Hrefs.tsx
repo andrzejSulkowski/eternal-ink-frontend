@@ -5,20 +5,21 @@ import Link from "next/link";
 
 interface Props extends EIProps {
   routes: EIRoute[];
-  onHrefClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-function Hrefs({ className, routes, onHrefClick }: Props) {
+function Hrefs({ className, routes }: Props) {
   return (
     <ul className={classNames("flex text-ei-primary-faded gap-4", className)}>
-        {routes?.map((route, index) => (
-          <li key={index}>
-            <Link key={index} href={route.href} onClick={onHrefClick}>{route.name}</Link>
-            {index !== routes.length - 1 && (
-              <span className="text-ei-primary-faded/20 ml-4">|</span>
-            )}
-          </li>
-        ))}
+      {routes?.map((route, index) => (
+        <li key={index} className="hover:underline text-base md:text-xs">
+          <Link key={index} href={route.href}>
+            {route.name}
+          </Link>
+          {index !== routes.length - 1 && (
+            <span className="text-ei-primary-faded/20 ml-4">|</span>
+          )}
+        </li>
+      ))}
     </ul>
   );
 }
