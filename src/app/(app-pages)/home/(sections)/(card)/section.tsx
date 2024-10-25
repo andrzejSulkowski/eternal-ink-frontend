@@ -1,4 +1,5 @@
 import Ball from "@/components/1.atoms/Ball/Ball";
+import BallBlur from "@/components/1.atoms/Ball/BallBlur";
 import CardsCarousel, {
   CardProps,
 } from "@/components/3.organisms/CardsCarousel/CardsCarousel";
@@ -28,12 +29,12 @@ function CardSection({ className }: EIProps) {
   return (
     <div
       className={classNames(
-        "px-12 my-24 md:my-48 md:px-60 relative overflow-visible",
+        "px-12 my-24 lg:my-48 lg:px-60 relative overflow-visible",
         className
       )}
     >
       <CardsCarousel cards={cards} />
-      <Ball className="absolute -left-[30%] md:left-[7%] top-[35%] z-20 blur-sm w-1/2 md:w-1/4 h-full" />
+      <Ball className="absolute -left-[30%] md:left-[7%] top-[10%] md:top-[35%] z-20 blur-sm w-1/2 md:w-1/4 h-full" />
       <Ball className="absolute right-[2%] md:right-[10%] top-[-50%] -z-20 blur-lg opacity-60 w-1/2 h-1/2" />
     </div>
   );

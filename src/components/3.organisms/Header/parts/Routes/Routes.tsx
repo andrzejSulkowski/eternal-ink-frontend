@@ -57,7 +57,7 @@ function Routes({ className, routes }: Props) {
         <>
           <div
             className={classNames(
-              "flex gap-12 font-manrope text-2xl md:text-sm",
+              "flex gap-12 font-manrope text-2xl lg:text-sm",
               className
             )}
           >

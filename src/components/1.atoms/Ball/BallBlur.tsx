@@ -12,7 +12,6 @@ function Ball({ className, priority }: IBall) {
       <Image
         className="object-contain"
         src={BallAsset}
-        placeholder="blur"
         fill
         priority={priority}
         sizes="(max-width: 768px) 70vw, (max-width: 1200px) 30vw, 20vw"

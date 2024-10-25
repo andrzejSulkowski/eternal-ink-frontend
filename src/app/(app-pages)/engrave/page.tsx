@@ -14,7 +14,7 @@ function EngravePage({}: Props) {
         <div>
           <div className="inline-block font-extrabold text-6xl mb-6 relative">
             <h3 className="z-10 text-7xl md:text-5xl">Eternalize Your Words</h3>
-            <Label className="absolute -top-5 -right-24 w-auto h-8 md:text-sm text-xl -z-10">
+            <Label className="absolute -top-5 -right-24 w-auto h-8 lg:text-sm text-xl -z-10">
               On the Bitcoin Blockchain
             </Label>
           </div>

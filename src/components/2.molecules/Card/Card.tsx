@@ -35,7 +35,7 @@ function Card({
           {highlightedTitle}
         </div>
 
-        <span className="text-2xl md:text-sm mt-5 text-ei-primary-faded">
+        <span className="text-2xl lg:text-sm mt-5 text-ei-primary-faded">
           {description}
         </span>
       </div>

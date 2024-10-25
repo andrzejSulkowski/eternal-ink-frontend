@@ -54,7 +54,7 @@ const Input: React.FC<Props> = ({
       {label ? (
         <div className="flex gap-12 pr-3 pl-4 py-3 bg-[#09090A] font-manrope rounded-xl">
           <div className="flex flex-col text-nowrap justify-center">
-            <span className="font-bold text-xl md:text-sm text-white">
+            <span className="font-bold text-xl lg:text-sm text-white">
               {label}:
             </span>
           </div>

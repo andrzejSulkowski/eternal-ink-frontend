@@ -19,13 +19,13 @@ function ContentBlock({
   return (
     <div className="relative overflow-visible my-8 md:my-0">
       <h2 className="font-extrabold text-4xl">{title}</h2>
-      <p className="mt-6 text-ei-primary-faded text-xl md:text-sm">
+      <p className="mt-6 text-ei-primary-faded text-xl lg:text-sm">
         {description}
       </p>
       <div className="flex flex-col gap-4 mt-7">
         <BulletPointsList bulletPoints={bulletPoints} />
       </div>
-      <p className="font-bold text-xl md:text-sm mt-8">{highlighted}</p>
+      <p className="font-bold text-xl lg:text-sm mt-8">{highlighted}</p>
       {children}
     </div>
   );

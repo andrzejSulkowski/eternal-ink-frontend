@@ -99,7 +99,7 @@ function RetrievePage() {
         <div>
           <div className="inline-block font-extrabold text-6xl mb-6 relative">
             <h3 className="z-10">Retrieve your Message</h3>
-            <Label className="absolute -top-5 -right-2 md:-right-24 w-auto md:h-8 h-12 text-xl md:text-sm -z-10">
+            <Label className="absolute -top-5 -right-2 md:-right-24 w-auto md:h-8 h-12 text-xl lg:text-sm -z-10">
               Simple Dimple
             </Label>
           </div>
@@ -113,7 +113,7 @@ function RetrievePage() {
         <div className="grid md:grid-cols-[1fr_auto_1fr] gap-8 font-manrope">
           {/* Column 1 */}
           <div data-col1 className="w-full min-w-full">
-            <span className="font-bold text-2xl md:text-sm block mb-4">
+            <span className="font-bold text-2xl lg:text-sm block mb-4">
               Enter Transaction ID
             </span>
             <Input
@@ -138,11 +138,11 @@ function RetrievePage() {
           </div>
           {/* Column 2 */}
           <div className="w-full h-full flex justify-center items-center">
-            <div className="font-bold hidden md:text-sm md:block"> = </div>
+            <div className="font-bold hidden lg:text-sm md:block"> = </div>
           </div>
           {/* Column 3 */}
           <div className="w-full max-w-full flex flex-col min-w-0">
-            <span className="font-bold text-2xl md:text-sm block mb-4 w-fit">
+            <span className="font-bold text-2xl lg:text-sm block mb-4 w-fit">
               Your Result
             </span>
             <RetrievedMessage status={status} message={message} txId={txId} />

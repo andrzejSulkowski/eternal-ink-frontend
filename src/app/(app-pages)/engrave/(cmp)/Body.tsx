@@ -91,7 +91,7 @@ function Body() {
         <div className="grid md:grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr] gap-6 font-manrope">
           {/* Row1 */}
           <div data-col1 className="w-full">
-            <span className="font-bold md:text-sm text-xl block mb-4">
+            <span className="font-bold lg:text-sm text-xl block mb-4">
               Enter Your Message
             </span>
             <Textarea
@@ -125,7 +125,7 @@ function Body() {
 
           {/* Row2 */}
           <div className="w-full h-full flex md:justify-center items-center">
-            <div className="font-bold text-2xl md:text-sm block">or</div>
+            <div className="font-bold text-2xl lg:text-sm block">or</div>
           </div>
 
           {/* Row3 */}

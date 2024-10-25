@@ -31,7 +31,7 @@ function SelectionCard({
           <React.Fragment key={index}>
             <div
               onClick={() => setSelectedOptionIdx(index)}
-              className={`inline-block text-xl md:text-sm font-bold cursor-pointer ${
+              className={`inline-block text-xl lg:text-sm font-bold cursor-pointer ${
                 selectedOptionIdx === index ? "text-ei-primary" : ""
               }`}
             >
@@ -65,13 +65,13 @@ function SelectionCard({
         <span className="block font-extrabold text-white text-2xl md:text-xl mb-3">
           {title}
         </span>
-        <span className="block text-2xl md:text-sm">{description}</span>
+        <span className="block text-2xl lg:text-sm">{description}</span>
         {options && options.length > 0 && <div className="mt-10 md:mt-6" />}
         {options && options.length > 0 && <CardOptionsTitles />}
         <AnimatePresence mode="wait">
           <motion.span
             key={selectedOptionIdx} // Ensure a unique key for each content change
-            className="text-xl md:text-sm"
+            className="text-xl lg:text-sm"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

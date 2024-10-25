@@ -43,30 +43,30 @@ function RetrievedMessage({ className, status, message, txId }: Props) {
           {/* Header */}
           <div className="flex justify-between gap-4 md:gap-0 flex-col md:flex-row">
             <div>
-              <span className="text-ei-primary-faded mr-4 text-xl md:text-sm">
+              <span className="text-ei-primary-faded mr-4 text-xl lg:text-sm">
                 Status:
               </span>
               <span
                 className={classNames(
                   getStatusColor(status!),
-                  "font-bold text-xl md:text-sm"
+                  "font-bold text-xl lg:text-sm"
                 )}
               >
                 {dStatus}
               </span>
             </div>
             <div>
-              <span className="text-ei-primary-faded mr-4 text-xl md:text-sm">
+              <span className="text-ei-primary-faded mr-4 text-xl lg:text-sm">
                 Transaction:
               </span>
-              <span className="text-white font-bold md:text-sm text-xl">
+              <span className="text-white font-bold lg:text-sm text-xl">
                 {trim(txId!)}
               </span>
             </div>
           </div>
           {/* Body */}
           <div className="flex flex-col pt-8 border-t-ei-primary-dark border border-transparent gap-3">
-            <span className="text-ei-primary-faded text-xl md:text-sm">
+            <span className="text-ei-primary-faded text-xl lg:text-sm">
               {bodyMessage}
             </span>
             <span className="text-white font-extrabold text-3xl md:text-xl break-words whitespace-pre-wrap">

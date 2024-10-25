@@ -17,7 +17,7 @@ function PasswordInput({ className, password, onChange }: Props) {
       )}
     >
       <div className="flex flex-col text-nowrap justify-center">
-        <span className="font-bold text-xl md:text-sm text-white">
+        <span className="font-bold text-xl lg:text-sm text-white">
           Create Password
         </span>
         <span className="text-xl md:text-xs font-semibold text-ei-primary-faded">

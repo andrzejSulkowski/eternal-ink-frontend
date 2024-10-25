@@ -57,7 +57,7 @@ function ContactSection({ className }: EIProps) {
   return (
     <div
       className={classNames(
-        "px-12 md:px-60 font-manrope w-full relative py-12 md:py-36",
+        "px-12 lg:px-60 font-manrope w-full relative py-12 md:py-36",
         className
       )}
     >
@@ -69,7 +69,7 @@ function ContactSection({ className }: EIProps) {
             or Need a Hand? <br />
             I&apos;m Here to Help!
           </h1>
-          <p className="text-ei-primary-faded text-xl md:text-sm">
+          <p className="text-ei-primary-faded text-xl lg:text-sm">
             Your curiosity and engagement drive this project forward. Whether
             you have inquiries about engraving, need guidance through the
             process, or simply want to share your thoughts, I&apos;m here for

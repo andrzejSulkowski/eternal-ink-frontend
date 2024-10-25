@@ -141,7 +141,7 @@ function EngravePage({}: Props) {
                 engravingData?.address ? trim(engravingData.address) : "-"
               }
             />
-            <div className="h-full flex items-center font-bold md:text-sm text-xl">
+            <div className="h-full flex items-center font-bold lg:text-sm text-xl">
               and
             </div>
             <InfoCard
@@ -154,7 +154,7 @@ function EngravePage({}: Props) {
 
           {address && (
             <div
-              className="text-ei-primary-faded text-2xl md:text-sm mt-12 hover:underline cursor-pointer"
+              className="text-ei-primary-faded text-2xl lg:text-sm mt-12 hover:underline cursor-pointer"
               onClick={cancel}
             >
               Cancel Engraving

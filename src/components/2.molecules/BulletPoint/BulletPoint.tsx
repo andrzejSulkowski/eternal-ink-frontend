@@ -12,7 +12,7 @@ function BulletPoint({ highlighted, description, className }: Props) {
   return (
     <div
       className={classNames(
-        "flex text-xl md:text-sm items-start space-x-3 text-white",
+        "flex text-xl lg:text-sm items-start space-x-3 text-white",
         className
       )}
     >

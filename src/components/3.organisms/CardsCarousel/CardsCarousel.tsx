@@ -8,6 +8,8 @@ import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import Image from "next/image";
+import Ball from "@/components/1.atoms/Ball/Ball";
+import BallBlur from "@/components/1.atoms/Ball/BallBlur";
 
 interface Props extends EIProps {
   cards: CardProps[];
@@ -61,18 +63,11 @@ function CardsCarousel({ cards, className }: Props) {
           <Card {...cards[selectedIdx]}>
             <div className="absolute bottom-0 top-0 left-0 right-0">
               {/* Change to Image */}
+              <BallBlur className="absolute -right-[50%] -top-44 -z-10 h-full w-full blur-md" />
               <Image
                 width={1260}
                 height={1425}
-                src="/storybook_resources/ball.png"
-                className="absolute -right-24 -top-20 -z-10"
-                alt="ball"
-              />
-              {/* Change to Image */}
-              <Image
-                width={1260}
-                height={1425}
-                className="w-auto bottom-0 absolute max-h-full md:max-h-none"
+                className="w-auto bottom-0 absolute h-[28rem] md:h-auto max-h-full md:max-h-none"
                 src="/storybook_resources/dwarf2.png"
                 alt="dwarf"
               />

@@ -18,7 +18,7 @@ function WhyEngrave({ className }: EIProps) {
   return (
     <div
       className={classNames(
-        "px-12 md:px-60 font-manrope overflow-hidden",
+        "px-12 lg:px-60 font-manrope overflow-hidden",
         className
       )}
     >
