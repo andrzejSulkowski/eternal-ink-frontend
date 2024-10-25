@@ -16,10 +16,14 @@ interface ISocial {
 
 function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
   const Socials = () => (
-    <div className="flex gap-8 justify-end">
+    <div className="flex gap-8 justify-end items-center h-full">
       {socials.map((Social, idx) => (
-        <a key={idx} href={Social.href}>
-          <Social.cmp key={idx} className="cursor-pointer" />
+        <a
+          key={idx}
+          href={Social.href}
+          className="flex-none h-full aspect-square"
+        >
+          <Social.cmp className="cursor-pointer" />
         </a>
       ))}
     </div>
@@ -43,7 +47,7 @@ function Footer({ className, onHrefClick, routes = [], socials = [] }: Props) {
       </div>
       {/* Social Links */}
       <div className="flex flex-col justify-between gap-4">
-        <div className="h-12 md:h-6 w-full flex gap-8 justify-end">
+        <div className="h-12 md:h-6 w-full">
           <Socials />
         </div>
         <span className="text-ei-primary-faded text-xl md:text-base">

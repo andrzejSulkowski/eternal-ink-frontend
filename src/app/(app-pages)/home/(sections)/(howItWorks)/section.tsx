@@ -63,7 +63,7 @@ const selectionCards: SelectionCardProps[] = [
       "Fees are tailored based on selected services and blockchain dynamics, ensuring transparency in every transaction",
   },
   {
-    icon: StarCheck({}),
+    icon: StarCheck(),
     title: "Payment and Confirmation",
     description:
       "Upon content and blockchain selection, a unique address for fee payment is generated. Post-payment, your data is engraved or hashed and broadcasted to the blockchain. Upon successful completion, you'll receive a unique transaction ID, marking the permanent engraving of your data on the blockchain. Additionally, you have the option to download a certificate in PDF format, which includes all essential details for easy reference of your engraving in the future.",

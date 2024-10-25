@@ -6,7 +6,7 @@ interface Props extends EIProps {}
 
 function Github({ className }: Props) {
   return (
-    <div className={classNames("max-h-full max-w-full h-full aspect-square", className)}>
+    <div className={classNames("aspect-square h-full", className)}>
       <svg
         viewBox="0 0 24 23"
         fill="none"
