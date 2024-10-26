@@ -26,13 +26,13 @@ function ProtectedTx({ encryptedBase64, onEncrypted }: Props) {
     setIv("");
   }, [setPassword, setSalt, setIv]);
 
-  const decrypt = useCallback(() => {
+  const decrypt = useCallback(async () => {
     try {
       const messageBuffer = Buffer.from(encryptedBase64, "base64");
       const saltBuffer = Buffer.from(salt, "base64");
       const ivBuffer = Buffer.from(iv, "base64");
 
-      const decrypted = $decrypt({
+      const decrypted = await $decrypt({
         data: new Uint8Array(messageBuffer),
         salt: new Uint8Array(saltBuffer),
         iv: new Uint8Array(ivBuffer),

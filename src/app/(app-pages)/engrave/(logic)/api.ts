@@ -28,7 +28,7 @@ const startEngraving = async (
       showBanner("Please enter a password");
       return;
     } else if (toggleKey === "encrypt" && password && password.length > 0) {
-      messageEncrypted = encrypt(message, password);
+      messageEncrypted = await encrypt(message, password);
     }
   } catch (e) {
     const error = e as any as Error;

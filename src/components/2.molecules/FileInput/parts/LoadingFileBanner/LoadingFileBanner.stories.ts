@@ -10,8 +10,7 @@ const meta = {
     layout: "padded",
   },
   tags: ["autodocs"],
-  argTypes: {
-  },
+  argTypes: {},
 } satisfies Meta<typeof LoadingFileBanner>;
 
 export default meta;
@@ -19,8 +18,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    src: './storybook_resources/dwarf.png',
-    namePlaceholder: 'Loading your file',
-    sizePlaceholder: '> 100 MB'
+    src: "./storybook_resources/dwarf.webp",
+    namePlaceholder: "Loading your file",
+    sizePlaceholder: "> 100 MB",
   },
 };

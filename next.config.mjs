@@ -16,7 +16,8 @@ const nextConfig = {
     experimental: {
         optimizePackageImports: ["crypto-browserify"]
     },
-    output: "standalone"
+    output: "standalone",
+    productionBrowserSourceMaps: process.env.NODE_ENV === 'development',
 };
 
 const withBundleAnalyzer = NextBundleAnalyzer({

@@ -67,7 +67,7 @@ function CardsCarousel({ cards, className }: Props) {
                 width={1260}
                 height={1425}
                 className="w-auto bottom-0 absolute h-[28rem] md:h-auto max-h-full md:max-h-none"
-                src="/storybook_resources/dwarf2.png"
+                src="/storybook_resources/dwarf2.webp"
                 alt="dwarf"
               />
             </div>

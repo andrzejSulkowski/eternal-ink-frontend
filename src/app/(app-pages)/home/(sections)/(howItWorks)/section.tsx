@@ -7,7 +7,6 @@ import StarCheck from "@/components/Svgs/StarCheck";
 import Ball from "@/components/1.atoms/Ball/Ball";
 import Header from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/Header";
 import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/SelectionCardsList";
-import { motion } from "framer-motion";
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 

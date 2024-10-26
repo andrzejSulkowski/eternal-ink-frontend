@@ -1,26 +1,24 @@
-import {
-  BinaryLike,
-  pbkdf2Sync,
-  randomBytes,
-  createCipheriv,
-  createHash,
-  createDecipheriv,
-} from "crypto";
-
 const algorithm = "AES-256-CBC";
 const ivLength = 16;
 
-function deriveKey(password: string, salt: BinaryLike) {
+async function loadCrypto() {
+  const crypto = await import("crypto");
+  return crypto;
+}
+
+async function deriveKey(password: string, salt: Uint8Array) {
+  const { pbkdf2Sync } = await loadCrypto();
   return pbkdf2Sync(password, salt, 100000, 32, "sha256");
 }
 
-function encrypt(
+async function encrypt(
   message: string,
   password: string
-): { data: Uint8Array; salt: Uint8Array; iv: Uint8Array } {
+): Promise<{ data: Uint8Array; salt: Uint8Array; iv: Uint8Array }> {
+  const { randomBytes, createCipheriv } = await loadCrypto();
   const iv = randomBytes(ivLength); // IV buffer
   const salt = randomBytes(16); // Salt buffer
-  const key = deriveKey(password, new Uint8Array(salt)); // Key buffer
+  const key = await deriveKey(password, new Uint8Array(salt)); // Key buffer
   const cipher = createCipheriv(
     algorithm,
     new Uint8Array(key),
@@ -39,14 +37,15 @@ function encrypt(
   };
 }
 
-function decrypt(args: {
+async function decrypt(args: {
   data: Uint8Array;
   salt: Uint8Array;
-  iv: BinaryLike;
+  iv: Uint8Array;
   password: string;
-}): string {
+}): Promise<string> {
   const { data, salt, iv, password } = args;
-  const key = new Uint8Array(deriveKey(password, salt));
+  const { createDecipheriv } = await loadCrypto();
+  const key = new Uint8Array(await deriveKey(password, salt));
   const decipher = createDecipheriv(algorithm, key, iv);
 
   const decrypted = Buffer.concat([
@@ -58,6 +57,7 @@ function decrypt(args: {
 }
 
 async function hash(blob: Blob): Promise<Uint8Array> {
+  const { createHash } = await loadCrypto();
   const arrayBuffer = await blob.arrayBuffer();
 
   // For browser environments

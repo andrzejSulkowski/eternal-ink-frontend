@@ -61,7 +61,7 @@ function FileInput(props: Props) {
     Enter: () => <InfoBanner allowedMimeTypes={props.allowedMimeTypes} />,
     Loading: () => (
       <LoadingFileBanner
-        src="/storybook_resources/dwarf.png"
+        src="/storybook_resources/dwarf.webp"
         namePlaceholder="Loading your file"
         sizePlaceholder=">100 MB"
       />

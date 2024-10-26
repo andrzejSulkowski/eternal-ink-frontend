@@ -1,4 +1,4 @@
-import type { Preview, ReactRenderer } from "@storybook/react";
+import type { Preview } from "@storybook/react";
 import "../src/app/globals.css";
 import { manrope, kanit } from "../src/libs/fonts";
 import * as React from "react";
