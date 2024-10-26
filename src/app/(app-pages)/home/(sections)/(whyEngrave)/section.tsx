@@ -12,8 +12,8 @@ import FeatureShowcase from "@/components/2.molecules/FeatureShowcase/FeatureSho
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 //Imgs
-import Dwarf3 from "public/storybook_resources/dwarf3/dwarf3.webp";
-import Dwarf4 from "public/storybook_resources/dwarf4/dwarf4.webp";
+import Dwarf3 from "public/storybook_resources/dwarf3.webp";
+import Dwarf4 from "public/storybook_resources/dwarf4.webp";
 
 function WhyEngrave({ className }: EIProps) {
   return (
