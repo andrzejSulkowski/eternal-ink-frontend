@@ -127,6 +127,12 @@ type PostConsent = {
 );
 type PostConsentResponse = {};
 
+/// Healthcheck
+type GetHealthCheck = {} | undefined;
+type GetHealthCheckResponse = {
+  network: "Production" | "Development";
+};
+
 export type {
   PostRequestEngraving,
   PostRequestEngravingResponse,
@@ -150,4 +156,6 @@ export type {
   PostCancelTxResponse,
   PostConsent,
   PostConsentResponse,
+  GetHealthCheck,
+  GetHealthCheckResponse,
 };

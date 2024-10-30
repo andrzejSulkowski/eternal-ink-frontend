@@ -66,7 +66,7 @@ function index({}: Props) {
         {/* Ball Left Top */}
         <img
           className="absolute top-0 left-[-50%] blur-3xl w-2/3"
-          src="/certificate/assets/ball.webp"
+          src="/certificate/assets/ball.png"
           alt="ball"
         />
 
@@ -74,7 +74,7 @@ function index({}: Props) {
         <img
           alt="ball"
           className="absolute bottom-[8%] left-[-10.5%] w-[100px] blur-[2px]"
-          src="/certificate/assets/ball.webp"
+          src="/certificate/assets/ball.png"
         />
       </div>
     </div>

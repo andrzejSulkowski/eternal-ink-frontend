@@ -19,7 +19,7 @@ function PlanetLayout({ className }: Props) {
           width={100}
           height={100}
           className="absolute bottom-[25%] left-[-2%] w-[10%] blur"
-          src="/certificate/assets/ball.webp"
+          src="/storybook_resources/ball_solid.webp"
           alt="ball"
         />
 
@@ -27,16 +27,16 @@ function PlanetLayout({ className }: Props) {
         <Image
           width={100}
           height={100}
-          className="absolute top-[4%] right-[10%] w-[12%] blur-xl"
-          src="/certificate/assets/ball.webp"
+          className="absolute top-[4%] right-[10%] w-[12%] blur-sm"
+          src="/storybook_resources/ball.webp"
           alt="ball"
         />
 
         <Image
           width={100}
           height={100}
-          className="absolute top-[5%] right-[-30%] w-[40%] blur-3xl"
-          src="/certificate/assets/ball.webp"
+          className="absolute top-[5%] right-[-30%] w-[40%] blur-md"
+          src="/storybook_resources/ball.webp"
           alt="ball"
         />
       </div>

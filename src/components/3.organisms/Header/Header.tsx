@@ -9,6 +9,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import api from "@/libs/api/general";
+import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 
 interface Props extends EIProps {
   routes: EIRoute[];
@@ -50,6 +52,23 @@ function Header({ className, children, routes }: Props) {
     );
   };
 
+  const { showBanner } = useBanner();
+  const [isDevelopment, setIsDevelopment] = useState<boolean | null>(null);
+  useEffect(() => {
+    api.getHealthCheck({}).then((res) => {
+      if (res.status_code === 200 && res.ok && res.data) {
+        if (res.data.network === "Development") {
+          setIsDevelopment(true);
+          showBanner("This is a development server");
+        } else {
+          setIsDevelopment(false);
+        }
+      } else {
+        showBanner("Server is down - please try again later", { danger: true });
+      }
+    });
+  }, []);
+
   return (
     <AnimatePresence>
       <motion.header
@@ -81,6 +100,11 @@ function Header({ className, children, routes }: Props) {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {children}
+            {isDevelopment === true && (
+              <div className="text-lg text-ei-warning">
+                Development Server - Operating On The Bitcoin Testnet Network
+              </div>
+            )}
             <Button onClick={onCTAClick}>
               <Link href="/engrave">Begin Your Legacy</Link>
             </Button>

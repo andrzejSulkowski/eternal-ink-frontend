@@ -1,6 +1,8 @@
-import postContactMessage from './handler/contact'
+import postContactMessage from "./handler/contact";
+import getHealthCheck from "./handler/healthcheck";
 
 const api = {
-    postContactMessage
-}
-export default api
+  postContactMessage,
+  getHealthCheck,
+};
+export default api;
