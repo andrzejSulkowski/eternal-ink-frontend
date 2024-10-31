@@ -56,18 +56,6 @@ function ContactSection({ className }: EIProps) {
     [showBanner, setIsDisabled]
   );
 
-  useEffect(() => {
-    showLoadingScreen("Loading...", 1, 1);
-    setTimeout(() => {
-      showLoadingScreen("Loading...", 1, 1, {
-        label: {
-          position: "bottom",
-          textContent: "Please be patient this can take some time",
-        },
-      });
-    }, 2000);
-  }, []);
-
   return (
     <div
       className={classNames(
