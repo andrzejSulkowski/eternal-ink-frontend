@@ -3,9 +3,11 @@ import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 import ContactMeForm from "@/components/3.organisms/ContactMeForm/ContactMeForm";
 import api from "@/libs/api/general";
 import { classNames } from "@/utils/className";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { validateEmail } from "@/utils/validateEmail";
 import { EIProps } from "@/types";
+import { useLoadingScreen } from "@/context/loadingScreenCtx";
+import { i } from "framer-motion/client";
 
 function BgBlue1({ className }: { className?: string }) {
   return (
@@ -29,6 +31,7 @@ function BgBlue1({ className }: { className?: string }) {
 
 function ContactSection({ className }: EIProps) {
   const [isDisabled, setIsDisabled] = useState(false);
+  const { showLoadingScreen } = useLoadingScreen();
 
   const { showBanner } = useBanner();
   const sendContactForm = useCallback(
@@ -52,6 +55,18 @@ function ContactSection({ className }: EIProps) {
     },
     [showBanner, setIsDisabled]
   );
+
+  useEffect(() => {
+    showLoadingScreen("Loading...", 1, 1);
+    setTimeout(() => {
+      showLoadingScreen("Loading...", 1, 1, {
+        label: {
+          position: "bottom",
+          textContent: "Please be patient this can take some time",
+        },
+      });
+    }, 2000);
+  }, []);
 
   return (
     <div

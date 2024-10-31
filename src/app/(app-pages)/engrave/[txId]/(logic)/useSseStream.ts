@@ -47,12 +47,21 @@ export const useSseStream = (
   }, [hideLoadingScreen]);
 
   const updateLoadingScreen = useCallback(
-    (status: TxStatus) => {
-      showLoadingScreen(
-        mapTxStatusToString[status],
-        mapTxStatusToProgress[status],
-        5
-      );
+    (status: TxStatus, opt?: { message: string }) => {
+      if (opt) {
+        showLoadingScreen(
+          mapTxStatusToString[status],
+          mapTxStatusToProgress[status],
+          5,
+          { label: { position: "bottom", textContent: opt?.message || "" } }
+        );
+      } else {
+        showLoadingScreen(
+          mapTxStatusToString[status],
+          mapTxStatusToProgress[status],
+          5
+        );
+      }
     },
     [showLoadingScreen]
   );
@@ -67,7 +76,13 @@ export const useSseStream = (
       );
       if (status === "keep-alive" || status === "close") {
         const txStatus = data as TxStatus;
-        updateLoadingScreen(txStatus);
+        if (txStatus === TxStatus.ConfirmingFunds) {
+          updateLoadingScreen(txStatus, {
+            message: "Please be patient this can take some time...",
+          });
+        } else {
+          updateLoadingScreen(txStatus);
+        }
         if (
           txStatus === TxStatus.Finalized ||
           txStatus === TxStatus.ExternalConfirmed
