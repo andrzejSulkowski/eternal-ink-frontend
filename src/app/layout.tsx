@@ -10,6 +10,7 @@ import Github from "@/components/Svgs/Github";
 import Web from "@/components/Svgs/Web";
 import LoadingScreenProvider from "@/context/loadingScreenCtx";
 import Header from "@/components/3.organisms/Header/Header";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Eternal Ink",
@@ -56,6 +57,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="overflow-x-hidden">
+      <Head>
+        <meta
+          property="og:title"
+          content="Eternal Ink - Immortalize Your Thoughts"
+        />
+        <meta
+          property="og:description"
+          content="Engrave your ideas and memories on the Blockchain. Eternal Ink provides a secure and permanent solution for storing your thoughts forever."
+        />
+        <meta
+          property="og:image"
+          content="https://eternal-ink.app/images/og-image.webp"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://eternal-ink.app" />
+      </Head>
       <body
         className={[
           kanit.variable,
