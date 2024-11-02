@@ -3,14 +3,13 @@ import type { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 import EIIcon from "@/components/1.atoms/EIIcon/EIIcon";
 import Copy from "@/components/Svgs/Copy";
-import { trim } from "@/libs/transaction";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
 
 interface Props extends EIProps {
   icon: React.ReactNode;
   label: string;
   value: string;
-  displayValue?: string;
+  displayValue?: string | undefined;
   isCopyable?: boolean;
 }
 

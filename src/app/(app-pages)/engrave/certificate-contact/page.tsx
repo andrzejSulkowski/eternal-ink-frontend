@@ -224,18 +224,21 @@ function CertificateContactPage() {
             </div>
           </div>
           <div className="flex gap-4 items-center">
-            <Button className="md:w-min h-18 md:h-10" onClick={acceptFlow}>
-              Accept
-              <ThreeStars className="max-w-5 ml-2" />
+            <Button
+              className="md:w-min h-18 md:h-10 border bg-white/80"
+              onClick={skipFlow}
+            >
+              Skip
             </Button>
             <span className="text-ei-primary-faded text-xl md:text-base">
               or
             </span>
             <Button
-              className="h-12 md:w-min md:h-8 bg-ei-primary-faded"
-              onClick={skipFlow}
+              className="md:w-min h-18 md:h-10 border"
+              onClick={acceptFlow}
             >
-              Skip
+              Accept
+              <ThreeStars className="max-w-5 ml-2" />
             </Button>
           </div>
         </div>

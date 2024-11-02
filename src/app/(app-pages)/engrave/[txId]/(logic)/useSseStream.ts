@@ -68,7 +68,6 @@ export const useSseStream = (
 
   const onmessage = useCallback(
     (event: MessageEvent) => {
-      console.log("received message", event.data);
       if (isCompletedRef.current) return;
 
       const { data, status }: GetTxStatusStreamResponse = JSON.parse(
@@ -76,13 +75,34 @@ export const useSseStream = (
       );
       if (status === "keep-alive" || status === "close") {
         const txStatus = data as TxStatus;
-        if (txStatus === TxStatus.ConfirmingFunds) {
+        let msg: string | null = null;
+
+        switch (txStatus) {
+          case TxStatus.WaitingForFunds:
+            msg = null;
+            break;
+          case TxStatus.ConfirmingFunds:
+            msg = "Please be patient this can take some time...";
+            break;
+          case TxStatus.ConfirmedFunds:
+            msg = "We got the funds and are ready to engrave";
+            break;
+          case TxStatus.Engraving:
+            msg = "Almost there! 🚀";
+            break;
+          case TxStatus.Engraved:
+            msg = "We have engraved your message";
+            break;
+        }
+
+        if (msg) {
           updateLoadingScreen(txStatus, {
-            message: "Please be patient this can take some time...",
+            message: msg,
           });
         } else {
           updateLoadingScreen(txStatus);
         }
+
         if (
           txStatus === TxStatus.Finalized ||
           txStatus === TxStatus.ExternalConfirmed

@@ -140,7 +140,10 @@ function EngravePage() {
           <InfoCard
             icon={<IoWallet color="white" />}
             label="Transaction Id:"
-            value={engravingData?.txId ? trim(engravingData.txId) : "-"}
+            value={engravingData?.txId ? engravingData.txId : "-"}
+            displayValue={
+              engravingData?.txId ? trim(engravingData.txId) : undefined
+            }
           />
         </div>
         <div className="flex gap-8">

@@ -56,7 +56,6 @@ function EngravePage({}: Props) {
   }, [engravingData]);
 
   const onCompleted = useCallback(() => {
-    console.log("onCompleted inside useCallback");
     router.push("/engrave/success/");
   }, [router]);
   const onError = useCallback(() => {}, []);
@@ -102,7 +101,9 @@ function EngravePage({}: Props) {
               ) {
                 router.push("/retrieve/" + address);
               } else if (status !== TxStatus.WaitingForFunds) {
-                updateLoadingScreen(status);
+                updateLoadingScreen(status, {
+                  message: "This can take some while",
+                });
               }
               startListening();
             } else {
