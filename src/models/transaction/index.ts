@@ -1,4 +1,4 @@
-import { ToggleKeys } from "@/app/(app-pages)/engrave/(logic)/types";
+import { ToggleKeys } from "@/app/(app-pages)/(flow)/engrave/(logic)/types";
 import { TxStatus } from "./state";
 
 interface EngravingState {

@@ -51,7 +51,10 @@ function MessagesPage() {
           <div className="flex flex-col gap-8 font-manrope bg-ei-primary/10 px-12 py-8 rounded-3xl overflow-y-auto my-2 flex-1 max-h-full h-full">
             {/* We need to make the date look better and configure all the layouts to have a provider which will set the layouts to be either "squashed" or "loose" */}
             {messages.map((m) => (
-              <div className="flex items-start justify-between gap-1 flex-col">
+              <div
+                className="flex items-start justify-between gap-1 flex-col"
+                key={m.id}
+              >
                 <span className="flex-shrink-0 text-ei-primary-faded text-base md:text-xs ml-1">
                   {new Date(m.time).toLocaleString()}.
                 </span>
