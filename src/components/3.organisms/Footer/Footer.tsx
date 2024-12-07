@@ -50,7 +50,7 @@ function Footer({ className, socials = [], routes }: Props) {
           <Socials />
         </div>
         <span className="text-ei-primary-faded text-xl md:text-base">
-          @{new Date().getFullYear()} Engrave. All Rights Reserved
+          @{new Date().getFullYear()} Engrave
         </span>
       </div>
     </footer>
