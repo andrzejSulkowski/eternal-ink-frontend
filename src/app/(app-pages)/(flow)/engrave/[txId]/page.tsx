@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import InfoCard from "@/components/2.molecules/InfoCard/InfoCard";
 import { IoWallet } from "react-icons/io5";
 import { useBanner } from "@/components/1.atoms/Banner/BannerContext";
-import { useEngraving } from "@/app/(app-pages)/engrave/(logic)/useContext";
 import { useLoadingScreen } from "@/context/loadingScreenCtx";
 import { useSseStream } from "./(logic)/useSseStream";
 import { useWindow } from "@/hooks/useWindow";
@@ -14,6 +13,7 @@ import CONFIG from "@/libs/config";
 import { trim } from "@/libs/transaction";
 import api from "@/libs/api/transaction";
 import { TxStatus } from "@/models";
+import { useEngraving } from "@/app/(app-pages)/(flow)/engrave/(logic)/useContext";
 
 interface Props {}
 

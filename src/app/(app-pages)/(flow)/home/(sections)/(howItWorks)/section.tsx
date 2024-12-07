@@ -5,8 +5,8 @@ import ThreeRoad from "@/components/Svgs/ThreeRoad";
 import DollarBanner from "@/components/Svgs/DollarBanner";
 import StarCheck from "@/components/Svgs/StarCheck";
 import Ball from "@/components/1.atoms/Ball/Ball";
-import Header from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/Header";
-import SelectionCardsList from "@/app/(app-pages)/home/(sections)/(howItWorks)/(cmp)/SelectionCardsList";
+import Header from "@/app/(app-pages)/(flow)/home/(sections)/(howItWorks)/(cmp)/Header";
+import SelectionCardsList from "@/app/(app-pages)/(flow)/home/(sections)/(howItWorks)/(cmp)/SelectionCardsList";
 import { EIProps } from "@/types";
 import { classNames } from "@/utils/className";
 

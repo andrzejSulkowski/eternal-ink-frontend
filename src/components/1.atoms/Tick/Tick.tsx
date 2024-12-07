@@ -7,9 +7,10 @@ export interface Props extends EIProps<string> {
   address: string;
   txHash: string;
   onClick: (id: string) => void;
+  data?: string;
 }
 
-function Tick({ address, txHash, onClick, className }: Props) {
+function Tick({ address, txHash, onClick, className, data }: Props) {
   const formattedTxHash = useMemo(() => {
     return `${txHash.slice(0, 9)}...${txHash.slice(txHash.length - 9)}`;
   }, [txHash]);
@@ -17,20 +18,20 @@ function Tick({ address, txHash, onClick, className }: Props) {
   return (
     <div
       className={classNames(
-        "flex text-white items-center h-8 gap-3 text-xs",
+        "flex text-white items-center h-8 gap-3 text-2xl md:text-xs",
         className
       )}
     >
-      <div className="flex h-full gap-2">
+      <div className="flex h-full gap-2 p-1">
         <Avatar address={address} />
       </div>
 
-      <span className="text-white/60 text-nowrap">engraved message into</span>
+      <span className="text-white/60 text-nowrap">message:</span>
       <span
         onClick={() => onClick(txHash)}
         className="font-bold hover:underline cursor-pointer"
       >
-        {formattedTxHash}
+        {data ?? formattedTxHash}
       </span>
     </div>
   );

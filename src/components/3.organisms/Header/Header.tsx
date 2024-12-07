@@ -84,7 +84,7 @@ function Header({ className, children, routes }: Props) {
         transition={{ type: "tween" }}
         ref={headerRef}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between relative">
+        <div className="max-w-7xl flex items-center justify-between relative w-full">
           {/* Left Side */}
           <div className="flex justify-center items-center gap-24">
             <Link
@@ -101,7 +101,7 @@ function Header({ className, children, routes }: Props) {
           <nav className="hidden md:flex items-center gap-8">
             {children}
             {isDevelopment === true && (
-              <div className="text-lg text-ei-warning">
+              <div className="text-md text-ei-warning">
                 Development Server - Operating On The Bitcoin Testnet Network
               </div>
             )}
