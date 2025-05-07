@@ -84,7 +84,7 @@ function Header({ className, children, routes }: Props) {
         transition={{ type: "tween" }}
         ref={headerRef}
       >
-        <div className="max-w-7xl flex items-center justify-between relative w-full">
+        <div className="max-w-7xl flex items-center justify-between relative w-full mx-auto">
           {/* Left Side */}
           <div className="flex justify-center items-center gap-24">
             <Link

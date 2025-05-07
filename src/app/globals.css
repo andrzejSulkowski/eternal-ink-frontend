@@ -83,7 +83,7 @@ img {
 
 /* Base font size */
 html {
-  font-size: 16px; /* Default font size */
+  font-size: 18px; /* Increased from 16px */
 }
 html, body {
   overflow-x: hidden;
@@ -98,45 +98,45 @@ html, body {
 /* Small screens */
 @media (max-width: 640px) {
   html {
-    font-size: 8px;
+    font-size: 10px; /* Increased from 8px */
   }
 }
 
 /* Medium screens */
 @media (min-width: 641px) and (max-width: 768px) {
   html {
-    font-size: 9px;
+    font-size: 11px; /* Increased from 9px */
   }
 }
 
 /* Large screens */
 @media (min-width: 769px) and (max-width: 1024px) {
   html {
-    font-size: 10px;
+    font-size: 12px; /* Increased from 10px */
   }
 }
 
 /* Extra large screens */
 @media (min-width: 1025px) and (max-width: 1280px) {
   html {
-    font-size: 11px;
+    font-size: 13px; /* Increased from 11px */
   }
 }
 
 @media (min-width: 1280px) and (max-width: 1536px){
   html {
-    font-size: 12px;
+    font-size: 14px; /* Increased from 12px */
   }
 }
 
 @media (min-width: 1536px) and (max-width: 1792px){
   html {
-    font-size: 14px;
+    font-size: 16px; /* Increased from 14px */
   }
 }
 
 @media (min-width: 1792px){
   html {
-    font-size: 16px;
+    font-size: 18px; /* Increased from 16px */
   }
 }
